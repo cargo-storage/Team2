@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>다들 안녕하세요 제가 이거 치면 같이 공유되나요?</h1> commit rollback...
+	<h1>다들 안녕하세요 제가 이거 치면 같이 공유되나요?</h1>
 </body>
 </html>
