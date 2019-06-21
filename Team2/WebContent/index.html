@@ -17,6 +17,37 @@
 
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="css/default.css" id="theme-color">
+        <!-- font-awesome CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <style>
+        	
+        	.market-intro{
+        		border: 4px solid #00c58c;
+        	}
+        	
+        	.market-go{
+        		font-size: 25px;
+   				font-weight: 600;
+    			margin: 40px 0;
+        	}
+        	.quote{
+	        	display:block;
+			 	overflow: hidden; 
+			  	text-overflow: ellipsis;
+			  	white-space: nowrap; 
+			  	
+				white-space: normal; 
+				line-height: 1.2; 
+				height: 3.6em; 
+				text-align: left;
+				word-wrap: break-word; 
+				display: -webkit-box; 
+				-webkit-line-clamp: 3; 
+				-webkit-box-orient: vertical;
+				text-align: center;
+			}
+        </style>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
@@ -361,60 +392,51 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-8 mx-auto text-center">
-                        <span class="text-muted small-xl text-uppercase">Loved by thousands of people</span>
+                        <span class="text-muted small-xl text-uppercase">미수령물건을 판매로!</span>
                         <h2 class="display-4">중고장터</h2>
                     </div>
                 </div>
-                <div class="row mt-5">
-                    <div class="col-md-8 mx-auto review-wrapper slick-reviews">
-                        <div class="card border-0 review p-5 raised-box">
-                            <div class="card-body">
-                                <img src="img/client-1.jpg" class="img-review rounded-circle d-block mx-auto" alt="Client 1"/>
-                                <p class="quote">Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.</p>
-                                <div class="mt-4 small-xl">
-                                    Ryan Siddle &mdash; <span class="text-muted">Google Design</span>
-                                </div>
-                                <div class="rating-stars text-primary mt-4">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half-empty"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 review p-5 raised-box">
-                            <div class="card-body">
-                                <img src="img/client-2.jpg" class="img-review rounded-circle d-block mx-auto" alt="Client 2"/>
-                                <p class="quote">Praesent vulputate dolor velit, in condimentum vulputate odio pellentesin condimentum odio pellentesque libero.</p>
-                                <div class="mt-4 small-xl">
-                                    Ameli Mao &mdash; <span class="text-muted">Developer</span>
-                                </div>
-                                <div class="rating-stars text-primary mt-4">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card border-0 review p-5 raised-box">
-                            <div class="card-body">
-                                <img src="img/client-3.jpg" class="img-review rounded-circle d-block mx-auto" alt="Client 3"/>
-                                <p class="quote">Praesent vulputate dolor velit, in condimentum odio pellentesin condimentum odio pellentesque libero.</p>
-                                <div class="mt-4 small-xl">
-                                    Kathrine Jones &mdash; <span class="text-muted">DropBox</span>
-                                </div>
-                                <div class="rating-stars text-primary mt-4">
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star-half-empty"></span>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row mt-5 market-intro">
+                	<div class="col-4 bg-light">
+                		<div class="mx-auto review-wrapper">
+                			<div class="card border-0 review p-5 bg-light">
+                				<div class="card-body">
+                					<img src="img/online-shop.png" width="200" class="rounded-circle d-block mx-auto"/>
+									<p class="market-go">중고 장터 서비스</p>
+									<p class="text-muted">미수령된 물건들은<br>중고장터에서 판매 가능합니다!</p>
+									<button type="button" class="btn btn-outline-success btn-lg">바로가기</button>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+									<i class="fas fa-arrow-alt-circle-right"></i>
+                				</div>	
+                			</div>
+                		</div>
+                	</div>
+                	<div class="col-8">
+	                    <div class="col-md-12 mx-auto review-wrapper slick-reviews">
+	                        <div class="card border-0 review p-5 raised-box">
+	                            <div class="card-body">
+	                                <img src="img/client-1.jpg" class="img-review rounded d-block mx-auto" alt="Client 1"/>
+	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
+	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다.</span></div>
+	                            </div>
+	                        </div>
+	                        <div class="card border-0 review p-5 raised-box">
+	                            <div class="card-body">
+	                                <img src="img/client-2.jpg" class="img-review rounded d-block mx-auto" alt="Client 2"/>
+	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
+	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span></div>
+	                            </div>
+	                        </div>
+	                        <div class="card border-0 review p-5 raised-box">
+	                            <div class="card-body">
+	                                <img src="img/client-3.jpg" class="img-review rounded d-block mx-auto" alt="Client 3"/>
+	                                <p class="quote">물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳</p>
+	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span> </div>   
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
                 </div>
             </div>

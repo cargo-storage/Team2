@@ -7134,7 +7134,7 @@ Custom CSS
   box-shadow: 0 15px 35px 0 rgba(52, 58, 64, 0.07); }
 
 .img-review {
-  max-width: 60px;
+  max-width: 300px; /* 은빈 수정함 */
   -webkit-filter: grayscale(1);
           filter: grayscale(1); }
   .img-review:hover {
@@ -7273,7 +7273,7 @@ ul.features-list {
 
 /**slick slider */
 .slick-dots {
-  bottom: -40px; }
+  bottom: 20px; } /* 은빈 수정 */
   .slick-dots li button::before {
     font-size: 8px !important;
     line-height: 40px !important; }
