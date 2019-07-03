@@ -8,7 +8,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>ExampleController</servlet-name>
-  	<url-pattern>*.ex</url-pattern>
+  	<url-pattern>/ex/*</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

@@ -24,6 +24,8 @@ public class ExampleAction implements Action {
 		// Redirect방식으로 보낼것이냐 안보낼것이냐?
 		// 기본적인 경우: DB에 변화가 있다? forward.setRedirect(true) ex)회원 추가
 		forward.setRedirect(false);
+		//ajax방식으로 온것도 아니니
+		forward.setAjax(false);
 
 		/*
 		 * Redirect방식으로 보낼때와 Dispatcher방식으로 보낼때 시작하는 폴더가 다릅니다. Redirect방식은

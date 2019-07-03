@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 	
 	<!-- Bootstrap CSS / Color Scheme -->
-	<link rel="stylesheet" href="css/default.css" id="theme-color">
+	<link rel="stylesheet" href="${contextPath}/css/default.css" id="theme-color">
 	<!-- font-awesome CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
@@ -37,6 +37,7 @@
 	</c:when>
 	<c:otherwise>
 		<h1>전달된 값: <c:out value="${requestScope.edto.go}"/> </h1>
+		<h2>go=12에서 10더해줬으니 22여야 OK!</h2>
 	</c:otherwise>
 </c:choose>
 </body>

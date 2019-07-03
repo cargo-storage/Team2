@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 
-//어노테이션으로 가상의 WebContent 폴더 안에 ex폴더를 만들었다고 보시면 됩니다요...
+//xml에서 /ex/*면 이곳으로 이동하게 하였음. 가상의 WebContent 폴더 안에 ex폴더를 만들었다고 보시면 됩니다요...
 public class ExampleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
@@ -32,11 +32,14 @@ public class ExampleController extends HttpServlet {
 		String contextPath=request.getContextPath();
 		System.out.println(contextPath.length());
 		
-//		System.out.println("1");
+		System.out.println(RequestURI.lastIndexOf("/"));
+//		System.out.println("??: "+request.getPathInfo()); xml로 했을땐 안되는듯?!
 		
-//		System.out.println(RequestURI.lastIndexOf("//"));
+//		String command=RequestURI.substring(contextPath.length()); //이건 선생님이 한것
 		
-		String command=RequestURI.substring(contextPath.length());
+		//이부분은 xml필터링을 *.me로 하지 않고 /폴더/*로 하였기 때문에 제가 바꾼것입니다.
+		//그런데 /폴더/*로 하는게 관리하기 더 편하지 않나요? 겹치지도 않고 contextPath.length도 쓰지 않음
+		String command=RequestURI.substring(RequestURI.lastIndexOf("/"));
 		System.out.println(command);
 		
 		ActionForward forward = null;

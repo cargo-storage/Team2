@@ -31,7 +31,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="${contextPath}/Join.ex?go=12">시작하기</a><br>
+<a href="${contextPath}/ex/Join.ex?go=12">시작하기</a><br>
 <p>a태그에 설정된 경로 명: ${contextPath}/ex/Join.ex?go=12</p>
 </body>
 </html>

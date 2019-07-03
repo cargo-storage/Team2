@@ -4,7 +4,6 @@ public class ExampleDTO {
 	int go;
 	public ExampleDTO(){}
 	public ExampleDTO(int go) {
-		super();
 		this.go = go;
 	}
 

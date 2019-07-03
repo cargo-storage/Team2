@@ -41,10 +41,9 @@ public class ExampleDAO {
 	
 	public ExampleDTO exerciseOne(ExampleDTO edto){
 		ExampleDTO dto = null;
-		try {
-			con = connect();
-			
+		try {	
 /*			
+  			con = connect();
  			String sql = "sql 구문";
 			pstmt = con.prepareStatement(sql);
 			
