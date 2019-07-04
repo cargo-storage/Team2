@@ -5,14 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- 위, head부분은 공통 form으로 필요할 만한 것 넣었습니다. -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Required meta tags -->
-	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
-	<title>Lambda - Free Bootstrap 4 Multipurpose Landing Page Template</title>
+	<title>예시페이지 시작!</title>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	
 	<!--Google fonts-->

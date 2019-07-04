@@ -24,15 +24,15 @@ public class ExampleController extends HttpServlet {
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
+
 		//가상요청 주소 가져오기
 		String RequestURI=request.getRequestURI();
 		System.out.println(RequestURI);
 		
 		String contextPath=request.getContextPath();
 		System.out.println(contextPath.length());
-		
 		System.out.println(RequestURI.lastIndexOf("/"));
+		
 //		System.out.println("??: "+request.getPathInfo()); xml로 했을땐 안되는듯?!
 		
 //		String command=RequestURI.substring(contextPath.length()); //이건 선생님이 한것
@@ -48,8 +48,6 @@ public class ExampleController extends HttpServlet {
 			if(command.equals("/Join.ex")){
 				action=new ExampleAction();
 				forward = action.execute(request, response);
-				
-				
 			}else if(command.equals("/none.ex")){
 				
 			}
