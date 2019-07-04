@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 
-public class ExampleAction implements Action {
+public class ExampleDispatcherAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -16,7 +16,7 @@ public class ExampleAction implements Action {
 
 		// 디비 작업슥스슥 DAO로부터 리턴 값 있으면 리퀘스트 영역에 set어트리뷰트
 		ExampleDAO edao = new ExampleDAO();
-		request.setAttribute("edto", edao.exerciseOne(edto)); 
+		request.setAttribute("edto", edao.exerciseDispatcher(edto)); 
 		
 		//정보는 request영역에 지정 해 주었으니 이제 어떻게, 어디로 이동할 지 설정해 봅시다.
 		ActionForward forward = new ActionForward();
@@ -36,7 +36,7 @@ public class ExampleAction implements Action {
 		 * 페이지를 열게됩니다. ex) @WebServlet({"/ex/*"}) 이거였으므로 WebContent 폴더 안에 ex폴더에서
 		 * 다른 페이지를 연다고 생각하심될듯.
 		 */
-		forward.setPath("../example/result.jsp");
+		forward.setPath("../example/dispatcherResult.jsp");
 		return forward;
 	}
 

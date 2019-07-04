@@ -30,14 +30,15 @@
 
 <title>Insert title here</title>
 </head>
-<body><!-- requestScope는 생략 가능 -->
+<body><!-- param은 꼭 써줘야 합니다~ -->
 <c:choose>
-	<c:when test="${empty requestScope.edto}">
-		<h1>전달받은 값이 없습니다.</h1>
+	<c:when test="${empty param.result || param.result==0}">
+		<h1>실패!</h1>
 	</c:when>
 	<c:otherwise>
-		<h1>전달된 값: <c:out value="${requestScope.edto.go}"/> </h1>
-		<h2>go=12에서 10더해줬으니 22여야 OK!</h2>
+		<h1>성공!</h1>
+		<h2>전달된 값: <c:out value="${param.result}"/> </h2>
+		<h2>주소창 변화를 잘 보세요!</h2>
 	</c:otherwise>
 </c:choose>
 </body>

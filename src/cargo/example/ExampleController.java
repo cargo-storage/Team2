@@ -45,11 +45,16 @@ public class ExampleController extends HttpServlet {
 		ActionForward forward = null;
 		Action action= null;
 		try {
-			if(command.equals("/Join.ex")){
-				action=new ExampleAction();
+			if(command.equals("/dispatcher.ex")){
+				action=new ExampleDispatcherAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/none.ex")){
-				
+			}else if(command.equals("/sendRedirect.ex")){
+				action= new ExampleSendRedirectAction();
+				forward = action.execute(request, response);
+			}else if(command.equals("/ajax.ex")){
+				action = new ExampleAjaxAction();
+				forward = action.execute(request, response);
+				System.out.println("ajax!");
 			}
 			
 			//모든 과정 후 페이지 이동부분
