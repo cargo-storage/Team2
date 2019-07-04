@@ -39,7 +39,7 @@ public class ExampleDAO {
 		}
 	}//end of free
 	
-	public ExampleDTO exerciseOne(ExampleDTO edto){
+	public ExampleDTO exerciseDispatcher(ExampleDTO edto){
 		ExampleDTO dto = null;
 		try {	
 /*			
@@ -63,11 +63,75 @@ public class ExampleDAO {
 			dto = new ExampleDTO(edto.getGo()+10);
 			
 		} catch (Exception e) {
-			System.out.println("exerciseOne err:"+e.getMessage());
+			System.out.println("exerciseDispatcher err:"+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			freeResource();
 		}
 		return dto;
-	}
+	}//end of exerciseOne
+	
+	public int exerciseSendRedirect(ExampleDTO edto){
+		int result=0;
+		try {
+		/*			
+			con = connect();
+			String sql = "sql 구문";
+		pstmt = con.prepareStatement(sql);
+		
+		//디비의 값만 변경하는 경우
+		pstmt.executeUpdate();
+		
+		
+		//디비에서 값이 반환되는 경우
+		rs=pstmt.executeQuery();
+		while (rs.next()) {
+		ExampleDTO edto  = new ExampleDTO();
+		edto.setGo(rs.getInt("go"));
+		}
+		
+		지금은 DB에 값을 넣어주고 성공 여부를 1/0으로 return 하는 상황이라고 칩시다
+		int result = pstmt.executeUpdate(); 이런식으로..
+		 */
+			
+		result = 1;//성공!
+		} catch (Exception e) {
+			System.out.println("exerciseSendRedirect err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return result;
+	}//end of exerciseSendRedirect
+	
+	public String exerciseAjax(ExampleDTO edto){
+		String result="";
+		try {
+			/*			
+			con = connect();
+			String sql = "sql 구문";
+			pstmt = con.prepareStatement(sql);
+			
+			//디비의 값만 변경하는 경우
+			pstmt.executeUpdate();
+			
+			
+			//디비에서 값이 반환되는 경우
+			rs=pstmt.executeQuery();
+			while (rs.next()) {
+			ExampleDTO edto  = new ExampleDTO();
+			edto.setGo(rs.getInt("go"));
+			}
+			*/
+			
+			//가공~!~!
+			result = Integer.toString(edto.getGo()+20);
+			} catch (Exception e) {
+				System.out.println("exerciseAjax err:"+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				freeResource();
+			}
+		return result;
+	}//end of exerciseAjax
 }
