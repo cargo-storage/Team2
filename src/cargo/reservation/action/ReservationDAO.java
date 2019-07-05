@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.ReservationDTO;
 import cargo.common.DTO.WarehouseDTO;
 
@@ -79,14 +80,54 @@ public class ReservationDAO {
 		return hList;
 	}
 	
-	public ArrayList<ReservationDTO> getReservation(String house){
+	public ArrayList<ItemsDTO> getCurReservation(String house){
+		ItemsDTO idto;
 		ReservationDTO rdto;
-		ArrayList<ReservationDTO> rList = new ArrayList<>();
+		ArrayList<ItemsDTO> rList = new ArrayList<>();
+		ArrayList<ReservationDTO> rList2 = new ArrayList<>();
 		
 		try {
 			
 			getConnection();
-			String sql = "SELECT * FROM reservation WHERE house=?";
+			String sql = "SELECT * FROM items WHERE house=? ORDER BY start_day";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, house);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				idto = new ItemsDTO();
+				
+				idto.setEmail(rs.getString("email"));
+				idto.setEnd_day(rs.getTimestamp("end_day"));
+				idto.setHouse(rs.getString("house"));
+				idto.setItem(rs.getString("item"));
+				idto.setItem_price(rs.getInt("item_price"));
+				idto.setPayment(rs.getInt("payment"));
+				idto.setStart_day(rs.getTimestamp("start_day"));
+				
+				rList.add(idto);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Error in getReservation()");
+			e.printStackTrace();
+		}finally {
+			closeRes();
+		}
+		return rList;
+	}
+	
+	public ArrayList<ReservationDTO> getReservation(String house){
+		ReservationDTO rdto;
+		ArrayList<ReservationDTO> rList2 = new ArrayList<>();
+		
+		try {
+			
+			getConnection();
+			
+			String sql = "SELECT * FROM reservation WHERE house=? ORDER BY start_day";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, house);
 			rs = pstmt.executeQuery();
@@ -103,16 +144,17 @@ public class ReservationDAO {
 				rdto.setRes_day(rs.getTimestamp("res_day"));
 				rdto.setStart_day(rs.getTimestamp("start_day"));
 				
-				rList.add(rdto);
+				rList2.add(rdto);
 			}
 			
+			
 		} catch (SQLException e) {
-			System.out.println("Error in getAllReservation()");
+			System.out.println("Error in getReservation()");
 			e.printStackTrace();
 		}finally {
 			closeRes();
 		}
-		return rList;
+		return rList2;
 	}
 
 }

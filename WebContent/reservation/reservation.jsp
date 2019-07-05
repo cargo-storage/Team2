@@ -37,8 +37,9 @@
 			var houseName = btn.value;
 			$.ajax({
 				type : 'POST',
-				url  : '${contextPath}/reserve/moreInfo',
-				data: {house: houseName}, 	
+				url  : '${contextPath}/reserve/moreInfo.do',
+				data: {house: houseName}, 
+				
 				success: function(data, textStatus){
 					var jsonInfo = JSON.parse(data);
 					var resInfo = "예약정보<br>"

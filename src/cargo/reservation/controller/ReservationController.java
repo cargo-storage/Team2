@@ -38,12 +38,12 @@ public class ReservationController extends HttpServlet {
 				System.out.println("error /info.do");
 				e.printStackTrace();
 			}
-		}else if(path.equals("/moreInfo")){ // 공간별 상세정보
+		}else if(path.equals("/moreInfo.do")){ // 공간별 상세정보
 			try {
 				action = new ResInfoMoreAction();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("error /moreinfo");
+				System.out.println("error /moreinfo.do");
 				e.printStackTrace();
 			}
 		}
