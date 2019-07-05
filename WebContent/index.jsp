@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,7 +68,7 @@
                         <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
+                        <a class="nav-link page-scroll" href="${contextPath }/reserve/info.do">예약안내</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#market">중고장터</a>
