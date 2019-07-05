@@ -15,10 +15,17 @@ public class ResInfoAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
+		String warehouse;
+		
+		if(request.getParameter("warehouse")==null){
+			warehouse = "A";
+		}else{
+			warehouse = request.getParameter("warehouse");
+		}
 		
 		ReservationDAO dao = new ReservationDAO();
 		
-		ArrayList<WarehouseDTO> hList = dao.getAllHouse();
+		ArrayList<WarehouseDTO> hList = dao.getHouse(warehouse);
 		
 		request.setAttribute("hList", hList);
 		

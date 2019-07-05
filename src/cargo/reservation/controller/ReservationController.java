@@ -30,7 +30,7 @@ public class ReservationController extends HttpServlet {
 		Action action = null;
 		
 		
-		if(path.equals("/info.do")){
+		if(path.substring(0,8).equals("/info.do")){ // 예약페이지 메인 - 창고현황
 			try {
 				action = new ResInfoAction();
 				forward = action.execute(request, response);
@@ -38,7 +38,7 @@ public class ReservationController extends HttpServlet {
 				System.out.println("error /info.do");
 				e.printStackTrace();
 			}
-		}else if(path.equals("/moreInfo")){
+		}else if(path.equals("/moreInfo")){ // 공간별 상세정보
 			try {
 				action = new ResInfoMoreAction();
 				forward = action.execute(request, response);

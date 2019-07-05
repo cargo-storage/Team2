@@ -45,7 +45,7 @@ public class ReservationDAO {
 		
 	}
 	
-	public ArrayList<WarehouseDTO> getAllHouse(){
+	public ArrayList<WarehouseDTO> getHouse(String warehouse){
 		
 		WarehouseDTO hBean;
 		ArrayList<WarehouseDTO> hList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class ReservationDAO {
 		try {
 			
 			getConnection();
-			String sql = "SELECT * FROM warehouse ORDER BY house";
+			String sql = "SELECT * FROM warehouse WHERE house LIKE '"+warehouse+"%' ORDER BY house";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -71,7 +71,7 @@ public class ReservationDAO {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Error in getAllHouse()");
+			System.out.println("Error in getHouse()");
 			e.printStackTrace();
 		}finally {
 			closeRes();

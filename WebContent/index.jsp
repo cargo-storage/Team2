@@ -48,11 +48,12 @@
 			}
         </style>
     </head>
+    
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
         <!--navigation-->
         <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="${contextPath }/index.jsp">
                 TEAM2 WAREHOUSE
             </a>
             <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -68,7 +69,7 @@
                         <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="${contextPath }/reserve/info.do">예약안내</a>
+                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="#market">중고장터</a>
@@ -335,7 +336,7 @@
                             <li>Cum sociis natoque penatibus mus.</li>
                         </ul>
                         <p class="lead mt-3">
-                            <a href="#" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
+                            <a href="${contextPath }/reserve/info.do?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
                                 예약하러가기 <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
                             </a>
                         </p>
