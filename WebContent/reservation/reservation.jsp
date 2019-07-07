@@ -42,13 +42,17 @@
 				
 				success: function(data, textStatus){
 					var jsonInfo = JSON.parse(data);
-					var resInfo = "예약정보<br>"
+					var currRes = "";								
 					for(var i in jsonInfo.reservations){
-						resInfo += jsonInfo.reservations[i].house+"<br>";
-						resInfo += jsonInfo.reservations[i].start_day+"<br>";
-						resInfo += jsonInfo.reservations[i].end_day+"<br>";
+						//houseName = jsonInfo.reservations[i].house+"";
+						currRes += jsonInfo.reservations[i].start_day+"~";
+						currRes += jsonInfo.reservations[i].end_day+"<br>";
 					}
-					$("#info").html(resInfo);
+					$("#houseName").html(houseName);
+					if(currRes=="")	$("#currRes").html("현재 비어있는 공간입니다.<br><br>");
+					else $("#currRes").html(currRes+"<br>");
+					
+					
 				},
 				error: function(data, textStatus){
 					alert("ERROR!!");
@@ -121,17 +125,17 @@
 	                <p class="lead">원하는 공간을 선택하세요!</p>
 	            </div>
 			</div>
-			<div class="p-5 mt-5 bg-white raised-box rounded">
 			
-	            <select class="form-control col-md-3" onchange="showHouse(this.value)">
+			<div class="row p-5 mt-5 bg-white raised-box rounded">
+				<div class="mx-auto">
+	            <select class="form-control col-md-6" onchange="showHouse(this.value)">
 					<option value="A" <c:if test="${param.warehouse == 'A'}">selected="selected"</c:if>>House A</option>
 					<option value="B" <c:if test="${param.warehouse == 'B'}">selected="selected"</c:if>>House B</option>
 					<option value="C" <c:if test="${param.warehouse == 'C'}">selected="selected"</c:if>>House C</option>
 					<option value="D" <c:if test="${param.warehouse == 'D'}">selected="selected"</c:if>>House D</option>
 				</select>
-
-				<div class="row pl-3 py-2 my-3">
-				<table>
+				<!-- 창고 사용 현황 테이블 -->
+				<table class="my-3">
 				<c:choose>
 					<c:when test="${requestScope.hList == null }"><tr><td colspan="5">nothing</td></tr></c:when>
 					<c:when test="${hList !=null }">
@@ -155,9 +159,31 @@
 					</c:when>
 				</c:choose>
 				</table>
-				<div id="info" class="ml-6 col-md-5 text-center" style="border: 1px solid #000000; width: 100px;">
 				</div>
+				
+				<!-- 예약정보 표시 영역 -->
+				<div id="info" class="text-center mx-auto">
+					<ul class="list-group mb-3">
+						<li class="list-group-item">
+						  <div>
+						    <h4 id="houseName" class="my-0">WAREHOUSE</h4>
+						  </div>
+						  <span id="houseFee" class="text-muted"></span>
+						</li>
+						<li class="list-group-item">
+				          <div>
+				            <h6 class="my-0">현재 사용현황 및 예약정보</h6><br>
+				            <span class="text-muted" id="currRes">확인하고자 하는 공간을 선택 해 주세요.</span>
+				          </div>
+				        </li>
+						<li class="list-group-item d-flex justify-content-between">
+						  <input type="button" class="btn" value="예약하기"><br> 
+						  <small class="text-muted">예약은 비어있는 날짜에 한해<br>최소 15일부터 가능합니다.</small>
+						</li>
+					</ul>
 				</div>
+				
+				
 			</div>
 		</div>
 	</section>
