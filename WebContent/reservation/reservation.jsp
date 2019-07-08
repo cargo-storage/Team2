@@ -44,7 +44,6 @@
 					var jsonInfo = JSON.parse(data);
 					var currRes = "";								
 					for(var i in jsonInfo.reservations){
-						//houseName = jsonInfo.reservations[i].house+"";
 						currRes += jsonInfo.reservations[i].start_day+"~";
 						currRes += jsonInfo.reservations[i].end_day+"<br>";
 					}
@@ -52,12 +51,17 @@
 					if(currRes=="")	$("#currRes").html("현재 비어있는 공간입니다.<br><br>");
 					else $("#currRes").html(currRes+"<br>");
 					
-					
 				},
 				error: function(data, textStatus){
 					alert("ERROR!!");
 				}
 			});
+		}
+		
+		function goReservation(){
+			var houseName = $('#houseName').text();
+			alert(houseName+"을 예약하시겠습니까?");
+			//location.href='이동주소 삽입?house='+houseName;
 		}
 	</script>
 	
@@ -177,7 +181,7 @@
 				          </div>
 				        </li>
 						<li class="list-group-item d-flex justify-content-between">
-						  <input type="button" class="btn" value="예약하기"><br> 
+						  <input type="button" class="btn" value="예약하기" onclick="goReservation()">
 						  <small class="text-muted">예약은 비어있는 날짜에 한해<br>최소 15일부터 가능합니다.</small>
 						</li>
 					</ul>
