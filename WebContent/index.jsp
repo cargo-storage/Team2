@@ -336,7 +336,7 @@
                             <li>Cum sociis natoque penatibus mus.</li>
                         </ul>
                         <p class="lead mt-3">
-                            <a href="${contextPath }/reserve/info.do?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
+                            <a href="${contextPath }/re/info.me?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
                                 예약하러가기 <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
                             </a>
                         </p>

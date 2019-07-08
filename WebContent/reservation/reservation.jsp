@@ -30,14 +30,14 @@
 	<script type="text/javascript">
 	
 		function showHouse(warehouse){
-			location.href = "${contextPath}/reserve/info.do?warehouse="+warehouse;
+			location.href = "${contextPath}/re/info.do?warehouse="+warehouse;
 		}
 		
 		function showInfo(btn){
 			var houseName = btn.value;
 			$.ajax({
 				type : 'POST',
-				url  : '${contextPath}/reserve/moreInfo.do',
+				url  : '${contextPath}/re/moreInfo.me',
 				data: {house: houseName}, 
 				
 				success: function(data, textStatus){
@@ -61,7 +61,7 @@
 		function goReservation(){
 			var houseName = $('#houseName').text();
 			alert(houseName+"을 예약하시겠습니까?");
-			//location.href='이동주소 삽입?house='+houseName;
+			location.href='/re/reservationCheck.me?house='+houseName;
 		}
 	</script>
 	

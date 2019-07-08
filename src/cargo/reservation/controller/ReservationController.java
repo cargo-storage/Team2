@@ -14,7 +14,7 @@ import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
 
-@WebServlet("/reserve/*")
+//@WebServlet("/reserve/*")
 public class ReservationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,29 +23,38 @@ public class ReservationController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String path = request.getPathInfo();
+	/*	String path = request.getPathInfo();
 		System.out.println(path);
-		
+	*/	
 		ActionForward forward = null;
 		Action action = null;
 		
 		
-		if(path.substring(0,8).equals("/info.do")){ // 예약페이지 메인 - 창고현황
-			try {
+		String RequestURI=request.getRequestURI();
+		System.out.println(RequestURI);
+		
+		String contextPath=request.getContextPath();
+		System.out.println(contextPath.length());
+		System.out.println(RequestURI.lastIndexOf("/"));
+		
+
+		String command=RequestURI.substring(RequestURI.lastIndexOf("/"));
+		System.out.println(command);
+		
+		
+		
+		try {
+			if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
 				action = new ResInfoAction();
 				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("error /info.do");
-				e.printStackTrace();
-			}
-		}else if(path.equals("/moreInfo.do")){ // 공간별 상세정보
-			try {
+			}else if(command.equals("/moreInfo.me")){ // 공간별 상세정보
 				action = new ResInfoMoreAction();
 				forward = action.execute(request, response);
-			} catch (Exception e) {
-				System.out.println("error /moreinfo.do");
-				e.printStackTrace();
 			}
+		
+		} catch (Exception e) {
+			System.out.println("Error in ReservationController");
+			e.printStackTrace();
 		}
 		
 		
@@ -61,8 +70,6 @@ public class ReservationController extends HttpServlet {
 			}
 		}
 	}
-	
-	
 	
 	
 	
