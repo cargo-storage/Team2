@@ -15,21 +15,32 @@ public class reserveCheckAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		
 		ReservationDTO rsdto = new ReservationDTO();
 		
 		String email = request.getParameter("email");
 		String house = request.getParameter("house");
-		String start_day = request.getParameter("start_day");
-		String end_day = request.getParameter("end_day");
-		String res_day = request.getParameter("res_day");
-		int payment = Integer.parseInt(request.getParameter("payment"));
+		Timestamp start_day = Timestamp.valueOf(request.getParameter("start_day") + " 00:00:00");
+		Timestamp end_day = Timestamp.valueOf(request.getParameter("end_day") + " 00:00:00");
+		Timestamp res_day = Timestamp.valueOf(request.getParameter("res_day") + " 00:00:00");
+
 		
 		
-		/*
-		 * rsdto.setEmail(email); rsdto.setHouse(house); rsdto.setStart_day(start_day);
-		 * rsdto.setEnd_day(end_day); rsdto.setRes_day(res_day);
-		 * rsdto.setPayment(payment);
-		 */
+		rsdto.setEmail(email); 
+		rsdto.setHouse(house); 
+		rsdto.setStart_day(start_day);
+		rsdto.setEnd_day(end_day); 
+		rsdto.setRes_day(res_day);
+		
+		reserveDAO rsdao1 = new reserveDAO();
+		
+		
+		long total = (end_day.getDate() - start_day.getDate()) ;
+		
+		int payment = (int)total * rsdao1.rsPayment(house); ;
+		rsdto.setPayment(payment);
+		
+		
 		System.out.println(email);
 		System.out.println(house);
 		System.out.println(start_day);
@@ -37,8 +48,9 @@ public class reserveCheckAction implements Action {
 		System.out.println(res_day);
 		System.out.println(payment);
 		
-		
+	
 		reserveDAO rsdao = new reserveDAO();
+		
 		rsdao.rsCheck(rsdto);
 		
 		
@@ -60,7 +72,7 @@ public class reserveCheckAction implements Action {
 		 * 페이지를 열게됩니다. ex) @WebServlet({"/ex/*"}) 이거였으므로 WebContent 폴더 안에 ex폴더에서
 		 * 다른 페이지를 연다고 생각하심될듯.
 		 */
-		forward.setPath("./reservePro.jsp");
+		forward.setPath("../reservation/reservePro.jsp");
 		return forward;
 	}
 

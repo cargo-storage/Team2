@@ -3,6 +3,16 @@
   <display-name>Team2</display-name>
   
   <servlet>
+    <servlet-name>reserveController</servlet-name>
+    <servlet-class>cargo.reservation.action.reserveController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reserveController</servlet-name>
+    <url-pattern>*.me</url-pattern>
+  </servlet-mapping>
+ 
+  
+  <servlet>
   	<servlet-name>ExampleController</servlet-name>
   	<servlet-class>cargo.example.ExampleController</servlet-class>
   </servlet>

@@ -41,6 +41,34 @@ public class reserveDAO {
 			}
 		}//end of free
 		
+		public int rsPayment(String house) {
+			
+			
+			int price = 0;
+			
+			try {
+				
+				con = connect();
+				sql = "select price from warehouse where house =?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, house);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+					price = rs.getInt(1);
+					}
+				
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				freeResource();
+			}
+			return price;
+		}
+		
+		
+		
 		public void rsCheck(ReservationDTO rsdto){
 			
 			try {

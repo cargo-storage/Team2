@@ -72,14 +72,14 @@
                 //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
                 //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
                 //buttonText: "날짜선택",             // 버튼의 대체 텍스트
-                dateFormat: "yy-MM-dd",             // 날짜의 형식
+                dateFormat: "yy-mm-dd",             // 날짜의 형식
                 changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
                     minDate: 0,  //오늘 이전  날짜 선택 불가                  // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
                 onClose: function( selectedDate ) {    
                     // 시작일(fromDate) datepicker가 닫힐때
                     // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
                     $("#end_day").datepicker( "option", "minDate", selectedDate );
-                }                
+                }
             });
 
             //종료일
@@ -87,7 +87,7 @@
                  //dateFormat: "yy-mm-dd",
                  monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
                  dayNamesMin:["일","월","화","수","목","금","토"], 
-                dateFormat: "yy-MM-dd",
+                dateFormat: "yy-mm-dd",
                 changeMonth: true,
                 minDate: 0, // 오늘  날짜 선택 불가
                 onClose: function( selectedDate ) {
@@ -103,11 +103,11 @@
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
         <%
     	String house = request.getParameter("house");
-    	
+    	String email = request.getParameter("email");
+        
         SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
         String today = formatter.format(new java.util.Date());
 		
-        int payment = 500000;
         
     	%>
     	
@@ -171,14 +171,13 @@
                                           	<input type="button" value="주동석" style="width: 450px; height: 400px; margin-left: 50px; margin-top: 30px">
 												<div style="background-color: pink; margin-left: 50px; margin-top: 30px; width: 450px; height: 400px;">
 					  								<!-- DatePicker input tag -->
-					  									<input type="text" id="house" value="<%=house %>"><br>
-					  									<input type="text" id="email" value="ds931229@naver.com" ><br>
+					  									<input type="text" id="house" name="house" value="${param.house }"><br>
+					  									<input type="text" id="email" name="email" value="ds931229@naver.com" ><br>
 					  									<input type="text" value="samll"><br>
-                        								<input type="text" id="start_day" name="start_day" ><br>
-                        								<input type="text" id="end_day" name="end_day" ><br>
-                        								<input type="text" id="res_day" value="<%=today%>"><br>
-                        								<input type="text" id="payment" value="<%=payment%>"><br>
-                        								<input type="submit" value="예약하기">
+                        								<input type="text" id="start_day" name="start_day" readonly="readonly"><br>
+                        								<input type="text" id="end_day" name="end_day" readonly="readonly"><br>
+                        								<input type="text" id="res_day" name="res_day" value="<%=today%>" readonly="readonly"><br>
+                        								<input type="submit" value="금액계산">
                         							
 											</div>
                                           </div>

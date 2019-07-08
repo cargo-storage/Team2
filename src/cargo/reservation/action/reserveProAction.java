@@ -15,6 +15,7 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 		
 		//정보는 request영역에 지정 해 주었으니 이제 어떻게, 어디로 이동할 지 설정해 봅시다.
 		ActionForward forward = new ActionForward();
+		
 		// 리다이렉트 방식으로 보내지 않을것임!
 		// Redirect방식으로 보낼것이냐 안보낼것이냐?
 		// 기본적인 경우: DB에 변화가 있다? forward.setRedirect(true) ex)회원 추가
@@ -31,7 +32,7 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 		 * 페이지를 열게됩니다. ex) @WebServlet({"/ex/*"}) 이거였으므로 WebContent 폴더 안에 ex폴더에서
 		 * 다른 페이지를 연다고 생각하심될듯.
 		 */
-		forward.setPath("/reservePro.jsp");
+		forward.setPath("/reservation/reservePro.jsp");
 		return forward;
 	}
 

@@ -38,6 +38,7 @@ public class reserveController extends HttpServlet{
 		
 		try {
 			if(command.equals("/reservation.me")){
+				System.out.println(command);
 				action = new reserveboxAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/reservePro.me")){
