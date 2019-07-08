@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cargo.common.action.Action;
+import cargo.common.action.ActionForward;
+
 public class reserveController extends HttpServlet{
 	
 	@Override

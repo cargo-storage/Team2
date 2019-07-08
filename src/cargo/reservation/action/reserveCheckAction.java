@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.DTO.ReservationDTO;
 import cargo.common.DTO.WarehouseDTO;
+import cargo.common.action.Action;
+import cargo.common.action.ActionForward;
 
 public class reserveCheckAction implements Action {
 

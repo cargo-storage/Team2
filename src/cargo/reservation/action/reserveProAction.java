@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.DTO.WarehouseDTO;
+import cargo.common.action.Action;
+import cargo.common.action.ActionForward;
 
 public class reserveProAction implements Action{
 	
