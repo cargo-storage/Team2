@@ -12,11 +12,11 @@
   </servlet-mapping>
   
 	<servlet>
-	  <servlet-name>ReservationController</servlet-name>
-	  <servlet-class>cargo.reservation.controller.ReservationController</servlet-class>
+	  <servlet-name>ReserveController</servlet-name>
+	  <servlet-class>cargo.reservation.controller.ReserveController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-	  <servlet-name>ReservationController</servlet-name>
+	  <servlet-name>ReserveController</servlet-name>
 	  <url-pattern>/re/*</url-pattern>
 	</servlet-mapping>
   

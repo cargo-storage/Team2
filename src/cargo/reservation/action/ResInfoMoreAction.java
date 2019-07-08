@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.ReservationDTO;
+import cargo.common.DTO.WarehouseDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 
@@ -36,6 +37,7 @@ public class ResInfoMoreAction implements Action {
 		String house = request.getParameter("house");
 		
 		ReservationDAO dao = new ReservationDAO();
+		
 		ArrayList<ItemsDTO> rList = dao.getCurReservation(house);
 		ArrayList<ReservationDTO> rList2 = dao.getReservation(house);
 		
