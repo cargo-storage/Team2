@@ -35,7 +35,7 @@ public class ReservationDAO {
 		
 	}
 	
-	private void closeRes(){
+	private void freeResource(){
 		try {
 			if(pstmt != null) pstmt.close();
 			if(conn != null) conn.close();
@@ -75,7 +75,7 @@ public class ReservationDAO {
 			System.out.println("Error in getHouse()");
 			e.printStackTrace();
 		}finally {
-			closeRes();
+			freeResource();
 		}
 		return hList;
 	}
@@ -114,7 +114,7 @@ public class ReservationDAO {
 			System.out.println("Error in getReservation()");
 			e.printStackTrace();
 		}finally {
-			closeRes();
+			freeResource();
 		}
 		return rList;
 	}
@@ -152,9 +152,35 @@ public class ReservationDAO {
 			System.out.println("Error in getReservation()");
 			e.printStackTrace();
 		}finally {
-			closeRes();
+			freeResource();
 		}
 		return rList2;
 	}
+	
+	
+	public void rsCheck(ReservationDTO rsdto){
+        
+        try {
+        	getConnection();
+           String sql = "insert into reservation (email, house, start_day, end_day, res_day, payment) "
+                 + "values(?,?,?,?,?,?)";
+           
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, rsdto.getEmail());
+           pstmt.setString(2, rsdto.getHouse());
+           pstmt.setTimestamp(3, rsdto.getStart_day());
+           pstmt.setTimestamp(4, rsdto.getEnd_day());
+           pstmt.setTimestamp(5, rsdto.getRes_day());
+           pstmt.setInt(6, rsdto.getPayment());
+           
+           pstmt.executeUpdate();         
+           
+        } catch (Exception e) {
+        	System.out.println("Error in rsCheck()");
+        	e.printStackTrace();
+        }finally{
+           freeResource();
+        }
+     }
 
 }

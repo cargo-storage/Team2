@@ -47,6 +47,7 @@ public class ReserveController extends HttpServlet{
 				forward = action.execute(request, response);
 			}else if(command.equals("/reserveCheck.me")){
 				action = new reserveCheckAction();
+				System.out.println("Hi");
 				forward = action.execute(request, response);
 				System.out.println(command);
 			}
