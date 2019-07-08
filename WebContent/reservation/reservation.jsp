@@ -61,7 +61,7 @@
 		function goReservation(){
 			var houseName = $('#houseName').text();
 			alert(houseName+"을 예약하시겠습니까?");
-			location.href='/re/reservationCheck.me?house='+houseName;
+			location.href='${contextPath}/re/reserveCheck.me?house='+houseName;
 		}
 	</script>
 	

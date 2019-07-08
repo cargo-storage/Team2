@@ -12,6 +12,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
+import cargo.reservation.action.reserveCheckAction;
 
 public class ReserveController extends HttpServlet{
 	
@@ -26,14 +27,13 @@ public class ReserveController extends HttpServlet{
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		String RequestURI=request.getRequestURI();
-		
-		String contextPath=request.getContextPath();
-		
-		String command=RequestURI.substring(contextPath.length());
+		String RequestURI = request.getRequestURI();
+		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
+		System.out.println(command);
 		
 		ActionForward forward = null;
 		Action action= null;
@@ -51,7 +51,6 @@ public class ReserveController extends HttpServlet{
 				System.out.println(command);
 			}
 			
-			
 			//모든 과정 후 페이지 이동부분
 			if(forward !=null){
 				if(forward.isAjax()){
@@ -67,7 +66,7 @@ public class ReserveController extends HttpServlet{
 			}
 			
 		} catch (Exception e) {
-			System.out.println("controller 에러" + e);
+			System.out.println("ReserveController 에러" + e);
 			e.printStackTrace();
 			
 		}
