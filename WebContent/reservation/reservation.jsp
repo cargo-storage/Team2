@@ -61,7 +61,7 @@
 		function goReservation(){
 			var houseName = $('#houseName').text();
 			alert(houseName+"을 예약하시겠습니까?");
-			location.href='${contextPath}/re/reserveCheck.me?house='+houseName;
+			location.href='${contextPath}/re/reservePro.me?house='+houseName;
 		}
 	</script>
 	
@@ -80,17 +80,18 @@
 		height:100%;
 	}
 
-</style>
+	</style>
 
 </head>
 
-<body class="bg-light">
+<body>
 
 <!--navigation in page-->
 <jsp:include page="../inc/header.jsp"></jsp:include>
         
-	<section class="py-7 bg-light" id="company">
+	<section class="py-7 bg-light">
 		<div class="container">
+		
 			<div class="row">
 	            <div class="col-md-7 col-sm-9 mx-auto text-center">
 	                <span class="text-muted text-uppercase">RESERVATION</span>
@@ -100,6 +101,7 @@
 			</div>
 			
 			<div class="row p-5 mt-5 bg-white raised-box rounded">
+				
 				<div class="mx-auto">
 	            <select class="form-control col-md-6" onchange="showHouse(this.value)">
 					<option value="A" <c:if test="${param.warehouse == 'A'}">selected="selected"</c:if>>House A</option>
@@ -135,7 +137,7 @@
 				</div>
 				
 				<!-- 예약정보 표시 영역 -->
-				<div id="info" class="text-center mx-auto">
+				<div id="info" class="text-center mx-auto mt-5">
 					<ul class="list-group mb-3">
 						<li class="list-group-item">
 						  <div>
@@ -150,7 +152,7 @@
 				          </div>
 				        </li>
 						<li class="list-group-item d-flex justify-content-between">
-						  <input type="button" class="btn" value="예약하기" onclick="goReservation()">
+						  <button class="btn" onclick="goReservation()">예약하기</button>
 						  <small class="text-muted">예약은 비어있는 날짜에 한해<br>최소 15일부터 가능합니다.</small>
 						</li>
 					</ul>

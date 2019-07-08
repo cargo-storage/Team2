@@ -18,11 +18,12 @@ public class reserveCheckAction implements Action {
 		
 		String email = request.getParameter("email");
 		String house = request.getParameter("house");
-		Timestamp start_day = Timestamp.valueOf(request.getParameter("start_day"));
-		Timestamp end_day = Timestamp.valueOf(request.getParameter("end_day"));
-		Timestamp res_day = Timestamp.valueOf(request.getParameter("res_day"));
+		Timestamp start_day = Timestamp.valueOf(request.getParameter("start_day")+" 00:00:00");
+		Timestamp end_day = Timestamp.valueOf(request.getParameter("end_day")+" 00:00:00");
+		Timestamp res_day = Timestamp.valueOf(request.getParameter("res_day")+" 00:00:00");
 		int payment = Integer.parseInt(request.getParameter("payment"));
 		
+		System.out.println();
 		
 		 rsdto.setEmail(email);
 		 rsdto.setHouse(house);

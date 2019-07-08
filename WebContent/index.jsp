@@ -342,48 +342,6 @@
                         </p>
                     </div>
                 </div>
-<!--                 <div class="row mt-7">
-                    <div class="col-md-6 my-auto order-1 order-md-2">
-                        <img src="img/feature2.png" class="img-fluid d-block mx-auto" alt="Feature 2" />
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0 order-2 order-md-1">
-                        <h2 class="display-4">B동</h2>
-                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
-                            Nam liber tempor cum soluta nobis.</p>
-                        <ul class="features-list">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus mus.</li>
-                        </ul>
-                        <p class="lead mt-3">
-                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
-                                Sign up now <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-7">
-                    <div class="col-md-6 my-auto">
-                        <img src="img/feature3.png" class="img-fluid d-block mx-auto" alt="Feature 3" />
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
-                        <h2 class="display-4">C동</h2>
-                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
-                            Nam liber tempor cum soluta nobis.</p>
-                        <ul class="features-list">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus mus.</li>
-                        </ul>
-                        <p class="lead mt-3">
-                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
-                                Contact us <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
-                            </a>
-                        </p>
-                    </div>
-                </div> -->
             </div>
         </section>
         

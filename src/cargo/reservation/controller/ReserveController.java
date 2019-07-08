@@ -13,6 +13,7 @@ import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
 import cargo.reservation.action.reserveCheckAction;
+import cargo.reservation.action.reserveProAction;
 
 public class ReserveController extends HttpServlet{
 	
@@ -45,9 +46,11 @@ public class ReserveController extends HttpServlet{
 			}else if(command.equals("/moreInfo.me")){ // 공간별 상세정보
 				action = new ResInfoMoreAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/reserveCheck.me")){
+			}else if(command.equals("/reservePro.me")){
+	            action = new reserveProAction();
+	            forward = action.execute(request, response);
+	        }else if(command.equals("/reserveCheck.me")){
 				action = new reserveCheckAction();
-				System.out.println("Hi");
 				forward = action.execute(request, response);
 				System.out.println(command);
 			}
