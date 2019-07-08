@@ -162,8 +162,8 @@ public class ReservationDAO {
         
         try {
         	getConnection();
-           String sql = "insert into reservation (email, house, start_day, end_day, res_day, payment) "
-                 + "values(?,?,?,?,?,?)";
+           String sql = "INSERT INTO reservation (email, house, start_day, end_day, res_day, payment) "
+                 + "VALUES(?,?,?,?,?,?)";
            
            pstmt = conn.prepareStatement(sql);
            pstmt.setString(1, rsdto.getEmail());
@@ -181,6 +181,32 @@ public class ReservationDAO {
         }finally{
            freeResource();
         }
+     }
+	
+	public int rsPayment(String house) {
+        
+        int price = 0;
+        
+        try {
+           
+           getConnection();
+           String sql = "SELECT price FROM warehouse WHERE house=?";
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, house);
+           rs=pstmt.executeQuery();
+           
+           if(rs.next()) {
+              price = rs.getInt(1);
+           }
+                 
+        } catch (Exception e) {
+        	System.out.println("Error in rsPayment()");
+           e.printStackTrace();
+        }finally{
+           freeResource();
+        }
+        
+        return price;
      }
 
 }
