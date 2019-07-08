@@ -19,7 +19,7 @@
                    <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link page-scroll" href="reserve/info.do?warehouse=A">예약안내</a>
+                   <a class="nav-link page-scroll" href="../reserve/info.do?warehouse=A">예약안내</a>
                </li>
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#market">중고장터</a>
