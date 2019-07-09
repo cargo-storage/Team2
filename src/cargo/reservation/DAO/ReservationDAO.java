@@ -1,4 +1,4 @@
-package cargo.reservation.action;
+package cargo.reservation.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

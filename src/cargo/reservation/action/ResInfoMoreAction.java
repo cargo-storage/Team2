@@ -16,6 +16,7 @@ import cargo.common.DTO.ReservationDTO;
 import cargo.common.DTO.WarehouseDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
+import cargo.reservation.DAO.ReservationDAO;
 
 
 public class ResInfoMoreAction implements Action {
