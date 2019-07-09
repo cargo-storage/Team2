@@ -178,7 +178,7 @@
                         								<input type="text" id="end_day" name="end_day" readonly="readonly"><br>
                         								<input type="text" id="res_day" name="res_day" value="<%=today%>" readonly="readonly"><br>
                         								<input type="submit" value="금액계산">
-                        							
+                        								
 											</div>
                                           </div>
                                          

@@ -72,7 +72,7 @@ public class reserveCheckAction implements Action {
 		 * 페이지를 열게됩니다. ex) @WebServlet({"/ex/*"}) 이거였으므로 WebContent 폴더 안에 ex폴더에서
 		 * 다른 페이지를 연다고 생각하심될듯.
 		 */
-		forward.setPath("../reservation/reservePro.jsp");
+		forward.setPath("/reservation/reservePro.jsp");
 		return forward;
 	}
 
