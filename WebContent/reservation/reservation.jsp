@@ -30,7 +30,7 @@
 	<script type="text/javascript">
 	
 		function showHouse(warehouse){
-			location.href = "${contextPath}/re/info.do?warehouse="+warehouse;
+			location.href = "${contextPath}/re/info.me?warehouse="+warehouse;
 		}
 		
 		function showInfo(btn){
