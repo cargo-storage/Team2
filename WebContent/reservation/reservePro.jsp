@@ -2,12 +2,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%	request.setCharacterEncoding("utf-8"); %>  
+
+<c:choose>   
+	<c:when test="${sessionScope.email==null }"><c:set var="mem_email" value="not_logined"/></c:when>
+	<c:when test="${sessionScope.email!=null }"><c:set var="mem_email" value="${sessionScope.email }"/></c:when>
+</c:choose>
+<c:choose>
+	<c:when test="${sessionScope.name==null }"><c:set var="mem_name" value="not_logined"/></c:when>
+	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
+</c:choose>     
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,8 +41,7 @@
 	<!-- jQuery UI 라이브러리 js파일 -->
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 
-
-      <!-- Bootstrap CSS / Color Scheme -->
+    <!-- Bootstrap CSS / Color Scheme -->
     <link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
     <!-- font-awesome CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -47,7 +58,7 @@
               //buttonText: "날짜선택",             // 버튼의 대체 텍스트
               dateFormat: "yy-mm-dd",             // 날짜의 형식
               changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-                  minDate: 0,  //오늘 이전  날짜 선택 불가                  // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+                  minDate: 1,  //오늘 이전  날짜 선택 불가                  // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
               onClose: function( selectedDate ) {    
                   // 시작일(fromDate) datepicker가 닫힐때
                   // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
@@ -62,7 +73,7 @@
                dayNamesMin:["일","월","화","수","목","금","토"], 
               dateFormat: "yy-mm-dd",
               changeMonth: true,
-              	minDate: 17, // 오늘  날짜 선택 불가
+              	minDate: 16, // 오늘  날짜 선택 불가
               onClose: function( selectedDate ) {
                   // 종료일(toDate) datepicker가 닫힐때
                   // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
@@ -72,51 +83,50 @@
       }); // function() - 끝
 
     </script>
-    
+    <style type="text/css">
+   	#inputArea{
+	   	background-color: rgba(108, 117, 125, 0.2);
+   	}
+    </style>
 </head>
     <body class="bg-light">
-    	
+	
 	<!--navigation in page-->
 	<jsp:include page="../inc/header.jsp"></jsp:include>
 	<section class="py-7 bg-light">
-            <div class="container">
-            
-            	<div class="row">
-		            <div class="col-md-7 col-sm-9 mx-auto text-center">
-		                <span class="text-muted text-uppercase">RESERVATION</span>
-		                <h2 class="display-4">예약안내</h2>
-		                <p class="lead">원하는 공간을 선택하세요!</p>
-		            </div>
-				</div>
+    	<div class="container">
+           	<div class="row">
+	            <div class="col-md-7 col-sm-9 mx-auto text-center">
+	                <span class="text-muted text-uppercase">RESERVATION</span>
+	                <h2 class="display-4">예약하기</h2>
+	                <p class="lead">예약을 원하는 날짜를 선택하세요.</p>
+	            </div>
+			</div>
 				
-				
-                    <div class="col-md-7 my-md-auto text-center text-md-left">
-                            <div class="ml-auto">
-                             <div class="card" style="width: 1070px; height: 550px; margin-top: 20px">
-                                 <div class="card-body p-4">
-                                     
-                                     <form class="signup-form" method="post" action="./reserveCheck.me">
-                                         <div class="form-group form-row">
-                                         	<input type="button" value="주동석" style="width: 450px; height: 400px; margin-left: 50px; margin-top: 30px">
-										<div style="background-color: pink; margin-left: 50px; margin-top: 30px; width: 450px; height: 400px;">
-			  								<!-- DatePicker input tag -->
-		  									<input type="text" id="house" name="house" value="${param.house }" readonly="readonly"><br>
-		  									<input type="text" id="email" name="email" value="do2@cargo.kr" readonly="readonly"><br>
-		  									<input type="text" value="samll"><br>
-                    						<input type="text" id="start_day" name="start_day"readonly="readonly"><br>
-                    						<input type="text" id="end_day" name="end_day" readonly="readonly"><br>
-                    						<input type="text" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
-                    						<input type="submit" value="금액계산">
-										</div>
-                                        </div>
-                                     </form>
-                                     
-                                 </div>
-                             </div>
-                            </div>
-                    </div>
-            </div>
-           </section>
+             <div class="row px-4 py-5 mt-5 bg-white raised-box rounded">
+                 <form class="signup-form form-group m-auto" method="post" action="./reserveCheck.me">
+						<c:set var="hn" value="${fn:substring(param.house,0,1)}"/>
+						<img class="m-auto p-auto col-xl-6" alt="house${hn}" src="../img/house${hn}.png">
+						<div class="col-lg-6 rounded form-group form-row p-4 float-right" id="inputArea">
+							<!-- DatePicker input tag -->
+							<label for="house" class="mt-1"><b>사용할 공간</b></label>
+								<input type="text" class="form-control" id="house" name="house" value="${param.house }" readonly="readonly"><br><!-- block -->
+							<%-- <label for="name" class="m-1">이름</label>
+								<input type="text" class="form-control" id="name" name="name" value="${mem_name}" readonly="readonly"><br><!-- value--session값 --> --%>
+							<label for="email" class="mt-1"><b>E-mail</b></label>
+								<input type="text" class="form-control" id="email" name="email" value="${mem_email }" readonly="readonly"><br><!-- block -->
+							<label for="res_day" class="mt-1"><b>오늘날짜</b></label>
+								<input type="text" class="form-control" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
+							<label for="start_day" class="mt-1 strong"><b>시작일</b><small class="text-muted ml-2">오늘 날짜 이후로 선택 가능합니다.</small></label>
+							    <input type="text" class="form-control" id="start_day" name="start_day"readonly="readonly"><br>
+							<label for="end_day" class="mt-1"><b>종료일</b><small class="text-muted ml-2">보관 최소기간은 15일입니다.</small></label>
+							    <input type="text" class="form-control" id="end_day" name="end_day" readonly="readonly"><br>
+							<input type="submit" class="mx-auto col-md-5 btn btn-primary mt-3" value="최종 금액 계산">
+						</div>
+                  </form>
+	         </div>          
+		</div>
+	</section>
 
         <!--footer -->
         <footer class="py-4 bg-black">

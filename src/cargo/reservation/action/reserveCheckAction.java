@@ -32,8 +32,12 @@ public class reserveCheckAction implements Action {
 		
 		ReservationDAO rsdao1 = new ReservationDAO();
 		
+		long diffSec = (end_day.getTime() - start_day.getTime())/1000 ;       
+		long total = diffSec/(60 * 60 * 24); 
+		System.out.println("일수 = " + total);  
+
 		
-		long total = (end_day.getDate() - start_day.getDate()) ;
+		System.out.println(total);
 		
 		int payment = (int)total * rsdao1.rsPayment(house);
 		rsdto.setPayment(payment);
@@ -47,7 +51,7 @@ public class reserveCheckAction implements Action {
 		 rsdto.setPayment(payment);
 		 
 		
-		
+		request.setAttribute("totalDay", total);
 		request.setAttribute("payment", payment);
 		
 		SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");

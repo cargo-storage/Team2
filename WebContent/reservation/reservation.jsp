@@ -60,8 +60,9 @@
 		
 		function goReservation(){
 			var houseName = $('#houseName').text();
-			alert(houseName+"을 예약하시겠습니까?");
-			location.href='${contextPath}/re/reservePro.me?house='+houseName;
+			var go = confirm(houseName+"을 예약하시겠습니까?");
+			if(go==true)	location.href='${contextPath}/re/reservePro.me?house='+houseName;
+			else 			return false;
 		}
 	</script>
 	

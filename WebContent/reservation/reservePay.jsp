@@ -1,10 +1,17 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+<c:choose>   
+	<c:when test="${sessionScope.email==null }"><c:set var="mem_email" value="not_logined"/></c:when>
+	<c:when test="${sessionScope.email!=null }"><c:set var="mem_email" value="${sessionScope.email }"/></c:when>
+</c:choose>
+<c:choose>
+	<c:when test="${sessionScope.name==null }"><c:set var="mem_name" value="not_logined"/></c:when>
+	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
+</c:choose>   
     
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -37,124 +44,109 @@
         <!-- font-awesome CSS -->
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-        <style>
-           
-           .market-intro{
-              border: 4px solid #00c58c;
-           }
-           
-           .market-go{
-              font-size: 25px;
-               font-weight: 600;
-             margin: 40px 0;
-           }
-           .quote{
-              display:block;
-             overflow: hidden; 
-              text-overflow: ellipsis;
-              white-space: nowrap; 
-              
-            white-space: normal; 
-            line-height: 1.2; 
-            height: 3.6em; 
-            text-align: left;
-            word-wrap: break-word; 
-            display: -webkit-box; 
-            -webkit-line-clamp: 3; 
-            -webkit-box-orient: vertical;
-            text-align: center;
-         }
-        </style>
-        
  
-    </head>
-    <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
+</head>
+<body class="bg-light">
  	
-        <!--navigation-->
-        <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="index.html">
-                TEAM2 WAREHOUSE
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span data-feather="menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#company">회사소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#market">중고장터</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">FAQ</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">로그인/회원가입</a>
-                </form>
-            </div>
-        </nav>
+<!--navigation in page-->
+<jsp:include page="../inc/header.jsp"></jsp:include>
+	<section class="py-7 bg-light">
+    	<div class="container">
+           	<div class="row">
+	            <div class="col-md-7 col-sm-9 mx-auto text-center">
+	                <span class="text-muted text-uppercase">RESERVATION</span>
+	                <h2 class="display-4">결제</h2>
+	                <p class="lead">예약 및 결제정보를 확인하세요</p>
+	            </div>
+			</div>
+						
+			
+			<div class="my-3 p-3 bg-white rounded shadow-sm">
+			    <p class="lead border-bottom border-gray display-5 pb-2 mb-0"><b>주문자 정보</b></p>
+			    <div class="media text-muted pt-3">
+			      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+			        <strong class="d-block">주문자명</strong>
+			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+			      </p>
+			    </div>
+			    <div class="media text-muted pt-3">
+			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+			        <strong class="d-block text-gray-dark">@username</strong>
+			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+			      </p>
+			    </div>
+			    <div class="media text-muted pt-3">
+			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
+			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+			        <strong class="d-block text-gray-dark">@username</strong>
+			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+			      </p>
+			    </div>
+			    <small class="d-block text-right mt-3">
+			      <a href="#">All updates</a>
+			    </small>
+		  </div>
+		  
+		  <div class="my-3 p-3 bg-white rounded shadow-sm">
+			    <p class="lead border-bottom border-gray display-5 pb-2 mb-0"><b>결제 정보</b></p>
+			    <div class="media text-muted pt-3">
+			      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
+			        <strong class="d-block">주문자명</strong>${mem_name }
+			      </p>
+			    </div>
+			    <div class="media text-muted pt-3">
+			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+			        <strong class="d-block text-gray-dark">@username</strong>
+			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+			      </p>
+			    </div>
+			    <div class="media text-muted pt-3">
+			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
+			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+			        <strong class="d-block text-gray-dark">@username</strong>
+			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+			      </p>
+			    </div>
+			    <small class="d-block text-right mt-3">
+			      <a href="#">All updates</a>
+			    </small>
+		  </div>		
+						
+						
+						
+             <%-- <div class="row px-4 py-5 mt-5 bg-white raised-box rounded">
+                 <form class="signup-form form-group m-auto" method="post" action="#">
+						<div class="rounded form-group form-row p-4" id="inputArea">
+							<!-- DatePicker input tag -->
+							<label for="house" class="m-1">공간명</label>
+								<input type="text" class="form-control" id="house" name="house" value="${param.house }" readonly="readonly"><br><!-- block -->
+							<label for="name" class="m-1">이름</label>
+								<input type="text" class="form-control" id="name" name="name" value="${mem_name }" readonly="readonly"><br><!-- value--session값 -->
+							<label for="email" class="m-1">E-mail</label>
+								<input type="text" class="form-control" id="email" name="email" value="${param.email }" readonly="readonly"><br><!-- block -->
+							<label for="res_day" class="m-1">현재날짜</label>
+								<input type="text" class="form-control" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
+							<label for="start_day" class="m-1">시작일</label>
+							    <input type="text" class="form-control" id="start_day" name="start_day" value="${param.start_day }"><br>
+							<label for="end_day" class="m-1">종료일</label>
+							    <input type="text" class="form-control" id="end_day" name="end_day" value="${param.end_day }"><br>
+							<label for="totalDay" class="m-1">총 이용기간</label>
+							    <input type="text" class="form-control" id="totalDay" name="totalDay" value="${totalDay }"><br>
+							<label for="payment" class="m-1">총 이용기간</label>
+							    <input type="text" class="form-control" id="payment" name="payment" value="${payment}"><br>   
+							<input type="submit" class="mx-auto col-md-5 btn btn-primary mt-3" value="결제하기">
+						</div>
+                  </form>
+	         </div> --%>
+	        </div>          
+	</section>
 
-        <!--hero header-->
-        <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
-            <div class="container">
-                <div class="row vh-md-100">
-                    <div class="col-md-7 my-md-auto text-center text-md-left">
-                        
-                        <p class="lead text-light my-4">간단하게 견적을 계산해 보세요!</p>
-                            <!-- <!-- 간편검색 -->
-                            <!-- <select class="col-md-6 form-control mx-2">
-                                                     <option value="">사이즈선택</option>
-                                                     <option value="housea">A - small</option>
-                                                     <option value="houseb">B - middle</option>
-                                                     <option value="housec">C - big</option>
-                                                     <option value="housed">D - Container</option>
-                            </select>  --> -->
-                             <div class="ml-auto">
-                              <div class="card" style="width: 1070px; height: 550px; margin-top: 20px">
-                                  <div class="card-body p-4">
-                                      <form class="signup-form" method="post" action="${contextPath}/re/reserveCheck.me">
-                                      
-                                          <div class="form-group">
-                                          
-                                          <div class="form-group form-row" >
-                                          	<!-- <input type="button" value="결제금액" style="width: 450px; height: 400px; margin-left: 50px; margin-top: 30px"> -->
-												<div style="background-color: pink; margin-left: 50px; margin-top: 30px; width: 450px; height: 400px;">
-					  								<!-- DatePicker input tag -->
-					  									<input type="text" id="house" name="house" value="${param.house }"><br>
-					  									<input type="text" id="email" name="email" value="${param.email }" ><br>
-					  									<input type="text" value="samll"><br>
-                        								<input type="text" id="start_day" name="start_day" value="${param.start_day }" readonly="readonly"><br>
-                        								<input type="text" id="end_day" name="end_day" value="${param.end_day }" readonly="readonly"><br>
-                        								<input type="text" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
-                        								<input type="text" id="payment" name="payment" value="${payment}" readonly="readonly"><br>
-                        								<input type="submit" value="금액계산">
-                        								
-											</div>
-                                          </div>
-                                         
-                                              
-                                          </div>
 
-                                      </form>
-                                  </div>
-                              </div>
-                             </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-               <!--footer / contact-->
-        <footer class="py-6 bg-black" id="contact">
+        <!--footer -->
+        <footer class="py-4 bg-black">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
@@ -212,37 +204,6 @@
                 </div>
             </div>
         </footer>
-
-        <!--scroll to top-->
-        <div class="scroll-top">
-            <i class="fa fa-angle-up" aria-hidden="true"></i>
-        </div>
-
-        <!-- theme switcher (FOR DEMO ONLY - REMOVE FROM PRODUCTION)-->
-        <div class="switcher-wrap">
-            <div class="switcher-trigger">
-                <span class="fa fa-gear"></span>
-            </div>
-            <div class="color-switcher">
-                <h6>Color Switcher</h6>
-                <ul class="mt-3 clearfix">
-                    <li class="bg-green active" data-color="default" title="Default Green"></li>
-                    <li class="bg-purple" data-color="purple" title="Purple"></li>
-                    <li class="bg-blue" data-color="blue" title="Blue"></li>
-                    <li class="bg-red" data-color="red" title="Red"></li>
-                    <li class="bg-orange" data-color="orange" title="Orange"></li>
-                    <li class="bg-indigo" data-color="indigo" title="Indigo"></li>
-                    <li class="bg-black" data-color="black" title="Black"></li>
-                    <li class="bg-teal" data-color="teal" title="Teal"></li>
-                    <li class="bg-cyan" data-color="cyan" title="Cyan"></li>
-                    <li class="bg-pink" data-color="pink" title="Pink"></li>
-                </ul>
-                <p>These are just demo colors. You can <b>easily</b> create your own color scheme.</p>
-            </div>
-            <div class="mt-4">
-                <a href="https://wireddots.com/themes/lambda?utm_source=lambda-demos" class="btn btn-primary btn-block">Free Download</a>
-            </div>
-        </div>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
