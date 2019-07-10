@@ -1,6 +1,7 @@
 package cargo.reservation.action;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,21 @@ public class reserveCheckAction implements Action {
 		Timestamp start_day = Timestamp.valueOf(request.getParameter("start_day")+" 00:00:00");
 		Timestamp end_day = Timestamp.valueOf(request.getParameter("end_day")+" 00:00:00");
 		Timestamp res_day = Timestamp.valueOf(request.getParameter("res_day")+" 00:00:00");
-		int payment = Integer.parseInt(request.getParameter("payment"));
 		
-		System.out.println();
+		rsdto.setEmail(email); 
+		rsdto.setHouse(house); 
+		rsdto.setStart_day(start_day);
+		rsdto.setEnd_day(end_day); 
+		rsdto.setRes_day(res_day);
+		
+		ReservationDAO rsdao1 = new ReservationDAO();
+		
+		
+		long total = (end_day.getDate() - start_day.getDate()) ;
+		
+		int payment = (int)total * rsdao1.rsPayment(house);
+		rsdto.setPayment(payment);
+		
 		
 		 rsdto.setEmail(email);
 		 rsdto.setHouse(house);
@@ -34,14 +47,23 @@ public class reserveCheckAction implements Action {
 		 rsdto.setPayment(payment);
 		 
 		
-		ReservationDAO rsdao = new ReservationDAO();
-		rsdao.rsCheck(rsdto);
 		
+		request.setAttribute("payment", payment);
+		
+		SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        String today = formatter.format(new java.util.Date());
+        request.setAttribute("today", today);
+		
+        /*
+		 ReservationDAO rsdao = new ReservationDAO(); 
+		 rsdao.rsCheck(rsdto);
+		 */
+        
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setAjax(false);
 		
-		forward.setPath("../reservation/reservePro.jsp");
+		forward.setPath("../reservation/reservePay.jsp");
 		return forward;
 	}
 
