@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.member.action.EmailAuthAction;
+import cargo.member.action.EmailCheckAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
@@ -63,6 +64,9 @@ public class MemberController extends HttpServlet {
 				forward = action.execute(request, response);
 			}else if(command.equals("/emailAuth.me")) { //이메일 인증
 				action = new EmailAuthAction();
+				forward = action.execute(request, response);
+			}else if(command.equals("/emailCheck.me")) { //이메일 중복 확인
+				action = new EmailCheckAction();
 				forward = action.execute(request, response);
 			}
 			
