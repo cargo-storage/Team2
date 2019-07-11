@@ -25,7 +25,7 @@ public class AdminEachInfoAction implements Action {
 		else if("closed".equals(category)) currntPage="종료된 보관 기록 열람";
 			
 		AdminDAO dao = new AdminDAO();
-		request.setAttribute("list", dao.getInfo(category));
+		request.setAttribute("list", dao.getTables(category));
 		request.setAttribute("currntPage", currntPage);
 		request.setAttribute("updateTime", new Date());
 		

@@ -111,6 +111,7 @@
 								<tr>
 									<th>상태</th>
 									<th>이름</th>
+									<th>휴대전화</th>
 									<th>이메일</th>
 									<th>물품ID</th>
 									<th>창고번호</th>
@@ -123,6 +124,7 @@
 								<tr>
 									<th>상태</th>
 									<th>이름</th>
+									<th>휴대전화</th>
 									<th>이메일</th>
 									<th>물품ID</th>
 									<th>창고번호</th>
@@ -136,6 +138,7 @@
 								<tr>
 									<td><c:out value="${adto.state}"/></td>
 									<td><c:out value="${adto.name}"/></td>
+									<td><c:out value="${adto.phone}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.house}"/></td>

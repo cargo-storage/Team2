@@ -11,4 +11,13 @@ $(document).ready(function() {
           $(this).addClass('selected');
       }
   } );
+  
+  $('#detailModal').on('show.bs.modal', function (event) {
+	  var tr = $(event.relatedTarget); //modal 열게한 tr
+	  var cate = tr.data('cate'); //data-cate 값 뽑아오기
+	  var index = tr.data('index'); //data-index 값 뽑아오기
+	  
+	  var modal = $(this);
+	  modal.find('.modal-title').text('New message to ' + index);
+	});
 });
