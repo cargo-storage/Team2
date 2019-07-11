@@ -60,9 +60,16 @@
 		
 		function goReservation(){
 			var houseName = $('#houseName').text();
-			var go = confirm(houseName+"을 예약하시겠습니까?");
-			if(go==true)	location.href='${contextPath}/re/reservePro.me?house='+houseName;
-			else 			return false;
+			if(houseName=='WAREHOUSE'){
+				alert("예약하실 공간을 선택하세요.");
+			}else{
+				var go = confirm(houseName+"을 예약하시겠습니까?");
+				
+				if(go==true)	location.href='${contextPath}/re/reservePro.me?house='+houseName;
+				else 			return false;
+			}
+			
+			
 		}
 	</script>
 	
@@ -111,7 +118,7 @@
 					<option value="D" <c:if test="${param.warehouse == 'D'}">selected="selected"</c:if>>House D</option>
 				</select>
 				<!-- 창고 사용 현황 테이블 -->
-				<table class="my-3">
+				<table class="my-3 col-lg-5">
 				<c:choose>
 					<c:when test="${requestScope.hList == null }"><tr><td colspan="5">nothing</td></tr></c:when>
 					<c:when test="${hList !=null }">
@@ -138,7 +145,7 @@
 				</div>
 				
 				<!-- 예약정보 표시 영역 -->
-				<div id="info" class="text-center mx-auto mt-5">
+				<div id="info" class="col-lg-5 text-center mx-auto mt-5">
 					<ul class="list-group mb-3">
 						<li class="list-group-item">
 						  <div>
@@ -152,9 +159,9 @@
 				            <span class="text-muted" id="currRes">확인하고자 하는 공간을 선택 해 주세요.</span>
 				          </div>
 				        </li>
-						<li class="list-group-item d-flex justify-content-between">
-						  <button class="btn" onclick="goReservation()">예약하기</button>
-						  <small class="text-muted">예약은 비어있는 날짜에 한해<br>최소 15일부터 가능합니다.</small>
+						<li class="list-group-item">
+						  <button class="btn d-block m-auto btn-primary col-5" onclick="goReservation()">예약하기</button>
+						  <small class="text-muted">예약은 비어있는 날짜에 한해 최소 15일부터 가능합니다.</small>
 						</li>
 					</ul>
 				</div>

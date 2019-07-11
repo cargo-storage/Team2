@@ -43,9 +43,22 @@
         <link rel="stylesheet" href="../css/default.css" id="theme-color">
         <!-- font-awesome CSS -->
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+		
+		<style type="text/css">
+			.table tr>td:not(.confirm){
+				text-align: center;
+			}
+			.red{
+				color: #ff3333;
+			}
+			.confirm{
+				text-align: right;
+			}
+	
+		</style>
  
 </head>
+
 <body class="bg-light">
  	
 <!--navigation in page-->
@@ -60,86 +73,70 @@
 	            </div>
 			</div>
 						
-			
+			<form action="./doResPay.me" method="post">
 			<div class="my-3 p-3 bg-white rounded shadow-sm">
-			    <p class="lead border-bottom border-gray display-5 pb-2 mb-0"><b>주문자 정보</b></p>
-			    <div class="media text-muted pt-3">
-			      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-			        <strong class="d-block">주문자명</strong>
-			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-			      </p>
-			    </div>
-			    <div class="media text-muted pt-3">
-			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-			        <strong class="d-block text-gray-dark">@username</strong>
-			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-			      </p>
-			    </div>
-			    <div class="media text-muted pt-3">
-			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-			        <strong class="d-block text-gray-dark">@username</strong>
-			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-			      </p>
-			    </div>
-			    <small class="d-block text-right mt-3">
-			      <a href="#">All updates</a>
-			    </small>
+			
+			    <p class="lead pb-2 mb-0"><b>예약자 정보</b></p>
+			    <table class="table">
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">예약자명 *</p></td>
+			    		<td><input type="text" class="form-control" name="name" value="${mem_name }" required=""></td>
+			    		
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">E-mail *</p></td>
+			    		<td><input type="text" class="form-control" name="email" value="${param.email }" required=""></td>
+			    		
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">휴대전화 *</p></td>
+			    		<td><input type="text" class="form-control" name="phone" placeholder="숫자만 입력 해 주십시오." required=""></td>
+			    		
+			    	</tr>
+			    </table>
 		  </div>
 		  
 		  <div class="my-3 p-3 bg-white rounded shadow-sm">
-			    <p class="lead border-bottom border-gray display-5 pb-2 mb-0"><b>결제 정보</b></p>
-			    <div class="media text-muted pt-3">
-			      <p class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
-			        <strong class="d-block">주문자명</strong>${mem_name }
-			      </p>
-			    </div>
-			    <div class="media text-muted pt-3">
-			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"></rect><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
-			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-			        <strong class="d-block text-gray-dark">@username</strong>
-			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-			      </p>
-			    </div>
-			    <div class="media text-muted pt-3">
-			      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1"></rect><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-			      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-			        <strong class="d-block text-gray-dark">@username</strong>
-			        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-			      </p>
-			    </div>
-			    <small class="d-block text-right mt-3">
-			      <a href="#">All updates</a>
-			    </small>
+			    <p class="lead pb-2 mb-0"><b>결제 정보</b></p>
+			    <table class="table">
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">사용하실 공간</p></td>
+			    		<td><input type="text" class="form-control" name="house" value="${param.house }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">예약일</p></td>
+			    		<td><input type="text" class="form-control" name="res_day" value="${param.res_day }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">사용 시작일</p></td>
+			    		<td><input type="text" class="form-control" name="start_day" value="${param.start_day }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">사용 종료일<br><small class="text-muted">(공간 반납일)</small></p></td>
+			    		<td><input type="text" class="form-control" name="end_day" value="${param.end_day }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td><p class="font-weight-bold pt-2 m-0">총 사용 기간</p></td>
+			    		<td><input type="text" class="form-control"  name="totalDay" value="${totalDay } 일" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td class=""><p class="red font-weight-bold pt-2 m-0">최종 금액</p></td>
+			    		<td><input type="text" class="form-control" name="payment" value="${payment }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td><p class="red font-weight-bold pt-2 m-0">예약 보증금<br><small class="text-muted">최종 금액의 10%</small></p></td>
+			    		<td><input type="text" class="form-control" name="res_payment" value="${payment*0.1 }" readOnly></td>
+			    	</tr>
+			    	<tr>
+			    		<td colspan="2" class="confirm" ><strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
+			    						<input type="submit" class="btn btn-primary" value="결제하기">
+			    						<a href="javascript: history.back()" class="btn btn-secondary">돌아가기</a>
+			    	</tr>
+			    	
+			    </table>
 		  </div>		
-						
-						
-						
-             <%-- <div class="row px-4 py-5 mt-5 bg-white raised-box rounded">
-                 <form class="signup-form form-group m-auto" method="post" action="#">
-						<div class="rounded form-group form-row p-4" id="inputArea">
-							<!-- DatePicker input tag -->
-							<label for="house" class="m-1">공간명</label>
-								<input type="text" class="form-control" id="house" name="house" value="${param.house }" readonly="readonly"><br><!-- block -->
-							<label for="name" class="m-1">이름</label>
-								<input type="text" class="form-control" id="name" name="name" value="${mem_name }" readonly="readonly"><br><!-- value--session값 -->
-							<label for="email" class="m-1">E-mail</label>
-								<input type="text" class="form-control" id="email" name="email" value="${param.email }" readonly="readonly"><br><!-- block -->
-							<label for="res_day" class="m-1">현재날짜</label>
-								<input type="text" class="form-control" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
-							<label for="start_day" class="m-1">시작일</label>
-							    <input type="text" class="form-control" id="start_day" name="start_day" value="${param.start_day }"><br>
-							<label for="end_day" class="m-1">종료일</label>
-							    <input type="text" class="form-control" id="end_day" name="end_day" value="${param.end_day }"><br>
-							<label for="totalDay" class="m-1">총 이용기간</label>
-							    <input type="text" class="form-control" id="totalDay" name="totalDay" value="${totalDay }"><br>
-							<label for="payment" class="m-1">총 이용기간</label>
-							    <input type="text" class="form-control" id="payment" name="payment" value="${payment}"><br>   
-							<input type="submit" class="mx-auto col-md-5 btn btn-primary mt-3" value="결제하기">
-						</div>
-                  </form>
-	         </div> --%>
+		  </form>				
+	
 	        </div>          
 	</section>
 

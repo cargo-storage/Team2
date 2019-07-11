@@ -49,36 +49,34 @@
     <script type="text/javascript">
     
     $(function() {
+    	
+    	 
       	 $('#start_day').datepicker({
                //dateFormat: "yy-mm-dd",
-               monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-               dayNamesMin:["일","월","화","수","목","금","토"],
-              //buttonImage: "/jdAdmin/images/calendar.png", // 버튼 이미지
-              //buttonImageOnly : true,             // 버튼 이미지만 표시할지 여부
-              //buttonText: "날짜선택",             // 버튼의 대체 텍스트
+              monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+              dayNamesMin:["일","월","화","수","목","금","토"],
               dateFormat: "yy-mm-dd",             // 날짜의 형식
               changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-                  minDate: 1,  //오늘 이전  날짜 선택 불가                  // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+              minDate: 1,  //오늘포함 이전  날짜 선택 불가                  
               onClose: function( selectedDate ) {    
-                  // 시작일(fromDate) datepicker가 닫힐때
-                  // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                  $("#start_day").datepicker( "option", "minDate", selectedDate );
-              }
+            	  
+                 selectedDate = new Date(selectedDate);
+            	 selectedDate.setDate(selectedDate.getDate()+15); // 입력받은 날짜에서 +15일
+            	 
+                 $("#end_day").datepicker( "option", "minDate", selectedDate); //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+           	     return $("#end_day").datepicker("show");
+                 
+             	}
           });
-
+        
           //종료일
           $('#end_day').datepicker({
                //dateFormat: "yy-mm-dd",
                monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
                dayNamesMin:["일","월","화","수","목","금","토"], 
-              dateFormat: "yy-mm-dd",
-              changeMonth: true,
-              	minDate: 16, // 오늘  날짜 선택 불가
-              onClose: function( selectedDate ) {
-                  // 종료일(toDate) datepicker가 닫힐때
-                  // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-                  $("#end_day").datepicker( "option", "maxDate", selectedDate );
-              }                
+               dateFormat: "yy-mm-dd",
+               changeMonth: true,
+           
           });// end_date - 끝
       }); // function() - 끝
 
@@ -88,6 +86,7 @@
 	   	background-color: rgba(108, 117, 125, 0.2);
    	}
     </style>
+    
 </head>
     <body class="bg-light">
 	
@@ -102,28 +101,41 @@
 	                <p class="lead">예약을 원하는 날짜를 선택하세요.</p>
 	            </div>
 			</div>
+			
 				
-             <div class="row px-4 py-5 mt-5 bg-white raised-box rounded">
-                 <form class="signup-form form-group m-auto" method="post" action="./reserveCheck.me">
-						<c:set var="hn" value="${fn:substring(param.house,0,1)}"/>
-						<img class="m-auto p-auto col-xl-6" alt="house${hn}" src="../img/house${hn}.png">
-						<div class="col-lg-6 rounded form-group form-row p-4 float-right" id="inputArea">
-							<!-- DatePicker input tag -->
-							<label for="house" class="mt-1"><b>사용할 공간</b></label>
-								<input type="text" class="form-control" id="house" name="house" value="${param.house }" readonly="readonly"><br><!-- block -->
-							<%-- <label for="name" class="m-1">이름</label>
-								<input type="text" class="form-control" id="name" name="name" value="${mem_name}" readonly="readonly"><br><!-- value--session값 --> --%>
+             <div class="row p-5 mt-5 bg-white raised-box rounded">
+             	<div class="m-auto">
+					<c:set var="hn" value="${fn:substring(param.house,0,1)}"/>
+					<img class="" alt="house${hn}" src="../img/house${hn}.png">
+				</div>	
+				<div class="float-right m-auto col-lg-6">
+				<form class="form-group" method="post" action="./reserveCheck.me">
+					<ul class="list-group rounded mb-3">
+						<li class="list-group-item text-center">
+						  <div>
+						 	 <b>공간명</b>
+						    <h4 id="houseName" class="my-0">${param.house }</h4>
+						    <input type="hidden" name="house" value="${param.house }">
+						  </div>
+						</li>
+						<li class="list-group-item">
+				          <div>
 							<label for="email" class="mt-1"><b>E-mail</b></label>
-								<input type="text" class="form-control" id="email" name="email" value="${mem_email }" readonly="readonly"><br><!-- block -->
-							<label for="res_day" class="mt-1"><b>오늘날짜</b></label>
-								<input type="text" class="form-control" id="res_day" name="res_day" value="${today}" readonly="readonly"><br>
-							<label for="start_day" class="mt-1 strong"><b>시작일</b><small class="text-muted ml-2">오늘 날짜 이후로 선택 가능합니다.</small></label>
+								<input type="text" class="form-control" id="email" name="email" value="${mem_email }" readonly=""><br>
+							<label for="res_day" class="mt-1"><b>예약일</b></label>
+								<input type="text" class="form-control" id="res_day" name="res_day" value="${res_day}" readonly=""><br>
+							<label for="start_day" class="mt-1 strong"><b>사용 시작일</b><small class="text-muted ml-2">오늘 날짜 이후로 선택 가능합니다.</small></label>
 							    <input type="text" class="form-control" id="start_day" name="start_day"readonly="readonly"><br>
-							<label for="end_day" class="mt-1"><b>종료일</b><small class="text-muted ml-2">보관 최소기간은 15일입니다.</small></label>
+							<label for="end_day" class="mt-1"><b>사용 종료일</b><small class="text-muted ml-2">보관 최소기간은 15일입니다.</small></label>
 							    <input type="text" class="form-control" id="end_day" name="end_day" readonly="readonly"><br>
-							<input type="submit" class="mx-auto col-md-5 btn btn-primary mt-3" value="최종 금액 계산">
-						</div>
-                  </form>
+				          </div>
+				        </li>
+						<li class="list-group-item text-center">
+						  <input type="submit" class="mx-auto col-md-5 btn btn-primary" value="최종 금액 계산">
+						</li>
+					</ul>
+				</form>
+				</div>
 	         </div>          
 		</div>
 	</section>

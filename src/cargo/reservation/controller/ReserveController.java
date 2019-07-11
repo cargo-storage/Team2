@@ -12,6 +12,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
+import cargo.reservation.action.reserveAction;
 import cargo.reservation.action.reserveCheckAction;
 import cargo.reservation.action.reserveProAction;
 
@@ -34,10 +35,11 @@ public class ReserveController extends HttpServlet{
 		
 		String RequestURI = request.getRequestURI();
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
-		System.out.println(command);
 		
 		ActionForward forward = null;
 		Action action= null;
+		
+		System.out.println(request.getParameter("name")+"1234");
 		
 		try {
 			if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
@@ -52,7 +54,14 @@ public class ReserveController extends HttpServlet{
 	        }else if(command.equals("/reserveCheck.me")){
 				action = new reserveCheckAction();
 				forward = action.execute(request, response);
-				System.out.println(command);
+			}else if(command.equals("/doResPay.me")){
+				forward = new ActionForward();
+				forward.setPath("../reservation/reservePayPro.jsp");
+				forward.setRedirect(false);
+			}else if(command.equals("/reserveConfirm.me")){
+				action = new reserveAction();
+				forward = action.execute(request, response);
+				
 			}
 			
 			//모든 과정 후 페이지 이동부분

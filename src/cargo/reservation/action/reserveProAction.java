@@ -13,7 +13,6 @@ public class reserveProAction implements Action{
 	
 public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-	WarehouseDTO wdto = new WarehouseDTO();
 	
 	ActionForward forward = new ActionForward();
 	forward.setRedirect(false);
@@ -22,7 +21,7 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 	SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
     String today = formatter.format(new java.util.Date());
     
-    request.setAttribute("today", today);
+    request.setAttribute("res_day", today);
 	
 	
 	forward.setPath("../reservation/reservePro.jsp");
