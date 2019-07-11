@@ -3,9 +3,9 @@ package cargo.common.DTO;
 import java.sql.Timestamp;
 
 public class ReservationDTO {
-	String email,house;
-	int num,payment;
-	Timestamp start_day,end_day,res_day;
+	private String email,house;
+	private int num,payment;
+	private Timestamp start_day,end_day,res_day;
 	public ReservationDTO(){}
 	public ReservationDTO(String email, String house, int num, int payment, Timestamp start_day, Timestamp end_day,
 			Timestamp res_day) {
