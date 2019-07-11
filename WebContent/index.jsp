@@ -235,11 +235,12 @@
                    <a class="nav-link page-scroll" href="#faq">FAQ</a>
                </li>
            <c:set var="email" value="${email }"/>
+           <c:set var="name" value="${name }"/>
            <c:if test="${email ne null }">
           		<li class="nav-item">
                    <a class="nav-link page-scroll" href="#">MY PAGE</a>
                	</li>               
-              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${email }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
            </c:if>
            </ul>
            <c:if test="${email eq null }">
