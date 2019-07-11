@@ -232,18 +232,23 @@
                    <a class="nav-link page-scroll" href="#market">중고장터</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link page-scroll" href="#faq">FAQ</a>
+                   <a class="nav-link page-scroll" href="#faq">고객지원</a>
                </li>
-           <c:set var="email" value="${email }"/>
-           <c:set var="name" value="${name }"/>
-           <c:if test="${email ne null }">
-          		<li class="nav-item">
-                   <a class="nav-link page-scroll" href="#">MY PAGE</a>
+           <c:set var="email" value="${sessionScope.email }"/>
+           <c:set var="name" value="${sessionScope.name }"/>
+           <c:if test="${sessionScope.admin == 1}">
+           		<li class="nav-item">
+                   <a class="nav-link page-scroll" href="#">관리자</a>
                	</li>               
-              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+           </c:if>
+           <c:if test="${sessionScope.email ne null }">
+          		<li class="nav-item">
+                   <a class="nav-link page-scroll" href="#">마이페이지</a>
+               	</li>               
+              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${sessionScope.name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
            </c:if>
            </ul>
-           <c:if test="${email eq null }">
+           <c:if test="${sessionScope.email eq null }">
            		<div class="text-center">
 					<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
 				</div>

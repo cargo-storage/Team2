@@ -60,6 +60,7 @@ public class LoginAction implements Action {
 			HttpSession session = request.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("name", mdto.getName());
+			session.setAttribute("admin", mdto.getAdmin());
 
 			String path = request.getContextPath();
 			forward.setRedirect(true);
