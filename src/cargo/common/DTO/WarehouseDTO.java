@@ -1,8 +1,8 @@
 package cargo.common.DTO;
 
 public class WarehouseDTO {
-	String house,area;
-	int price,height,isEmpty;
+	private String house,area;
+	private int price,height,isEmpty;
 	public WarehouseDTO(){}
 	public WarehouseDTO(String house, String area, int price, int height, int isEmpty) {
 		this.house = house;
