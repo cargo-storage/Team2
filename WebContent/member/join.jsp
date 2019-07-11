@@ -15,10 +15,11 @@
 	
 	<!-- Bootstrap CSS / Color Scheme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/default.css" id="theme-color">
+	<link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
 	<!-- font-awesome CSS -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-
+	<link href="${contextPath }/css/font.css" rel="stylesheet">
+	
 	<!-- jquery.js -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- 주소 api -->
@@ -47,7 +48,7 @@
 		
 		.email-auth{
 			position: absolute;
-		    top: 32px;
+		    top: 30px;
 		    right: 15px;
 		    height: calc(1.5em + .75rem + 2px);
 		    padding: .375rem .75rem;
