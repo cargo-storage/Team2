@@ -94,21 +94,6 @@ public class MemberDAO {
 				if(pwd.equals(rs.getString("pwd"))) state = 1;
 				else state = -1;
 			}
-			/* 나중에 써먹음
-			 * MemberDTO mdto = new MemberDTO(); try { con = connect(); query =
-			 * "SELECT * FROM member WHERE email=?";
-			 * 
-			 * pstmt = con.prepareStatement(query); pstmt.setString(1, email);
-			 * 
-			 * rs = pstmt.executeQuery(); if(rs.next()) { if() mdto.setEmail(email);
-			 * mdto.setPwd(pwd); mdto.setName(rs.getString("name"));
-			 * mdto.setPhone(rs.getString("phone"));
-			 * mdto.setPostCode(rs.getInt("postCode"));
-			 * mdto.setRoadAddr(rs.getString("roadAddr"));
-			 * mdto.setDetailAddr(rs.getString("detailAddr"));
-			 * mdto.setAdmin(rs.getInt("admin"));
-			 * mdto.setReg_date(rs.getTimestamp("reg_date")); }
-			 */
 			
 		}catch (Exception e) {
 			System.out.println("LogingetMember()에서 오류: " + e);
@@ -118,12 +103,16 @@ public class MemberDAO {
 		return state;
 	}
 
-	public int randomNum() { //이메일 인증 랜덤 숫자
-		int authNum = (int)(Math.random()*100000)+1;
+	public String randomNum() { //이메일 인증 랜덤 숫자
+		String authNum = "";
+		for(int i=0;i<6;i++){
+			authNum += (int)(Math.random()*10);
+			System.out.println(authNum);
+		}
 		return authNum;
 	}
 
-	public int sendEmail(String to_email, int authNum) { //이메일 발송
+	public int sendEmail(String to_email, String authNum) { //이메일 발송
 		String from_email = "hbaymail@naver.com";
 		String subject = "TEAM2_WAREHOUSE 이메일 인증";
 		String content = "인증번호는 [" + authNum + "] 입니다.";
@@ -167,9 +156,28 @@ public class MemberDAO {
 		}
 	}
 	
-	public MemberDTO getMember(String email, String pwd){
+	public MemberDTO getMember(String email) { //이메일 중복 확인, 내정보 확인(패스워드 없이 세션의 이메일 유무로 확인)
 		MemberDTO mdto = new MemberDTO();
 		try{
+			con = connect();
+			query = "SELECT * FROM member WHERE email=?";
+			pstmt = con.prepareStatement(query); 
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				mdto.setEmail(email);
+				mdto.setPwd(rs.getString("pwd"));
+				mdto.setName(rs.getString("name"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setPostCode(rs.getInt("postCode"));
+				mdto.setRoadAddr(rs.getString("roadAddr"));
+				mdto.setDetailAddr(rs.getString("detailAddr"));
+				mdto.setAdmin(rs.getInt("admin"));
+				mdto.setReg_date(rs.getTimestamp("reg_date")); 
+				}
+		 
 			
 		}catch (Exception e) {
 			System.out.println("getMember()에서 오류 : " + e);

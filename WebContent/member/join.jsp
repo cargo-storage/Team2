@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +65,17 @@
 			margin: 5px 20px 0 0;
 			width: 50%;
 			float:left;
+		    height: calc(1.5em + .75rem + 2px);
+		    padding: .375rem .75rem;
+		    font-size: 1rem;
+		    font-weight: 400;
+		    line-height: 1.5;
+		    color: #495057;
+		    background-color: #fff;
+		    background-clip: padding-box;
+		    border: 1px solid #ced4da;
+		    border-radius: .25rem;
+		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 		}
 		
 		.authCheck{
@@ -130,8 +141,35 @@
 			var authNum;
 			//이메일 중복 체크 (ajax 구현하기)
 			$("#email").blur(function(){
-				
+				var email = $(this).val();
+				if(email ==''){
+					$("#emailErr").text("필수 입력 사항입니다.");
+				}else{
+					var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+					if(!reg.test(email)){
+						$("#emailErr").text("이메일 형식이 맞지 않습니다.");
+					}else{
+						$.ajax({
+							type: "post",
+							async: false,
+							url: "${contextPath}/me/emailCheck.me",
+							data: {email: email},
+							dataType: 'text',
+							success: function(data){
+								if(data == 0){ //이메일 존재하지 않음
+									$("#emailErr").text('');
+								}else{
+									$("#emailErr").text('존재하는 이메일 입니다.');
+								}
+							},
+							error: function(jqXHR, exception){
+								alert("서버 내부 에러가 발생했습니다.");
+							}
+						});
+					}
+				}
 			});
+			
 			//비밀번호 체크
 			$("#pwd").blur(function(){
 				var pwd = $(this).val();
@@ -194,27 +232,29 @@
 			if(email==''){
 				alert("이메일을 입력해주세요.");
 			}else{
-				$("#postAuth").attr("value","재전송");
-				$.ajax({
-					type: "post",
-					async: false,
-					url: "${path}/me/emailAuth.me",
-					data: {email: email},
-					dataType: 'text',
-					success: function(data){
-						var msg = JSON.parse(data);
-						if(msg.state == 0){
-							alert("인증번호 전송에 실패하였습니다.");
-						}else{
-							alert("인증번호를 전송하였습니다. \n인증번호를 입력해주시기 바랍니다.");
-							authNum = msg.authNum;
-							$("#auth").show();
+				if($("#emailErr").text()!=''){
+					alert("오류사항을 확인 후 다시 입력해주세요.");
+				}else{
+					$("#postAuth").attr("value","재전송");
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "${contextPath}/me/emailAuth.me",
+						data: {email: email},
+						success: function(data){
+							if(data.state == 0){
+								alert("인증번호 전송에 실패하였습니다.");
+							}else{
+								alert("인증번호를 전송하였습니다. \n인증번호를 입력해주시기 바랍니다.");
+								authNum = data.authNum;
+								$("#auth").show();
+							}
+						},
+						error: function(jqXHR, exception){
+							alert("서버 내부 에러가 발생했습니다.");
 						}
-					},
-					error: function(jqXHR, exception){
-						alert("서버 내부 에러가 발생했습니다.");
-					}
-				});
+					});
+				}
 			}
 		};
 		
@@ -224,9 +264,10 @@
 			}else{
 				alert("인증 성공");
 				$("#auth").hide();
+				$("#emailAuthNum").attr("disabled",true);
 				$("#email").attr("readonly","readonly");	
 			}
-		}
+		};
 			
 		function register(){
 			var result = 1;
@@ -270,7 +311,7 @@
 				alert("필수 사항을 기입해주세요.");
 				return false;
 			}
-			if($("#idErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
+			if($("#emailErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
 					||$("#nameErr").text()!=''||$("#phoneErr").text()!=''
 					||$("#addrErr").text()!=''||$("#emailErr").text()!=''){
 				alert("오류 사항을 확인 후 다시 입력해주세요.");
@@ -290,14 +331,14 @@
 			</div>
 		</div>
 		<div class="col-sm-9 col-lg-6" style="margin: 0 auto;">
-			<form action="${path }/me/join.me" method="post" onsubmit="return register()">
+			<form action="${contextPath }/me/join.me" method="post" onsubmit="return register()">
 				<div class="form-group">
 					<label for="email">이메일</label>
 					<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">
 					<input type="button" id="postAuth"class="email-auth" value="이메일 인증" onclick="emailAuth()">
 					<div id="auth">
-						<input type="email" class="form-control" id="emailAuthNum" name="emailAuthNum" placeholder="인증번호 입력">
-						<button class="authCheck" onclick="authCheck()">인증 확인</button>
+						<input type="email" id="emailAuthNum" name="emailAuthNum" placeholder="인증번호 입력">
+						<button type="button" class="authCheck" onclick="authCheck()">인증 확인</button>
 					</div>
 					<span id="emailErr" class="help-block"></span>
 				</div>
