@@ -8,8 +8,8 @@ public class MemberDTO {
 	Timestamp reg_date;
 	
 	public MemberDTO(){}
-	public MemberDTO(String email, String pwd, String name, String phone, String detailAddr, String roadAddr,
-			int postCode, int admin, Timestamp reg_date) {
+	public MemberDTO(String email, String pwd, String name, String phone, int postCode, 
+			String roadAddr, String detailAddr, int admin, Timestamp reg_date) {
 		this.email = email;
 		this.pwd = pwd;
 		this.name = name;
