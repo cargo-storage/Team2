@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/default.css" id="theme-color">
         <!-- font-awesome CSS -->
        	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-		<link href="${path }/css/font.css" rel="stylesheet">
+		<link href="${contextPath }/css/font.css" rel="stylesheet">
 		
 		<!-- jquery.js -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -239,7 +239,7 @@
           		<li class="nav-item">
                    <a class="nav-link page-scroll" href="#">MY PAGE</a>
                	</li>               
-              	<a href="${path}/me/logout.me" class="btn btn-outline-secondary btn-navbar">${email }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${email }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
            </c:if>
            </ul>
            <c:if test="${email eq null }">
@@ -800,7 +800,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
-							<form action="${pageContext.request.contextPath}/me/login.me" method="post" onsubmit="return login()">
+							<form action="${contextPath }/me/login.me" method="post" onsubmit="return login()">
 								<div class="form-group">
 									<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
 									<span id="emailErr" class="help-block"></span>
@@ -819,7 +819,7 @@
 							<div class="hint-text">			
 								<span><a href="#">이메일찾기</a></span> | 
 								<span><a href="#">비밀번호찾기</a></span> | 
-								<span><a href="${path }/member/join.jsp">회원가입</a></span>
+								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
 							</div>
 						</div>
 					</div>
