@@ -21,7 +21,7 @@ public class EmailAuthAction implements Action {
 		String to_email = request.getParameter("email");
 		
 		MemberDAO mdao = new MemberDAO();
-		int authNum = mdao.randomNum(); 
+		String authNum = mdao.randomNum(); 
 		
 		int state = mdao.sendEmail(to_email, authNum);
 		
