@@ -234,25 +234,29 @@
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#faq">고객지원</a>
                </li>
-           <c:set var="email" value="${sessionScope.email }"/>
-           <c:set var="name" value="${sessionScope.name }"/>
-           <c:if test="${sessionScope.admin == 1}">
-           		<li class="nav-item">
-                   <a class="nav-link page-scroll" href="#">관리자</a>
-               	</li>               
-           </c:if>
-           <c:if test="${sessionScope.email ne null }">
-          		<li class="nav-item">
-                   <a class="nav-link page-scroll" href="#">마이페이지</a>
-               	</li>               
-              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${sessionScope.name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
-           </c:if>
-           </ul>
-           <c:if test="${sessionScope.email eq null }">
-           		<div class="text-center">
-					<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
-				</div>
-           	</c:if>  
+          	<c:set var="email" value="${sessionScope.email }"/>
+          	<c:set var="name" value="${sessionScope.name }"/>
+          	<c:set var="admin" value="${sessionScope.admin }"/>
+         	
+			<c:if test="${admin == 1 }">
+        		<li class="nav-item">
+                	<a class="nav-link page-scroll" href="#">관리자</a>
+            	</li> 
+            </c:if>
+           	<c:choose>
+               	<c:when test="${email != null }">
+               		<li class="nav-item">
+                   		<a class="nav-link page-scroll" href="#">마이페이지</a>
+               		</li>               
+              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+               	</c:when>
+               	<c:otherwise>
+               		<div class="text-center">
+						<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
+					</div>
+              	</c:otherwise>
+       		</c:choose>
+          	</ul>
         </div>
     </nav>
 
