@@ -19,6 +19,7 @@ public class AdminModalAction implements Action {
 		
 		JSONObject jobj=null;
 		AdminDAO dao = new AdminDAO();
+		
 		if ("overdue".equals(cate)) {
 			jobj = new JSONObject(dao.getOverdueInfo(email, house));
 		}else if("예약".equals(cate)){
@@ -27,6 +28,8 @@ public class AdminModalAction implements Action {
 			jobj = new JSONObject(dao.getInfo("items", email, house));
 		}else if("완료".equals(cate)){
 			jobj = new JSONObject(dao.getInfo("closed", email, house));
+		}else if("member".equals(cate)){
+			jobj = new JSONObject(dao.getMemberInfo(email));
 		}
 		System.out.println(jobj.toJSONString());
 		

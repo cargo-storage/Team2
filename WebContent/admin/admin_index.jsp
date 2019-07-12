@@ -135,7 +135,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${odto.house}" data-email="${odto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.state}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.phone}"/></td>
