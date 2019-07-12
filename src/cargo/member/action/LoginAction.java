@@ -16,9 +16,9 @@ public class LoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		request.setCharacterEncoding("utf-8");
-
+		response.setContentType("text/html; charset=utf-8");
+		
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
 
@@ -26,8 +26,6 @@ public class LoginAction implements Action {
 		int state = mdao.LogingetMember(email, pwd);
 
 		ActionForward forward = new ActionForward();
-
-		response.setContentType("text/html; charset=utf-8");
 
 		// 0: 이메일 없음, -1: 비밀번호 틀림, 1: 성공
 		if (state == 0) {
