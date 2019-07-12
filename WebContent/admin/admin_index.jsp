@@ -135,7 +135,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${odto.house}" data-email="${odto.email}">
 									<td><c:out value="${adto.state}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.phone}"/></td>
@@ -179,7 +179,7 @@
 	</a>
 
 	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">

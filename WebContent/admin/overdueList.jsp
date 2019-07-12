@@ -69,8 +69,8 @@
 								</tr>
 							</tfoot>
 							<tbody>
-							<c:forEach items="${list}" var="odto" varStatus="status">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-index="${status.index}">
+							<c:forEach items="${list}" var="odto">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-house="${odto.house}" data-email="${odto.email}">
 									<td><fmt:formatDate value="${odto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
 									<td><c:out value="${odto.overdue}"/></td>
 									<td><fmt:formatNumber value="${odto.arrears}" type="currency" currencySymbol="￦"/></td>
@@ -120,7 +120,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="detailModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="detailModalLabel">연체 상세 정보</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>

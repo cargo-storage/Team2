@@ -55,6 +55,8 @@ public class ExampleController extends HttpServlet {
 				action = new ExampleAjaxAction();
 				forward = action.execute(request, response);
 				System.out.println("ajax!");
+			}else{
+				System.out.println("이곳은 예시 컨트롤러 입니다... 돌아가세요..!");
 			}
 			
 			//모든 과정 후 페이지 이동부분
