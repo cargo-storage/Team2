@@ -17,7 +17,8 @@ public class JoinAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("utf-8");
-
+		response.setContentType("text/html; charset=utf-8");
+		
 		String email = request.getParameter("email");
 		
 		int admin;
@@ -36,7 +37,6 @@ public class JoinAction implements Action {
 		ActionForward forward = new ActionForward();
 
 		if (result == 0) { // 실패했을 때
-			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			
 			out.println("<script>");
