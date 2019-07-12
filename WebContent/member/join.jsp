@@ -243,21 +243,22 @@
 						url: "${contextPath}/me/emailAuth.me",
 						data: {email: email},
 						success: function(data){
-							if(data.state == 0){
+							var msg = JSON.parse(data);
+							if(msg.state == 0){
 								alert("인증번호 전송에 실패하였습니다.");
 							}else{
 								alert("인증번호를 전송하였습니다. \n인증번호를 입력해주시기 바랍니다.");
-								authNum = data.authNum;
+								authNum = msg.authNum;
 								$("#auth").show();
 							}
 						},
-						error: function(jqXHR, exception){
+						error: function(){
 							alert("서버 내부 에러가 발생했습니다.");
 						}
 					});
 				}
 			}
-		};
+		}
 		
 		function authCheck(){
 			if(authNum != $("#emailAuthNum").val()){
@@ -268,7 +269,7 @@
 				$("#emailAuthNum").attr("disabled",true);
 				$("#email").attr("readonly","readonly");	
 			}
-		};
+		}
 			
 		function register(){
 			var result = 1;
@@ -318,20 +319,20 @@
 				alert("오류 사항을 확인 후 다시 입력해주세요.");
 				return false;
 			} 
-		};
+		}
 	</script>
 </head>
 <body>
 
 	<div class="container">
 		<div class="page-header">
-			<div class="col-sm-9 col-lg-6" style="margin: 0 auto; text-align: center;">
+			<div class="col-sm-9 col-lg-6 text-center m-auto">
 				<a class="logo" href="../index.jsp">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE</a>
 				<br>
 				<br>
 			</div>
 		</div>
-		<div class="col-sm-9 col-lg-6" style="margin: 0 auto;">
+		<div class="col-sm-9 col-lg-6 m-auto">
 			<form action="${contextPath }/me/join.me" method="post" onsubmit="return register()">
 				<div class="form-group">
 					<label for="email">이메일</label>
