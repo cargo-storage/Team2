@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -21,10 +21,17 @@
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="css/default.css" id="theme-color">
         <!-- font-awesome CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
+       	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+		<link href="${contextPath }/css/font.css" rel="stylesheet">
+		
+		<!-- jquery.js -->
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<!-- bootstrap.min.js -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+        
         <style>
-        	
+        	/* 중고 장터 */
         	.market-go{
         		font-size: 25px;
    				font-weight: 600;
@@ -46,43 +53,203 @@
 				-webkit-box-orient: vertical;
 				text-align: center;
 			}
+			
+			/* login */
+			.modal-login {
+			width: 350px;
+			}
+		
+			.modal-login .modal-content {
+				padding: 20px;
+				border-radius: 1px;
+				border: none;
+			}
+			
+			.modal-login .modal-header {
+				border-bottom: none;
+				position: relative;
+				justify-content: center;
+			}
+			
+			.modal-login h4 {
+				text-align: center;
+				font-size: 26px;
+			}
+			
+			.modal-login .form-control, .modal-login .btn {
+				min-height: 40px;
+				border-radius: 1px;
+			}
+			
+			.modal-login .close {
+				position: absolute;
+				top: -5px;
+				right: -5px;
+			}
+			
+			.modal-login .btn {
+				background: #3498db;
+				border: none;
+				line-height: normal;
+				font-size: 1.25rem;
+			}
+			
+			.modal-login .btn:hover, .modal-login .btn:focus {
+				background: #248bd0;
+			}
+			
+			.modal-login .hint-text, .modal-login .hint-text a{
+				color: #14ba9a;
+				font-size: 12px;
+				font-weight: bold;
+				line-height: 3;
+				margin: 0 7px;
+			}
+			
+			.trigger-btn {
+				display: inline-block;
+			}
+			
+			.help-block {
+				color: red;
+				font-size: 11px;
+			}
         </style>
+        
+        <script type="text/javascript"> //login.js
+			$(function(){
+		
+				/* 이메일 저장 */
+				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+			    var key = getCookie("key");
+			    $("#email").val(key); 
+			     
+			    if($("#email").val() != ''){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+			        $("#emailSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+			    }
+			     
+			    $("#emailSaveCheck").change(function(){ // 체크박스에 변화가 있다면,
+			        if($("#emailSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
+			            setCookie("key", $("#email").val(), 7); // 7일 동안 쿠키 보관
+			        }else{ // ID 저장하기 체크 해제 시,
+			            deleteCookie("key");
+			        }
+			    });
+			        
+				$("#email").blur(function(){
+					if($(this).val()==''){
+						$("#emailErr").text("필수 입력 사항입니다.");
+						$("#emailErr").show();
+					}else{
+						$("#emailErr").hide();
+						if($("#emailSaveCheck").is(":checked")){ // ID 저장하기를 체크한 상태라면,
+				            setCookie("key", $("#email").val(), 7); // 7일 동안 쿠키 보관
+				            }
+					}
+				});
+				
+				$("#pw").blur(function(){
+					if($(this).val() ==''){
+						$("#pwErr").text("필수 입력 사항입니다.");
+						$("#pwErr").show();
+					}else{ $("#pwErr").hide(); }
+				});
+			});
+			
+		 	function login(){
+		 		var result = 0;
+		 		var email = $("#email");
+				var pw = $("#pw");
+		
+				if (email.val() == '') {
+					$("#emailErr").text("필수 입력 사항입니다.");
+					$("#emailErr").show();
+					result = 1;
+				}
+				if (pw.val() == '') {
+					$("#pwErr").text("필수 입력 사항입니다.");
+					$("#pwErr").show();
+					result = 1;
+				}
+				if(result==1){
+					alert("필수 사항을 기입해주세요.");
+					return false;
+				}
+		 	};
+		 	
+		 	/* 쿠키관련 */
+		 	function setCookie(cookieName, value, exdays){
+			    var exdate = new Date();
+			    exdate.setDate(exdate.getDate() + exdays);
+			    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+			    document.cookie = cookieName + "=" + cookieValue;
+			}
+			 
+			function deleteCookie(cookieName){
+			    var expireDate = new Date();
+			    expireDate.setDate(expireDate.getDate() - 1);
+			    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+			}
+			 
+			function getCookie(cookieName) {
+			    cookieName = cookieName + '=';
+			    var cookieData = document.cookie;
+			    var start = cookieData.indexOf(cookieName);
+			    var cookieValue = '';
+			    if(start != -1){
+			        start += cookieName.length;
+			        var end = cookieData.indexOf(';', start);
+			        if(end == -1)end = cookieData.length;
+			        cookieValue = cookieData.substring(start, end);
+			    }
+			    return unescape(cookieValue);
+			}
+		</script>
     </head>
-    
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
-        <!--navigation-->
-        <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="${contextPath }/index.jsp">
-                TEAM2 WAREHOUSE
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span data-feather="menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#company">회사소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#market">중고장터</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">FAQ</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">로그인/회원가입</a>
-                </form>
-            </div>
-        </nav>
+   <!--navigation-->
+   <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
+       <a class="navbar-brand" href="index.html">
+           TEAM2 WAREHOUSE
+       </a>
+       <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
+               data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+           <span data-feather="menu"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarCollapse">
+           <ul class="navbar-nav ml-auto">
+               <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#company">회사소개</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#reservation">예약안내</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#market">중고장터</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#faq">FAQ</a>
+               </li>
+           <c:set var="email" value="${email }"/>
+           <c:set var="name" value="${name }"/>
+           <c:if test="${email ne null }">
+          		<li class="nav-item">
+                   <a class="nav-link page-scroll" href="#">MY PAGE</a>
+               	</li>               
+              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+           </c:if>
+           </ul>
+           <c:if test="${email eq null }">
+           		<div class="text-center">
+					<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
+				</div>
+           	</c:if>  
+        </div>
+    </nav>
 
         <!--hero header-->
         <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
@@ -116,7 +283,7 @@
 		                                </form>
 		                            </div>
 		                        </div>
-		                      </div>
+		                       </div>
                     </div>
                 </div>
             </div>
@@ -336,12 +503,54 @@
                             <li>Cum sociis natoque penatibus mus.</li>
                         </ul>
                         <p class="lead mt-3">
-                            <a href="${contextPath }/re/info.me?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
+                            <a href="#" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
                                 예약하러가기 <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
                             </a>
                         </p>
                     </div>
                 </div>
+<!--                 <div class="row mt-7">
+                    <div class="col-md-6 my-auto order-1 order-md-2">
+                        <img src="img/feature2.png" class="img-fluid d-block mx-auto" alt="Feature 2" />
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0 order-2 order-md-1">
+                        <h2 class="display-4">B동</h2>
+                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
+                            Nam liber tempor cum soluta nobis.</p>
+                        <ul class="features-list">
+                            <li>Lorem ipsum dolor sit amet.</li>
+                            <li>Aenean commodo ligula eget dolor.</li>
+                            <li>Aenean massa.</li>
+                            <li>Cum sociis natoque penatibus mus.</li>
+                        </ul>
+                        <p class="lead mt-3">
+                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
+                                Sign up now <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-7">
+                    <div class="col-md-6 my-auto">
+                        <img src="img/feature3.png" class="img-fluid d-block mx-auto" alt="Feature 3" />
+                    </div>
+                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
+                        <h2 class="display-4">C동</h2>
+                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
+                            Nam liber tempor cum soluta nobis.</p>
+                        <ul class="features-list">
+                            <li>Lorem ipsum dolor sit amet.</li>
+                            <li>Aenean commodo ligula eget dolor.</li>
+                            <li>Aenean massa.</li>
+                            <li>Cum sociis natoque penatibus mus.</li>
+                        </ul>
+                        <p class="lead mt-3">
+                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
+                                Contact us <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
+                            </a>
+                        </p>
+                    </div>
+                </div> -->
             </div>
         </section>
         
@@ -362,11 +571,7 @@
                 					<img src="img/online-shop.png" width="200" class="rounded-circle d-block mx-auto"/>
 									<p class="market-go text-white">중고 장터 서비스</p>
 									<p class="text-white">미수령된 물건들은<br>중고장터에서 판매 가능합니다!</p>
-									<button type="button" class="btn btn-outline-success btn-lg text-white">바로가기</button>
-									<i class="fas fa-arrow-alt-circle-right"></i>
-									<i class="fas fa-arrow-alt-circle-right"></i>
-									<i class="fas fa-arrow-alt-circle-right"></i>
-									<i class="fas fa-arrow-alt-circle-right"></i>
+									<button type="button" class="btn btn-outline-success btn-lg text-white">바로가기 <i class="far fa-arrow-alt-circle-right"></i></button>
                 				</div>	
                 			</div>
                 		</div>
@@ -588,11 +793,42 @@
                 <a href="https://wireddots.com/themes/lambda?utm_source=lambda-demos" class="btn btn-primary btn-block">Free Download</a>
             </div>
         </div>
+       	<div id="loginModal" class="modal fade">
+				<div class="modal-dialog modal-login">
+					<div class="modal-content">
+						<div class="modal-header">				
+							<h4 class="modal-title">LOGIN</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<form action="${contextPath }/me/login.me" method="post" onsubmit="return login()">
+								<div class="form-group">
+									<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
+									<span id="emailErr" class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="pwd" name="pwd" placeholder="PASSWORD">
+									<span id="pwErr" class="help-block"></span>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-primary btn-block btn-lg" value="LOGIN">
+								</div>
+							</form>
+							<div class="remember">
+								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
+							</div>	
+							<div class="hint-text">			
+								<span><a href="#">이메일찾기</a></span> | 
+								<span><a href="#">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
         <script src="js/scripts.js"></script>
