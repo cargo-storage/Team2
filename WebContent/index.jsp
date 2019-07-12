@@ -827,8 +827,8 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="#">이메일찾기</a></span> | 
-								<span><a href="#">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/member/findMember.jsp?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/member/findMember.jsp?find=pwd">비밀번호찾기</a></span> | 
 								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
 							</div>
 						</div>
