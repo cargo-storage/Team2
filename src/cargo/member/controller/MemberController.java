@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +12,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.member.action.EmailAuthAction;
 import cargo.member.action.EmailCheckAction;
+import cargo.member.action.EmailSearchAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
@@ -67,6 +67,9 @@ public class MemberController extends HttpServlet {
 				forward = action.execute(request, response);
 			}else if(command.equals("/emailCheck.me")) { //이메일 중복 확인
 				action = new EmailCheckAction();
+				forward = action.execute(request, response);
+			}else if(command.equals("/emailSearch.me")) { //이메일 찾기
+				action = new EmailSearchAction();
 				forward = action.execute(request, response);
 			}
 			

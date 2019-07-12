@@ -1,0 +1,81 @@
+package cargo.member.action;
+
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import cargo.common.DTO.MemberDTO;
+import cargo.common.action.Action;
+import cargo.common.action.ActionForward;
+import cargo.member.DAO.MemberDAO;
+
+public class EmailSearchAction implements Action {
+
+	@Override
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		
+		MemberDAO mdao = new MemberDAO();
+		ArrayList<MemberDTO> memberList = mdao.getEmail(name, phone);
+		
+		ActionForward forward = new ActionForward();
+		forward.setAjax(true);
+		
+		JSONArray list = new JSONArray();
+		JSONObject emailList = new JSONObject();
+		
+		if(memberList.size()!=0){
+			for(MemberDTO mdto : memberList){
+				if(mdto.getEmail()!=null){
+					JSONObject obj = new JSONObject();
+					StringBuilder secretemail = new StringBuilder(mdto.getEmail());
+					int findStd = secretemail.indexOf("@");
+					int findCom = secretemail.lastIndexOf(".");
+					int endNum = secretemail.length();
+					
+					secretemail = secretemail.replace(3, findStd, "");
+					for(int i=3; i<findStd;i++){
+						secretemail.insert(i, "*");
+					}
+					secretemail = secretemail.replace(findStd+3, findCom, "");
+					for(int i=findStd+3; i<findCom;i++){
+						secretemail.insert(i, "*");
+					}
+					secretemail = secretemail.replace(findCom+1, endNum, "");
+					for(int i=findCom+1; i<endNum; i++){
+						secretemail.insert(i, "*");
+					}
+					String email = secretemail.toString();
+					
+					obj.put("email", email);
+					obj.put("name", mdto.getName());
+					String reg_date = mdto.getReg_date().toString();
+					reg_date = reg_date.substring(0, 10);
+					obj.put("reg_date", reg_date); //날짜는 string 형식으로 바꿈
+					
+					list.add(obj);
+				}
+			}
+			
+			emailList.put("list", list);
+			HttpSession session = request.getSession();
+			session.setAttribute("emailList", emailList);
+			
+			response.getWriter().println(1); //임시
+			//response.getWriter().println(emailList.toJSONString()); 임시
+		}else{
+			response.getWriter().println(0); //이메일 없음
+		}
+		return forward;
+	}
+
+}

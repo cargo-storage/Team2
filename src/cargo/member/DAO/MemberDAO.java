@@ -1,6 +1,7 @@
 package cargo.member.DAO;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.*;
@@ -51,7 +52,7 @@ public class MemberDAO {
 		}
 	}//end of free
 	
-	public int insertMember(MemberDTO mdto) {	
+	public int insertMember(MemberDTO mdto) { //회원 가입	
 		int result = 0; // 0: 실패, 1: 성공
 		
 		try {
@@ -81,7 +82,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	public int LogingetMember(String email, String pwd) {
+	public int LogingetMember(String email, String pwd) { //로그인
 		int state = 0; //0: 아이디 없음, -1: 비밀번호 틀림, 1: 성공
 		try{
 			con = connect();
@@ -151,12 +152,12 @@ public class MemberDAO {
 		    
 		    return 1;
 		} catch(Exception e){
-			System.out.println("sendEmail()에서 오류 : " + e);
+			System.out.println("sendEmail()에서 오류: " + e);
 			return 0;
 		}
 	}
 	
-	public MemberDTO getMember(String email) { //이메일 중복 확인, 내정보 확인(패스워드 없이 세션의 이메일 유무로 확인)
+	public MemberDTO getMember(String email) { //이메일 중복 확인, 내정보 확인(패스워드 없이 세션의 이메일 유무로 확인하기 위해 MemberDTO 리턴)
 		MemberDTO mdto = new MemberDTO();
 		try{
 			con = connect();
@@ -180,10 +181,46 @@ public class MemberDAO {
 		 
 			
 		}catch (Exception e) {
-			System.out.println("getMember()에서 오류 : " + e);
+			System.out.println("getMember()에서 오류: " + e);
 		}finally {
 			freeResource();
 		}
 		return mdto;
+	}
+
+	public ArrayList<MemberDTO> getEmail(String name, String phone) { //이메일 찾기
+		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
+		
+		try{
+			con = connect();
+			query = "SELECT * FROM member WHERE name=? AND phone=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, phone);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MemberDTO mdto = new MemberDTO();
+				mdto.setEmail(rs.getString("email"));
+				mdto.setPwd(rs.getString("pwd"));
+				mdto.setName(name);
+				mdto.setPhone(phone);
+				mdto.setPostCode(rs.getInt("postCode"));
+				mdto.setRoadAddr(rs.getString("roadAddr"));
+				mdto.setDetailAddr(rs.getString("detailAddr"));
+				mdto.setAdmin(rs.getInt("admin"));
+				mdto.setReg_date(rs.getTimestamp("reg_date")); 
+				
+				list.add(mdto);
+				}
+			
+		}catch (Exception e) {
+			System.out.println("getEmail()에서 오류: " + e);
+		}finally {
+			freeResource();
+		}
+		
+		return list;
 	}
 }
