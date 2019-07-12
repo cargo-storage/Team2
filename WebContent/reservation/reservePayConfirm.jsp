@@ -5,13 +5,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <c:choose>   
-	<c:when test="${sessionScope.email==null }"><c:set var="mem_email" value="not_logined"/></c:when>
 	<c:when test="${sessionScope.email!=null }"><c:set var="mem_email" value="${sessionScope.email }"/></c:when>
-</c:choose>
-<c:choose>
-	<c:when test="${sessionScope.name==null }"><c:set var="mem_name" value="not_logined"/></c:when>
 	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
-</c:choose>   
+</c:choose>
     
 
 <!DOCTYPE html>
@@ -59,7 +55,7 @@
  
 </head>
 
-<body class="bg-light">
+<body>
  	
 <!--navigation in page-->
 <jsp:include page="../inc/header.jsp"></jsp:include>
@@ -119,65 +115,9 @@
 
 
 
-        <!--footer -->
-        <footer class="py-4 bg-black">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <h5 class="text-white">About Lambda</h5>
-                        <p class="about">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. 
-                            Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.</p>
-                        <ul class="list-inline social social-rounded social-sm">
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6 ml-auto">
-                        <h5 class="text-white">Lambda</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Products</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Publish</a></li>
-                            <li><a href="#">Outreach</a></li>
-                            <li><a href="#">Collaborate</a></li>
-                            <li><a href="#">Global</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Community</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Help forum</a></li>
-                            <li><a href="#">Slack channel</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Policies</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 text-muted text-center small-xl">
-                        <p>&copy; 2019 Lambda. All rights reserved.</p>
-                        Free Bootstrap 4 Multipurpose Landing Page Template by <a href="https://wireddots.com" target="_blank">Wired Dots</a>.
-                    </div>
-                </div>
-            </div>
-        </footer>
+<!--footer -->
+<jsp:include page="../inc/footer.jsp"></jsp:include>
+        
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
@@ -185,6 +125,5 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-        <script src="js/scripts.js"></script>
     </body>
 </html>
