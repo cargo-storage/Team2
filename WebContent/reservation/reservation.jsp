@@ -1,11 +1,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%	request.setCharacterEncoding("utf-8"); %>  
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<!-- Required meta tags -->
@@ -26,6 +27,15 @@
 	<link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
 	<!-- font-awesome CSS -->
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+	<c:choose>   
+		<c:when test="${sessionScope.email==null }">
+			<script type="text/javascript">
+				alert("로그인 후 이용 가능합니다.");
+				history.back();
+			</script>
+		</c:when>
+	</c:choose>
 
 	<script type="text/javascript">
 	
