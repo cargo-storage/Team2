@@ -3,13 +3,13 @@ package cargo.common.DTO;
 import java.sql.Timestamp;
 
 public class MemberDTO {
-	String email,pwd,name,phone,detailAddr,roadAddr;
-	int postCode,admin;
-	Timestamp reg_date;
+	private String email,pwd,name,phone,detailAddr,roadAddr;
+	private int postCode,admin;
+	private Timestamp reg_date;
 	
 	public MemberDTO(){}
-	public MemberDTO(String email, String pwd, String name, String phone, String detailAddr, String roadAddr,
-			int postCode, int admin, Timestamp reg_date) {
+	public MemberDTO(String email, String pwd, String name, String phone, int postCode, 
+			String roadAddr, String detailAddr, int admin, Timestamp reg_date) {
 		this.email = email;
 		this.pwd = pwd;
 		this.name = name;

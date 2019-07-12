@@ -1,11 +1,10 @@
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%	request.setCharacterEncoding("utf-8"); %>  
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<!-- Required meta tags -->
@@ -32,7 +31,7 @@
 <body class="bg-light">
 
 <!--navigation in page-->
-<jsp:include page="inc/header.jsp"></jsp:include>
+<%@include file="inc/header.jsp" %>
 		
 
         
