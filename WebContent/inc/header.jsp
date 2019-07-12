@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
     
-	<nav class="navbar navbar-expand-md navbar-transparent fixed-top sticky-navigation navbar-light bg-white shadow-bottom" id="lambda-navbar">
+   <nav class="navbar navbar-expand-md navbar-transparent fixed-top sticky-navigation navbar-light bg-white shadow-bottom" id="lambda-navbar">
        <a class="navbar-brand" href="/Team2/index.jsp">
            TEAM2 WAREHOUSE
        </a>
@@ -18,7 +21,7 @@
                    <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link page-scroll" href="reserve/info.do?warehouse=A">예약안내</a>
+                   <a class="nav-link page-scroll" href="${contextPath }/re/info.me?warehouse=A">예약안내</a>
                </li>
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#market">중고장터</a>
@@ -26,9 +29,20 @@
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#faq">FAQ</a>
                </li>
-           </ul>
-           <form class="form-inline">
-               <a href="#signup" class="btn btn-navbar page-scroll btn-primary">로그인/회원가입</a>
-           </form>
-       </div>
-	</nav>
+           <c:set var="email" value="${email }"/>
+           <c:set var="name" value="${name }"/>
+           <c:if test="${email ne null }">
+                <li class="nav-item">
+                   <a class="nav-link page-scroll" href="#">MY PAGE</a>
+                  </li>               
+                 <a href="${contextPath }/me/logout.me" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+           </c:if>
+           <c:if test="${email eq null }">
+                 <div class="text-center">
+               <a href="#loginModal" class="btn btn-primary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
+            </div>
+              </c:if> 
+               
+              </ul>
+        </div>
+    </nav>
