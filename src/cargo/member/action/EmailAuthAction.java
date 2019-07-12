@@ -26,21 +26,16 @@ public class EmailAuthAction implements Action {
 		int state = mdao.sendEmail(to_email, authNum);
 		
 		ActionForward forward = new ActionForward();
+		forward.setAjax(true); //ajax 방식이기 때문에 무조건 true
 		
 		JSONObject obj= new JSONObject();
 		obj.put("state", state);
 		obj.put("authNum", authNum);
 		
 		System.out.println(obj);
-		response.setContentType("application/json");
+		
 		response.getWriter().println(obj.toJSONString());
 		
-		forward.setAjax(true); //ajax 방식이기 때문에 무조건 true
-		
-		if(state == 1) {
-			HttpSession session = request.getSession();
-			session.setAttribute("authNum", authNum);
-		}
 		return forward;
 	}
 }
