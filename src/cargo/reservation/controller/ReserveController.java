@@ -39,8 +39,6 @@ public class ReserveController extends HttpServlet{
 		ActionForward forward = null;
 		Action action= null;
 		
-		System.out.println(request.getParameter("name")+"1234");
-		
 		try {
 			if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
 				action = new ResInfoAction();
@@ -61,7 +59,10 @@ public class ReserveController extends HttpServlet{
 			}else if(command.equals("/reserveConfirm.me")){
 				action = new reserveAction();
 				forward = action.execute(request, response);
-				
+			}else if(command.equals("/goIndex.me")){
+				forward = new ActionForward();
+				forward.setPath("../index.jsp");
+				forward.setRedirect(true);
 			}
 			
 			//모든 과정 후 페이지 이동부분

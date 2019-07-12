@@ -13,8 +13,22 @@
 <c:choose>
 	<c:when test="${sessionScope.name==null }"><c:set var="mem_name" value="not_logined"/></c:when>
 	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
-</c:choose>     
+</c:choose>
 
+
+			
+<%-- <c:choose>
+	<c:when test="${requestScope.sList != null }">
+		<c:forEach var="r_start_day" items="${sList }">
+			${r_start_day }	
+		</c:forEach>
+		<c:forEach var="r_end_day" items="${eList }">
+			${r_end_day }<br>
+		</c:forEach>
+	</c:when>		
+</c:choose>
+
+${eList[0] } --%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -49,15 +63,61 @@
     <script type="text/javascript">
     
     $(function() {
-    	
+/*     
+    	var startDate = "";
+		var endDate = "";
+		var startDateArray = ""
+		dateRange = [];
+		
+		if(${requestScope.sList} != null)	{
+
+			<c:forEach var="r_start_day" items="${sList }">
+				startDateArray += "${r_start_day } ";
+			</c:forEach>
+			
+			
+			alert(startDateArray);
+			endDateArray= ${eList};
+			alert(startDateArray[0]);
+			
+			for(i=0;i<${sList.size()};i++){
+				
+				
+				startDate = "startDateArray["+i+"]";
+				endDate = "endDateArray["+i+"]";
+				
+				for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+			        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+			    } 
+			}
+		}
+		
+    	 */
+    	 
+    	 /* var array = ["a", "b", "c"];
+    	 for(i=0;i<array.length;i++){
+    		 document.write(array[i]);
+    	 } */
+    	 
+    	var startDate = "";
+ 		var endDate = "";
+ 		dateRange = [];
+ 		
+ 		for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+	        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+	    }
     	 
       	 $('#start_day').datepicker({
-               //dateFormat: "yy-mm-dd",
+              //dateFormat: "yy-mm-dd",
               monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
               dayNamesMin:["일","월","화","수","목","금","토"],
               dateFormat: "yy-mm-dd",             // 날짜의 형식
               changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
-              minDate: 1,  //오늘포함 이전  날짜 선택 불가                  
+              minDate: 1,  //오늘포함 이전  날짜 선택 불가         
+              beforeShowDay: function (date) {
+      	        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+      	        return [dateRange.indexOf(dateString) == -1];
+      	      },
               onClose: function( selectedDate ) {    
             	  
                  selectedDate = new Date(selectedDate);
@@ -76,7 +136,10 @@
                dayNamesMin:["일","월","화","수","목","금","토"], 
                dateFormat: "yy-mm-dd",
                changeMonth: true,
-           
+               beforeShowDay: function (date) {
+         	        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+         	        return [dateRange.indexOf(dateString) == -1];
+       	       }
           });// end_date - 끝
       }); // function() - 끝
 
@@ -102,7 +165,9 @@
 	            </div>
 			</div>
 			
-				
+
+			
+			
              <div class="row p-5 mt-5 bg-white raised-box rounded">
              	<div class="m-auto">
 					<c:set var="hn" value="${fn:substring(param.house,0,1)}"/>
