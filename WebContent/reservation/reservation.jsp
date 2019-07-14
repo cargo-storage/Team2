@@ -12,7 +12,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>TEAM2 WAREHOUSE RESERVATION</title>
+	<title>RESERVATION - TEAM2 WAREHOUSE</title>
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
 	<!--Google fonts-->
