@@ -11,19 +11,6 @@
 	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
 </c:choose>
 
-			
-<%-- <c:choose>
-	<c:when test="${requestScope.sList != null }">
-		<c:forEach var="r_start_day" items="${sList }">
-			${r_start_day }	
-		</c:forEach>
-		<c:forEach var="r_end_day" items="${eList }">
-			${r_end_day }<br>
-		</c:forEach>
-	</c:when>		
-</c:choose>
-
-${eList[0] } --%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -58,49 +45,34 @@ ${eList[0] } --%>
     <script type="text/javascript">
     
     $(function() {
-/*     
+     
     	var startDate = "";
 		var endDate = "";
-		var startDateArray = ""
 		dateRange = [];
+		innerDateRange = [];
 		
 		if(${requestScope.sList} != null)	{
-
+			
+			<c:set var="i" value="0"/>
 			<c:forEach var="r_start_day" items="${sList }">
-				startDateArray += "${r_start_day } ";
+					startDate = '${r_start_day }';	
+					innerDateRange.push(startDate);
+					
+					endDate = '${eList[i]}'
+					innerDateRange.push(endDate);
+					
+					for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+						dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+			        }
+					
+					innerDateRange=[];
+					<c:set var="i" value="${i+1}"/>	
+					
 			</c:forEach>
-			
-			
-			alert(startDateArray);
-			endDateArray= ${eList};
-			alert(startDateArray[0]);
-			
-			for(i=0;i<${sList.size()};i++){
-				
-				
-				startDate = "startDateArray["+i+"]";
-				endDate = "endDateArray["+i+"]";
-				
-				for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
-			        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
-			    } 
-			}
+					
 		}
 		
-    	 */
-    	 
-    	 /* var array = ["a", "b", "c"];
-    	 for(i=0;i<array.length;i++){
-    		 document.write(array[i]);
-    	 } */
-    	 
-    	var startDate = "";
- 		var endDate = "";
- 		dateRange = [];
- 		
- 		for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
-	        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
-	    }
+		console.log(dateRange);
     	 
       	 $('#start_day').datepicker({
               //dateFormat: "yy-mm-dd",
@@ -110,9 +82,9 @@ ${eList[0] } --%>
               changeMonth: true,                  // 월을 이동하기 위한 선택상자 표시여부
               minDate: 1,  //오늘포함 이전  날짜 선택 불가         
               beforeShowDay: function (date) {
-      	        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
-      	        return [dateRange.indexOf(dateString) == -1];
-      	      },
+            	  var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                  return [dateRange.indexOf(dateString) == -1];
+      	      }, // 이미 예약된 날짜 disabled
               onClose: function( selectedDate ) {    
             	  
                  selectedDate = new Date(selectedDate);
@@ -121,7 +93,7 @@ ${eList[0] } --%>
                  $("#end_day").datepicker( "option", "minDate", selectedDate); //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
            	     return $("#end_day").datepicker("show");
                  
-             	}
+             }
           });
         
           //종료일
@@ -134,8 +106,9 @@ ${eList[0] } --%>
                beforeShowDay: function (date) {
          	        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
          	        return [dateRange.indexOf(dateString) == -1];
-       	       }
+       	       } // 이미 예약된 날짜 disabled
           });// end_date - 끝
+          
       }); // function() - 끝
 
     </script>
@@ -154,11 +127,11 @@ ${eList[0] } --%>
     </style>
     
 </head>
+
     <body class="bg-light">
 	
 	<!--navigation in page-->
 	<jsp:include page="../inc/header.jsp"></jsp:include>
-	
 	<section class="py-7">
     	<div class="container">
            	<div class="row">
@@ -168,7 +141,6 @@ ${eList[0] } --%>
 	                <p class="lead">예약을 원하는 날짜를 선택하세요.</p>
 	            </div>
 			</div>
-			
              <div class="row p-5 mt-5 background raised-box rounded">
              	<div class="m-auto">
 					<c:set var="hn" value="${fn:substring(param.house,0,1)}"/>

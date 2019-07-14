@@ -41,7 +41,12 @@ public class ReserveController extends HttpServlet{
 		Action action= null;
 		
 		try {
-			if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
+			
+			if(command.equals("/goIndex.me")){ // 로그인 필요!
+				forward = new ActionForward();
+				forward.setPath("../index.jsp");
+				forward.setRedirect(true);
+			}else if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
 				action = new ResInfoAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/moreInfo.me")){ // 공간별 상세정보
@@ -60,10 +65,6 @@ public class ReserveController extends HttpServlet{
 			}else if(command.equals("/reserveConfirm.me")){
 				action = new reserveAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/goIndex.me")){
-				forward = new ActionForward();
-				forward.setPath("../index.jsp");
-				forward.setRedirect(true);
 			}
 			
 			//모든 과정 후 페이지 이동부분
