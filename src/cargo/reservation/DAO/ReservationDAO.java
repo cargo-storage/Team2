@@ -220,12 +220,10 @@ public class ReservationDAO {
            pstmt = conn.prepareStatement(sql);
            pstmt.setString(1, house);
            rs = pstmt.executeQuery();
-           System.out.println(rs.toString());
            
-           rs.next();
-           
-           price = rs.getInt(1);
-           System.out.println(price+" price!");
+           if(rs.next()){
+        	   price = rs.getInt(1);
+           }
               
                  
         } catch (Exception e) {
