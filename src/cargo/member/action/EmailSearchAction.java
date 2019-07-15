@@ -28,12 +28,13 @@ public class EmailSearchAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		ArrayList<MemberDTO> memberList = mdao.getEmail(name, phone);
 		
-		ActionForward forward = new ActionForward();
+		ActionForward forward = null;
 		
 		JSONArray list = new JSONArray();
 		JSONObject emailList = new JSONObject();
 		
 		if(memberList.size()!=0){
+			forward = new ActionForward();
 			for(MemberDTO mdto : memberList){
 				if(mdto.getEmail()!=null){
 					JSONObject obj = new JSONObject();
@@ -71,8 +72,6 @@ public class EmailSearchAction implements Action {
 			
 			String path = request.getContextPath();
 			forward.setPath("/member/findMember.jsp?find=email");
-			//response.getWriter().println(1); //임시
-			//response.getWriter().println(emailList.toJSONString()); 임시
 		}else{
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -81,6 +80,7 @@ public class EmailSearchAction implements Action {
 			out.println("</script>");
 			
 			out.close();
+			
 		}
 		return forward;
 	}

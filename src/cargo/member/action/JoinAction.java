@@ -34,7 +34,7 @@ public class JoinAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insertMember(mdto);
 
-		ActionForward forward = new ActionForward();
+		ActionForward forward = null;
 
 		if (result == 0) { // 실패했을 때
 			PrintWriter out = response.getWriter();
@@ -49,6 +49,7 @@ public class JoinAction implements Action {
 			
 			return null;
 		} else { // 성공했을 때
+			forward =  new ActionForward();
 			String path = request.getContextPath();
 			forward.setRedirect(true);
 			
