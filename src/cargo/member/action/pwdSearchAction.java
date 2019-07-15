@@ -31,7 +31,7 @@ public class pwdSearchAction implements Action {
 			state = mdao.updateMember(mdto);
 			if (state == 1) { // state: 0이라면 update가 안된 것 -> email존재 X, 1: update 성공
 				String subject = "TEAM2_WAREHOUSE 임시 비밀번호 발송";
-				String content = mdto.getName() + "님의 " + email + "의 임시 비밀번호는 [" + newPwd + "] 입니다.";
+				String content = mdto.getName() + "님의 " + email + "의 임시 비밀번호는 [" + newPwd + "] 입니다. <br> <a href='http://localhost:8090/Team2/index.jsp'>Team2 WAREHOUSE 바로가기</a>"; //나중에 주소 수정해야함
 				state = mdao.sendEmail(email, subject, content);
 				if(state!=1) {
 					response.getWriter().println(-1);
