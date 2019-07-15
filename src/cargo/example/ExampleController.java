@@ -44,6 +44,7 @@ public class ExampleController extends HttpServlet {
 		
 		ActionForward forward = null;
 		Action action= null;
+		
 		try {
 			if(command.equals("/dispatcher.ex")){
 				action=new ExampleDispatcherAction();
