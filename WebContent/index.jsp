@@ -29,6 +29,9 @@
 		<!-- bootstrap.min.js -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 		
+    	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+		
         
         <style>
         	/* 중고 장터 */
@@ -204,6 +207,58 @@
 			    }
 			    return unescape(cookieValue);
 			}
+			
+			/* 간편견적 */
+			var go;
+			var day;
+		
+		$(function () {
+			
+			$("#ajaxbtn").on("click", function() {
+				go = $("#size").val(); //A,B,C,D
+				day = $("#minday").val();
+				//var AllData = {'minday': day,'house': go};
+				$.ajax({
+					type : 'POST',
+					url : "${contextPath}/re/simplepayment.me",
+					data : {house : go},
+					dataType: 'text',
+					success : function(r) {
+						var re = JSON.parse(r);
+						alert(re.price);
+						$("#ajaxresult").val(re.price * day);
+						$("#rsname").val($("#name").val());
+						$("#rssize").val($("#size").val());
+						$("#rsminday").val($("#minday").val());
+					}
+				});//end of ajax
+			});//end of onclick
+		});
+		
+		$(function(){
+            //$("#dialog").dialog();
+            
+            $("#dialog").dialog({
+                autoOpen:false, //자동으로 열리지않게
+                position:[100,200], //x,y  값을 지정
+                //"center", "left", "right", "top", "bottom"
+                modal:true, //모달대화상자
+                resizable:false, //크기 조절 못하게
+                
+                buttons:{
+                    "확인":function(){
+                    	location.href='${contextPath}/re/info.me?warehouse='+$("#rssize").val();
+                    },"취소":function(){
+                        $(this).dialog("close");
+                    }
+                }
+            });
+
+            //창 열기 버튼을 클릭했을경우
+            $("#ajaxbtn").on("click",function(){
+                $("#dialog").dialog("open"); //다이얼로그창 오픈                
+            });
+        });
 		</script>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
@@ -264,21 +319,23 @@
 		                            <div class="card-body p-4">
 		                                <form class="signup-form">
 		                                    <div class="form-group">
-		                                        <input type="text" class="form-control" placeholder="Customer Name">
+		                                        <input type="email" class="form-control" id="name" name="name" placeholder="Customer Name">
 		                                    </div>
 		                                    <div class="form-group form-row" >
-			                                        <select class="col-md-6 form-control mx-2">
+			                                        <select class="col-md-6 form-control mx-2" id="size" name="size">
 			                                            <option value="">사이즈선택</option>
-			                                            <option value="housea">A - small</option>
-			                                            <option value="houseb">B - middle</option>
-			                                            <option value="housec">C - big</option>
-			                                            <option value="housed">D - Container</option>
+			                                            <option value="A">A - 9㎥ : 3m x 3m x 1m</option>
+			                                            <option value="B">B - 50㎥ : 5m x 5m x 2m</option>
+			                                            <option value="C">C - 122.5㎥ : 7m x 7m x 2.5m</option>
+			                                            <option value="D">D - 300㎥ : 10m x 10m x 3m</option>
 			                                        </select>
-			                                        <input type="email" class="form-control col-md-4 ml-2" placeholder="최소 대여기간 15">
+			                                        <input type="text" id="minday" name="minday"  class="form-control col-md-4 ml-2" placeholder="최소 대여기간 15">
+			                                        
 			                                        <span class="ml-3 text-muted lead">일</span>
 		                                    </div>
 		                                    <div class="form-group">
-		                                        <button class="btn btn-primary btn-block">계산하기</button>
+		                                        <input type="button" id="ajaxbtn" value="계산하기" class="btn btn-primary btn-block">
+		                                        
 		                                    </div>
 		                                </form>
 		                            </div>
@@ -287,7 +344,19 @@
                     </div>
                 </div>
             </div>
+            
+
+
+			<div id="dialog" title="간편견적">
+				email : <input type="text" id="rsname" readonly="readonly">
+			    size : <input type="text" id="rssize" readonly="readonly">
+			    using day : <input type="text" id="rsminday" readonly="readonly">
+			    price : <input type="text" id="ajaxresult" readonly="readonly" placeholder="결과값"><br>
+			       &nbsp;※확인을 눌러 예약페이지에서 예약해주세요.
+			</div>
         </section>
+        
+        
 
        <!-- company section -->
         <section class="py-7 bg-light" id="company">

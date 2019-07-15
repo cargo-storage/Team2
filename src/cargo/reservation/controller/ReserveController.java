@@ -15,6 +15,7 @@ import cargo.reservation.action.ResInfoMoreAction;
 import cargo.reservation.action.reserveAction;
 import cargo.reservation.action.reserveCheckAction;
 import cargo.reservation.action.reserveProAction;
+import cargo.reservation.action.simplepaymentAction;
 
 public class ReserveController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class ReserveController extends HttpServlet{
 		ActionForward forward = null;
 		Action action= null;
 		
+		System.out.println(command);
+		
 		try {
 			
 			if(command.equals("/goIndex.me")){ // 로그인 필요!
@@ -64,6 +67,9 @@ public class ReserveController extends HttpServlet{
 				forward.setRedirect(false);
 			}else if(command.equals("/reserveConfirm.me")){
 				action = new reserveAction();
+				forward = action.execute(request, response);
+			}else if(command.equals("/simplepayment.me")) {
+				action = new simplepaymentAction();
 				forward = action.execute(request, response);
 			}
 			

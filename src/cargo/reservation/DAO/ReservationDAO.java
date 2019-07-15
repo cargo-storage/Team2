@@ -208,5 +208,33 @@ public class ReservationDAO {
         
         return price;
      }
-
+	
+	public int simplepayment(String house) {
+        
+        int price = 0;
+        
+        try {
+           
+           getConnection();
+           String sql = "SELECT price FROM warehouse WHERE substr(house,1,1)=?"; //ABCD
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, house);
+           rs = pstmt.executeQuery();
+           System.out.println(rs.toString());
+           
+           rs.next();
+           
+           price = rs.getInt(1);
+           System.out.println(price+" price!");
+              
+                 
+        } catch (Exception e) {
+        	System.out.println("Error in simplepayment()");
+           e.printStackTrace();
+        }finally{
+           freeResource();
+        }
+        
+        return price;
+     }
 }
