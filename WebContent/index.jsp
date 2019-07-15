@@ -225,7 +225,6 @@
 					dataType: 'text',
 					success : function(r) {
 						var re = JSON.parse(r);
-						alert(re.price);
 						$("#ajaxresult").val(re.price * day);
 						$("#rsname").val($("#name").val());
 						$("#rssize").val($("#size").val());
