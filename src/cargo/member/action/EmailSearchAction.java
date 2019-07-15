@@ -1,5 +1,6 @@
 package cargo.member.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,6 @@ public class EmailSearchAction implements Action {
 		ArrayList<MemberDTO> memberList = mdao.getEmail(name, phone);
 		
 		ActionForward forward = new ActionForward();
-		forward.setAjax(true);
 		
 		JSONArray list = new JSONArray();
 		JSONObject emailList = new JSONObject();
@@ -67,13 +67,20 @@ public class EmailSearchAction implements Action {
 			}
 			
 			emailList.put("list", list);
-			HttpSession session = request.getSession();
-			session.setAttribute("emailList", emailList);
+			request.setAttribute("emailList", emailList);
 			
-			response.getWriter().println(1); //임시
+			String path = request.getContextPath();
+			forward.setPath("/member/findMember.jsp?find=email");
+			//response.getWriter().println(1); //임시
 			//response.getWriter().println(emailList.toJSONString()); 임시
 		}else{
-			response.getWriter().println(0); //이메일 없음
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('조건에 일치하는 회원이 없습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+			
+			out.close();
 		}
 		return forward;
 	}

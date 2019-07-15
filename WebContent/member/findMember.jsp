@@ -50,21 +50,22 @@
 		  padding: 14px 16px;
 		  transition: 0.3s;
 		  font-size: 17px;
+		  border-top: 5px solid #f1f1f1;
 		}
 		
 		/* Change background color of buttons on hover */
 		.tab button:hover {
 		  background-color: #ddd;
+		  border-top: 5px solid #ddd;
 		}
 		
 		/* Create an active/current tablink class */
 		.tab button.active {
-		  background-color: #ccc;
+		  border-top: 5px solid #00c583;
 		}
 		
 		/* Style the tab content */
 		.tabcontent {
-		  display: none;
 		  padding: 20px 26px;
 		  border: 1px solid #ccc;
 		  border-top: none;
@@ -76,68 +77,79 @@
 		}
 	</style>	
 	<script type="text/javascript">
-		$(function(){
-			$("#emailSearchResult").hide();
-			
+		$(function(){			
 			//이름 확인
 			$("#name").blur(function(){
 				var name = $(this).val();
-				if(name ==''){
-					$("#nameErr").text("필수 입력 사항입니다.");
-				}else{
-					var reg = /^[가-힣]{2,5}$/;
-					if(!reg.test(name)){
-						$("#nameErr").text("정확한 이름을 입력하세요.");
-					}else{ $("#nameErr").text(''); }
-				}
+				var reg = /^[가-힣]{2,5}$/;
+				if(!reg.test(name)){
+					$("#nameErr").text("정확한 이름을 입력하세요.");
+				}else{ $("#nameErr").text(''); }
 			});
 			
 			//휴대폰 확인
 			$("#phone").blur(function(){
 				var phone = $(this).val();
-				if(phone ==''){
-					$("#phoneErr").text("필수 입력 사항입니다.");
-				}else{ 
-					var reg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
-					if(!reg.test(phone)){
-						$("#phoneErr").text("양식에 맞는 휴대폰 번호를 입력하세요");
-					}else{ $("#phoneErr").text(''); }
-				}
+				var reg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
+				if(!reg.test(phone)){
+					$("#phoneErr").text("양식에 맞는 휴대폰 번호를 입력하세요");
+				}else{ $("#phoneErr").text(''); }
 			});
 			
+			//이메일 확인
+			$("#email").blur(function(){
+				var email = $(this).val();
+				var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+				if(!reg.test(email)){
+					$("#emailErr").text("이메일 형식이 맞지 않습니다.");
+				}
+			});
 		});
 		
 		function emailSearch(){
 			var name = $("#name").val();
 			var phone = $("#phone").val();
 			
-			if(name==''){
-				alert("이름을 입력해주세요.");
-			}else if(phone==''){
-				alert("휴대폰 번호를 입력해주세요.");
-			}else if($("#nameErr").text()!='' || $("#phoneErr").text()!=''){
+			if(name ==''){
+				$("#nameErr").text("필수 입력 사항입니다.");
+			}
+			else if(phone ==''){
+				$("#phoneErr").text("필수 입력 사항입니다.");
+			}
+			else if($("#nameErr").text()!='' || $("#phoneErr").text()!=''){
 				alert("오류 사항을 확인 후 다시 입력해주세요.");
+				return false;
+			}
+		}
+		
+		function pwdSearch(){
+			var email = $("#email").val();
+			if(email==''){
+				$("#emailErr").text("이메일을 입력해주세요.");
+			}else if($("#emailErr").text()!=''){
+				alert("오류 사항을 확인 후 다시 입력해주세요.");
+				return false;
 			}else{
 				$.ajax({
 					type: "post",
 					async: false,
-					url: "${contextPath}/me/emailSearch.me",
-					data: {name: name, phone: phone},
-					dataType: 'text',
-					success: function(data){
-						alert(data);
+					url: "${contextPath}/me/pwdSearch.me",
+					data: {email: email},
+					success: function(data){ // 0: 실패, 1: 성공, -1: 이메일은 존재하나 메일 발송에 실패한 경우
 						if(data == 0){
-							alert("조건에 일치하는 회원이 없습니다.");
+							alert("해당 이메일로 등록된 회원이 없습니다.");
+						}else if(data == -1){
+							alert("임시 비밀번호 발급에 실패했습니다. \n다시 시도해주시기 바랍니다.");
 						}else{
-							$("#emailSearchShow").hide();
-							$("#emailSearchResult").show();
+							alert(email+"로 임시 비밀번호를 발급했습니다. \n다시 로그인 해주시기 바랍니다.");
+							location.href="${contextPath}/index.jsp";
 						}
 					},
-					error: function() {
-				        alert("서버 내부 오류가 발생했습니다.");
+					error: function(){
+						alert("서버 내부 에러가 발생했습니다.");
 					}
 				});
-			}
+			}	
 		}
 	</script>
 </head>
@@ -149,42 +161,55 @@
 <div class="container">
 	<div class="col-sm-9 col-lg-6" style="margin: 150px auto 0;">
 			<h1 class="text-center">회원 정보 찾기</h1><br><br>
+			<c:if test="${param.find eq 'email' }">
 			<div class="tab">
-			  <button class="tablinks" id="emailTab" onclick="openFrom(event, 'emailSearch')">이메일 찾기</button>
-			  <button class="tablinks" id="pwdTab"onclick="openFrom(event, 'pwdSearch')">비밀번호 찾기</button>
+				<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
+				<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
 			</div>
-			
-			
 			<div id="emailSearch" class="tabcontent">
+			<c:choose>
+				<c:when test="${empty requestScope.emailList }">
 				<div id="emailSearchShow">
 					<p class="text-center font-weight-bold small">- <mark class="text-danger">이름</mark>과 <mark class="text-danger">전화번호</mark>를 통해 이메일을 찾을 수 있습니다 -</p>
-					<div class="form-group">
-						<label for="name">이름</label>
-						<input type="text" class="form-control" id="name" placeholder="NAME">
-						<span id="nameErr" class="help-block"></span>
-					</div>
-					<div class="form-group">
-						<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
-						<input type="text" class="form-control" id="phone" placeholder="PHONE(010-1234-1234 형식)">
-						<span id="phoneErr" class="help-block"></span>
-					</div>
-					<div class="form-group">
-						<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="emailSearch()" value="이메일 찾기">
-					</div>
+					<form action="${contextPath }/me/emailSearch.me" method="post" onsubmit="return emailSearch()">
+						<div class="form-group">
+							<label for="name">이름</label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="NAME">
+							<span id="nameErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="PHONE(010-1234-1234 형식)">
+							<span id="phoneErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary btn-block btn-lg mt-5">이메일 찾기</button>
+						</div>
+					</form>
 				</div>
-				<div id="emailSearchResult">
-					<h5 class="text-center font-weight-bold mt-3"><c:out value="${sessionScope.emailList.list[0].name }"/>회원님의 이메일 주소</h5>
-					<div class="text-center" id="memberEmailList">
-					<c:set var="startNum" value="0"/>
-					<c:forEach var="i" items="${sessionScope.emailList.list }">
-						<c:set var="startNum" value="${startNum+1 }"/>
-						<span class="text-center font-weight-bold mr-4"><span id="memberEmail"><c:out value="${startNum }"/>. <c:out value="${i.email }"/></span></span>
-						<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><c:out value="${i.reg_date }"/></span></span><br>
-					</c:forEach>
-					<a href="${contextPath }/index.jsp" class="btn btn-primary btn-block btn-lg mt-3">로그인 하러 가기</a>
+				</c:when>
+				<c:otherwise>
+					<div id="emailSearchResult">
+						<h5 class="text-center font-weight-bold mt-3"><c:out value="${requestScope.emailList.list[0].name }"/>회원님의 이메일 주소</h5>
+						<div class="text-center" id="memberEmailList">
+						<c:set var="startNum" value="0"/>
+						<c:forEach var="i" items="${requestScope.emailList.list }">
+							<c:set var="startNum" value="${startNum+1 }"/>
+							<span class="text-center font-weight-bold mr-4"><span id="memberEmail"><c:out value="${startNum }"/>. <c:out value="${i.email }"/></span></span>
+							<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><c:out value="${i.reg_date }"/></span></span><br>
+						</c:forEach>
+						<a href="${contextPath }/index.jsp" class="btn btn-primary btn-block btn-lg mt-3">로그인 하러 가기</a>
+						</div>
 					</div>
-				</div>
-			</div>			
+				</c:otherwise>
+			</c:choose>
+			</div>
+			</c:if>
+			<c:if test="${param.find eq 'pwd' }">
+			<div class="tab">
+				<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
+				<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
+			</div>		
 			<div id="pwdSearch" class="tabcontent">
 			  <p class="text-center font-weight-bold small">- <mark class="text-danger">이메일</mark>을 통해 임시 비밀번호를 보내드립니다 - </p>
 			  <div class="form-group">
@@ -193,26 +218,10 @@
 			  	<span id="pwdSearchErr" class="help-block"></span>
 			  </div>
 			  <div class="form-group">
-					<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="emailSearch()" value="임시 비밀번호 발송">
+					<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="pwdSearch()" value="임시 비밀번호 발송">
 				</div>
 			</div>
-			
-			<script>
-			function openFrom(evt, target) {
-			  var i, tabcontent, tablinks;
-			  tabcontent = document.getElementsByClassName("tabcontent");
-			  for (i = 0; i < tabcontent.length; i++) {
-			    tabcontent[i].style.display = "none";
-			  }
-			  tablinks = document.getElementsByClassName("tablinks");
-			  for (i = 0; i < tablinks.length; i++) {
-			    tablinks[i].className = tablinks[i].className.replace(" active", "");
-			  }
-			  document.getElementById(target).style.display = "block";
-			  evt.currentTarget.className += " active";
-			}
-			document.getElementById("defaultOpen").click();
-			</script>
+			</c:if>
 		</div>
 	</div>
     
@@ -223,6 +232,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-        <script src="js/scripts.js"></script>
 </body>
 </html>
