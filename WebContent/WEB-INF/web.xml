@@ -11,6 +11,15 @@
   	<url-pattern>/ex/*</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+  	<servlet-name>BoardController</servlet-name>
+  	<servlet-class>cargo.boardq.controller.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>BoardController</servlet-name>
+  	<url-pattern>/boardq/*</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
