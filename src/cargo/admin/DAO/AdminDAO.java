@@ -1,6 +1,7 @@
 package cargo.admin.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,8 +10,6 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.json.simple.JSONObject;
 
 import cargo.admin.DTO.AdminDTO;
 import cargo.admin.DTO.OverdueDTO;
@@ -53,9 +52,9 @@ public class AdminDAO {
 		
 		/*String인데 값 없는경우 '-'
 		 *int인데 값없는 경우 -1
-		 *Timestamp인데 값 없는경우 null
+		 *Date인데 값 없는경우 null
 		 *로 DB에서 가져옵니다.
-		 *null 피하기 위해.. Timestamp경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
+		 *null 피하기 위해.. Date경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
 		String resev = 
 				"select '예약' as state, m.name, m.phone, m.email,"
 				+ " r.num, '-' as item, r.house,"
@@ -115,10 +114,10 @@ public class AdminDAO {
 				dto.setItem(rs.getString("item"));
 				dto.setHouse(rs.getString("house"));
 				
-				dto.setRes_day(rs.getTimestamp("res_day"));
-				dto.setStart_day(rs.getTimestamp("start_day"));
-				dto.setEnd_day(rs.getTimestamp("end_day"));
-				dto.setReturn_day(rs.getTimestamp("return_day"));
+				dto.setRes_day(rs.getDate("res_day"));
+				dto.setStart_day(rs.getDate("start_day"));
+				dto.setEnd_day(rs.getDate("end_day"));
+				dto.setReturn_day(rs.getDate("return_day"));
 				
 				dto.setPayment(rs.getInt("payment"));
 				dto.setItem_price(rs.getInt("item_price"));
@@ -205,8 +204,8 @@ public class AdminDAO {
 				odto.setDetailAddr(rs.getString("detailAddr"));
 				odto.setRoadAddr(rs.getString("roadAddr"));
 				
-				odto.setStart_day(rs.getTimestamp("start_day"));
-				odto.setEnd_day(rs.getTimestamp("end_day"));
+				odto.setStart_day(rs.getDate("start_day"));
+				odto.setEnd_day(rs.getDate("end_day"));
 				odto.setPayment(rs.getInt("payment"));
 				odto.setItem_price(rs.getInt("item_price"));
 				odto.setItem(rs.getString("item"));
@@ -228,9 +227,9 @@ public class AdminDAO {
 		
 		/*String인데 값 없는경우 '-'
 		 *int인데 값없는 경우 -1
-		 *Timestamp인데 값 없는경우 null
+		 *Date인데 값 없는경우 null
 		 *로 DB에서 가져옵니다.
-		 *null 피하기 위해.. Timestamp경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
+		 *null 피하기 위해.. Date경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
 		String resev = 
 				"select '-' as item, r.num, r.email, r.house,"
 				+ " r.start_day,  r.end_day, r.res_day, r.payment, -1 as item_price, null as return_day,"
@@ -295,10 +294,10 @@ public class AdminDAO {
 				map.put("payment",rs.getInt("payment"));
 				map.put("item_price",rs.getInt("item_price"));
 				
-				if(rs.getTimestamp("res_day")!=null) map.put("res_day",rs.getTimestamp("res_day").toString());
-				map.put("start_day",rs.getTimestamp("start_day").toString());
-				map.put("end_day",rs.getTimestamp("end_day").toString());
-				if(rs.getTimestamp("return_day")!=null) map.put("return_day",rs.getTimestamp("return_day").toString());
+				if(rs.getDate("res_day")!=null) map.put("res_day",rs.getDate("res_day").toString());
+				map.put("start_day",rs.getDate("start_day").toString());
+				map.put("end_day",rs.getDate("end_day").toString());
+				if(rs.getDate("return_day")!=null) map.put("return_day",rs.getDate("return_day").toString());
 				
 			}
 		} catch (Exception e) {
@@ -330,7 +329,7 @@ public class AdminDAO {
 				map.put("postCode",rs.getInt("postCode"));
 				map.put("detailAddr",rs.getString("detailAddr"));
 				map.put("roadAddr",rs.getString("roadAddr"));
-				map.put("reg_date",rs.getTimestamp("reg_date").toString());				
+				map.put("reg_date",rs.getDate("reg_date").toString());				
 			}
 		} catch (Exception e) {
 			System.out.println("getMemberInfo err:"+e.getMessage());
@@ -376,8 +375,8 @@ public class AdminDAO {
 				map.put("detailAddr",rs.getString("detailAddr"));
 				map.put("roadAddr",rs.getString("roadAddr"));
 				
-				map.put("start_day",rs.getTimestamp("start_day").toString());
-				map.put("end_day",rs.getTimestamp("end_day").toString());
+				map.put("start_day",rs.getDate("start_day").toString());
+				map.put("end_day",rs.getDate("end_day").toString());
 				map.put("payment",rs.getInt("payment"));
 				map.put("item_price",rs.getInt("item_price"));
 				map.put("item",rs.getString("item"));
