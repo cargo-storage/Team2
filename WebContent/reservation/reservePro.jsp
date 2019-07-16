@@ -93,7 +93,7 @@
                   return [dateRange.indexOf(dateString) == -1];
       	      }, // 이미 예약된 날짜 disabled
               onClose: function( selectedDate ) {   
-            	 start_day=selectedDate;
+            	 start_day = selectedDate;
             	 console.log(start_day);
             	 
                  selectedDate = new Date(selectedDate);
@@ -134,7 +134,7 @@
           // 예약된 날짜 배열(dateRange), 선택된 날짜 배열(selectedRange) 중복값비교
           function dup_check(){
         	  for(i = 0; i < selectedRange.length ; i++) {
-        			for(j = 0; j< dateRange.length; j++) {
+        			for(j = 0; j < dateRange.length; j++) {
         				if(selectedRange[i] == dateRange[j]) {
        					 	$("#start_day").val("");
        						$("#end_day").val("");
@@ -148,9 +148,8 @@
           
       }); // function() - 끝
       
-      
-
     </script>
+    
     <style type="text/css">
    	#inputArea{
 	   	background-color: rgba(108, 117, 125, 0.2);

@@ -212,51 +212,62 @@
 			var go;
 			var day;
 		
-		$(function () {
+			$(function () {
+				
+				$("#ajaxbtn").on("click", function() {
+					go = $("#size").val(); //A,B,C,D
+					day = $("#minday").val();
+					//var AllData = {'minday': day,'house': go};
+					$.ajax({
+						type : 'POST',
+						url : "${contextPath}/re/simplepayment.me",
+						data : {house : go},
+						dataType: 'text',
+						success : function(r) {
+							var re = JSON.parse(r);
+							$("#ajaxresult").val(re.price * day);
+							$("#rsname").val($("#name").val());
+							$("#rssize").val($("#size").val());
+							$("#rsminday").val($("#minday").val());
+						}
+					});//end of ajax
+				});//end of onclick
+			});
 			
-			$("#ajaxbtn").on("click", function() {
-				go = $("#size").val(); //A,B,C,D
-				day = $("#minday").val();
-				//var AllData = {'minday': day,'house': go};
-				$.ajax({
-					type : 'POST',
-					url : "${contextPath}/re/simplepayment.me",
-					data : {house : go},
-					dataType: 'text',
-					success : function(r) {
-						var re = JSON.parse(r);
-						$("#ajaxresult").val(re.price * day);
-						$("#rsname").val($("#name").val());
-						$("#rssize").val($("#size").val());
-						$("#rsminday").val($("#minday").val());
-					}
-				});//end of ajax
-			});//end of onclick
-		});
-		
-		$(function(){
-            //$("#dialog").dialog();
-            
-            $("#dialog").dialog({
-                autoOpen:false, //자동으로 열리지않게
-                position:[100,200], //x,y  값을 지정
-                //"center", "left", "right", "top", "bottom"
-                modal:true, //모달대화상자
-                resizable:false, //크기 조절 못하게
-                
-                buttons:{
-                    "확인":function(){
-                    	location.href='${contextPath}/re/info.me?warehouse='+$("#rssize").val();
-                    },"취소":function(){
-                        $(this).dialog("close");
-                    }
-                }
-            });
-
-            //창 열기 버튼을 클릭했을경우
-            $("#ajaxbtn").on("click",function(){
-                $("#dialog").dialog("open"); //다이얼로그창 오픈                
-            });
+			$(function(){
+	            
+				//$("#dialog").dialog();
+	            $("#dialog").dialog({
+	                autoOpen:false, //자동으로 열리지않게
+	                position:[100,200], //x,y  값을 지정
+	                //"center", "left", "right", "top", "bottom"
+	                modal:true, //모달대화상자
+	                resizable:false, //크기 조절 못하게
+	                width: 350,
+	                height: 525,
+	                buttons:{
+	                    "확인" : function(){
+	                    	location.href='${contextPath}/re/info.me?warehouse='+$("#rssize").val();
+	                    },"취소" : function(){
+	                        $(this).dialog("close");
+	                    }
+	                }
+	            });
+	
+	            //창 열기 버튼을 클릭했을경우
+	            $("#ajaxbtn").on("click",function(){
+	            	if($("#name").val()==""){
+	            		alert("이름을 입력하세요.");
+	            	}else if($("#size").val()==""){
+	            		alert("사이즈를 선택하세요.");
+	            	}else if($("#minday").val()==""){
+	            		alert("이용하실 일 수를 입력하세요.");
+	            	}else if(parseInt($("#minday").val())<15){
+	            		alert("최소 15일 이상 사용가능합니다.");
+	            	}else{
+	            		$("#dialog").dialog("open"); //다이얼로그창 오픈                
+	            	}
+	            });
         });
 		</script>
     </head>
@@ -347,11 +358,15 @@
 
 
 			<div id="dialog" title="간편견적">
-				email : <input type="text" id="rsname" readonly="readonly">
-			    size : <input type="text" id="rssize" readonly="readonly">
-			    using day : <input type="text" id="rsminday" readonly="readonly">
-			    price : <input type="text" id="ajaxresult" readonly="readonly" placeholder="결과값"><br>
-			       &nbsp;※확인을 눌러 예약페이지에서 예약해주세요.
+				<label for="rsname"><small>Name</small></label>
+				<input type="text" class="form-control" id="rsname" readonly="readonly">
+				<label for="rssize"><small>Size</small></label>
+			    <input type="text" class="form-control" id="rssize" readonly="readonly">
+			    <label for="rsminday"><small>Using day</small></label>
+			    <input type="text" class="form-control" id="rsminday" readonly="readonly">
+			    <label for="ajaxresult"><small>Price</small></label>
+			    <input type="text" class="form-control" id="ajaxresult" readonly="readonly" placeholder="예상견적"><br>
+			    <div class="text-center"><small><b>※ 확인을 눌러 예약페이지에서 예약해주세요.</b></small></div>
 			</div>
         </section>
         
