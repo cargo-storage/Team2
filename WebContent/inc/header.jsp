@@ -29,20 +29,28 @@
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#faq">FAQ</a>
                </li>
-           <c:set var="email" value="${sessionScope.mdto.email }"/>
-           <c:set var="name" value="${sessionScope.mdto.name }"/>
-           <c:if test="${email ne null }">
-                <li class="nav-item">
-                   <a class="nav-link page-scroll" href="#">MY PAGE</a>
-                  </li>               
-                 <a href="${contextPath }/me/logout.me" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
-           </c:if>
-           <c:if test="${email eq null }">
-                 <div class="text-center">
-               <a href="#loginModal" class="btn btn-primary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
-            </div>
-              </c:if> 
-               
+              	<c:set var="email" value="${sessionScope.mdto.email }"/>
+	          	<c:set var="name" value="${sessionScope.mdto.name }"/>
+	          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
+	         	
+				<c:if test="${admin == 1 }">
+	        		<li class="nav-item">
+	                	<a class="nav-link page-scroll" href="#">관리자</a>
+	            	</li> 
+	            </c:if>
+	           	<c:choose>
+	               	<c:when test="${email ne null }">
+	               		<li class="nav-item">
+	                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
+	               		</li>               
+	              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+	               	</c:when>
+	               	<c:otherwise>
+	               		<div class="text-center">
+							<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
+						</div>
+	              	</c:otherwise>
+	       		</c:choose>
               </ul>
         </div>
     </nav>
