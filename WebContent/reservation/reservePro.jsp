@@ -7,8 +7,7 @@
 <%	request.setCharacterEncoding("utf-8"); %>  
 
 <c:choose>   
-	<c:when test="${sessionScope.email!=null }"><c:set var="mem_email" value="${sessionScope.email }"/></c:when>
-	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
+	<c:when test="${sessionScope.mdto.email != null }"><c:set var="mem_email" value="${sessionScope.mdto.email }"/></c:when>
 </c:choose>
 
     
