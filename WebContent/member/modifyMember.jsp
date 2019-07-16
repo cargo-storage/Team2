@@ -224,6 +224,14 @@
 	</script>
 </head>
 <body>
+	<c:choose>   
+		<c:when test="${sessionScope.mdto.email==null }">
+			<script type="text/javascript">
+				alert("로그인 후 이용 가능합니다.");
+				history.back();
+			</script>
+		</c:when>
+	</c:choose>
 	<div class="container-fluid">
 		<div class="col-sm-9 col-lg-6 m-auto">
 			<h1 class="text-center">회원 정보 수정</h1>
