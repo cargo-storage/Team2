@@ -4,9 +4,12 @@ function overdueModal(modal, result) {
 }//end of overdueModal
 
 function reservationModal(modal, result) {
-	modal.find('.name td').text(result.name);
-	modal.find('.phone td').text(result.phone);
-	modal.find('.email td').text(result.email);
+	modal.find('.start_day').text(result.start_day);
+	modal.find('.end_day').text(result.end_day);
+	modal.find('.name').text(result.name);
+	modal.find('.phone').text(result.phone);
+	modal.find('.email').text(result.email);
+	
 }//end of reservationModal
 
 function itemsModal(modal,result) {
