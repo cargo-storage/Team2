@@ -16,7 +16,7 @@ public class AdminAllInfoAction implements Action {
 		
 		AdminDAO dao = new AdminDAO();
 		/*3태이블 and member join해서 모든 정보를 가져온다.*/
-		request.setAttribute("list", dao.getInfo());
+		request.setAttribute("list", dao.getTables());
 		request.setAttribute("updateTime", new Date());
 		ActionForward forward = new ActionForward();
 		forward.setAjax(false);

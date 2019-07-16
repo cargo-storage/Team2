@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%request.setCharacterEncoding("utf-8");%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -49,7 +48,7 @@
 					<a class="dropdown-item" href="#">Settings</a>
 					<a class="dropdown-item" href="#">Activity Log</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+					<a class="dropdown-item" href="#">Logout</a>
 				</div>
 			</li>
 		</ul>

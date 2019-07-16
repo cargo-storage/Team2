@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%request.setCharacterEncoding("utf-8");%>
@@ -72,7 +71,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.num}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -114,7 +113,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.house}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
@@ -156,7 +155,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -203,11 +202,80 @@
 	</a>
 
 	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+			<c:choose>
+				<c:when test="${currntPage eq '예약 내역 관리'}">
+				<form action="" method="post" >
+					<div class="modal-header">
+						<h5 class="modal-title" id="detailModalLabel">예약 상세 내역</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table>
+							<tr class="name">
+								<th>예약자 이름</th>
+								<td></td>
+							</tr>
+							<tr class="phone">
+								<th>연락처</th>
+								<td></td>
+							</tr>
+							<tr class="email">
+								<th>이메일</th>
+								<td></td>
+							</tr>
+							<tr class="name">
+								<th>예약자 이름</th>
+								<td></td>
+							</tr>
+							<tr class="phone">
+								<th>연락처</th>
+								<td></td>
+							</tr>
+							<tr class="email">
+								<th>이메일</th>
+								<td></td>
+							</tr>
+							<tr class="name">
+								<th>예약자 이름</th>
+								<td></td>
+							</tr>
+							<tr class="phone">
+								<th>연락처</th>
+								<td></td>
+							</tr>
+							<tr class="email">
+								<th>이메일</th>
+								<td></td>
+							</tr><tr class="name">
+								<th>예약자 이름</th>
+								<td></td>
+							</tr>
+							<tr class="phone">
+								<th>연락처</th>
+								<td></td>
+							</tr>
+							<tr class="email">
+								<th>이메일</th>
+								<td></td>
+							</tr>
+						</table>
+						<input type="text">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
+				</form>
+				</c:when>
+				
+				<c:when test="${currntPage eq '창고 현황 관리'}">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="detailModalLabel">창고 상세 내역</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -217,6 +285,22 @@
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
+				</c:when>
+				
+				<c:when test="${currntPage eq '종료된 보관 기록 열람'}">
+				<div class="modal-header">
+					<h5 class="modal-title" id="detailModalLabel">완료 상세 내역</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+				</c:when>
+			</c:choose>
 			</div>
 		</div>
 	</div>

@@ -13,7 +13,7 @@ public class AdminMemberAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdminDAO dao = new AdminDAO();
-		request.setAttribute("list", dao.getMemberInfo());
+		request.setAttribute("list", dao.getMembersTable());
 		request.setAttribute("updateTime", new Date());
 		
 		ActionForward forward = new ActionForward();

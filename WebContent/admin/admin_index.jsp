@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%request.setCharacterEncoding("utf-8");%>
@@ -112,6 +111,7 @@
 								<tr>
 									<th>상태</th>
 									<th>이름</th>
+									<th>휴대전화</th>
 									<th>이메일</th>
 									<th>물품ID</th>
 									<th>창고번호</th>
@@ -124,6 +124,7 @@
 								<tr>
 									<th>상태</th>
 									<th>이름</th>
+									<th>휴대전화</th>
 									<th>이메일</th>
 									<th>물품ID</th>
 									<th>창고번호</th>
@@ -134,9 +135,10 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.state}"/></td>
 									<td><c:out value="${adto.name}"/></td>
+									<td><c:out value="${adto.phone}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.house}"/></td>
@@ -177,7 +179,7 @@
 	</a>
 
 	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
