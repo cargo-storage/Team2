@@ -55,9 +55,7 @@ public class LoginAction implements Action {
 			MemberDTO mdto = mdao.getMember(email);
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("email", email);
-			session.setAttribute("name", mdto.getName());
-			session.setAttribute("admin", mdto.getAdmin());
+			session.setAttribute("mdto", mdto);
 
 			String path = request.getContextPath();
 			forward.setRedirect(true);

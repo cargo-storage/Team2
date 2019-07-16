@@ -234,9 +234,9 @@
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#faq">고객지원</a>
                </li>
-          	<c:set var="email" value="${sessionScope.email }"/>
-          	<c:set var="name" value="${sessionScope.name }"/>
-          	<c:set var="admin" value="${sessionScope.admin }"/>
+          	<c:set var="email" value="${sessionScope.mdto.email }"/>
+          	<c:set var="name" value="${sessionScope.mdto.name }"/>
+          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
          	
 			<c:if test="${admin == 1 }">
         		<li class="nav-item">
