@@ -297,22 +297,31 @@
                    <a class="nav-link page-scroll" href="#market">중고장터</a>
                </li>
                <li class="nav-item">
-                   <a class="nav-link page-scroll" href="#faq">FAQ</a>
+                   <a class="nav-link page-scroll" href="#faq">고객지원</a>
                </li>
-           <c:set var="email" value="${email }"/>
-           <c:set var="name" value="${name }"/>
-           <c:if test="${email ne null }">
-          		<li class="nav-item">
-                   <a class="nav-link page-scroll" href="#">MY PAGE</a>
-               	</li>               
-              	<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
-           </c:if>
-           </ul>
-           <c:if test="${email eq null }">
-           		<div class="text-center">
-					<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
-				</div>
-           	</c:if>  
+          	<c:set var="email" value="${sessionScope.mdto.email }"/>
+          	<c:set var="name" value="${sessionScope.mdto.name }"/>
+          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
+         	
+			<c:if test="${admin == 1 }">
+        		<li class="nav-item">
+                	<a class="nav-link page-scroll" href="#">관리자</a>
+            	</li> 
+            </c:if>
+           	<c:choose>
+               	<c:when test="${email != null }">
+               		<li class="nav-item">
+                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
+               		</li>               
+              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+               	</c:when>
+               	<c:otherwise>
+               		<div class="text-center">
+						<a href="#loginModal" class="btn btn-outline-secondary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
+					</div>
+              	</c:otherwise>
+       		</c:choose>
+          	</ul>
         </div>
     </nav>
 
@@ -901,8 +910,8 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="#">이메일찾기</a></span> | 
-								<span><a href="#">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/member/findMember.jsp?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/member/findMember.jsp?find=pwd">비밀번호찾기</a></span> | 
 								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
 							</div>
 						</div>

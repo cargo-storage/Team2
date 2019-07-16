@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.admin.action.AdminAllInfoAction;
 import cargo.admin.action.AdminEachInfoAction;
 import cargo.admin.action.AdminMemberAction;
+import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminOverdueAction;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
@@ -62,6 +63,11 @@ public class AdminController extends HttpServlet {
 			//연체 관리 페이지
 			}else if("/overdue_admin".equals(command)){
 				action = new AdminOverdueAction();
+				forward = action.execute(request, response);
+			
+			//모달로 데이터를 뿌려주는 경우
+			}else if("/modal_data".equals(command)){
+				action = new AdminModalAction();
 				forward = action.execute(request, response);
 			}
 			

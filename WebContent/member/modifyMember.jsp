@@ -7,7 +7,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>SIGN UP - TEAM2 WAREHOUSE</title>
+	<title>MODIFY - TEAM2 WAREHOUSE</title>
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
 	<!--Google fonts-->
@@ -28,23 +28,11 @@
 	<style  type="text/css">
 		body {
 			background-color: #f5f6f7;
-		}		
-		
-		.logo {
-			color: #00c853;
-		    text-decoration: none;
-		    font-size: 50px;
-		    font-weight: 800;
 		}
 		
-		.logo:HOVER{
-			color: #00a243;
-			text-decoration: none;
-		}
-		
-		.email-auth{
+		.pwdCheck{
 			position: absolute;
-		    top: 30px;
+		    top: 180px;
 		    right: 15px;
 		    height: calc(1.5em + .75rem + 2px);
 		    padding: .375rem .75rem;
@@ -54,41 +42,8 @@
 		    color: white;
 		}
 		
-		.email-auth:HOVER{
+		.pwdCheck:HOVER{
 			background-color: #00a243;
-		}
-		
-		#emailAuthNum{
-			margin: 5px 20px 0 0;
-			width: 50%;
-			float:left;
-		    height: calc(1.5em + .75rem + 2px);
-		    padding: .375rem .75rem;
-		    font-size: 1rem;
-		    font-weight: 400;
-		    line-height: 1.5;
-		    color: #495057;
-		    background-color: #fff;
-		    background-clip: padding-box;
-		    border: 1px solid #ced4da;
-		    border-radius: .25rem;
-		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-		}
-		
-		.authCheck{
-			margin-top: 5px;
-   			background-color: #eee;
-    		color: black;
-    		text-decoration: none;
-    		height: calc(1.5em + .75rem + 2px);
-		    padding: .375rem .75rem;
-		    border: 1px solid #00c853;
-		    border-radius: 3px;
-		}
-		
-		.authCheck:HOVER{
-			background-color: #00c853;
-			color: white;
 		}
 
 		.post {
@@ -132,38 +87,31 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			//이메일 인증 숨김
-			$("#auth").hide();
-			//이메일 인증번호
-			var authNum;
-			//이메일 중복 체크 (ajax 구현하기)
-			$("#email").blur(function(){
-				var email = $(this).val();
-				if(email ==''){
-					$("#emailErr").text("필수 입력 사항입니다.");
+			//비밀번호 갱신 숨김
+			$("#check").hide();
+			
+			//기존 비밀번호 체크
+			$("#pastPwd").blur(function(){
+				var pastPwd = $(this).val();
+				if(pastPwd ==''){
+					$("#pastPwd").text("필수 입력 사항입니다.");
 				}else{
-					var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-					if(!reg.test(email)){
-						$("#emailErr").text("이메일 형식이 맞지 않습니다.");
-					}else{
-						$.ajax({
-							type: "post",
-							async: false,
-							url: "${contextPath}/me/emailCheck.me",
-							data: {email: email},
-							dataType: 'text',
-							success: function(data){
-								if(data == 0){ //이메일 존재하지 않음
-									$("#emailErr").text('');
-								}else{
-									$("#emailErr").text('존재하는 이메일 입니다.');
-								}
-							},
-							error: function(jqXHR, exception){
-								alert("서버 내부 에러가 발생했습니다.");
+					$.ajax({
+						type: "post",
+						async: false,
+						url: "${contextPath}/me/pwdCheck.me",
+						data: {pastPwd : pastPwd},
+						success: function(data){
+							if(data == 0){
+								$("#pastPwdErr").text("비밀번호가 틀립니다.");
+							}else{
+								$("#pastPwdErr").text('');
 							}
-						});
-					}
+						},
+						error: function(){
+							alert("서버 내부 에러가 발생했습니다.");
+						}
+					});
 				}
 			});
 			
@@ -224,159 +172,115 @@
 			});
 		});
 		
-		function emailAuth() {
-			var email = $("#email").val();
-			if(email==''){
-				alert("이메일을 입력해주세요.");
-			}else{
-				if($("#emailErr").text()!=''){
-					alert("오류사항을 확인 후 다시 입력해주세요.");
-				}else{
-					$("#postAuth").attr("value","재전송");
-					$.ajax({
-						type: "post",
-						async: false,
-						url: "${contextPath}/me/emailAuth.me",
-						data: {email: email},
-						success: function(data){
-							var msg = JSON.parse(data);
-							if(msg.state == 0){
-								alert("인증번호 전송에 실패하였습니다.");
-							}else{
-								alert("인증번호를 전송하였습니다. \n인증번호를 입력해주시기 바랍니다.");
-								authNum = msg.authNum;
-								$("#auth").show();
-							}
-						},
-						error: function(){
-							alert("서버 내부 에러가 발생했습니다.");
-						}
-					});
-				}
+		function pwdCheck() {
+			var pastPwd = $("#pastPwd").val();
+			if(pastPwd==''){
+				alert("기존 비밀번호를 입력해주세요.");
 			}
-		}
-		
-		function authCheck(){
-			if(authNum != $("#emailAuthNum").val()){
-				alert("인증번호가 다릅니다. 다시 확인해주세요.");
+			else if($("#pastPwdErr").text() !=''){
+				alert("기존 비밀번호가 다릅니다.");
 			}else{
-				alert("인증 성공");
-				$("#auth").hide();
-				$("#emailAuthNum").attr("disabled",true);
-				$("#email").attr("readonly","readonly");	
+				$("#check").show();
 			}
 		}
 			
-		function register(){
+		function modify(){
 			var result = 1;
-			var email = $("#email");
+			var pastPwd = $("#pastPwd");
 			var pwd = $("#pwd");
-			var pwd2 = $("#pwd2");
 			var name = $("#name");
 			var phone = $("#phone");
 			var postCode = $("#postCode");
 			var detailAddr = $("#detailAddr");
 			
-			if (email.val() == '') {
-				$("#emailErr").text("필수 입력 사항입니다.");
+			if(pastPwd.val()==''){
+				$("#pastPwdErr").text("필수 입력 사항입니다.");
 				result = 0;
 			}
-			if (pwd.val() == '') {
-				$("#pwdErr").text("필수 입력 사항입니다.");
-				result = 0;
+			if(pwd.val()=='') {
+				$("#pwd").val(pastPwd.val());
 			} 
-			if (pwd2.val() == '') {
-				$("#pwd2Err").text("필수 입력 사항입니다.");
-				result = 0;
-			}
-			if(name.val()==''){
-				$("#nameErr").text("필수 입력 사항입니다.");
-				result = 0;
-			}
-			if(phone.val()==''){
-				$("#phoneErr").text("필수 입력 사항입니다.");
-				result = 0;
-			}
-			if(postCode.val()==''||detailAddr.val()==''){
+			if(detailAddr.val()==''){
 				$("#addrErr").text("필수 입력 사항입니다.");
 				result = 0;
 			}
 			else{
 				$("#addrErr").text('');
 			}
+			
 			if(result==0){
 				alert("필수 사항을 기입해주세요.");
 				return false;
 			}
-			if($("#emailErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
+			
+			if($("#pastPwdErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
 					||$("#nameErr").text()!=''||$("#phoneErr").text()!=''
 					||$("#addrErr").text()!=''||$("#emailErr").text()!=''){
 				alert("오류 사항을 확인 후 다시 입력해주세요.");
 				return false;
 			} 
+			
 		}
 	</script>
 </head>
 <body>
-
-	<div class="container mt-5">
-		<div class="page-header">
-			<div class="col-sm-9 col-lg-6 text-center m-auto">
-				<a class="logo" href="../index.jsp">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE</a>
-				<br>
-				<br>
-			</div>
-		</div>
+	<div class="container-fluid">
 		<div class="col-sm-9 col-lg-6 m-auto">
-			<form action="${contextPath }/me/join.me" method="post" onsubmit="return register()">
+			<h1 class="text-center">회원 정보 수정</h1>
+			<form action="${contextPath }/me/modifyMember.me" method="post" onsubmit="return modify()">
 				<div class="form-group">
 					<label for="email">이메일</label>
-					<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">
-					<input type="button" id="postAuth"class="email-auth" value="이메일 인증" onclick="emailAuth()">
-					<div id="auth">
-						<input type="email" id="emailAuthNum" name="emailAuthNum" placeholder="인증번호 입력">
-						<button type="button" class="authCheck" onclick="authCheck()">인증 확인</button>
-					</div>
+					<input type="email" class="form-control" id="email" name="email" value="${sessionScope.mdto.email }" readonly>
 					<span id="emailErr" class="help-block"></span>
 				</div>
 				<div class="form-group">
-					<label for="pwd">비밀번호<span class="help-block">(영문/숫자/특수문자 혼합하여 8자이상 20글자 이하)</span></label> 
-					<input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해 주세요">
-					<span id="pwdErr" class="help-block"></span>
+					<label for="pastPwd">기존 비밀번호</label> 
+					<input type="password" class="form-control" id="pastPwd" placeholder="비밀번호를 입력해 주세요">
+					<input type="button" class="pwdCheck" value="비밀번호 변경" onclick="pwdCheck()">
+					<span id="pastPwdErr" class="help-block"></span>
 				</div>
-				<div class="form-group">
-					<label for="pwdCheck">비밀번호 확인</label>
-					<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
-					<span id="pwd2Err" class="help-block"></span>
-				</div>
+				<div id="check">
+					<div class="form-group">
+						<label for="pwd">새로운 비밀번호</label>
+						<input type="password" class="form-control" id="pwd" name="pwd" placeholder="새로운 비밀번호를 입력해주세요">
+						<span id="pwdErr" class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<label for="pwd2">비밀번호 확인</label>
+						<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
+						<span id="pwd2Err" class="help-block"></span>
+					</div>
+				</div>	
 				<div class="form-group">
 					<label for="name">성명</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
+					<input type="text" class="form-control" id="name" name="name" value="${sessionScope.mdto.name }">
 					<span id="nameErr" class="help-block"></span>
 				</div>
 				<div class="form-group">
 					<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
-					<input type="tel" class="form-control" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요">
+					<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.mdto.phone }">
 					<span id="phoneErr" class="help-block"></span>
 				</div>
 				<div class="form-group">
 					<label for="detailAddr">집 주소</label>
 					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="postCode" name="postCode" class="post" placeholder="우편번호" readonly>
+						<input type="text" id="postCode" name="postCode" class="post" value="${sessionScope.mdto.postCode }" readonly>
 						<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
 					</div>
 					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="roadAddr" name="roadAddr" class="post post1" placeholder="도로명주소" readonly>
+						<input type="text" id="roadAddr" name="roadAddr" class="post post1" value="${sessionScope.mdto.roadAddr }" readonly>
 					</div>
 					<span id="guide" style="color:#999;display:none"></span>
-					<input type="text" id="detailAddr" name="detailAddr" class="post post1" placeholder="상세주소">
+					<input type="text" id="detailAddr" name="detailAddr" class="post post1" value="${sessionScope.mdto.detailAddr }">
 					<span id="addrErr" class="help-block clear"></span>	
 				</div>
 				<br>
 				<br>
+				<input type="hidden" name="admin" value="${sessionScope.mdto.admin }">
+				<input type="hidden" name="reg_date" value="${sessionScope.mdto.reg_date }">
 				<div class="form-group text-center">
 					<button class="btn btn_submit">
-						회원가입 <i class="fa fa-check spaceLeft"></i>
+						회원 정보 수정 <i class="fa fa-check spaceLeft"></i>
 					</button>&nbsp;&nbsp;
 				</div>
 			</form>

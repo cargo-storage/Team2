@@ -13,7 +13,7 @@ public class AdminOverdueAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdminDAO dao = new AdminDAO();
-		request.setAttribute("list", dao.getOverdueInfo());
+		request.setAttribute("list", dao.getOverdueTable());
 		request.setAttribute("updateTime", new Date());
 		
 		ActionForward forward = new ActionForward();
