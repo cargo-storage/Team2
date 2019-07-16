@@ -205,7 +205,7 @@
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 			<c:choose>
 				<c:when test="${currntPage eq '예약 내역 관리'}">
@@ -216,31 +216,32 @@
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<table>
-							<tr>
-								<td rowspan="5"><div class="clickX" id="calendar" ></div></td>
-								<th>시작일</th>
-								<td class="start_day"></td>
-							</tr>
-							<tr>
-								<th>예정 완료일</th>
-								<td class="end_day"></td>
-							</tr>
-							<tr>
-								<th>예약자 이름</th>
-								<td class="name"></td>
-							</tr>
-							<tr>
-								<th>연락처</th>
-								<td class="phone"></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td class="email"></td>
-							</tr>
-						</table>
-						<input type="text">
+					<div class="modal-body mx-auto container-fluid row">
+							<div class="col-lg-7 calendar" id="calendar" ></div>
+							<div class="col-lg-5 mt-4 mx-auto">
+								<table class="mx-auto my-auto">
+									<tr>
+										<th>시작일</th>
+										<td class="start_day"></td>
+									</tr>
+									<tr>
+										<th>예정 완료일</th>
+										<td class="end_day"></td>
+									</tr>
+									<tr>
+										<th>예약자 이름</th>
+										<td class="name"></td>
+									</tr>
+									<tr>
+										<th>연락처</th>
+										<td class="phone"></td>
+									</tr>
+									<tr>
+										<th>이메일</th>
+										<td class="email"></td>
+									</tr>
+								</table>
+							</div>
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

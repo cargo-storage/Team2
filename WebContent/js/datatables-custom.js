@@ -4,12 +4,21 @@ function overdueModal(modal, result) {
 }//end of overdueModal
 
 function reservationModal(modal, result) {
+	$('.calendar').pignoseCalendar({
+    	lang: 'ko',
+    	theme: 'blue',
+    	multiple: true,
+		init: function(context){
+	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+	      }
+    });//end of pignoseCalendar
+	$('.pignose-calendar-body').addClass('clickX');
+	
 	modal.find('.start_day').text(result.start_day);
 	modal.find('.end_day').text(result.end_day);
 	modal.find('.name').text(result.name);
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
-	
 }//end of reservationModal
 
 function itemsModal(modal,result) {
