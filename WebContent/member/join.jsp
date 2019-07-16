@@ -28,11 +28,7 @@
 	<style  type="text/css">
 		body {
 			background-color: #f5f6f7;
-		}
-		
-		.container {
-			padding: 3rem;
-		}
+		}		
 		
 		.logo {
 			color: #00c853;
@@ -307,7 +303,6 @@
 			}
 			else{
 				$("#addrErr").text('');
-				result = 1;
 			}
 			if(result==0){
 				alert("필수 사항을 기입해주세요.");
@@ -324,7 +319,7 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container mt-5">
 		<div class="page-header">
 			<div class="col-sm-9 col-lg-6 text-center m-auto">
 				<a class="logo" href="../index.jsp">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE</a>
