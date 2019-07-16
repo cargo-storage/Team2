@@ -81,7 +81,7 @@ public class MemberDAO {
 		return result;
 	}
 
-	public int LogingetMember(String email, String pwd) { // 로그인
+	public int LoginMember(String email, String pwd) { // 로그인, 기존 비밀번호 확인
 		int state = 0; // 0: 아이디 없음, -1: 비밀번호 틀림, 1: 성공
 		try {
 			con = connect();

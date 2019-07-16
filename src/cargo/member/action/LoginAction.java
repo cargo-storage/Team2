@@ -23,7 +23,7 @@ public class LoginAction implements Action {
 		String pwd = request.getParameter("pwd");
 
 		MemberDAO mdao = new MemberDAO();
-		int state = mdao.LogingetMember(email, pwd);
+		int state = mdao.LoginMember(email, pwd);
 
 		ActionForward forward = null;
 
