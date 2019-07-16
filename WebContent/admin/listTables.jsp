@@ -78,9 +78,9 @@
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.house}"/></td>
-									<td><fmt:formatDate value="${adto.res_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.res_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 								</tr>
 							</c:forEach>
@@ -120,8 +120,8 @@
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 								</tr>
@@ -161,9 +161,9 @@
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.return_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.return_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 								</tr>
