@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cargo.common.DTO.MemberDTO;
 import cargo.common.action.Action;
@@ -32,8 +33,7 @@ public class modifyMemberAction implements Action {
 		
 		int state = mdao.updateMember(mdto);
 		
-		ActionForward forward = new ActionForward();
-		forward.setRedirect(true);
+		ActionForward forward = null;
 		
 		if (state == 0) { // 실패했을 때
 			PrintWriter out = response.getWriter();
@@ -45,14 +45,17 @@ public class modifyMemberAction implements Action {
 
 			System.out.println("회원정보 수정 오류 ");
 			out.close();
-			
-			return null;
+
 		} else { // 성공했을 때
+			forward = new ActionForward();
+			forward.setRedirect(true);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("mdto", mdto);
 			String path = request.getContextPath();
 			forward.setPath(path+"/member/mypage.jsp");
-			
-			return forward;
 		}
+		return forward;
 	}
 	
 }

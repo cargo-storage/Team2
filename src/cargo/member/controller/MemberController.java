@@ -17,6 +17,7 @@ import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
 import cargo.member.action.modifyMemberAction;
+import cargo.member.action.pwdCheckAction;
 import cargo.member.action.pwdSearchAction;
 
 public class MemberController extends HttpServlet {
@@ -45,9 +46,10 @@ public class MemberController extends HttpServlet {
 		System.out.println(contextPath.length());
 		System.out.println(RequestURI.lastIndexOf("/"));
 
-//		System.out.println("??: "+request.getPathInfo()); xml로 했을땐 안되는듯?!
+		// System.out.println("??: "+request.getPathInfo()); xml로 했을땐 안되는듯?!
 
-//		String command=RequestURI.substring(contextPath.length()); //이건 선생님이 한것
+		// String command=RequestURI.substring(contextPath.length()); //이건 선생님이
+		// 한것
 
 		// 이부분은 xml필터링을 *.me로 하지 않고 /폴더/*로 하였기 때문에 제가 바꾼것입니다.
 		// 그런데 /폴더/*로 하는게 관리하기 더 편하지 않나요? 겹치지도 않고 contextPath.length도 쓰지 않음
@@ -77,6 +79,12 @@ public class MemberController extends HttpServlet {
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdSearch.me")) { // 비밀번호 찾기
+				action = new pwdSearchAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/pwdCheck.me")) { // 기존 비밀번호 확인
+				action = new pwdCheckAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/mypage.me")) { //마이 페이지
 				action = new pwdSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
