@@ -159,71 +159,71 @@
 <!--navigation in page-->
 <%@include file="../inc/header.jsp" %>
 <div class="container">
-	<div class="col-sm-9 col-lg-6" style="margin: 150px auto 0;">
-			<h1 class="text-center">회원 정보 찾기</h1><br><br>
-			<c:if test="${param.find eq 'email' }">
-			<div class="tab">
-				<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
-				<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
-			</div>
-			<div id="emailSearch" class="tabcontent">
-			<c:choose>
-				<c:when test="${empty requestScope.emailList }">
-				<div id="emailSearchShow">
-					<p class="text-center font-weight-bold small">- <mark class="text-danger">이름</mark>과 <mark class="text-danger">전화번호</mark>를 통해 이메일을 찾을 수 있습니다 -</p>
-					<form action="${contextPath }/me/emailSearch.me" method="post" onsubmit="return emailSearch()">
-						<div class="form-group">
-							<label for="name">이름</label>
-							<input type="text" class="form-control" id="name" name="name" placeholder="NAME">
-							<span id="nameErr" class="help-block"></span>
-						</div>
-						<div class="form-group">
-							<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="PHONE(010-1234-1234 형식)">
-							<span id="phoneErr" class="help-block"></span>
-						</div>
-						<div class="form-group">
-							<button class="btn btn-primary btn-block btn-lg mt-5">이메일 찾기</button>
-						</div>
-					</form>
-				</div>
-				</c:when>
-				<c:otherwise>
-					<div id="emailSearchResult">
-						<h5 class="text-center font-weight-bold mt-3"><c:out value="${requestScope.emailList.list[0].name }"/>회원님의 이메일 주소</h5>
-						<div class="text-center" id="memberEmailList">
-						<c:set var="startNum" value="0"/>
-						<c:forEach var="i" items="${requestScope.emailList.list }">
-							<c:set var="startNum" value="${startNum+1 }"/>
-							<span class="text-center font-weight-bold mr-4"><span id="memberEmail"><c:out value="${startNum }"/>. <c:out value="${i.email }"/></span></span>
-							<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><c:out value="${i.reg_date }"/></span></span><br>
-						</c:forEach>
-						<a href="${contextPath }/index.jsp" class="btn btn-primary btn-block btn-lg mt-3">로그인 하러 가기</a>
-						</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
-			</div>
-			</c:if>
-			<c:if test="${param.find eq 'pwd' }">
-			<div class="tab">
-				<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
-				<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
-			</div>		
-			<div id="pwdSearch" class="tabcontent">
-			  <p class="text-center font-weight-bold small">- <mark class="text-danger">이메일</mark>을 통해 임시 비밀번호를 보내드립니다 - </p>
-			  <div class="form-group">
-			  	<label for="email">이메일</label>
-			  	<input type="text" class="form-control" id="email" placeholder="EMAIL">
-			  	<span id="pwdSearchErr" class="help-block"></span>
-			  </div>
-			  <div class="form-group">
-					<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="pwdSearch()" value="임시 비밀번호 발송">
-				</div>
-			</div>
-			</c:if>
+	<div class="col-sm-9 col-lg-6 mt-6 ml-auto mr-auto">
+		<h1 class="text-center">회원 정보 찾기</h1><br><br>
+		<c:if test="${param.find eq 'email' }">
+		<div class="tab">
+			<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
+			<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
 		</div>
+		<div id="emailSearch" class="tabcontent">
+		<c:choose>
+			<c:when test="${empty requestScope.emailList }">
+			<div id="emailSearchShow">
+				<p class="text-center font-weight-bold small">- <mark class="text-danger">이름</mark>과 <mark class="text-danger">전화번호</mark>를 통해 이메일을 찾을 수 있습니다 -</p>
+				<form action="${contextPath }/me/emailSearch.me" method="post" onsubmit="return emailSearch()">
+					<div class="form-group">
+						<label for="name">이름</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="NAME">
+						<span id="nameErr" class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
+						<input type="text" class="form-control" id="phone" name="phone" placeholder="PHONE(010-1234-1234 형식)">
+						<span id="phoneErr" class="help-block"></span>
+					</div>
+					<div class="form-group">
+						<button class="btn btn-primary btn-block btn-lg mt-5">이메일 찾기</button>
+					</div>
+				</form>
+			</div>
+			</c:when>
+			<c:otherwise>
+				<div id="emailSearchResult">
+					<h5 class="text-center font-weight-bold mt-3"><c:out value="${requestScope.emailList.list[0].name }"/>회원님의 이메일 주소</h5>
+					<div class="text-center" id="memberEmailList">
+					<c:set var="startNum" value="0"/>
+					<c:forEach var="i" items="${requestScope.emailList.list }">
+						<c:set var="startNum" value="${startNum+1 }"/>
+						<span class="text-center font-weight-bold mr-4"><span id="memberEmail"><c:out value="${startNum }"/>. <c:out value="${i.email }"/></span></span>
+						<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><c:out value="${i.reg_date }"/></span></span><br>
+					</c:forEach>
+					<a href="${contextPath }/index.jsp" class="btn btn-primary btn-block btn-lg mt-3">로그인 하러 가기</a>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		</div>
+		</c:if>
+		<c:if test="${param.find eq 'pwd' }">
+		<div class="tab">
+			<button class="tablinks" onclick="location.href='${contextPath}/member/findMember.jsp?find=email'">이메일 찾기</button>
+			<button class="tablinks active" onclick="location.href='${contextPath}/member/findMember.jsp?find=pwd'">비밀번호 찾기</button>
+		</div>		
+		<div id="pwdSearch" class="tabcontent">
+			<p class="text-center font-weight-bold small">- <mark class="text-danger">이메일</mark>을 통해 임시 비밀번호를 보내드립니다 - </p>
+ 			<div class="form-group">
+ 				<label for="email">이메일</label>
+ 				<input type="text" class="form-control" id="email" placeholder="EMAIL">
+ 				<span id="pwdSearchErr" class="help-block"></span>
+ 			</div>
+			<div class="form-group">
+				<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="pwdSearch()" value="임시 비밀번호 발송">
+			</div>
+		</div>
+		</c:if>
 	</div>
+</div>
     
 	
 
