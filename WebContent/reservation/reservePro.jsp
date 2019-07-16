@@ -45,12 +45,15 @@
     <script type="text/javascript">
     
     $(function() {
-     
+     	
+    	/* Datepicker 작동 관련 */
+    	
     	var startDate = "";
 		var endDate = "";
 		dateRange = [];
 		innerDateRange = [];
 		
+		// 이미 예약된 날짜 배열 생성
 		if(${requestScope.sList} != null)	{
 			
 			<c:set var="i" value="0"/>
@@ -73,7 +76,11 @@
 		}
 		
 		console.log(dateRange);
+		var start_day;
+		var end_day;
+		var selectedRange = [];
     	 
+		//시작일
       	 $('#start_day').datepicker({
               //dateFormat: "yy-mm-dd",
               monthNamesShort: ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
@@ -85,8 +92,10 @@
             	  var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
                   return [dateRange.indexOf(dateString) == -1];
       	      }, // 이미 예약된 날짜 disabled
-              onClose: function( selectedDate ) {    
-            	  
+              onClose: function( selectedDate ) {   
+            	 start_day=selectedDate;
+            	 console.log(start_day);
+            	 
                  selectedDate = new Date(selectedDate);
             	 selectedDate.setDate(selectedDate.getDate()+15); // 입력받은 날짜에서 +15일
             	 
@@ -106,10 +115,40 @@
                beforeShowDay: function (date) {
          	        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
          	        return [dateRange.indexOf(dateString) == -1];
-       	       } // 이미 예약된 날짜 disabled
+       	       }, // 이미 예약된 날짜 disabled
+       	       onClose: function( selectedDate ) {   
+           	 		end_day=selectedDate;
+           	 		console.log(end_day);
+           	 		
+           	 		// 선택된 시작일과 종료일 범위의 배열 생성
+	           	 	for (var d = new Date(start_day); d <= new Date(end_day); d.setDate(d.getDate() + 1)) {
+	           	 		selectedRange.push($.datepicker.formatDate('yy-mm-dd', d));
+			        }
+           	 		
+	           	 	console.log(selectedRange);
+	           	 	dup_check();
+                
+           		}
           });// end_date - 끝
           
+          // 예약된 날짜 배열(dateRange), 선택된 날짜 배열(selectedRange) 중복값비교
+          function dup_check(){
+        	  for(i = 0; i < selectedRange.length ; i++) {
+        			for(j = 0; j< dateRange.length; j++) {
+        				if(selectedRange[i] == dateRange[j]) {
+       					 	$("#start_day").val("");
+       						$("#end_day").val("");
+        					alert("선택하신 날짜는 예약이 불가능합니다. 다시 선택 해 주세요.");
+        					selectedRange = [];
+        					return;
+        				}
+        			}
+        		}
+          }
+          
       }); // function() - 끝
+      
+      
 
     </script>
     <style type="text/css">
@@ -163,7 +202,7 @@
 							<label for="res_day" class="mt-1"><b>예약일</b></label>
 								<input type="text" class="form-control" id="res_day" name="res_day" value="${res_day}" readonly=""><br>
 							<label for="start_day" class="mt-1 strong"><b>사용 시작일</b><small class="text-muted ml-2">오늘 날짜 이후로 선택 가능합니다.</small></label>
-							    <input type="text" class="form-control" id="start_day" name="start_day"readonly="readonly"><br>
+							    <input type="text" class="form-control" id="start_day" name="start_day" readonly="readonly"><br>
 							<label for="end_day" class="mt-1"><b>사용 종료일</b><small class="text-muted ml-2">보관 최소기간은 15일입니다.</small></label>
 							    <input type="text" class="form-control" id="end_day" name="end_day" readonly="readonly"><br>
 				          </div>
