@@ -246,7 +246,7 @@
            	<c:choose>
                	<c:when test="${email != null }">
                		<li class="nav-item">
-                   		<a class="nav-link page-scroll" href="#">마이페이지</a>
+                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
                		</li>               
               		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
                	</c:when>
