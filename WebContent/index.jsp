@@ -275,7 +275,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.html">
+       <a class="navbar-brand" href="index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -309,7 +309,7 @@
             	</li> 
             </c:if>
            	<c:choose>
-               	<c:when test="${email != null }">
+               	<c:when test="${email ne null }">
                		<li class="nav-item">
                    		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
                		</li>               
