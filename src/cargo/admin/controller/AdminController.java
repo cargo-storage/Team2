@@ -69,6 +69,11 @@ public class AdminController extends HttpServlet {
 			}else if("/modal_data".equals(command)){
 				action = new AdminModalAction();
 				forward = action.execute(request, response);
+			}else if("/extend_reserv".equals(command)){
+				System.out.println(request.getParameter("result")); 
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath("/admin/admin_index.jsp");
 			}
 			
 			//모든 과정 후 페이지 이동부분
