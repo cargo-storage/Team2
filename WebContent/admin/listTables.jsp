@@ -209,7 +209,7 @@
 			<div class="modal-content">
 			<c:choose>
 				<c:when test="${currntPage eq '예약 내역 관리'}">
-				<form action="" method="post" >
+				<form method="post" action="">
 					<div class="modal-header">
 						<h5 class="modal-title" id="detailModalLabel">예약 상세 내역</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -217,35 +217,45 @@
 						</button>
 					</div>
 					<div class="modal-body mx-auto container-fluid row">
-							<div class="col-lg-7 calendar" id="calendar" ></div>
-							<div class="col-lg-5 mt-4 mx-auto">
-								<table class="mx-auto my-auto">
-									<tr>
-										<th>시작일</th>
-										<td class="start_day"></td>
-									</tr>
-									<tr>
-										<th>예정 완료일</th>
-										<td class="end_day"></td>
-									</tr>
-									<tr>
-										<th>예약자 이름</th>
-										<td class="name"></td>
-									</tr>
-									<tr>
-										<th>연락처</th>
-										<td class="phone"></td>
-									</tr>
-									<tr>
-										<th>이메일</th>
-										<td class="email"></td>
-									</tr>
-								</table>
-							</div>
+						<div class="col-lg-7 mb- calendar" id="calendar" ></div>
+						<dl class="row col-lg-5 mx-auto my-auto">
+							<dt class="col-12">예약 정보</dt>
+							<dt class="col-5">예약번호</dt>
+							<dd class="col-7 num"></dd>
+							
+							<dt class="col-5">예약일</dt>
+							<dd class="col-7 res_day"></dd>
+							
+							<dt class="col-5">시작일</dt>
+							<dd class="col-7 start_day"></dd>
+							
+							<dt class="col-5">예정 완료일</dt>
+							<dd class="col-7 end_day"></dd>
+							
+							<dt class="col-5">결제 가격</dt>
+							<dd class="col-7 payment"></dd>
+							
+							<dt class="col-12">예약자 정보</dt>
+							<dt class="col-5">예약자 이름</dt>
+							<dd class="col-7 name"></dd>
+							
+							<dt class="col-5">연락처</dt>
+							<dd class="col-7 phone"></dd>
+							
+							<dt class="col-5">이메일</dt>
+							<dd class="col-7 email"></dd>
+							
+							<dt class="col-5">우편번호</dt>
+							<dd class="col-7 postCode"></dd>
+							
+							<dt class="col-5">주소</dt>
+							<dd class="col-7 addr"></dd>
+						</dl>
+						<input type="hidden" id="result" name="result">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+						<input type="button" class="btn btn-primary extend" >예약 연장하기</a>
 					</div>
 				</form>
 				</c:when>
