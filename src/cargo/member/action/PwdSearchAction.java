@@ -8,7 +8,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.member.DAO.MemberDAO;
 
-public class pwdSearchAction implements Action {
+public class PwdSearchAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
