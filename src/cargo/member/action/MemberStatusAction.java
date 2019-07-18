@@ -35,9 +35,9 @@ public class MemberStatusAction implements Action {
 			currentPage = "예약현황";
 		}
 		
-		forward.setPath("/mypage.jsp?content=memberList.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
+		forward.setPath("../member/mypage.jsp?content=memberStatus.jsp");
 		
 		return forward;
 	}

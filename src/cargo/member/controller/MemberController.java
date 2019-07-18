@@ -93,7 +93,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
 				action = new ModifyCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/memberStatus.me")) { // 마이페이지 리스트
+			} else if (command.equals("/memberStatus.me")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
