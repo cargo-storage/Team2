@@ -16,9 +16,12 @@ import cargo.member.action.EmailSearchAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
-import cargo.member.action.modifyMemberAction;
-import cargo.member.action.pwdCheckAction;
-import cargo.member.action.pwdSearchAction;
+import cargo.member.action.ModifyCheckAction;
+import cargo.member.action.ModifyMemberAction;
+import cargo.member.action.PwdCheckAction;
+import cargo.member.action.PwdSearchAction;
+import cargo.member.action.LeaveMemberAction;
+import cargo.member.action.MemberListAction;
 
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -79,18 +82,25 @@ public class MemberController extends HttpServlet {
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdSearch.me")) { // 비밀번호 찾기
-				action = new pwdSearchAction();
+				action = new PwdSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdCheck.me")) { // 기존 비밀번호 확인
-				action = new pwdCheckAction();
+				action = new PwdCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/mypage.me")) { //마이 페이지
-				action = new pwdSearchAction();
+			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
+				action = new ModifyCheckAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
-				action = new modifyMemberAction();
+				action = new ModifyMemberAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/memberList.me")) { // 마이페이지 리스트
+				action = new MemberListAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
+				action = new LeaveMemberAction();
 				forward = action.execute(request, response);
 			}
+			
 
 			// 모든 과정 후 페이지 이동부분
 			if (forward != null) {
