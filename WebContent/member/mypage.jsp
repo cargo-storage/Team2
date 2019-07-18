@@ -51,9 +51,6 @@
 			width: 100%;
 		}
 	</style>
-	<script type="text/javascript">
-		alert(${contextPath});
-	</script>
 	<!-- Page level plugin CSS-->
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
@@ -83,8 +80,8 @@
 				<ul>
 					<h2><i class="fas fa-user-cog"></i> 마이페이지</h2>
 					<li><a href="${contextPath }/member/mypage.jsp">내 정보</a></li>
-					<li><a href="${contextPath }/me/memberList.me?category=status">사용 내역</a></li>
-					<li><a href="${contextPath }/me/memberList.me?category=reservation">예약 현황</a></li>
+					<li><a href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a></li>
+					<li><a href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a></li>
 					<li><a href="${contextPath }/member/mypage.jsp?content=leave">회원 탈퇴</a></li>
 					
 				</ul>
