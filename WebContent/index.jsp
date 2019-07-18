@@ -667,7 +667,7 @@
                 					<img src="img/online-shop.png" width="200" class="rounded-circle d-block mx-auto"/>
 									<p class="market-go text-white">중고 장터 서비스</p>
 									<p class="text-white">미수령된 물건들은<br>중고장터에서 판매 가능합니다!</p>
-									<button type="button" class="btn btn-outline-success btn-lg text-white">바로가기 <i class="far fa-arrow-alt-circle-right"></i></button>
+									<a href="${contextPath }/mk/market.do" class="btn btn-outline-success btn-lg text-white">바로가기 <i class="far fa-arrow-alt-circle-right"></i></a>
                 				</div>	
                 			</div>
                 		</div>

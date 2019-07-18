@@ -40,6 +40,16 @@
 		<servlet-name>ReserveController</servlet-name>
 		<url-pattern>/re/*</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>MarketController</servlet-name>
+		<servlet-class>cargo.market.controller.MarketController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MarketController</servlet-name>
+		<url-pattern>/mk/*</url-pattern>
+	</servlet-mapping>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
