@@ -14,8 +14,7 @@ public class AdminModalAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String cate = request.getParameter("cate");
-		String email = request.getParameter("email");
-		String house = request.getParameter("house");
+		String primary = request.getParameter("primary");
 		
 		JSONObject jobj=null;
 		AdminDAO dao = new AdminDAO();
