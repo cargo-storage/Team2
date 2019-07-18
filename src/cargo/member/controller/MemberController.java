@@ -87,11 +87,11 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/pwdCheck.me")) { // 기존 비밀번호 확인
 				action = new PwdCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
-				action = new ModifyCheckAction();
-				forward = action.execute(request, response);
 			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
 				action = new ModifyMemberAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
+				action = new ModifyCheckAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/memberStatus.me")) { // 마이페이지 리스트
 				action = new MemberStatusAction();
