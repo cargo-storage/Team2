@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.admin.action.AdminAllInfoAction;
 import cargo.admin.action.AdminEachInfoAction;
+import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminOverdueAction;
@@ -31,7 +32,7 @@ public class AdminController extends HttpServlet {
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-
+		System.out.println("---------------------------------");
 		String contextPath=request.getContextPath();
 		
 		//가상요청 주소 가져오기
@@ -69,17 +70,19 @@ public class AdminController extends HttpServlet {
 			}else if("/modal_data".equals(command)){
 				action = new AdminModalAction();
 				forward = action.execute(request, response);
+			
+			//모달에서 예약 연장 버튼을 눌렀을 경우
 			}else if("/extend_reserv".equals(command)){
-				System.out.println(request.getParameter("result")); 
-				forward = new ActionForward();
-				forward.setRedirect(true);
-				forward.setPath("/admin/admin_index.jsp");
+				action = new AdminExtendReservAction();
+				forward = action.execute(request, response);
 			}
+			
 			
 			//모든 과정 후 페이지 이동부분
 			if(forward !=null){
 				if(forward.isAjax()){
 					//Ajax방식이였으면 이동시키지 말아야합니다.
+					System.out.println("ajax");
 				}else if(forward.isRedirect()){
 					//sendRedirect 방식으로 보내는 경우
 					System.out.println("sendRedirect");
@@ -91,6 +94,7 @@ public class AdminController extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 			}
+//			System.out.println("---------------------------------\n");
 			
 		} catch (Exception e) {
 			System.out.println("AdminController err: "+e.getMessage());

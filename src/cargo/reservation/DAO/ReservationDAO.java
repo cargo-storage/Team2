@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -235,4 +236,31 @@ public class ReservationDAO {
         
         return price;
      }
+	
+	public String disabledMultipleRangesCalendar(String end_day, String house){
+		String sql="select start_day"
+				+ " from reservation"
+				+ " where end_day > ? and house =?";
+		
+		String next_start_day = "null";
+		try {
+			getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, end_day);
+			pstmt.setString(2, house);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				next_start_day = "'"+rs.getString(1)+"'";
+			}
+			
+		} catch (Exception e) {
+			System.out.println("disabledMultipleRangesCalendar Error: "+e.getMessage());
+	        e.printStackTrace();
+		}finally{
+	           freeResource();
+	        }
+		
+		return next_start_day;
+	}
 }

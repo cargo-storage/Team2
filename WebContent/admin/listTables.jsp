@@ -73,7 +73,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.num}">
 									<td><c:out value="${adto.num}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -115,7 +115,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
 									<td><c:out value="${adto.house}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
@@ -157,7 +157,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -217,7 +217,7 @@
 						</button>
 					</div>
 					<div class="modal-body mx-auto container-fluid row">
-						<div class="col-lg-7 mb- calendar" id="calendar" ></div>
+						<div class="col-lg-7 mb-3 calendar" id="calendar" ></div>
 						<dl class="row col-lg-5 mx-auto my-auto">
 							<dt class="col-12">예약 정보</dt>
 							<dt class="col-5">예약번호</dt>
@@ -252,10 +252,11 @@
 							<dd class="col-7 addr"></dd>
 						</dl>
 						<input type="hidden" id="result" name="result">
+						<input type="hidden" id="path" name="path">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<input type="button" class="btn btn-primary extend" >예약 연장하기</a>
+						<input type="button" class="btn btn-primary extend" value="예약 연장하기">
 					</div>
 				</form>
 				</c:when>
