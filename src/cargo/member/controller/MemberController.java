@@ -21,7 +21,7 @@ import cargo.member.action.ModifyMemberAction;
 import cargo.member.action.PwdCheckAction;
 import cargo.member.action.PwdSearchAction;
 import cargo.member.action.LeaveMemberAction;
-import cargo.member.action.MemberListAction;
+import cargo.member.action.MemberStatusAction;
 
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -93,8 +93,8 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
 				action = new ModifyMemberAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/memberList.me")) { // 마이페이지 리스트
-				action = new MemberListAction();
+			} else if (command.equals("/memberStatus.me")) { // 마이페이지 리스트
+				action = new MemberStatusAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
 				action = new LeaveMemberAction();

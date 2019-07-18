@@ -12,7 +12,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.member.DAO.MemberDAO;
 
-public class MemberListAction implements Action {
+public class MemberStatusAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -23,7 +23,7 @@ public class MemberListAction implements Action {
 		MemberDTO mdto = (MemberDTO) session.getAttribute("mdto");
 		
 		MemberDAO mdao = new MemberDAO();
-		ArrayList<AdminDTO> list = mdao.memberList(mdto.getEmail(), category);
+		ArrayList<AdminDTO> list = mdao.memberStatus(mdto.getEmail(), category);
 		
 		ActionForward forward = new ActionForward();
 		

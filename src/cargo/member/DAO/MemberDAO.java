@@ -256,7 +256,7 @@ public class MemberDAO {
 		return state;
 	}
 
-	public ArrayList memberList(String email, String category) { // 보관/예약현황
+	public ArrayList memberStatus(String email, String category) { // 보관/예약현황
 		ArrayList<AdminDTO> list = new ArrayList<>();
 		String item =
 				"SELECT '보관' as state, m.name, m.phone, m.email,"
