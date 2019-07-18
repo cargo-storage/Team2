@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <c:choose>   
@@ -127,9 +128,11 @@
 			    		<td><input type="text" class="form-control" name="payment" value="${payment }" readOnly></td>
 			    	</tr>
 			    	<tr>
-			    		<td><p class="red font-weight-bold pt-2 m-0">예약 보증금<br><small class="text-muted">최종 금액의 10%</small></p></td>
-			    		<td><input type="text" class="form-control" name="res_payment" value="${payment*0.1 }" readOnly></td>
+			    		<fmt:parseNumber var="deposit" value="${payment*0.1 }" integerOnly="true"/>
+			    		<td><p class="red font-weight-bold pt-2 m-0">예약 보증금<br><small class="text-muted">최종 금액의 10%, 물건 반납시 돌려드립니다.</small></p></td>
+			    		<td><input type="text" class="form-control" name="res_payment" value="${deposit }" readOnly></td>
 			    	</tr>
+			    	
 			    	<tr>
 			    		<td colspan="2" class="confirm" >
 	   						<strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
