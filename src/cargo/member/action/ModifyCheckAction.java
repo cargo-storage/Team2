@@ -17,10 +17,7 @@ public class ModifyCheckAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession();
-		MemberDTO mdto = (MemberDTO) session.getAttribute("mdto");
-		
-		String email = mdto.getEmail();
+		String email = request.getParameter("email");
 		String checkPwd = request.getParameter("checkPwd");
 		
 		MemberDAO mdao = new MemberDAO();

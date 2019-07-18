@@ -250,6 +250,7 @@
 				      			<input type="submit" class="btn btn-primary btn-block btn-lg col-2" value="확인" style="height: calc(1.5em + .75rem + 2px); line-height: 0.6">
 		      				</div>
 		      			</div>
+		      			<input type="hidden" name="email" value="${sessionScope.mdto.email }">
 		      		</form>
 	      		</div>
 	      		</c:when>
