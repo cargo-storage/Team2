@@ -17,13 +17,11 @@ public class LeaveMemberAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 
-		HttpSession session = request.getSession();
-		MemberDTO mdto = (MemberDTO) session.getAttribute("mdto");
-		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("currentPwd");
 
 		MemberDAO mdao = new MemberDAO();
-
-		int state = mdao.deleteMember(mdto.getEmail(), pwd);
+		int state = mdao.deleteMember(email, pwd);
 		
 		ActionForward forward = null;
 		
@@ -41,9 +39,12 @@ public class LeaveMemberAction implements Action {
 			return null;
 		} else { // 성공했을 때
 			forward =  new ActionForward();
-			String path = request.getContextPath();
 			forward.setRedirect(true);
 			
+			HttpSession session = request.getSession(); //탈퇴했기 때문에 session값도 없앰
+			session.removeAttribute("mdto");
+			
+			String path = request.getContextPath();
 			forward.setPath(path+"/index.jsp");
 		}
 		return forward;

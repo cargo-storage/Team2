@@ -256,7 +256,7 @@ public class MemberDAO {
 		return state;
 	}
 
-	public ArrayList memberStatus(String email, String category) { // 보관/예약현황
+	public ArrayList memberStatus(String email, String category) { // 사용/예약 현황
 		ArrayList<AdminDTO> list = new ArrayList<>();
 		String item =
 				"SELECT '보관' as state, m.name, m.phone, m.email,"
@@ -327,42 +327,30 @@ public class MemberDAO {
 		return list;
 	}
 
-	public int deleteMember(String email, String pwd) {
+	public int deleteMember(String email, String pwd) { //회원 탈퇴
 		int state = 0; // 0: 실패, 1: 성공
-		
-		String item =
-				"SELECT '보관' as state, m.name, m.phone, m.email,"
-				+ " -1 as num, i.item, i.house,"
-				+ " null as res_day, i.start_day, i.end_day, null as return_day,"
-				+ " i.payment, i.item_price"
-				+ " FROM items as i"
-				+ " LEFT JOIN member as m"
-				+ " ON i.email = m.email"
-				+ " WHERE m.email=?";
-		
-		String resev = 
-				"SELECT '예약' as state, m.name, m.phone, m.email,"
-				+ " r.num, '-' as item, r.house,"
-				+ " r.res_day, r.start_day, r.end_day, null as return_day,"
-				+ " r.payment, -1 as item_price"
-				+ " FROM reservation as r"
-				+ " LEFT JOIN member as m"
-				+ " ON r.email = m.email"
-				+ " WHERE m.email=?";
 		
 		try {
 			con = connect();
-			query = "("+item+") UNION all ("+resev+") ";
+			query = "(SELECT email FROM items WHERE email=?) UNION ALL (SELECT email FROM reservation WHERE email=?)";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, email);
+			pstmt.setString(2, email);
 			
-			if(rs.next())
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
 				return 0; // 보관이나 예약 존재하기 때문에 탈퇴 안됨
-			query = "DELETE FROM member WHERE email=?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, email);
-			
-			state = pstmt.executeUpdate();
+			}
+			else{
+				con = connect();
+				query = "DELETE FROM member WHERE email=? and pwd=?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, email);
+				pstmt.setString(2, pwd);
+				
+				state = pstmt.executeUpdate();
+			}
 			
 		}catch (Exception e) {
 			System.out.println("deleteMember()에서 오류: " + e);
