@@ -32,11 +32,11 @@ public class JoinAction implements Action {
 				admin, new Timestamp(System.currentTimeMillis()));
 
 		MemberDAO mdao = new MemberDAO();
-		int result = mdao.insertMember(mdto);
+		int state = mdao.insertMember(mdto);
 
 		ActionForward forward = null;
 
-		if (result == 0) { // 실패했을 때
+		if (state == 0) { // 실패했을 때
 			PrintWriter out = response.getWriter();
 			
 			out.println("<script>");
