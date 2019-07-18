@@ -121,6 +121,10 @@
         
         <script type="text/javascript"> //login.js
 			$(function(){
+				
+				if(${param.login!=null}){
+					$("#loginModal").modal('toggle');
+				}
 		
 				/* 이메일 저장 */
 				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.

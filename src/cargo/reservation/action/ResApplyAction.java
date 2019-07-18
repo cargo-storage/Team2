@@ -13,7 +13,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class reserveProAction implements Action{
+public class ResApplyAction implements Action{
 	
 public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -62,19 +62,14 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 		String end_day = formatter.format(rdto.getEnd_day());
 		edayList.add(end_day);
 	}
-	
-	
-	
 
     request.setAttribute("res_day", today);
-    
 	
     request.setAttribute("sList", sdayList);
     request.setAttribute("eList", edayList);
-    
 	
 	
-	forward.setPath("../reservation/reservePro.jsp");
+	forward.setPath("../reservation/reservation_apply.jsp");
 	return forward;
 	}
 
