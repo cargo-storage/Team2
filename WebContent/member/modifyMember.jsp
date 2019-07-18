@@ -26,13 +26,10 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 	<style  type="text/css">
-		body {
-			background-color: #f5f6f7;
-		}
-		
+				
 		.pwdCheck{
 			position: absolute;
-		    top: 180px;
+		    top: 237px;
 		    right: 15px;
 		    height: calc(1.5em + .75rem + 2px);
 		    padding: .375rem .75rem;
@@ -91,21 +88,21 @@
 			$("#check").hide();
 			
 			//기존 비밀번호 체크
-			$("#pastPwd").blur(function(){
-				var pastPwd = $(this).val();
-				if(pastPwd ==''){
-					$("#pastPwd").text("필수 입력 사항입니다.");
+			$("#currentPwd").blur(function(){
+				var currentPwd = $(this).val();
+				if(currentPwd ==''){
+					$("#currentPwd").text("필수 입력 사항입니다.");
 				}else{
 					$.ajax({
 						type: "post",
 						async: false,
 						url: "${contextPath}/me/pwdCheck.me",
-						data: {pastPwd : pastPwd},
+						data: {currentPwd : currentPwd},
 						success: function(data){
 							if(data == 0){
-								$("#pastPwdErr").text("비밀번호가 틀립니다.");
+								$("#currentPwdErr").text("비밀번호가 틀립니다.");
 							}else{
-								$("#pastPwdErr").text('');
+								$("#currentPwdErr").text('');
 							}
 						},
 						error: function(){
@@ -116,17 +113,17 @@
 			});
 			
 			//비밀번호 체크
-			$("#pwd").blur(function(){
-				var pwd = $(this).val();
-				if(pwd ==''){
-					$("#pwdErr").text("필수 입력 사항입니다.");
+			$("#newPwd").blur(function(){
+				var newPwd = $(this).val();
+				if(newPwd ==''){
+					$("#newPwdErr").text("필수 입력 사항입니다.");
 				}else{
 					var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}/;
-					if(!reg.test(pwd)){
-						$("#pwdErr").text("비밀번호 형식이 맞지 않습니다.");
+					if(!reg.test(newPwd)){
+						$("#newPwdErr").text("비밀번호 형식이 맞지 않습니다.");
 					}else{		
-						$("#pwdErr").text('');
-						if($("#pwd2").val() != pwd){
+						$("#newPwdErr").text('');
+						if($("#pwd2").val() != newPwd){
 							$("#pwd2Err").text("비밀번호 확인이 맞지 않습니다.");
 						}else{$("#pwd2Err").text('');}
 					}
@@ -139,9 +136,9 @@
 				if(pwd2 ==''){
 					$("#pwd2Err").text("필수 입력 사항입니다.");
 				}else{
-					if($("#pwd").val() != pwd2){
+					if($("#newPwd").val() != pwd2){
 						$("#pwd2Err").text("비밀번호 확인이 맞지 않습니다.");
-					}else{  $("#pwd2Err").text(''); }
+					}else{$("#pwd2Err").text(''); }
 				}
 			});
 			
@@ -173,11 +170,11 @@
 		});
 		
 		function pwdCheck() {
-			var pastPwd = $("#pastPwd").val();
-			if(pastPwd==''){
+			var currentPwd = $("#currentPwd").val();
+			if(currentPwd==''){
 				alert("기존 비밀번호를 입력해주세요.");
 			}
-			else if($("#pastPwdErr").text() !=''){
+			else if($("#currentPwdErr").text() !=''){
 				alert("기존 비밀번호가 다릅니다.");
 			}else{
 				$("#check").show();
@@ -186,19 +183,19 @@
 			
 		function modify(){
 			var result = 1;
-			var pastPwd = $("#pastPwd");
-			var pwd = $("#pwd");
+			var currentPwd = $("#currentPwd");
+			var newPwd = $("#newPwd");
 			var name = $("#name");
 			var phone = $("#phone");
 			var postCode = $("#postCode");
 			var detailAddr = $("#detailAddr");
 			
-			if(pastPwd.val()==''){
-				$("#pastPwdErr").text("필수 입력 사항입니다.");
+			if(currentPwd.val()==''){
+				$("#currentPwdErr").text("필수 입력 사항입니다.");
 				result = 0;
 			}
-			if(pwd.val()=='') {
-				$("#pwd").val(pastPwd.val());
+			if(newPwd.val()=='') {
+				$("#newPwd").val(currentPwd.val());
 			} 
 			if(detailAddr.val()==''){
 				$("#addrErr").text("필수 입력 사항입니다.");
@@ -213,7 +210,7 @@
 				return false;
 			}
 			
-			if($("#pastPwdErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
+			if($("#currentPwdErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
 					||$("#nameErr").text()!=''||$("#phoneErr").text()!=''
 					||$("#addrErr").text()!=''||$("#emailErr").text()!=''){
 				alert("오류 사항을 확인 후 다시 입력해주세요.");
@@ -224,74 +221,99 @@
 	</script>
 </head>
 <body>
-	<c:choose>   
+	<%-- <c:choose>   
 		<c:when test="${sessionScope.mdto.email==null }">
 			<script type="text/javascript">
 				alert("로그인 후 이용 가능합니다.");
 				history.back();
 			</script>
 		</c:when>
-	</c:choose>
-	<div class="container-fluid">
-		<div class="col-sm-9 col-lg-6 m-auto">
-			<h1 class="text-center">회원 정보 수정</h1>
-			<form action="${contextPath }/me/modifyMember.me" method="post" onsubmit="return modify()">
-				<div class="form-group">
-					<label for="email">이메일</label>
-					<input type="email" class="form-control" id="email" name="email" value="${sessionScope.mdto.email }" readonly>
-					<span id="emailErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="pastPwd">기존 비밀번호</label> 
-					<input type="password" class="form-control" id="pastPwd" placeholder="비밀번호를 입력해 주세요">
-					<input type="button" class="pwdCheck" value="비밀번호 변경" onclick="pwdCheck()">
-					<span id="pastPwdErr" class="help-block"></span>
-				</div>
-				<div id="check">
-					<div class="form-group">
-						<label for="pwd">새로운 비밀번호</label>
-						<input type="password" class="form-control" id="pwd" name="pwd" placeholder="새로운 비밀번호를 입력해주세요">
-						<span id="pwdErr" class="help-block"></span>
-					</div>
-					<div class="form-group">
-						<label for="pwd2">비밀번호 확인</label>
-						<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
-						<span id="pwd2Err" class="help-block"></span>
-					</div>
-				</div>	
-				<div class="form-group">
-					<label for="name">성명</label>
-					<input type="text" class="form-control" id="name" name="name" value="${sessionScope.mdto.name }">
-					<span id="nameErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
-					<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.mdto.phone }">
-					<span id="phoneErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="detailAddr">집 주소</label>
-					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="postCode" name="postCode" class="post" value="${sessionScope.mdto.postCode }" readonly>
-						<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
-					</div>
-					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="roadAddr" name="roadAddr" class="post post1" value="${sessionScope.mdto.roadAddr }" readonly>
-					</div>
-					<span id="guide" style="color:#999;display:none"></span>
-					<input type="text" id="detailAddr" name="detailAddr" class="post post1" value="${sessionScope.mdto.detailAddr }">
-					<span id="addrErr" class="help-block clear"></span>	
-				</div>
-				<br>
-				<br>
-				<input type="hidden" name="admin" value="${sessionScope.mdto.admin }">
-				<input type="hidden" name="reg_date" value="${sessionScope.mdto.reg_date }">
-				<div class="form-group text-center">
-					<button class="btn btn_submit">
-						회원 정보 수정 <i class="fa fa-check spaceLeft"></i>
-					</button>&nbsp;&nbsp;
-				</div>
-			</form>
+	</c:choose> --%>
+	<div class="container">
+		<div class="row p-5 background raised-box rounded">
+			<div class="col-sm-9 col-lg-6 m-auto">
+			<div class="col-md-7 col-sm-9 mx-auto text-center mb-5">
+				<span class="text-muted text-uppercase">MODIFY MEMBER</span>
+				<h2 class="display-4">회원 정보 수정</h2>
+				<c:if test="${empty requestScope.modifyCheck}">
+					<p class="lead">안전한 수정을 위해<br>비밀번호를 입력하세요!</p>
+				</c:if>
+	      	</div>
+	      	<c:choose>
+	      		<c:when test="${requestScope.modifyCheck ne	1}">
+	      		<div class="m-auto">
+		      		<form action="${contextPath }/me/modifyCheck.me" method="post">
+		      			<div class="form-group ml-6">
+			      			<label for="checkPwd">비밀번호</label>
+			      			<div class="row">
+				      			<input type="password" class="form-control col-8 mr-3" id="checkPwd" name="checkPwd" placeholder="비밀번호를 입력해 주세요">
+				      			<input type="submit" class="btn btn-primary btn-block btn-lg col-2" value="확인" style="height: calc(1.5em + .75rem + 2px); line-height: 0.6">
+		      				</div>
+		      			</div>
+		      		</form>
+	      		</div>
+	      		</c:when>
+	      		<c:otherwise>
+		      		<form action="${contextPath }/me/modifyMember.me?page=next" method="post" onsubmit="return modify()">
+						<div class="form-group">
+							<label for="email">이메일</label>
+							<input type="email" class="form-control" id="email" name="email" value="${sessionScope.mdto.email }" readonly>
+							<span id="emailErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="currentPwd">기존 비밀번호</label> 
+							<input type="password" class="form-control" id="currentPwd" placeholder="비밀번호를 입력해 주세요">
+							<input type="button" class="pwdCheck" value="비밀번호 변경" onclick="pwdCheck()">
+							<span id="currentPwdErr" class="help-block"></span>
+						</div>
+						<div id="check">
+							<div class="form-group">
+								<label for="newPwd">새로운 비밀번호</label>
+								<input type="password" class="form-control" id="newPwd" name="pwd" placeholder="새로운 비밀번호를 입력해주세요">
+								<span id="newPwdErr" class="help-block"></span>
+							</div>
+							<div class="form-group">
+								<label for="pwd2">비밀번호 확인</label>
+								<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
+								<span id="pwd2Err" class="help-block"></span>
+							</div>
+						</div>	
+						<div class="form-group">
+							<label for="name">성명</label>
+							<input type="text" class="form-control" id="name" name="name" value="${sessionScope.mdto.name }">
+							<span id="nameErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
+							<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.mdto.phone }">
+							<span id="phoneErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="detailAddr">집 주소</label>
+							<div style="width:100%; margin-bottom: 5px;">
+								<input type="text" id="postCode" name="postCode" class="post" value="${sessionScope.mdto.postCode }" readonly>
+								<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
+							</div>
+							<div style="width:100%; margin-bottom: 5px;">
+								<input type="text" id="roadAddr" name="roadAddr" class="post post1" value="${sessionScope.mdto.roadAddr }" readonly>
+							</div>
+							<span id="guide" style="color:#999;display:none"></span>
+							<input type="text" id="detailAddr" name="detailAddr" class="post post1" value="${sessionScope.mdto.detailAddr }">
+							<span id="addrErr" class="help-block clear"></span>	
+						</div>
+						<br>
+						<br>
+						<input type="hidden" name="admin" value="${sessionScope.mdto.admin }">
+						<input type="hidden" name="reg_date" value="${sessionScope.mdto.reg_date }">
+						<div class="form-group text-center">
+							<button class="btn btn_submit">
+								회원 정보 수정 <i class="fa fa-check spaceLeft"></i>
+							</button>&nbsp;&nbsp;
+						</div>
+					</form>
+	      		</c:otherwise>
+	      	</c:choose>
+			</div>
 		</div>
 	</div>
 <script>
