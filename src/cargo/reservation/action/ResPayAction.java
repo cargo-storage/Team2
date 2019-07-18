@@ -1,6 +1,6 @@
 package cargo.reservation.action;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class reserveAction implements Action {
+public class ResPayAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -21,9 +21,9 @@ public class reserveAction implements Action {
 		
 		String email = request.getParameter("email");
 		String house = request.getParameter("house");
-		Timestamp start_day = Timestamp.valueOf(request.getParameter("start_day")+" 00:00:00");
-		Timestamp end_day = Timestamp.valueOf(request.getParameter("end_day")+" 00:00:00");
-		Timestamp res_day = Timestamp.valueOf(request.getParameter("res_day")+" 00:00:00");
+		Date start_day = Date.valueOf(request.getParameter("start_day"));
+		Date end_day = Date.valueOf(request.getParameter("end_day"));
+		Date res_day = Date.valueOf(request.getParameter("res_day"));
 		int payment = Integer.parseInt(request.getParameter("payment"));
 		
 		rsdto.setEmail(email); 
@@ -39,7 +39,7 @@ public class reserveAction implements Action {
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setAjax(false);
-		forward.setPath("../reservation/reservePayConfirm.jsp");
+		forward.setPath("../reservation/reservation_payconfirm.jsp");
 		
 		return forward;
 	}

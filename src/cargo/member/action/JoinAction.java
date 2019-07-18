@@ -17,7 +17,8 @@ public class JoinAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("utf-8");
-
+		response.setContentType("text/html; charset=utf-8");
+		
 		String email = request.getParameter("email");
 		
 		int admin;
@@ -33,10 +34,9 @@ public class JoinAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insertMember(mdto);
 
-		ActionForward forward = new ActionForward();
+		ActionForward forward = null;
 
 		if (result == 0) { // 실패했을 때
-			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			
 			out.println("<script>");
@@ -49,6 +49,7 @@ public class JoinAction implements Action {
 			
 			return null;
 		} else { // 성공했을 때
+			forward =  new ActionForward();
 			String path = request.getContextPath();
 			forward.setRedirect(true);
 			

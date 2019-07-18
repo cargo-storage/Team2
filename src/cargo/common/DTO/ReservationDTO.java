@@ -1,14 +1,14 @@
 package cargo.common.DTO;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ReservationDTO {
 	private String email,house;
 	private int num,payment;
-	private Timestamp start_day,end_day,res_day;
+	private Date start_day,end_day,res_day;
 	public ReservationDTO(){}
-	public ReservationDTO(String email, String house, int num, int payment, Timestamp start_day, Timestamp end_day,
-			Timestamp res_day) {
+	public ReservationDTO(String email, String house, int num, int payment, Date start_day, Date end_day,
+			Date res_day) {
 		this.email = email;
 		this.house = house;
 		this.num = num;
@@ -41,22 +41,22 @@ public class ReservationDTO {
 	public void setPayment(int payment) {
 		this.payment = payment;
 	}
-	public Timestamp getStart_day() {
+	public Date getStart_day() {
 		return start_day;
 	}
-	public void setStart_day(Timestamp start_day) {
+	public void setStart_day(Date start_day) {
 		this.start_day = start_day;
 	}
-	public Timestamp getEnd_day() {
+	public Date getEnd_day() {
 		return end_day;
 	}
-	public void setEnd_day(Timestamp end_day) {
+	public void setEnd_day(Date end_day) {
 		this.end_day = end_day;
 	}
-	public Timestamp getRes_day() {
+	public Date getRes_day() {
 		return res_day;
 	}
-	public void setRes_day(Timestamp res_day) {
+	public void setRes_day(Date res_day) {
 		this.res_day = res_day;
 	}
 }

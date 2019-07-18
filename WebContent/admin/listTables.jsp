@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%request.setCharacterEncoding("utf-8");%>
@@ -18,9 +17,11 @@
 <!-- Page level plugin CSS-->
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
+
 </head>
 <body id="page-top">
 	
@@ -72,7 +73,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.num}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -114,7 +115,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.house}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
@@ -156,7 +157,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -203,11 +204,54 @@
 	</a>
 
 	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+			<c:choose>
+				<c:when test="${currntPage eq '예약 내역 관리'}">
+				<form action="" method="post" >
+					<div class="modal-header">
+						<h5 class="modal-title" id="detailModalLabel">예약 상세 내역</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table>
+							<tr>
+								<td rowspan="5"><div class="clickX" id="calendar" ></div></td>
+								<th>시작일</th>
+								<td class="start_day"></td>
+							</tr>
+							<tr>
+								<th>예정 완료일</th>
+								<td class="end_day"></td>
+							</tr>
+							<tr>
+								<th>예약자 이름</th>
+								<td class="name"></td>
+							</tr>
+							<tr>
+								<th>연락처</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td class="email"></td>
+							</tr>
+						</table>
+						<input type="text">
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
+				</form>
+				</c:when>
+				
+				<c:when test="${currntPage eq '창고 현황 관리'}">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="detailModalLabel">창고 상세 내역</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
@@ -217,6 +261,22 @@
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
+				</c:when>
+				
+				<c:when test="${currntPage eq '종료된 보관 기록 열람'}">
+				<div class="modal-header">
+					<h5 class="modal-title" id="detailModalLabel">완료 상세 내역</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+				</c:when>
+			</c:choose>
 			</div>
 		</div>
 	</div>
@@ -231,7 +291,9 @@
 	<!-- Page level plugin JavaScript-->
 	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
+	
 	<!-- Custom scripts for all pages-->
 	<script src="${contextPath}/js/sb-admin.js"></script>
 

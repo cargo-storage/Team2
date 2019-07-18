@@ -1,15 +1,16 @@
 package cargo.admin.DTO;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+
 
 public class AdminDTO {
 	private String state, item, email, house, name, phone, roadAddr, detailAddr;
 	private int num, payment, item_price, postCode;
-	private Timestamp start_day, end_day, res_day, return_day;
+	private Date start_day, end_day, res_day, return_day;
 	public AdminDTO(){}
 	public AdminDTO(String state, String item, String email, String house, String name, String phone, String roadAddr,
-			String detailAddr, int num, int payment, int item_price, int postCode, Timestamp start_day,
-			Timestamp end_day, Timestamp res_day, Timestamp return_day) {
+			String detailAddr, int num, int payment, int item_price, int postCode, Date start_day,
+			Date end_day, Date res_day, Date return_day) {
 		this.state = state;
 		this.item = item;
 		this.email = email;
@@ -99,28 +100,28 @@ public class AdminDTO {
 	public void setPostCode(int postCode) {
 		this.postCode = postCode;
 	}
-	public Timestamp getStart_day() {
+	public Date getStart_day() {
 		return start_day;
 	}
-	public void setStart_day(Timestamp start_day) {
+	public void setStart_day(Date start_day) {
 		this.start_day = start_day;
 	}
-	public Timestamp getEnd_day() {
+	public Date getEnd_day() {
 		return end_day;
 	}
-	public void setEnd_day(Timestamp end_day) {
+	public void setEnd_day(Date end_day) {
 		this.end_day = end_day;
 	}
-	public Timestamp getRes_day() {
+	public Date getRes_day() {
 		return res_day;
 	}
-	public void setRes_day(Timestamp res_day) {
+	public void setRes_day(Date res_day) {
 		this.res_day = res_day;
 	}
-	public Timestamp getReturn_day() {
+	public Date getReturn_day() {
 		return return_day;
 	}
-	public void setReturn_day(Timestamp return_day) {
+	public void setReturn_day(Date return_day) {
 		this.return_day = return_day;
 	}
 }

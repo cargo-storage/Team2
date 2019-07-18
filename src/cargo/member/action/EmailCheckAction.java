@@ -13,6 +13,7 @@ public class EmailCheckAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
 		
 		String email = request.getParameter("email");
 		
@@ -21,8 +22,6 @@ public class EmailCheckAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setAjax(true); //ajax 방식이기 때문에 무조건 true
-		
-		response.setContentType("text/html; charset=utf-8");
 		
 		if(mdto.getEmail() != null){
 			response.getWriter().println(1); //이메일 존재함

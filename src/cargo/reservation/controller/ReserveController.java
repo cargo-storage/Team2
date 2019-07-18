@@ -12,10 +12,10 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
-import cargo.reservation.action.reserveAction;
-import cargo.reservation.action.reserveCheckAction;
-import cargo.reservation.action.reserveProAction;
-import cargo.reservation.action.simplepaymentAction;
+import cargo.reservation.action.ResPayAction;
+import cargo.reservation.action.ResCheckAction;
+import cargo.reservation.action.ResApplyAction;
+import cargo.reservation.action.SimplepaymentAction;
 
 public class ReserveController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -45,31 +45,27 @@ public class ReserveController extends HttpServlet{
 		
 		try {
 			
-			if(command.equals("/goIndex.me")){ // 로그인 필요!
-				forward = new ActionForward();
-				forward.setPath("../index.jsp");
-				forward.setRedirect(true);
-			}else if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
+			if(command.substring(0,8).equals("/info.me")){ // 예약페이지 메인 - 창고현황
 				action = new ResInfoAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/moreInfo.me")){ // 공간별 상세정보
 				action = new ResInfoMoreAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/reservePro.me")){
-	            action = new reserveProAction();
+	            action = new ResApplyAction();
 	            forward = action.execute(request, response);
 	        }else if(command.equals("/reserveCheck.me")){
-				action = new reserveCheckAction();
+				action = new ResCheckAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/doResPay.me")){
 				forward = new ActionForward();
-				forward.setPath("../reservation/reservePayPro.jsp");
+				forward.setPath("../reservation/reservation_dopay.jsp");
 				forward.setRedirect(false);
 			}else if(command.equals("/reserveConfirm.me")){
-				action = new reserveAction();
+				action = new ResPayAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/simplepayment.me")) {
-				action = new simplepaymentAction();
+				action = new SimplepaymentAction();
 				forward = action.execute(request, response);
 			}
 			

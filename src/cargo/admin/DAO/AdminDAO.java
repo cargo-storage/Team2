@@ -1,9 +1,12 @@
 package cargo.admin.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -43,41 +46,42 @@ public class AdminDAO {
 		}
 	}//end of freeResource
 	
-	public ArrayList<AdminDTO> getInfo(String category){
+	public ArrayList<AdminDTO> getTables(String category){
 		sql="";
 		ArrayList<AdminDTO> list = new ArrayList<>();
 		
 		/*String인데 값 없는경우 '-'
 		 *int인데 값없는 경우 -1
-		 *Timestamp인데 값 없는경우 null
+		 *Date인데 값 없는경우 null
 		 *로 DB에서 가져옵니다.
-		 *null 피하기 위해.. Timestamp경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
+		 *null 피하기 위해.. Date경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
 		String resev = 
-				"select '예약' as state, '-' as item, r.num, r.email, r.house,"
-				+ " r.start_day,  r.end_day, r.res_day, r.payment, -1 as item_price, null as return_day,"
-				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
+				"select '예약' as state, m.name, m.phone, m.email,"
+				+ " r.num, '-' as item, r.house,"
+				+ " r.res_day, r.start_day, r.end_day, null as return_day,"
+				+ " r.payment, -1 as item_price"
 				+ " from reservation as r"
 				+ " left join member as m"
 				+ " on r.email = m.email";
-		
+	
 		String itm =
-				"select '보관' as state, i.item, -1 as num, i.email, i.house,"
-				+ " i.start_day, i.end_day, null as res_day, i.payment, i.item_price, null as return_day,"
-				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
+				"select '보관' as state, m.name, m.phone, m.email,"
+				+ " -1 as num, i.item, i.house,"
+				+ " null as res_day, i.start_day, i.end_day, null as return_day,"
+				+ " i.payment, i.item_price"
 				+ " from items as i"
 				+ " left join member as m"
 				+ " on i.email = m.email";
-		
+
 		/*예전 기록의 경우 회원이 탈퇴했을때 없어진 정보는 null대신 "탈퇴한 회원"으로 채움
 		 * ifnull은 oracle NVL함수와 같은 기능으로 ifnull(v1,v2) v1이 null이면 v2로 대체
 		 * String이  null 이면 '탈퇴한 회원'
 		 * int null 이면 -1*/
 		String cld=
-				"select '완료' as state, c.item, null as num, c.email, c.house,"
-				+ " c.start_day, c.end_day, null as res_day, c.payment, c.item_price, c.return_day,"
-				+ " ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
-				+ " ifnull(m.postCode, -1) as postCode, ifnull(m.roadAddr, '탈퇴한 회원') as roadAddr,"
-				+ " ifnull(m.detailAddr, '탈퇴한 회원') as detailAddr"
+				"select '완료' as state, ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
+				+ " c.email, -1 as num, c.item, c.house,"
+				+ " null as res_day, c.start_day, c.end_day, c.return_day,"
+				+ " c.payment, c.item_price"
 				+ " from closed as c"
 				+ " left join member as m"
 				+ " on c.email = m.email";
@@ -98,43 +102,41 @@ public class AdminDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				AdminDTO dto = new AdminDTO();
+				AdminDTO dto = new AdminDTO();	
+				//상태 이름 휴대전화 이메일  +예약번호 물품ID 창고번호  +예약일 시작일 종료일 +가져간 날  이용금액 +물품 가격
 				
 				dto.setState(rs.getString("state"));
 				dto.setName(rs.getString("name"));
 				dto.setPhone(rs.getString("phone"));
 				dto.setEmail(rs.getString("email"));
-				dto.setRoadAddr(rs.getString("roadAddr"));
-				dto.setDetailAddr(rs.getString("detailAddr"));
-				dto.setHouse(rs.getString("house"));
-				dto.setItem(rs.getString("item"));
 				
 				dto.setNum(rs.getInt("num"));
-				dto.setPostCode(rs.getInt("postCode"));
+				dto.setItem(rs.getString("item"));
+				dto.setHouse(rs.getString("house"));
+				
+				dto.setRes_day(rs.getDate("res_day"));
+				dto.setStart_day(rs.getDate("start_day"));
+				dto.setEnd_day(rs.getDate("end_day"));
+				dto.setReturn_day(rs.getDate("return_day"));
+				
 				dto.setPayment(rs.getInt("payment"));
 				dto.setItem_price(rs.getInt("item_price"));
-				
-				dto.setRes_day(rs.getTimestamp("res_day"));
-				dto.setStart_day(rs.getTimestamp("start_day"));
-				dto.setEnd_day(rs.getTimestamp("end_day"));
-				dto.setReturn_day(rs.getTimestamp("return_day"));
-				
 				list.add(dto);
 			}
 		} catch (Exception e) {
-			System.out.println("getInfo err:"+e.getMessage());
+			System.out.println("getTables err:"+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 		return list;
-	}//end of getInfo(String category)
+	}//end of getTables(String category)
 	
-	public ArrayList<AdminDTO> getInfo(){
-		return getInfo("all");
-	}//다 받아오는거는 getInfo()만 호출하면 되도록... 인자 안넣도록..... 왜냐.. 귀찮으니까.... 
-
-	public ArrayList<MemberDTO> getMemberInfo() {
+	public ArrayList<AdminDTO> getTables(){
+		return getTables("all");
+	}//다 받아오는거는 getTables()만 호출하면 되도록... 인자 안넣도록..... 왜냐.. 귀찮으니까.... 
+	
+	public ArrayList<MemberDTO> getMembersTable() {
 		ArrayList<MemberDTO> list = new ArrayList<>();
 		sql="select * from member";
 		
@@ -158,16 +160,16 @@ public class AdminDAO {
 				list.add(mdto);
 			}
 		} catch (Exception e) {
-			System.out.println("getMemberInfo err:"+e.getMessage());
+			System.out.println("getMembersTable err:"+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 		
 		return list;
-	}//end of getMemberInfo
-
-	public ArrayList<OverdueDTO> getOverdueInfo() {
+	}//end of getMembersTable
+	
+	public ArrayList<OverdueDTO> getOverdueTable() {
 		ArrayList<OverdueDTO> list = new ArrayList<>();
 		sql=
 				"select datediff(curdate(),end_day) as overdue, datediff(curdate(),end_day)*w.price as arrears,"
@@ -201,9 +203,9 @@ public class AdminDAO {
 				odto.setPostCode(rs.getInt("postCode"));
 				odto.setDetailAddr(rs.getString("detailAddr"));
 				odto.setRoadAddr(rs.getString("roadAddr"));
-
-				odto.setStart_day(rs.getTimestamp("start_day"));
-				odto.setEnd_day(rs.getTimestamp("end_day"));
+				
+				odto.setStart_day(rs.getDate("start_day"));
+				odto.setEnd_day(rs.getDate("end_day"));
 				odto.setPayment(rs.getInt("payment"));
 				odto.setItem_price(rs.getInt("item_price"));
 				odto.setItem(rs.getString("item"));
@@ -211,11 +213,181 @@ public class AdminDAO {
 				list.add(odto);
 			}
 		} catch (Exception e) {
-			System.out.println("getOverdueInfo err:"+e.getMessage());
+			System.out.println("getOverdueTable err:"+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 		return list;
+	}//end of getOverdueTable
+	
+	public HashMap<String, Object> getInfo(String category, String email, String house){
+		HashMap<String, Object> map = new HashMap<>();
+		sql="";
+		
+		/*String인데 값 없는경우 '-'
+		 *int인데 값없는 경우 -1
+		 *Date인데 값 없는경우 null
+		 *로 DB에서 가져옵니다.
+		 *null 피하기 위해.. Date경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
+		String resev = 
+				"select '-' as item, r.num, r.email, r.house,"
+				+ " r.start_day,  r.end_day, r.res_day, r.payment, -1 as item_price, null as return_day,"
+				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
+				+ " from reservation as r"
+				+ " left join member as m"
+				+ " on r.email = m.email"
+				+ " where r.email = ? and r.house =?";
+		
+		String itm =
+				"select i.item, -1 as num, i.email, i.house,"
+				+ " i.start_day, i.end_day, null as res_day, i.payment, i.item_price, null as return_day,"
+				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
+				+ " from items as i"
+				+ " left join member as m"
+				+ " on i.email = m.email"
+				+ " where i.email = ? and i.house =?";
+		
+		/*예전 기록의 경우 회원이 탈퇴했을때 없어진 정보는 null대신 "탈퇴한 회원"으로 채움
+		 * ifnull은 oracle NVL함수와 같은 기능으로 ifnull(v1,v2) v1이 null이면 v2로 대체
+		 * String이  null 이면 '탈퇴한 회원'
+		 * int null 이면 -1*/
+		String cld=
+				"select c.item, null as num, c.email, c.house,"
+				+ " c.start_day, c.end_day, null as res_day, c.payment, c.item_price, c.return_day,"
+				+ " ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
+				+ " ifnull(m.postCode, -1) as postCode, ifnull(m.roadAddr, '탈퇴한 회원') as roadAddr,"
+				+ " ifnull(m.detailAddr, '탈퇴한 회원') as detailAddr"
+				+ " from closed as c"
+				+ " left join member as m"
+				+ " on c.email = m.email"
+				+ " where c.email=? and c.house =?";
+		
+		
+		if("reservation".equals(category)){
+			sql = resev;
+		}else if("items".equals(category)){
+			sql = itm;
+		}else if("closed".equals(category)){
+			sql = cld;
+		}
+		
+		try {
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, house);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				map.put("name",rs.getString("name"));
+				map.put("phone",rs.getString("phone"));
+				map.put("email",rs.getString("email"));
+				map.put("roadAddr",rs.getString("roadAddr"));
+				map.put("detailAddr",rs.getString("detailAddr"));
+				map.put("house",rs.getString("house"));
+				map.put("item",rs.getString("item"));
+				
+				map.put("num",rs.getInt("num"));
+				map.put("postCode",rs.getInt("postCode"));
+				map.put("payment",rs.getInt("payment"));
+				map.put("item_price",rs.getInt("item_price"));
+				
+				if(rs.getDate("res_day")!=null) map.put("res_day",rs.getDate("res_day").toString());
+				map.put("start_day",rs.getDate("start_day").toString());
+				map.put("end_day",rs.getDate("end_day").toString());
+				if(rs.getDate("return_day")!=null) map.put("return_day",rs.getDate("return_day").toString());
+				
+			}
+		} catch (Exception e) {
+			System.out.println("getInfo err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return map;
+	}//end of getInfo(String category, String email, String house)
+	
+
+	public HashMap<String, Object> getMemberInfo(String email) {
+		sql="select * from member where email=?";
+		HashMap<String, Object> map = new HashMap<>();
+		
+		try {
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				map.put("admin",rs.getInt("admin"));
+				map.put("name",rs.getString("name"));
+				map.put("email",rs.getString("email"));
+				map.put("phone",rs.getString("phone"));
+				map.put("pwd",rs.getString("pwd"));
+				map.put("postCode",rs.getInt("postCode"));
+				map.put("detailAddr",rs.getString("detailAddr"));
+				map.put("roadAddr",rs.getString("roadAddr"));
+				map.put("reg_date",rs.getDate("reg_date").toString());				
+			}
+		} catch (Exception e) {
+			System.out.println("getMemberInfo err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return map;
+	}//end of getMemberInfo
+
+	public HashMap<String, Object> getOverdueInfo(String email, String house) {
+		HashMap<String, Object> map = new HashMap<>();
+		sql=
+		"select datediff(curdate(),end_day) as overdue, datediff(curdate(),end_day)*w.price as arrears,"
+				+ " round((i.payment*0.1),-1)-(datediff(curdate(),end_day)*w.price) as now_deposit,"
+				+ " m.email, m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr,"
+				+ " w.house, w.price,"
+				+ " i.item ,i.start_day, i.end_day, i.payment, i.item_price"
+				+ " from items as i"
+				+ " join member as m on i.email = m.email"
+				+ " join warehouse as w on i.house = w.house"
+				+ " where end_day<curdate() and i.email =? and w.house =?";
+		
+		try {
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, house);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				map.put("overdue", rs.getInt("overdue")); 
+				map.put("arrears", rs.getInt("arrears")); 
+				map.put("now_deposit", rs.getInt("now_deposit")); 
+				
+				map.put("house", rs.getString("house"));
+				map.put("price", rs.getInt("price"));
+				
+				map.put("email", rs.getString("email"));
+				map.put("name",rs.getString("name"));
+				map.put("phone",rs.getString("phone"));
+				map.put("postCode",rs.getInt("postCode"));
+				map.put("detailAddr",rs.getString("detailAddr"));
+				map.put("roadAddr",rs.getString("roadAddr"));
+				
+				map.put("start_day",rs.getDate("start_day").toString());
+				map.put("end_day",rs.getDate("end_day").toString());
+				map.put("payment",rs.getInt("payment"));
+				map.put("item_price",rs.getInt("item_price"));
+				map.put("item",rs.getString("item"));
+			}
+		} catch (Exception e) {
+			System.out.println("getOverdueInfo err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return map;
 	}//end of getOverdueInfo
+	
 }

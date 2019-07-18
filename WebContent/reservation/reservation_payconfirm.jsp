@@ -3,11 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<c:choose>   
-	<c:when test="${sessionScope.email!=null }"><c:set var="mem_email" value="${sessionScope.email }"/></c:when>
-	<c:when test="${sessionScope.name !=null }"><c:set var="mem_name" value="${sessionScope.name }"/></c:when>
-</c:choose>
     
 
 <!DOCTYPE html>
@@ -91,17 +86,14 @@
 			    		<td><p class="font-weight-bold pt-2 m-0">사용기간</p></td>
 			    		<td><input type="text" class="form-control" name="start_day" value="${param.start_day } ~ ${param.end_day } (총 ${param.totalDay })" readOnly></td>
 			    	</tr>
+			    	
 			    	<tr>
-			    		<td class=""><p class="red font-weight-bold pt-2 m-0">최종 금액</p></td>
-			    		<td><input type="text" class="form-control" name="payment" value="${param.payment }" readOnly></td>
-			    	</tr>
-			    	<tr>
-			    		<td><p class="red font-weight-bold pt-2 m-0">결제하신 금액<br><small class="text-muted">최종 금액의 10%</small></p></td>
+			    		<td><p class="red font-weight-bold pt-2 m-0">예약 보증금<br><small class="text-muted">결제하신 금액, 최종 금액의 10%</small></p></td>
 			    		<td><input type="text" class="form-control" name="res_payment" value="${param.res_payment }" readOnly></td>
 			    	</tr>
 			    	<tr>
-			    		<td><p class="red font-weight-bold pt-2 m-0">차액<br><small class="text-muted">차액은 물건 입고 시 결제됩니다.</small></p></td>
-			    		<td><input type="text" class="form-control" name="res_payment" value="${param.payment-param.res_payment}" readOnly></td>
+			    		<td class=""><p class="red font-weight-bold pt-2 m-0">최종 금액<br><small class="text-muted">물건 입고시 결제하실 금액</small></p></td>
+			    		<td><input type="text" class="form-control" name="payment" value="${param.payment }" readOnly></td>
 			    	</tr>
 			    	<tr>
 			    		<td colspan="2"><a href="./goIndex.me" class="btn btn-primary">메인으로 돌아가기</a></td>
