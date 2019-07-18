@@ -32,7 +32,7 @@
 		<c:when test="${sessionScope.mdto.email==null }">
 			<script type="text/javascript">
 				alert("로그인 후 이용 가능합니다.");
-				history.back();
+				location.href="${contextPath}/index.jsp?login=true";
 			</script>
 		</c:when>
 	</c:choose>
