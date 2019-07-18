@@ -55,14 +55,14 @@
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
-	<%-- <c:choose>   
+	<c:choose>   
 		<c:when test="${sessionScope.mdto.email==null }">
 			<script type="text/javascript">
 				alert("로그인 후 이용 가능합니다.");
 				history.back();
 			</script>
 		</c:when>
-	</c:choose> --%>
+	</c:choose>
 <jsp:include page="../inc/header.jsp"/>
 
 <c:set var="content" value="${param.content}"/>
