@@ -53,12 +53,6 @@
 				</c:if>
 	            <c:set var="email" value="${mdto.email }"/>
 	            <c:set var="name" value="${mdto.name }"/>
-	            <c:if test="${email ne null }">
-	            <li class="nav-item">
-	            	<a class="nav-link page-scroll" href="#">MY PAGE</a>
-	            </li>               
-	                <a href="${contextPath }/me/logout.me" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
-	            </c:if>
 	            <c:if test="${email eq null }">
 	                <div class="text-center">
 	                	<a href="#loginModal" class="btn btn-primary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
