@@ -17,9 +17,11 @@
 <!-- Page level plugin CSS-->
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
+
 </head>
 <body id="page-top">
 	
@@ -216,52 +218,26 @@
 					</div>
 					<div class="modal-body">
 						<table>
-							<tr class="name">
+							<tr>
+								<td rowspan="5"><div class="clickX" id="calendar" ></div></td>
+								<th>시작일</th>
+								<td class="start_day"></td>
+							</tr>
+							<tr>
+								<th>예정 완료일</th>
+								<td class="end_day"></td>
+							</tr>
+							<tr>
 								<th>예약자 이름</th>
-								<td></td>
+								<td class="name"></td>
 							</tr>
-							<tr class="phone">
+							<tr>
 								<th>연락처</th>
-								<td></td>
+								<td class="phone"></td>
 							</tr>
-							<tr class="email">
+							<tr>
 								<th>이메일</th>
-								<td></td>
-							</tr>
-							<tr class="name">
-								<th>예약자 이름</th>
-								<td></td>
-							</tr>
-							<tr class="phone">
-								<th>연락처</th>
-								<td></td>
-							</tr>
-							<tr class="email">
-								<th>이메일</th>
-								<td></td>
-							</tr>
-							<tr class="name">
-								<th>예약자 이름</th>
-								<td></td>
-							</tr>
-							<tr class="phone">
-								<th>연락처</th>
-								<td></td>
-							</tr>
-							<tr class="email">
-								<th>이메일</th>
-								<td></td>
-							</tr><tr class="name">
-								<th>예약자 이름</th>
-								<td></td>
-							</tr>
-							<tr class="phone">
-								<th>연락처</th>
-								<td></td>
-							</tr>
-							<tr class="email">
-								<th>이메일</th>
-								<td></td>
+								<td class="email"></td>
 							</tr>
 						</table>
 						<input type="text">
@@ -315,7 +291,9 @@
 	<!-- Page level plugin JavaScript-->
 	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
+	
 	<!-- Custom scripts for all pages-->
 	<script src="${contextPath}/js/sb-admin.js"></script>
 

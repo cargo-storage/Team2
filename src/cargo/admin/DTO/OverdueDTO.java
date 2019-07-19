@@ -1,6 +1,6 @@
 package cargo.admin.DTO;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 /*연체된 정보를 받아오는 DTO*/
 public class OverdueDTO {
@@ -18,7 +18,7 @@ public class OverdueDTO {
 	private int postCode;
 	
 	/*Items*/
-	private Timestamp start_day, end_day;
+	private Date start_day, end_day;
 	private int payment, item_price;
 	private String item;
 
@@ -38,19 +38,19 @@ public class OverdueDTO {
 		this.item = item;
 	}
 
-	public Timestamp getStart_day() {
+	public Date getStart_day() {
 		return start_day;
 	}
 
-	public void setStart_day(Timestamp start_day) {
+	public void setStart_day(Date start_day) {
 		this.start_day = start_day;
 	}
 
-	public Timestamp getEnd_day() {
+	public Date getEnd_day() {
 		return end_day;
 	}
 
-	public void setEnd_day(Timestamp end_day) {
+	public void setEnd_day(Date end_day) {
 		this.end_day = end_day;
 	}
 

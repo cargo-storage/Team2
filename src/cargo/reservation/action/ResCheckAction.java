@@ -11,7 +11,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class reserveCheckAction implements Action {
+public class ResCheckAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,7 +37,7 @@ public class reserveCheckAction implements Action {
 		forward.setRedirect(false);
 		forward.setAjax(false);
 		
-		forward.setPath("../reservation/reservePay.jsp");
+		forward.setPath("../reservation/reservation_pay.jsp");
 		return forward;
 	}
 

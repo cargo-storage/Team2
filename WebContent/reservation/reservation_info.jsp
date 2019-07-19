@@ -29,10 +29,10 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	
 	<c:choose>   
-		<c:when test="${sessionScope.email==null }">
+		<c:when test="${sessionScope.mdto.email==null }">
 			<script type="text/javascript">
 				alert("로그인 후 이용 가능합니다.");
-				history.back();
+				location.href="${contextPath}/index.jsp?login=true";
 			</script>
 		</c:when>
 	</c:choose>

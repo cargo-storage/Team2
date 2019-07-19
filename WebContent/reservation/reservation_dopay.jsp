@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>RESERVATION - TEAM2 WAREHOUSE</title>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -75,12 +74,12 @@
 		<input type="hidden" name="res_day" value="${param.res_day }">
 		<input type="hidden" name="start_day" value="${param.start_day }">
 		<input type="hidden" name="end_day" value="${param.end_day }">
-		<input type="hidden" name="payment" value="${param.payment }">
+		<input type="hidden" name="payment" value="${param.payment}">
 		<input type="hidden" name="house" value="${param.house }">
 		<input type="hidden" name="name" value="${param.name }">
 		<input type="hidden" name="phone" value="${param.phone }">
 		<input type="hidden" name="totalDay" value="${param.totalDay }">
-		<input type="hidden" name="res_payment" value="${param.res_payment }">
+		<input type="hidden" name="res_payment" value="${param.res_payment}">
 	</form>
 </body>
 </html>

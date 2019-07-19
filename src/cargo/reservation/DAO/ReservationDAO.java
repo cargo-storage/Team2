@@ -99,12 +99,12 @@ public class ReservationDAO {
 				idto = new ItemsDTO();
 				
 				idto.setEmail(rs.getString("email"));
-				idto.setEnd_day(rs.getTimestamp("end_day"));
+				idto.setEnd_day(rs.getDate("end_day"));
 				idto.setHouse(rs.getString("house"));
 				idto.setItem(rs.getString("item"));
 				idto.setItem_price(rs.getInt("item_price"));
 				idto.setPayment(rs.getInt("payment"));
-				idto.setStart_day(rs.getTimestamp("start_day"));
+				idto.setStart_day(rs.getDate("start_day"));
 				
 				rList.add(idto);
 			}
@@ -137,12 +137,12 @@ public class ReservationDAO {
 				rdto = new ReservationDTO();
 				
 				rdto.setEmail(rs.getString("email"));
-				rdto.setEnd_day(rs.getTimestamp("end_day"));
+				rdto.setEnd_day(rs.getDate("end_day"));
 				rdto.setHouse(rs.getString("house"));
 				rdto.setNum(rs.getInt("num"));
 				rdto.setPayment(rs.getInt("payment"));
-				rdto.setRes_day(rs.getTimestamp("res_day"));
-				rdto.setStart_day(rs.getTimestamp("start_day"));
+				rdto.setRes_day(rs.getDate("res_day"));
+				rdto.setStart_day(rs.getDate("start_day"));
 				
 				rList2.add(rdto);
 			}
@@ -168,9 +168,9 @@ public class ReservationDAO {
            pstmt = conn.prepareStatement(sql);
            pstmt.setString(1, rsdto.getEmail());
            pstmt.setString(2, rsdto.getHouse());
-           pstmt.setTimestamp(3, rsdto.getStart_day());
-           pstmt.setTimestamp(4, rsdto.getEnd_day());
-           pstmt.setTimestamp(5, rsdto.getRes_day());
+           pstmt.setDate(3, rsdto.getStart_day());
+           pstmt.setDate(4, rsdto.getEnd_day());
+           pstmt.setDate(5, rsdto.getRes_day());
            pstmt.setInt(6, rsdto.getPayment());
            
            pstmt.executeUpdate();         

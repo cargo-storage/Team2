@@ -10,7 +10,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class simplepaymentAction implements Action{
+public class SimplePaymentAction implements Action{
 	
 	
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -40,5 +40,7 @@ public class simplepaymentAction implements Action{
 		//기본값이 false이므로 설정할 필요 없겠지만 세팅해줌
 		forward.setRedirect(false);
 		return forward;
+		
+		
 	}
 }
