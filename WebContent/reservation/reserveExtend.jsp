@@ -99,29 +99,37 @@
 				    		<td><input type="text" class="form-control-plaintext" name="house" value="${map.house}" readonly="readonly"></td>
 				    	</tr>
 				    	<tr>
-				    		<td><p class="font-weight-bold pt-2 m-0">예약일</p></td>
-				    		<td><input type="text" class="form-control" name="res_day" value="" readOnly></td>
-				    	</tr>
-				    	<tr>
 				    		<td><p class="font-weight-bold pt-2 m-0">사용 시작일</p></td>
-				    		<td><input type="text" class="form-control" name="start_day" value="${map.start_day}" readonly="readonly"></td>
+				    		<td><input type="text" class="form-control-plaintext" name="start_day" value="${map.start_day}" readonly="readonly"></td>
 				    	</tr>
 				    	<tr>
-				    		<td><p class="font-weight-bold pt-2 m-0">사용 종료일<br><small class="text-muted">(공간 반납일)</small></p></td>
-				    		<td><input type="text" class="form-control" name="end_day" value="${map.end_day}" readonly="readonly"></td>
+				    		<td><p class="font-weight-bold pt-2 m-0">현재 종료일<br></p></td>
+				    		<td><input type="text" class="form-control-plaintext" value="${map.end_day}" readonly="readonly"></td>
 				    	</tr>
 				    	<tr>
-				    		<td><p class="font-weight-bold pt-2 m-0">총 사용 기간</p></td>
-				    		<td><input type="text" class="form-control"  name="totalDay" value="" readonly="readonly"></td>
+				    		<td><p class="font-weight-bold pt-2 m-0">연장 선택일<br><small class="text-muted">(공간 반납일)</small></p></td>
+				    		<td><input type="text" class="form-control" id="end_day" name="end_day" value="${map.end_day}" readonly="readonly"></td>
 				    	</tr>
 				    	<tr>
-				    		<td class=""><p class="red font-weight-bold pt-2 m-0">최종 금액</p></td>
-				    		<td><input type="text" class="form-control" name="payment" value="0" readonly="readonly"></td>
+				    		<td><p class="font-weight-bold pt-2 m-0">총 연장 기간</p></td>
+				    		<td><input type="text" class="form-control" id="totalDay" name="totalDay" value="0" readonly="readonly"></td>
+				    	</tr>
+				    	<tr>
+				    		<td class=""><p class="red font-weight-bold pt-2 m-0">최종 추가 금액</p></td>
+				    		<td><input type="text" class="form-control" name="payment" id="payment" value="0" readonly="readonly"></td>
 				    	</tr>
 				    	<tr>
 				    		<td colspan="2" class="confirm" >
-		   						<strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
-		   						<input type="submit" class="btn btn-primary" value="결제하기">
+				    		<c:choose>
+				    			<c:when test="${mdto.admin ==1}">
+			   						<strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
+			   						<input type="submit" class="btn btn-primary" value="결제하기">
+				    			</c:when>
+				    			<c:otherwise>
+			   						<strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
+			   						<input type="submit" class="btn btn-primary" value="결제하기">
+		   						</c:otherwise>
+		   					</c:choose>
 		   						<a href="javascript: history.back()" class="btn btn-secondary">돌아가기</a>
 		   					</td>
 				    	</tr>
@@ -148,35 +156,40 @@
 		<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
 	
 		<!-- scripts for this page-->
-<%--         <script src="${contextPath}/js/reservation_extension.js"></script> --%>
         <script type="text/javascript">
+        var price = ${price};
         var start_day = '${map.start_day}';
         var end_day = '${map.end_day}';
-        var disable = ${diableRanges};
+        var disable = ${maxDate};
         $(document).ready(function() {
+        	
         	$('#calendar').pignoseCalendar({
             	lang: 'ko',
             	multiple: true,
             	minDate: moment(start_day)-1,
             	maxDate: disable,
         		init: function(context){
-       	          $(this).pignoseCalendar('set', start_day+'~'+end_day);
-        	       },
-               	select: function(date, context) {
-             
+					$(this).pignoseCalendar('set', start_day+'~'+end_day);
+       			    $('.pignose-calendar-body div[data-date='+start_day+']').addClass("clickX");
+        	   },
+               select: function(date, context) {
                     var $this = $(this);
                     var $element = context.element;
                     var $calendar = context.calendar;
                     
-                    console.log(date[0], date[1]);
                     var end = date[0]._i
                     if(moment(end_day)>moment(end)){
-                    alert("예약일을 줄일 수 없습니다!");
+                    alert("기간은 줄일 수 없습니다!");
                     $('#calendar').pignoseCalendar('set', start_day+'~'+end_day);
                     }else{
+                    var totalDay = (moment(end)-moment(end_day))/1000/60/60/24;	
+                    
                     $('#calendar').pignoseCalendar('set', start_day+'~'+end);
+                    $('#end_day').val(end);
+                    $('#totalDay').val(totalDay);
+                    $('#payment').val(totalDay*price);
                     }
-               }
+               	}
             	});//end of pignoseCalendar
 
         });//end of onload

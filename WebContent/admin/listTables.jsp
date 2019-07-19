@@ -252,7 +252,7 @@
 							<dd class="col-7 addr"></dd>
 						</dl>
 						<input type="hidden" id="result" name="result">
-						<input type="hidden" id="path" name="path">
+
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

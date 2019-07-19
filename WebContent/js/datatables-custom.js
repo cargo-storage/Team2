@@ -5,7 +5,6 @@ function overdueModal(modal, result) {
 function reservationModal(modal, result) {
 	$('.calendar').pignoseCalendar({
     	lang: 'ko',
-    	theme: 'blue',
     	multiple: true,
 		init: function(context){
 	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);

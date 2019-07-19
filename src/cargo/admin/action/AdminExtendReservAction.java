@@ -15,7 +15,6 @@ public class AdminExtendReservAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setAttribute("path", request.getParameter("path"));
 		String jsonString = request.getParameter("result");
 		
 		JSONParser ps = new JSONParser();
@@ -24,12 +23,13 @@ public class AdminExtendReservAction implements Action {
 		Map<String, Object> map = (Map<String, Object>) ps.parse(jsonString);
 		String end_day = map.get("end_day").toString();
 		String house = map.get("house").toString();
-		
+
 		System.out.println(end_day +" "+ house);
 		
 		ReservationDAO rdao = new ReservationDAO();
 		request.setAttribute("map", map);
-		request.setAttribute("diableRanges", rdao.disabledMultipleRangesCalendar(end_day, house));
+		request.setAttribute("maxDate", rdao.getMaxDateCalendar(end_day, house));
+		request.setAttribute("price", rdao.rsPayment(house));
 		
 		ActionForward forward = new ActionForward();
 		forward.setAjax(false);
