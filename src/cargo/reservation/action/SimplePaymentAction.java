@@ -10,7 +10,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class SimplepaymentAction implements Action{
+public class SimplePaymentAction implements Action{
 	
 	
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
