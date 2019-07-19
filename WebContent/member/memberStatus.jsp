@@ -32,7 +32,7 @@
 	            <div class="col-md-7 col-sm-9 mx-auto text-center mb-5">
 	                <span class="text-muted text-uppercase">
 	                <c:choose>
-	                	<c:when test="${requestScope.currentPage eq '사용내역' }">USAGE </c:when>
+	                	<c:when test="${requestScope.currentPage eq '사용현황' }">USAGE </c:when>
 	                	<c:otherwise>RESERVATION </c:otherwise>
 	                </c:choose>
 	                STATUS</span>
@@ -47,7 +47,7 @@
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<c:choose>
-							<c:when test="${requestScope.currentPage eq '사용내역' }">
+							<c:when test="${requestScope.currentPage eq '사용현황' }">
 							<thead>
 								<tr>
 									<th>상태</th>

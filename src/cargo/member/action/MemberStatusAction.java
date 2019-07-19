@@ -30,7 +30,7 @@ public class MemberStatusAction implements Action {
 		String currentPage ="";
 		
 		if(category.equals("status")) {
-			currentPage = "사용내역";
+			currentPage = "사용현황";
 		}else if(category.equals("reservation")) {
 			currentPage = "예약현황";
 		}
