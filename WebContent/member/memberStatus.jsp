@@ -9,6 +9,7 @@
 <script type="text/javascript">
 	$(function(){
 	    $('#dataTable').DataTable( {
+	    	"sScrollX": '100%',
 	        "scrollY":        "500px",
 	        "scrollCollapse": true
 	    } );

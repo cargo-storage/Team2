@@ -117,11 +117,19 @@
 				color: red;
 				font-size: 11px;
 			}
+					 	
         </style>
         
         <script type="text/javascript"> //login.js
 			$(function(){
-		
+			 	/* 마이 페이지 hover */
+			 	$("#navbardrop").mouseenter(function(){
+			 		$(".dropdown-menu").addClass("show");
+			 	});
+			 	$("#dropdown-menu").mouseleave(function(){
+			 		$(this).removeClass("show");
+			 	});
+			 				
 				/* 이메일 저장 */
 				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 			    var key = getCookie("key");
@@ -310,9 +318,14 @@
             </c:if>
            	<c:choose>
                	<c:when test="${email ne null }">
-               		<li class="nav-item">
-                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
-               		</li>               
+	               	<li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
+				      <div class="dropdown-menu" id="dropdown-menu">
+				        <a class="dropdown-item" href="${contextPath }/member/mypage.jsp">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				      </div>
+				    </li>               
               		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
                	</c:when>
                	<c:otherwise>
