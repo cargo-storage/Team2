@@ -70,8 +70,8 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="odto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-house="${odto.house}" data-email="${odto.email}">
-									<td><fmt:formatDate value="${odto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-primary ="${odto.item}">
+									<td><fmt:formatDate value="${odto.end_day}" pattern="YYYY-MM-dd"/></td>
 									<td><c:out value="${odto.overdue}"/></td>
 									<td><fmt:formatNumber value="${odto.arrears}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${odto.now_deposit}" type="currency" currencySymbol="￦"/></td>

@@ -221,7 +221,7 @@ public class AdminDAO {
 		return list;
 	}//end of getOverdueTable
 	
-	public HashMap<String, Object> getInfo(String category, String email, String house){
+	public HashMap<String, Object> getInfo(String category, String primary){
 		HashMap<String, Object> map = new HashMap<>();
 		sql="";
 		
@@ -237,7 +237,7 @@ public class AdminDAO {
 				+ " from reservation as r"
 				+ " left join member as m"
 				+ " on r.email = m.email"
-				+ " where r.email = ? and r.house =?";
+				+ " where r.num =?";
 		
 		String itm =
 				"select i.item, -1 as num, i.email, i.house,"
@@ -246,7 +246,7 @@ public class AdminDAO {
 				+ " from items as i"
 				+ " left join member as m"
 				+ " on i.email = m.email"
-				+ " where i.email = ? and i.house =?";
+				+ " where i.item =?";
 		
 		/*예전 기록의 경우 회원이 탈퇴했을때 없어진 정보는 null대신 "탈퇴한 회원"으로 채움
 		 * ifnull은 oracle NVL함수와 같은 기능으로 ifnull(v1,v2) v1이 null이면 v2로 대체
@@ -261,7 +261,7 @@ public class AdminDAO {
 				+ " from closed as c"
 				+ " left join member as m"
 				+ " on c.email = m.email"
-				+ " where c.email=? and c.house =?";
+				+ " where c.item =?";
 		
 		
 		if("reservation".equals(category)){
@@ -275,8 +275,7 @@ public class AdminDAO {
 		try {
 			con = connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, email);
-			pstmt.setString(2, house);
+			pstmt.setString(1, primary);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -340,7 +339,7 @@ public class AdminDAO {
 		return map;
 	}//end of getMemberInfo
 
-	public HashMap<String, Object> getOverdueInfo(String email, String house) {
+	public HashMap<String, Object> getOverdueInfo(String item) {
 		HashMap<String, Object> map = new HashMap<>();
 		sql=
 		"select datediff(curdate(),end_day) as overdue, datediff(curdate(),end_day)*w.price as arrears,"
@@ -351,13 +350,12 @@ public class AdminDAO {
 				+ " from items as i"
 				+ " join member as m on i.email = m.email"
 				+ " join warehouse as w on i.house = w.house"
-				+ " where end_day<curdate() and i.email =? and w.house =?";
+				+ " where end_day<curdate() and i.item =?";
 		
 		try {
 			con = connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, email);
-			pstmt.setString(2, house);
+			pstmt.setString(1, item);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {

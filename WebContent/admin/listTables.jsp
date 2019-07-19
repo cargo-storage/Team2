@@ -73,14 +73,14 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.num}">
 									<td><c:out value="${adto.num}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.house}"/></td>
-									<td><fmt:formatDate value="${adto.res_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.res_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 								</tr>
 							</c:forEach>
@@ -115,13 +115,13 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
 									<td><c:out value="${adto.house}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 								</tr>
@@ -157,13 +157,13 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
-									<td><fmt:formatDate value="${adto.return_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
+									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
+									<td><fmt:formatDate value="${adto.return_day}" pattern="YYYY-MM-dd"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 								</tr>
@@ -205,46 +205,58 @@
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 			<c:choose>
 				<c:when test="${currntPage eq '예약 내역 관리'}">
-				<form action="" method="post" >
+				<form method="post" action="">
 					<div class="modal-header">
 						<h5 class="modal-title" id="detailModalLabel">예약 상세 내역</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">×</span>
 						</button>
 					</div>
-					<div class="modal-body">
-						<table>
-							<tr>
-								<td rowspan="5"><div class="clickX" id="calendar" ></div></td>
-								<th>시작일</th>
-								<td class="start_day"></td>
-							</tr>
-							<tr>
-								<th>예정 완료일</th>
-								<td class="end_day"></td>
-							</tr>
-							<tr>
-								<th>예약자 이름</th>
-								<td class="name"></td>
-							</tr>
-							<tr>
-								<th>연락처</th>
-								<td class="phone"></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td class="email"></td>
-							</tr>
-						</table>
-						<input type="text">
+					<div class="modal-body mx-auto container-fluid row">
+						<div class="col-lg-7 mb-3 calendar" id="calendar" ></div>
+						<dl class="row col-lg-5 mx-auto my-auto">
+							<dt class="col-12">예약 정보</dt>
+							<dt class="col-5">예약번호</dt>
+							<dd class="col-7 num"></dd>
+							
+							<dt class="col-5">예약일</dt>
+							<dd class="col-7 res_day"></dd>
+							
+							<dt class="col-5">시작일</dt>
+							<dd class="col-7 start_day"></dd>
+							
+							<dt class="col-5">예정 완료일</dt>
+							<dd class="col-7 end_day"></dd>
+							
+							<dt class="col-5">결제 가격</dt>
+							<dd class="col-7 payment"></dd>
+							
+							<dt class="col-12">예약자 정보</dt>
+							<dt class="col-5">예약자 이름</dt>
+							<dd class="col-7 name"></dd>
+							
+							<dt class="col-5">연락처</dt>
+							<dd class="col-7 phone"></dd>
+							
+							<dt class="col-5">이메일</dt>
+							<dd class="col-7 email"></dd>
+							
+							<dt class="col-5">우편번호</dt>
+							<dd class="col-7 postCode"></dd>
+							
+							<dt class="col-12">주소</dt>
+							<dd class="col-12 addr"></dd>
+						</dl>
+						<input type="hidden" id="result" name="result">
+						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+						<input type="button" class="btn btn-primary extend" value="예약 연장하기">
 					</div>
 				</form>
 				</c:when>

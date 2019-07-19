@@ -1,7 +1,12 @@
+/*보여주기만 하는 css 추가했습니다..*/
+.clickX{
+	pointer-events: none;
+}
+
 @font-face {
   font-family: 'pignose-calendar-icon';
-  src: url("../fonts/pignose.calendar.eot?gpa4vl");
-  src: url("../fonts/pignose.calendar.eot?gpa4vl#iefix") format('embedded-opentype'), url("../fonts/pignose.calendar.ttf?gpa4vl") format('truetype'), url("../fonts/pignose.calendar.woff?gpa4vl") format('woff'), url("../fonts/pignose.calendar.svg?gpa4vl#pignose.calendar") format('svg');
+  src: url("../vendor/pignose_calendar/fonts/pignose.calendar.eot?gpa4vl");
+  src: url("../vendor/pignose_calendar/fonts/pignose.calendar.eot?gpa4vl#iefix") format('embedded-opentype'), url("../vendor/pignose_calendar/fonts/pignose.calendar.ttf?gpa4vl") format('truetype'), url("../vendor/pignose_calendar/fonts/pignose.calendar.woff?gpa4vl") format('woff'), url("../vendor/pignose_calendar/fonts/pignose.calendar.svg?gpa4vl#pignose.calendar") format('svg');
   font-weight: normal;
   font-style: normal;
 }
