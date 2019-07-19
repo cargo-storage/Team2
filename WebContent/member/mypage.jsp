@@ -54,7 +54,15 @@
 				display: none;
 			}
 		}
-	
+		
+		#sidebar ul li a{
+			color: darkslategrey;
+		}
+		
+		#sidebar ul li a:HOVER{
+			color: #00953e;
+		}
+		
 		.post {
 			height: calc(1.5em + .75rem + 2px);
 			padding: .375rem .75rem;
