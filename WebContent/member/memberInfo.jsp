@@ -9,12 +9,12 @@
 </head>
 <body>
 <div class="container">
-			<div class="row p-5 background raised-box rounded">
-				<div class="col-sm-9 col-lg-6 m-auto">
+			<div class="row p-5 rounded">
+				<div class="col-sm-9 col-lg-6 mt-0 ml-auto mr-auto">
 		            <div class="col-md-7 col-sm-9 mx-auto text-center mb-5">
 		                <span class="text-muted text-uppercase">INFORMATION</span>
 		                <h2 class="display-4">내 정보 확인</h2>
-		                <p class="lead"><a href="${contextPath }/me/modifyMember.me">내 정보 수정하기</a></p>
+		                <p class="lead"><a href="${contextPath }/me/modifyMember.me">내 정보 수정하기  <i class="fas fa-arrow-alt-circle-right"></i></a></p>
 					</div>
 					<div class="form-group">
 						<label for="email">이메일</label>
