@@ -24,11 +24,13 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- 주소 api -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	
+	<!-- Page level plugin CSS -->
+	<link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+	
 	<style>
 	
-		.background{
-			background-color: rgba( 255, 255, 255, 0.9);
-		}
 		.post {
 			height: calc(1.5em + .75rem + 2px);
 			padding: .375rem .75rem;
@@ -51,18 +53,25 @@
 			width: 100%;
 		}
 	</style>
-	<!-- Page level plugin CSS-->
-<link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<style>
+	section{
+		margin-top: 83px;
+	}
+	#sidebar{
+		background-color: #f8f9fa;
+		height: 1000px;
+	}
+	ul{
+		list-style: none;
+	}
+	
+	ul li{
+		font-size: 20px;
+	}
+</style>
 </head>
 <body>
-	<c:choose>   
-		<c:when test="${sessionScope.mdto.email==null }">
-			<script type="text/javascript">
-				alert("로그인 후 이용 가능합니다.");
-				history.back();
-			</script>
-		</c:when>
-	</c:choose>
+	
 <jsp:include page="../inc/header.jsp"/>
 
 <c:set var="content" value="${param.content}"/>
@@ -73,17 +82,25 @@
 <c:if test="${content eq 'leave' }">
 	<c:set var="content" value="leaveMember.jsp"/>
 </c:if> 
-<section class="py-7">
+<c:choose>   
+	<c:when test="${sessionScope.mdto.email==null }">
+		<script type="text/javascript">
+			alert("로그인 후 이용 가능합니다.");
+			location.href="${contextPath}/index.jsp"
+		</script>
+	</c:when>
+</c:choose>
+<section>
 	<div class="container-fuild">
 		<div class="row">
-			<div class="col-sm-2" id="sidebar">
-				<ul>
-					<h2><i class="fas fa-user-cog"></i> 마이페이지</h2>
-					<li><a href="${contextPath }/member/mypage.jsp">내 정보</a></li>
-					<li><a href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a></li>
-					<li><a href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a></li>
-					<li><a href="${contextPath }/member/mypage.jsp?content=leave">회원 탈퇴</a></li>
-					
+			<div class="col-sm-2 rounded p-5 text-center" id="sidebar">
+				<ul class="p-0">
+					<span class="text-muted text-uppercase">MY PAGE</span>
+					<h1 class="mb-4">마이페이지</h1>
+					<li class="m-2"><a href="${contextPath }/member/mypage.jsp"><i class="fas fa-user-circle"></i> 내 정보</a></li>
+					<li class="m-2"><a href="${contextPath }/me/memberStatus.me?category=status"><i class="fas fa-warehouse"></i> 사용 내역</a></li>
+					<li class="m-2"><a href="${contextPath }/me/memberStatus.me?category=reservation"><i class="far fa-calendar-alt"></i> 예약 현황</a></li>
+					<li class="m-2"><a href="${contextPath }/member/mypage.jsp?content=leave"><i class="fas fa-cut"></i> 회원 탈퇴</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-10" id="content">
@@ -92,5 +109,24 @@
 		</div>
 	</div>
 </section>
+<jsp:include page="../inc/footer.jsp"></jsp:include>
+
+	
+	<!-- Bootstrap core JavaScript-->
+	<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
+	<script src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="${contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Page level plugin JavaScript-->
+	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="${contextPath}/js/sb-admin.js"></script>
+
+	<!-- Demo scripts for this page-->
+	<script src="${contextPath}/js/datatables-custom.js"></script>
 </body>
 </html>
