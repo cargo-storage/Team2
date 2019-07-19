@@ -20,15 +20,15 @@ public class AdminModalAction implements Action {
 		AdminDAO dao = new AdminDAO();
 		
 		if ("overdue".equals(cate)) {
-			jobj = new JSONObject(dao.getOverdueInfo(email, house));
+			jobj = new JSONObject(dao.getOverdueInfo(primary));
 		}else if("예약".equals(cate)){
-			jobj = new JSONObject(dao.getInfo("reservation", email, house));
+			jobj = new JSONObject(dao.getInfo("reservation", primary));
 		}else if("보관".equals(cate)){
-			jobj = new JSONObject(dao.getInfo("items", email, house));
+			jobj = new JSONObject(dao.getInfo("items", primary));
 		}else if("완료".equals(cate)){
-			jobj = new JSONObject(dao.getInfo("closed", email, house));
+			jobj = new JSONObject(dao.getInfo("closed", primary));
 		}else if("member".equals(cate)){
-			jobj = new JSONObject(dao.getMemberInfo(email));
+			jobj = new JSONObject(dao.getMemberInfo(primary));
 		}
 		System.out.println(jobj.toJSONString());
 		

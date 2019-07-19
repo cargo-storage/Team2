@@ -237,7 +237,7 @@ public class ReservationDAO {
         return price;
      }
 	
-	public String disabledMultipleRangesCalendar(String end_day, String house){
+	public String getMaxDateCalendar(String end_day, String house){
 		String sql="select start_day"
 				+ " from reservation"
 				+ " where end_day > ? and house =?";

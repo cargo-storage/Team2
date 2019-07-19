@@ -68,7 +68,7 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="mdto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="member" data-house="" data-email="${mdto.email}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="member" data-primary="${mdto.email}">
 								<c:choose>
 									<c:when test="${mdto.admin ==1}"><td><c:out value="관리자"/></td></c:when>
 									<c:otherwise><td><c:out value="고객"/></td></c:otherwise>
