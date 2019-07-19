@@ -265,8 +265,8 @@ public class MemberDAO {
 				+ " i.payment, i.item_price"
 				+ " FROM items as i"
 				+ " LEFT JOIN member as m"
-				+ " ON i.email = m.email"
-				+ " WHERE m.email=?";
+				+ " ON i.email = m.email";
+//				+ " WHERE m.email=?";
 		
 		String cld=
 				"SELECT '완료' as state, ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
@@ -275,8 +275,8 @@ public class MemberDAO {
 				+ " c.payment, c.item_price"
 				+ " FROM closed as c"
 				+ " LEFT JOIN member as m"
-				+ " ON c.email = m.email"
-				+ " WHERE m.email=?";
+				+ " ON c.email = m.email";
+//				+ " WHERE m.email=?";
 		
 		String resev = 
 				"SELECT '예약' as state, m.name, m.phone, m.email,"
@@ -285,8 +285,8 @@ public class MemberDAO {
 				+ " r.payment, -1 as item_price"
 				+ " FROM reservation as r"
 				+ " LEFT JOIN member as m"
-				+ " ON r.email = m.email"
-				+ " WHERE m.email=?";
+				+ " ON r.email = m.email";
+//				+ " WHERE m.email=?";
 		if(category.equals("status")) {
 			query = "("+item+") UNION all ("+cld+")";
 		}else if(category.equals("reservation")){
@@ -297,8 +297,8 @@ public class MemberDAO {
 			con = connect();
 			pstmt = con.prepareStatement(query);
 			if(category.equals("status")) {
-				pstmt.setString(1, email);
-				pstmt.setString(2, email);
+//				pstmt.setString(1, email);
+//				pstmt.setString(2, email);
 			}else if(category.equals("reservation")){
 				pstmt.setString(1, email);
 			}

@@ -14,7 +14,7 @@
 </script>
 <body>
 <div class="container">
-	<div class="row p-5 background raised-box rounded">
+	<div class="row p-5 background rounded">
 		<div class="col-sm-9 col-lg-6 m-auto">
 			<div class="col-md-7 col-sm-9 mx-auto text-center mb-5">
 				<span class="text-muted text-uppercase">LEAVE MEMBER</span>

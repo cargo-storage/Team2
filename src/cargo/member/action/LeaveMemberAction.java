@@ -29,7 +29,7 @@ public class LeaveMemberAction implements Action {
 			PrintWriter out = response.getWriter();
 			
 			out.println("<script>");
-			out.println("alert('보관과 예약 정보가 있어 \n탈퇴가 실패했습니다.');");
+			out.println("alert('보관 또는 예약하신 내역이 있어 탈퇴 처리가 되지 않습니다. \\n내역을 다시 한 번 확인해 주시기 바랍니다.');");
 			out.println("history.back();");
 			out.print("</script>");
 
