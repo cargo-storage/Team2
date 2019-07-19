@@ -109,7 +109,7 @@
 	               		<li class="nav-item">
 	                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
 	               		</li>               
-	              		<a href="${contextPath }/me/logout.me" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+	              		<a href="${contextPath }/me/logout.me" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
 	               	</c:when>
 	               	<c:otherwise>
 	               		<div class="text-center">
