@@ -13,6 +13,7 @@ import cargo.common.action.ActionForward;
 import cargo.reservation.action.ResInfoAction;
 import cargo.reservation.action.ResInfoMoreAction;
 import cargo.reservation.action.ResPayAction;
+import cargo.reservation.action.ResPayExtendAction;
 import cargo.reservation.action.ResCheckAction;
 import cargo.reservation.action.ResApplyAction;
 import cargo.reservation.action.SimplePaymentAction;
@@ -66,6 +67,13 @@ public class ReserveController extends HttpServlet{
 				forward = action.execute(request, response);
 			}else if(command.equals("/simplepayment.me")) {
 				action = new SimplePaymentAction();
+				forward = action.execute(request, response);
+			}else if("/reserv_ext_pay".equals(command)){
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("../reservation/reserveExtend_dopay.jsp");
+			}else if("/reserv_ext_confirm".equals(command)){
+				action = new ResPayExtendAction();
 				forward = action.execute(request, response);
 			}
 			

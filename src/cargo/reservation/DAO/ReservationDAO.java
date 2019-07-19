@@ -255,12 +255,41 @@ public class ReservationDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("disabledMultipleRangesCalendar Error: "+e.getMessage());
+			System.out.println("getMaxDateCalendar Error: "+e.getMessage());
 	        e.printStackTrace();
 		}finally{
 	           freeResource();
-	        }
+	    }
 		
 		return next_start_day;
+	}//end of getMaxDateCalendar
+	
+	public int extendEnd_day(String state, String end_day, String payment, ArrayList<String> primary){
+		int result =0;
+		
+		String sql="update "+state
+				+ " set end_day =?, payment=?"
+				+ " where "+primary.get(0)+"=?";
+		
+		try {
+			getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, end_day);
+			pstmt.setString(2, payment);
+			
+			if("reservation".equals(state)){
+				pstmt.setInt(3, Integer.parseInt(primary.get(1)));
+			}else{
+				pstmt.setString(3, primary.get(1));
+			}
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("extendEnd_day Error: "+e.getMessage());
+	        e.printStackTrace();
+		}finally{
+	           freeResource();
+	    }
+		return result;
 	}
 }

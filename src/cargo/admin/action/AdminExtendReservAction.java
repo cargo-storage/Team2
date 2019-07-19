@@ -27,9 +27,10 @@ public class AdminExtendReservAction implements Action {
 		System.out.println(end_day +" "+ house);
 		
 		ReservationDAO rdao = new ReservationDAO();
-		request.setAttribute("map", map);
+		request.setAttribute("dto", map);
 		request.setAttribute("maxDate", rdao.getMaxDateCalendar(end_day, house));
 		request.setAttribute("price", rdao.rsPayment(house));
+		request.setAttribute("state", request.getParameter("state"));
 		
 		ActionForward forward = new ActionForward();
 		forward.setAjax(false);

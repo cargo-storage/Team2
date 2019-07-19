@@ -248,11 +248,11 @@
 							<dt class="col-5">우편번호</dt>
 							<dd class="col-7 postCode"></dd>
 							
-							<dt class="col-5">주소</dt>
-							<dd class="col-7 addr"></dd>
+							<dt class="col-12">주소</dt>
+							<dd class="col-12 addr"></dd>
 						</dl>
 						<input type="hidden" id="result" name="result">
-
+						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
