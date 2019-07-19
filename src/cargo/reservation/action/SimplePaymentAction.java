@@ -40,5 +40,7 @@ public class SimplePaymentAction implements Action{
 		//기본값이 false이므로 설정할 필요 없겠지만 세팅해줌
 		forward.setRedirect(false);
 		return forward;
+		
+		
 	}
 }
