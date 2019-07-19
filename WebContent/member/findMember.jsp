@@ -211,7 +211,7 @@
 							<c:forEach var="i" items="${requestScope.emailList.list }">
 								<c:set var="startNum" value="${startNum+1 }"/>
 								<span class="text-center font-weight-bold mr-4"><span id="memberEmail"><c:out value="${startNum }"/>. <c:out value="${i.email }"/></span></span>
-								<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><c:out value="${i.reg_date }"/></span></span><br>
+								<span class="text-center text-danger">가입날짜: <span id="memberReg_date"><fmt:formatDate value="${i.reg_date}" pattern="YYYY-MM-dd a hh시 mm분"/></span></span><br>
 							</c:forEach>
 							<a href="${contextPath }/index.jsp" class="btn btn-primary btn-block btn-lg mt-3">로그인 하러 가기</a>
 							</div>
