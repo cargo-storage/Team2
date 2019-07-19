@@ -14,6 +14,8 @@ import cargo.board.action.BoardDelAction;
 import cargo.board.action.BoardListAction;
 import cargo.board.action.BoardModifyAction;
 import cargo.board.action.BoardModifyFormAction;
+import cargo.board.action.BoardReplayAction;
+import cargo.board.action.BoardReplayFormAction;
 import cargo.board.action.BoardViewAction;
 import cargo.board.action.NoticeAddAction;
 import cargo.board.action.NoticeAddFormAction;
@@ -97,6 +99,20 @@ public class BoardController extends HttpServlet{
 				}
 			}else if (command.equals("/QuestionDelAction.bo")) {
 				action = new BoardDelAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if (command.equals("/QuestionReplayFormAction.bo")) {
+				action = new BoardReplayFormAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if (command.equals("/QuestionReplayAction.bo")) {
+				action = new BoardReplayAction();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {

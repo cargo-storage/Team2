@@ -141,11 +141,11 @@
 	<form id="addForm" action="${contextPath}/bo/BoardAddAction.bo" method="post">	
 		<div class="form-group">
 			<label for="name">name</label>  
-			<input class="form-control" name="name" id="name" type="text" readonly="readonly" value="${sessionScope.name }"/>
+			<input class="form-control" name="name" id="name" type="text" readonly="readonly" value="${sessionScope.mdto.name }"/>
 		</div>
 		<div class="form-group">
 			<label for="email">email</label>  
-			<input class="form-control" name="email" id="email" type="text" readonly="readonly" value="${sessionScope.email }" />
+			<input class="form-control" name="email" id="email" type="text" readonly="readonly" value="${sessionScope.mdto.email }" />
 		</div>
 		<div class="form-group">
 			<label for="subject">subject</label>

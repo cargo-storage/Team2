@@ -64,8 +64,8 @@ public class BoardqDAO {
 	         }
 	         //insert
 	         sql = "insert into boardq"
-	               +"(no, name,email, subject, content, secret ,re_ref, re_lev, re_seq, date)"
-	               +"values(?,?,?,?,?,?,?,0,0,?)";
+	               +"(no, name,email, subject, content, secret ,re_ref, re_lev, re_seq, date,prent)"
+	               +"values(?,?,?,?,?,?,?,0,0,?,?)";
 	         
 	         pstmt=con.prepareStatement(sql);
 	         pstmt.setInt(1, no); //num
@@ -76,6 +76,7 @@ public class BoardqDAO {
 	         pstmt.setInt(6, bqDTO.getSecret());
 	         pstmt.setInt(7, no);   //num 주글번호 기준 re_ref그룹번호
 	         pstmt.setTimestamp(8, bqDTO.getDate());
+	         pstmt.setInt(9, bqDTO.getPrent());
 	       
 	         
 	         //실행
@@ -139,7 +140,7 @@ public class BoardqDAO {
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		      }finally {
-		    	  
+		    	  closeDB();
 		      }
 		      return count;
 		        
@@ -153,18 +154,23 @@ public class BoardqDAO {
 			try{
 				getConnection();
 				pstmt = con.prepareStatement(
-						"select no, name, subject, content, secret, date, email from boardq where no=?");
+						"select * from boardq where no=?");
 				pstmt.setInt(1, no);
 				rs= pstmt.executeQuery();
+				
 	 		if(rs.next()){
 				bqDTO = new BoardqDTO();
 					bqDTO.setNo(rs.getInt("no"));
 					bqDTO.setName(rs.getString("name"));
 					bqDTO.setSubject(rs.getString("subject"));
 					bqDTO.setContent(rs.getString("content"));
+					bqDTO.setRe_ref(rs.getInt("re_ref"));
+					bqDTO.setRe_lev(rs.getInt("re_lev"));
+					bqDTO.setRe_seq(rs.getInt("re_seq"));
 					bqDTO.setSecret(rs.getInt("secret"));
 					bqDTO.setDate(rs.getTimestamp("date"));
 					bqDTO.setEmail(rs.getString("email"));
+
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -220,6 +226,58 @@ public class BoardqDAO {
 			return row;
 		}
 
+		public void ReplayBoardq(BoardqDTO bqDTO) {
+			  int no=0;
+			   try {
+				   getConnection();
+				   /*답변글 글번호 구하기*/
+				   //기존글중 num이 가장 큰 글번호 가져오기
+				   sql="select max(no) from boardq";
+				   pstmt=con.prepareStatement(sql);
+				   rs=pstmt.executeQuery();
+				  
+				   //글번호가 있으면
+				   if (rs.next()) {
+					//답변글번호 = 그글번호에 +1
+					   no = rs.getInt(1)+1;
+				   }else{	//글번호가없으면
+					   		//답변 달 답변글번호를 1로 지정
+					   no=1;
+				   }
+				   
+				   /*re_seq 답글순서 재배치*/
+				   //부모글 그룹과 같은 그룹이면서 부모글의 seq값보다 큰 답변글들은 seq값을 1증가시킨다
+				   sql="update boardq set re_seq=re_seq+1 where re_ref=? and re_seq>?";
+				   pstmt=con.prepareStatement(sql);
+				   pstmt.setInt(1, bqDTO.getRe_ref());	//부모글 그룹번호
+				   pstmt.setInt(2, bqDTO.getRe_seq());//부모글의 글 입력순서
+				   pstmt.executeUpdate();
+				   
+				   //답변글달기 insert// reseq+1 rslev+1 답글달기
+				   sql="insert into boardq values(?,?,?,?,?,?,?,?,?,?)";
+				   pstmt=con.prepareStatement(sql);
+				   pstmt.setInt(1, no);	//num
+				   pstmt.setString(2, bqDTO.getName());
+				   pstmt.setString(3, bqDTO.getEmail());
+				   pstmt.setString(4, bqDTO.getSubject());
+				   pstmt.setString(5, bqDTO.getContent());
+				   pstmt.setInt(6, bqDTO.getRe_ref());			//부모글 그룹번호 re_ref사용
+				   pstmt.setInt(7, bqDTO.getRe_lev()+1);		//부모글의 re_lev에 +1을 하여 들여쓰기
+				   pstmt.setInt(8, bqDTO.getRe_seq()+1);		//부모글의 re_seq에 +1을하여 답글을 단순서 정하기
+				   pstmt.setInt(9, bqDTO.getSecret());				
+				   pstmt.setTimestamp(10, bqDTO.getDate());
+				   //답변달기 실행
+				   pstmt.executeUpdate();
+				   
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				closeDB();
+			}
+		   }
+
+		
+		
 		
 	
 	

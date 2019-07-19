@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
+
     <head>
+  
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -133,43 +134,52 @@
 </nav>
 <!-- 왼쪽메뉴 -->
 
-      <div class="container">
-	<h1 align="center">Question</h1>
-     <table class="table">
-     	<tbody>
-     		<tr>
-		        <td>no : ${bqDTO.no}</td>
-   			</tr>
-			<tr>
-			   	<td>제목 :  ${bqDTO.subject}</td>
-			</tr>
-			<tr>
-			   	<td>내용 :</td>
-			   	<td>${bqDTO.content}</td>
-			</tr>
-			<tr>
-			   	<td>작성자 :</td>
-			   	<td>${bqDTO.name} ${bqDTO.email } </td>
-			</tr>
-			<tr>
-			   	<td>작성일 :</td>
-			   	<td>${bqDTO.date}</td>
-			</tr>
-		</tbody>
-	</table>
-		<div align="right">
-		<c:if test="${bqDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >
-			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/QuestionModifyFormAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">수정</a>
-			<a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/QuestionDelAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">삭제</a>
-			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/QuestionReplayFormAction.bo?no=${bqDTO.no}">답변</a>
-		</c:if>
-			<a class="btn btn-primary btn-sm" href="${contextPath}/bo/QuestionListAction.bo">목록</a>
+           
+           
+           <div class="container">
+	<h1>문의하기</h1>
+	<form id="addForm" action="${contextPath}/bo/QuestionReplayAction.bo?no=${bqDTO.no}" method="post">	
+	<!-- 부모글 정보를 넘긴다. -->
+	<input type="hidden" name="email" value="${bqDTO.email}">
+	<input type="hidden" name="no" value="${bqDTO.no}"/>
+	<input type="hidden" name="re_ref" value="${bqDTO.re_ref}"/>
+	
+		<div class="form-group">
+			<label for="name">name</label>  
+			<input class="form-control" name="name" id="name" type="text" readonly="readonly" value="${sessionScope.mdto.name }"/>
 		</div>
+		<div class="form-group">
+			<label for="email">email</label>  
+			<input class="form-control" name="email" id="email" type="text" readonly="readonly" value="${sessionScope.mdto.email }" />
+		</div>
+		<div class="form-group">
+			<label for="subject">subject</label>
+			<input class="form-control" name="subject" id="subject" type="text" value="답변입니다"/>
+		</div>
+		<div class="form-group">
+			<label for="content">Content</label>
+			<textarea class="form-control" name="content" id="content" rows="5" cols="50"></textarea>
+		</div>
+		<div class="form-group" align="left">
+			<label for="secret">비밀글</label>
+			<input class="form-control" name="secret" id="secret" type="text"/>
+		</div>
+		
+		<div align="right">
+			<input class="btn btn-primary btn-sm"  type="submit" value="글작성"/>
+			<input class="btn btn-primary btn-sm" type="reset" value="초기화"/>
+			<a class="btn btn-primary btn-sm" href="${contextPath}/bo/QuestionListAction.bo">글목록</a>
+		</div>
+	</form>
 </div>
 
      
 
+        
+        <!--footer / contact-->
+    
 
+      
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

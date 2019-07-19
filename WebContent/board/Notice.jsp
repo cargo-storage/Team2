@@ -187,7 +187,7 @@
                       	 <form action="noticesearch.jsp">
                          <input type="text" name="search" class="input_box" size="10">
                      	   <input type="submit" value="검색" class="btn btn-primary btn-sm">
-                       <c:if test="${bnDTO.email != sessionScope.email}">
+                       <c:if test="${sessionScope.mdto.admin==1}">
                          <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-sm">작성하기</a>
              			</c:if>
                         </form>

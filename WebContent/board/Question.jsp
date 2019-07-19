@@ -191,7 +191,7 @@
                       	 <form action="Questionsearch.jsp">
                          <input type="text" name="search" class="input_box" size="10">
                      	   <input type="submit" value="검색" class="btn btn-primary btn-sm">
-                     	   <c:if test="${bqDTO.email != sessionScope.email}">
+                     	   <c:if test="${bqDTO.email != sessionScope.mdto.email}">
                          <a href="${contextPath}/bo/QuestionAddForm.bo" class="btn btn-primary btn-sm">문의하기</a>
                          </c:if>
                         </form>

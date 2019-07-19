@@ -14,10 +14,11 @@ public class BoardqDTO {
 	int re_seq;
 	Timestamp date;
 	String email;
+	int prent;
 		
 		
 		public BoardqDTO(){}
-		public BoardqDTO(int no, String name, String subject, String content, int secret, int re_ref, int re_lev, int re_seq, Timestamp date, String email){
+		public BoardqDTO(int no, String name, String subject, String content, int secret, int re_ref, int re_lev, int re_seq, Timestamp date, String email, int prent){
 			this.no = no;
 			this.name= name;
 			this.subject = subject;
@@ -28,6 +29,7 @@ public class BoardqDTO {
 			this.re_lev = re_lev;
 			this.re_seq = re_lev;
 			this.email = email;
+			this.prent = prent;
 		}
 		
 		
@@ -94,7 +96,12 @@ public class BoardqDTO {
 		public void setEmail(String email) {
 			this.email = email;
 		}
-		
+		public int getPrent() {
+			return prent;
+		}
+		public void setPrent(int prent) {
+			this.prent = prent;
+		}
 	
 		
 		
