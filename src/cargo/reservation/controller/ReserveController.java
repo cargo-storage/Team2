@@ -15,7 +15,7 @@ import cargo.reservation.action.ResInfoMoreAction;
 import cargo.reservation.action.ResPayAction;
 import cargo.reservation.action.ResCheckAction;
 import cargo.reservation.action.ResApplyAction;
-import cargo.reservation.action.SimplepaymentAction;
+import cargo.reservation.action.SimplePaymentAction;
 
 public class ReserveController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -65,7 +65,7 @@ public class ReserveController extends HttpServlet{
 				action = new ResPayAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/simplepayment.me")) {
-				action = new SimplepaymentAction();
+				action = new SimplePaymentAction();
 				forward = action.execute(request, response);
 			}
 			
