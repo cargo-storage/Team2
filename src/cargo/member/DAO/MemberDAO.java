@@ -310,10 +310,10 @@ public class MemberDAO {
 				adto.setState(rs.getString("state"));
 				adto.setItem(rs.getString("item"));
 				adto.setHouse(rs.getString("house"));
-				adto.setRes_day(rs.getTimestamp("res_day"));
-				adto.setStart_day(rs.getTimestamp("start_day"));
-				adto.setEnd_day(rs.getTimestamp("end_day"));
-				adto.setReturn_day(rs.getTimestamp("return_day"));
+				adto.setRes_day(rs.getDate("res_day"));
+				adto.setStart_day(rs.getDate("start_day"));
+				adto.setEnd_day(rs.getDate("end_day"));
+				adto.setReturn_day(rs.getDate("return_day"));
 				adto.setPayment(rs.getInt("payment"));
 				adto.setItem_price(rs.getInt("item_price"));
 				
