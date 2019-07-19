@@ -29,8 +29,8 @@
                <li class="nav-item">
                    <a class="nav-link page-scroll" href="#faq">FAQ</a>
                </li>
-           <c:set var="email" value="${email }"/>
-           <c:set var="name" value="${name }"/>
+           <c:set var="email" value="${mdto.email }"/>
+           <c:set var="name" value="${mdto.name }"/>
            <c:if test="${email ne null }">
                 <li class="nav-item">
                    <a class="nav-link page-scroll" href="#">MY PAGE</a>

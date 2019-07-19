@@ -31,7 +31,7 @@ public class ResInfoAction implements Action{
 		request.setAttribute("hList", hList);
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("../reservation/reservation.jsp");
+		forward.setPath("../reservation/reservation_info.jsp");
 		
 		return forward;
 	}
