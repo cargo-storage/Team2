@@ -14,6 +14,9 @@ import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminOverdueAction;
+import cargo.admin.action.AdminReservToItemsAction;
+import cargo.admin.action.AdminwarehousingCheckAction;
+import cargo.common.DTO.MemberDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 
@@ -32,22 +35,41 @@ public class AdminController extends HttpServlet {
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
+		
 		System.out.println("---------------------------------");
+		System.out.println("관리자 영역");
 		String contextPath=request.getContextPath();
 		
 		//가상요청 주소 가져오기
 		String RequestURI=request.getRequestURI();
-		System.out.println(RequestURI);
-		System.out.println(RequestURI.lastIndexOf("/"));
+		System.out.println("RequestURI: "+RequestURI);
+
 		
 		String command=RequestURI.substring(RequestURI.lastIndexOf("/"));
-		System.out.println(command);
+		System.out.println("command: "+command);
 		
 		ActionForward forward = null;
 		Action action= null;
+		
+		//세션영역에서 로그인 정보 얻기
+		int admin =0;
+		if(request.getSession().getAttribute("mdto") != null){
+			MemberDTO mdto = (MemberDTO) request.getSession().getAttribute("mdto");
+			admin = mdto.getAdmin();
+		}
+		
 		try {
+			
+			//filter 역할! 관리자가 아니면 index.jsp로 이동.
+			if(admin == 0){
+				System.out.println("관리자가 아님! 잘못된 접근");
+				
+				forward = new ActionForward();
+				forward.setRedirect(true);
+				forward.setPath(contextPath+"/index.jsp");
+			
 			//관리자 메인 페이지
-			if("/admin_main".equals(command)){
+			}else  if("/admin_main".equals(command)){
 				action = new AdminAllInfoAction();
 				forward = action.execute(request, response);
 				
@@ -75,6 +97,16 @@ public class AdminController extends HttpServlet {
 			}else if("/extend_reserv".equals(command)){
 				action = new AdminExtendReservAction();
 				forward = action.execute(request, response);
+			
+			//예약된 물건을 창고에 넣기 전 체크!
+			}else if("/warehousing_check".equals(command)){
+				action = new AdminwarehousingCheckAction();
+				forward = action.execute(request, response);
+			
+			//예약 -> 창고
+			}else if("/reserve_to_items".equals(command)){
+				action = new AdminReservToItemsAction();
+				forward = action.execute(request, response);
 			}
 			
 			
@@ -94,7 +126,7 @@ public class AdminController extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 			}
-//			System.out.println("---------------------------------\n");
+			System.out.println("---------------------------------\n");
 			
 		} catch (Exception e) {
 			System.out.println("AdminController err: "+e.getMessage());

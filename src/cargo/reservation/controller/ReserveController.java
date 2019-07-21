@@ -75,6 +75,10 @@ public class ReserveController extends HttpServlet{
 			}else if("/reserv_ext_confirm".equals(command)){
 				action = new ResPayExtendAction();
 				forward = action.execute(request, response);
+			}else if("/reserv_ext_admin".equals(command)){
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("../reservation/reserveExtend_admin.jsp");
 			}
 			
 			//모든 과정 후 페이지 이동부분

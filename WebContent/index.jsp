@@ -309,7 +309,7 @@
          	
 			<c:if test="${admin == 1 }">
         		<li class="nav-item">
-                	<a class="nav-link page-scroll" href="#">관리자</a>
+                	<a class="nav-link page-scroll" href="${contextPath}/ad/admin_main">관리자</a>
             	</li> 
             </c:if>
            	<c:choose>

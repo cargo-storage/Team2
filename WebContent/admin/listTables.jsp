@@ -24,6 +24,8 @@
 
 </head>
 <body id="page-top">
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
 	
 	<%@include file="Top.jsp"%>
 	<div id="content-wrapper">
@@ -40,7 +42,8 @@
 			<!-- DataTables -->
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fas fa-table"></i> <c:out value="${currntPage}"/> 표 </div>
+					<i class="fas fa-table"></i> <c:out value="${currntPage}"/> 표 
+				</div>
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -73,14 +76,26 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
+							<fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd" var="start_day"/>
+							<fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd" var="end_day"/>
+							<c:choose>
+								<c:when test="${start_day == today}">
+								<tr data-toggle="modal" class="bg-info text-white" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.num}">
+								</c:when>
+								<c:when test="${start_day < today}">
+								<tr data-toggle="modal" class="bg-primary text-white" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.num}">
+								</c:when>
+								<c:otherwise>
 								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.num}">
+								</c:otherwise>
+							</c:choose>
 									<td><c:out value="${adto.num}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.house}"/></td>
 									<td><fmt:formatDate value="${adto.res_day}" pattern="YYYY-MM-dd"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
+									<td><c:out value="${start_day}"/></td>
+									<td><c:out value="${end_day}"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 								</tr>
 							</c:forEach>
@@ -115,13 +130,25 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
+							<fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd" var="start_day"/>
+							<fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd" var="end_day"/>
+							<c:choose>
+								<c:when test="${end_day == today}">
+								<tr data-toggle="modal" class="bg-warning text-dark" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								</c:when>
+								<c:when test="${end_day < today}">
+								<tr data-toggle="modal" class="bg-danger text-white" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								</c:when>
+								<c:otherwise>
 								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								</c:otherwise>
+							</c:choose>
 									<td><c:out value="${adto.house}"/></td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
+									<td><c:out value="${start_day}"/></td>
+									<td><c:out value="${end_day}"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 								</tr>
@@ -205,11 +232,11 @@
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
+			<form method="post" action="">
 			<c:choose>
 				<c:when test="${currntPage eq '예약 내역 관리'}">
-				<form method="post" action="">
 					<div class="modal-header">
 						<h5 class="modal-title" id="detailModalLabel">예약 상세 내역</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -217,48 +244,61 @@
 						</button>
 					</div>
 					<div class="modal-body mx-auto container-fluid row">
-						<div class="col-lg-7 mb-3 calendar" id="calendar" ></div>
-						<dl class="row col-lg-5 mx-auto my-auto">
-							<dt class="col-12">예약 정보</dt>
-							<dt class="col-5">예약번호</dt>
-							<dd class="col-7 num"></dd>
+						<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+						<table class='table col-lg-6 mx-auto my-auto'>
+							<tr>
+								<th colspan="2" class="text-center table-primary">예약 정보</th>
+							</tr>
+							<tr>
+								<th>예약 번호</th>
+								<td class="num"></td>
+							</tr>
+							<tr>
+								<th>예약일</th>
+								<td class="res_day"></td>
+							</tr>
+							<tr>
+								<th>시작일</th>
+								<td class="start_day"></td>
+							</tr>
+							<tr>
+								<th>예정 완료일</th>
+								<td class="end_day"></td>
+							</tr>
+							<tr>
+								<th>결제 가격</th>
+								<td class="payment"></td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-center table-primary">예약자 정보</th>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td class="name"></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td class="addr"></td>
+							</tr>
 							
-							<dt class="col-5">예약일</dt>
-							<dd class="col-7 res_day"></dd>
-							
-							<dt class="col-5">시작일</dt>
-							<dd class="col-7 start_day"></dd>
-							
-							<dt class="col-5">예정 완료일</dt>
-							<dd class="col-7 end_day"></dd>
-							
-							<dt class="col-5">결제 가격</dt>
-							<dd class="col-7 payment"></dd>
-							
-							<dt class="col-12">예약자 정보</dt>
-							<dt class="col-5">예약자 이름</dt>
-							<dd class="col-7 name"></dd>
-							
-							<dt class="col-5">연락처</dt>
-							<dd class="col-7 phone"></dd>
-							
-							<dt class="col-5">이메일</dt>
-							<dd class="col-7 email"></dd>
-							
-							<dt class="col-5">우편번호</dt>
-							<dd class="col-7 postCode"></dd>
-							
-							<dt class="col-12">주소</dt>
-							<dd class="col-12 addr"></dd>
-						</dl>
+						</table>
 						<input type="hidden" id="result" name="result">
 						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 						<input type="button" class="btn btn-primary extend" value="예약 연장하기">
+						<input type="button" class="btn btn-primary toitems" value="창고에 넣기">
 					</div>
-				</form>
+				
 				</c:when>
 				
 				<c:when test="${currntPage eq '창고 현황 관리'}">
@@ -289,6 +329,7 @@
 				</div>
 				</c:when>
 			</c:choose>
+			</form>
 			</div>
 		</div>
 	</div>

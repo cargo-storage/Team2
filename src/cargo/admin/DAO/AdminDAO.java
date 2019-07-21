@@ -387,5 +387,58 @@ public class AdminDAO {
 		}
 		return map;
 	}//end of getOverdueInfo
+
+	public ArrayList<String> getItemIDs(String firstSixofID) {
+		ArrayList<String> IDs = new ArrayList<>();
+		
+		sql = "select item"
+				+ " from items"
+				+ " where house like ?";
+		try {
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, firstSixofID+"%");
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				IDs.add(rs.getString("item"));
+			}
+		} catch (Exception e) {
+			System.out.println("getItemIDs err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return IDs;
+	}//end of getItemIDs
+
+	public void reservToitems(int num, String item, int item_price) {
+		try {
+			sql = "insert into items(item, item_price, email, house, start_day, end_day, payment)"
+				+ " select ? as item, ? as item_price, email, house, start_day, end_day, payment"
+				+ " from reservation where num = ?";
+		
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.setInt(2, item_price);
+			pstmt.setInt(3, num);
+			
+			pstmt.executeUpdate();
+			
+			sql ="delete from reservation"
+					+ " where num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("reservToitems err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of reservToitems
 	
 }
