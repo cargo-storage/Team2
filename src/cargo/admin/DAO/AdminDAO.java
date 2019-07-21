@@ -425,6 +425,14 @@ public class AdminDAO {
 			pstmt.setInt(3, num);
 			
 			pstmt.executeUpdate();
+			
+			sql ="delete from reservation"
+					+ " where num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("reservToitems err:"+e.getMessage());
 			e.printStackTrace();
