@@ -88,7 +88,7 @@
 		  
 		  <div class="my-3 p-3 background rounded shadow-sm">
 			    <p class="lead pb-2 mb-0"><b>추가 결제 정보</b>
-			    <br><small class="text-muted">
+			    <br><small class="text-muted red">
 			    <c:choose>
 					<c:when test="${state eq 'reservation'}">추가 보증금 10%가 결제됩니다.</c:when>
 					<c:otherwise>추가보증금 10%와 비용 모두 결제하셔야 합니다.</c:otherwise>
@@ -134,7 +134,10 @@
 				    		<c:choose>
 				    			<c:when test="${sessionScope.mdto.admin ==1}">
 			   						<strong class="red mr-2">최종 내역 페이지로 이동합니다</strong>
-			   						<input type="button" class="btn btn-primary" value="결제하기">
+			   						<input type="button" class="btn btn-primary" value="예약 연장 확인" onclick="payIt('admin');">
+			   						<c:if test="${sessionScope.mdto.email eq dto.email}">
+			   							<input type="button" class="btn btn-primary" value="결제하기" onclick="payIt('custom');">
+			   						</c:if>
 				    			</c:when>
 				    			<c:otherwise>
 			   						<strong class="red mr-2">내용을 모두 확인 하셨으면 결제하기 버튼을 눌러주세요.</strong>
@@ -177,7 +180,7 @@
         	if($('#payment').val() == 0){
         		alert("예약에 변화가 없습니다!");
         	}else if(who== 'admin'){
-				$('#payInfo').attr('action','../re/reserv_ext_confirm');
+				$('#payInfo').attr('action','../re/reserv_ext_admin');
 				$('#payInfo').submit();
         	}else{
 				$('#payInfo').attr('action','../re/reserv_ext_pay');

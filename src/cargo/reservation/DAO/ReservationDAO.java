@@ -268,7 +268,7 @@ public class ReservationDAO {
 		int result =0;
 		
 		String sql="update "+state
-				+ " set end_day =?, payment=?"
+				+ " set end_day =?, payment=payment+?"
 				+ " where "+primary.get(0)+"=?";
 		
 		try {
