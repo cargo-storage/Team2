@@ -14,6 +14,8 @@ import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminOverdueAction;
+import cargo.admin.action.AdminReservToItemsAction;
+import cargo.admin.action.AdminwarehousingCheckAction;
 import cargo.common.DTO.MemberDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
@@ -35,15 +37,16 @@ public class AdminController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		System.out.println("---------------------------------");
+		System.out.println("관리자 영역");
 		String contextPath=request.getContextPath();
 		
 		//가상요청 주소 가져오기
 		String RequestURI=request.getRequestURI();
-		System.out.println(RequestURI);
-		System.out.println(RequestURI.lastIndexOf("/"));
+		System.out.println("RequestURI: "+RequestURI);
+
 		
 		String command=RequestURI.substring(RequestURI.lastIndexOf("/"));
-		System.out.println(command);
+		System.out.println("command: "+command);
 		
 		ActionForward forward = null;
 		Action action= null;
@@ -93,6 +96,16 @@ public class AdminController extends HttpServlet {
 			//모달에서 예약 연장 버튼을 눌렀을 경우
 			}else if("/extend_reserv".equals(command)){
 				action = new AdminExtendReservAction();
+				forward = action.execute(request, response);
+			
+			//예약된 물건을 창고에 넣기 전 체크!
+			}else if("/warehousing_check".equals(command)){
+				action = new AdminwarehousingCheckAction();
+				forward = action.execute(request, response);
+			
+			//예약 -> 창고
+			}else if("/reserve_to_items".equals(command)){
+				action = new AdminReservToItemsAction();
 				forward = action.execute(request, response);
 			}
 			

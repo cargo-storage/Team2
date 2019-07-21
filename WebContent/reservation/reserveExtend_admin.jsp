@@ -127,7 +127,7 @@
         function check() {
 			var check = confirm("고객님이 결제를 완료하셨습니까?");
 			alert(check);
-			if(check== true){
+			if(check){
 		        var nearForm = $('#exinfo');
 		    	nearForm.attr("action", "../re/reserv_ext_confirm");
 		    	nearForm.submit();

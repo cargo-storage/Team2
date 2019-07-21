@@ -67,7 +67,7 @@ $(document).ready(function() {
 			dataType: 'text',
 			success : function(r) {
 				$('#result').val(r);
-				$('#path').val(window.location.pathname+window.location.search);
+				
 				var result = JSON.parse(r);
 				if(cate=='overdue') overdueModal(modal, result);
 				else if(cate=='예약') reservationModal(modal, result);
@@ -88,4 +88,10 @@ $(document).ready(function() {
 	nearForm.attr("action", "../ad/extend_reserv");
 	nearForm.submit();
   });//end of extend on click
+  
+  $('.toitems').on('click', function() {
+	var nearForm = $(this).closest('form');
+	nearForm.attr("action", "../ad/warehousing_check");
+	nearForm.submit();
+  });//end of toitems on click
 });//end of onload

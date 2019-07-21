@@ -10,24 +10,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>예약 연장 완료 - TEAM2 WAREHOUSE</title>
-        <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
         <!--Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
         <!--vendors styles-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
 	
-		<!-- jQuery UI CSS파일 --> 
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css"/>  
-		<!-- jQuery 기본 js파일 -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<!-- jQuery UI 라이브러리 js파일 -->
-		<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-		
-		
         <!-- Bootstrap CSS / Color Scheme -->
         <link rel="stylesheet" href="../css/default.css" id="theme-color">
         <!-- font-awesome CSS -->
@@ -119,12 +108,7 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
         
-
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+		<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     </body>
 </html>
