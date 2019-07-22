@@ -42,8 +42,20 @@ public class MarketController extends HttpServlet{
 			if(command.equals("/market.do")){ // 예약페이지 메인 - 창고현황
 				forward = new ActionForward();
 				forward.setPath("../market/market_main.jsp");
-				forward.setRedirect(false);
+			}else if(command.equals("/uploaditem.do")){
+				forward = new ActionForward();
+				forward.setPath("../market/market_post.jsp");
+			}else if(command.equals("/cart.do")){
+				forward = new ActionForward();
+				forward.setPath("../market/market_cart.jsp");
+			}else if(command.equals("/showcontent.do")){
+				forward = new ActionForward();
+				forward.setPath("../market/market_content.jsp");
 			}
+				
+				
+				
+				
 			
 			//모든 과정 후 페이지 이동부분
 			if(forward !=null){

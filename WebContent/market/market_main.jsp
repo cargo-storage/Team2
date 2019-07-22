@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,30 +10,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="../css/animate.css">
-    
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="../css/magnific-popup.css">
-
-    <link rel="stylesheet" href="../css/aos.css">
-
-    <link rel="stylesheet" href="../css/ionicons.min.css">
-
-    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="../css/jquery.timepicker.css">
-
-    
-    <link rel="stylesheet" href="../css/flaticon.css">
-    <link rel="stylesheet" href="../css/icomoon.css">
-    <link rel="stylesheet" href="../css/style.css">
-    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<!-- css/cdn links -->
+	<jsp:include page="market_link.jsp"></jsp:include>
     
     
     <style type="text/css">
@@ -69,6 +49,13 @@
     
     </style>
     
+    <c:set var="email" value="${sessionScope.mdto.email }"/>
+    <c:if test="${email==null }">
+    	<script type="text/javascript">
+    		alert("로그인 후 이용가능합니다.");
+    		location.href="${contextPath}/index.jsp?login=true";
+    	</script>
+    </c:if>
     
     
   </head>
@@ -99,9 +86,10 @@
 	    			
 	    				<div class="row">
 	    				
+	    					<!-- for문돌릴거임 -->
 			    			<div class="col-md-4">
 			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_1.jpg);"></a>
+										<a href="${contextPath }/mk/showcontent.do" class="img img-2" style="background-image: url(../images/image_1.jpg);"></a>
 										<div class="text text-2 pt-2 mt-3">
 				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
 				              <div class="meta-wrap">
@@ -115,7 +103,7 @@
 				            </div>
 									</div>
 			    			</div>
-			    			
+			    			<!-- for문돌릴거임 -->
 			    			
 			    			
 			    			<div class="col-md-4">
