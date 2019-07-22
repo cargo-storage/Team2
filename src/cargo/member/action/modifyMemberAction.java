@@ -28,6 +28,7 @@ public class modifyMemberAction implements Action {
 		int admin = Integer.parseInt(request.getParameter("admin"));
 		Timestamp reg_date = Timestamp.valueOf(request.getParameter("reg_date"));
 		
+		
 		MemberDTO mdto = new MemberDTO(email, pwd, name, phone, postCode, roadAddr, detailAddr, admin, reg_date);
 		MemberDAO mdao = new MemberDAO();
 		

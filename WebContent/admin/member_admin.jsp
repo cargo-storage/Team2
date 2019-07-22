@@ -120,15 +120,86 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="exampleModalLabel">회원 정보</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-body  mx-auto container-fluid">
+				<form action="../me/modifyMember.me"></form>
+					<table class='table mx-auto my-auto'>
+						<tr>
+							<th colspan="2" class="text-center table-primary">회원 정보</th>
+						</tr>
+						<tr>
+							<th>가입일</th>
+							<td>
+								<input type="text" name="reg_date" id="reg_date" class="form-control-plaintext dont" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<th>이름 <span class="sr-only text-danger">(관리자)</span></th>
+							<td>
+								<input type="text" name="name" id="name" class="form-control-plaintext" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>
+								<input type="text" name="email" id="email" class="form-control-plaintext dont" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<th>비밀번호</th>
+							<td>
+								<input type="text" name="pwd" id="pwd" class="form-control-plaintext" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td>
+								<input type="text" name="phone" id="phone" class="form-control-plaintext" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<th>우편 번호</th>
+							<td class="row">
+								<input type="text" name="postCode" id="postCode" class="form-control-plaintext ml-3 col-6 dont" value="" readonly="readonly">
+								<input type="hidden" class="btn btn-outline-primary col-5 modi" onclick="execPostcode()" value="우편번호 찾기">
+							</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td>
+								<input type="text" name="roadAddr" id="roadAddr" class="form-control-plaintext dont" value="" readonly="readonly">
+								<input type="text" name="detailAddr" id="detailAddr" class="form-control-plaintext" value="" readonly="readonly">
+							</td>
+						</tr>
+						<tr class="sr-only admin">
+							<th>관리자 여부</th>
+							<td class="row">
+								<div class="form-check">
+								  <input class="form-check-input dont" type="radio" name="admin" id="custom" value="0" checked="checked">
+								  <label class="form-check-label" for="custom">
+								    	고객
+								  </label>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="form-check">
+								  <input class="form-check-input dont" type="radio" name="admin" id="admin" value="1">
+								  <label class="form-check-label" for="admin">
+								    	관리자
+								  </label>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<input type="hidden" id="result" name="result">
+					<input type="hidden" name="state" value="member">
+				</div>
 				<div class="modal-footer">
+					<input class="btn btn-primary modi" type="hidden" onclick="register();" value="수정하기">
+					<button class="btn btn-info" type="button" onclick="makeChange();">고객 정보 수정</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -144,11 +215,94 @@
 	<!-- Page level plugin JavaScript-->
 	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+	<!-- Daum 주소 api -->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	
 	<!-- Custom scripts for all pages-->
 	<script src="${contextPath}/js/sb-admin.js"></script>
 
 	<!-- Demo scripts for this page-->
 	<script src="${contextPath}/js/datatables-custom.js"></script>
+	
+	<script type="text/javascript">
+		function makeChange() {
+			$('table input:not(.dont)').removeClass('form-control-plaintext').addClass('form-control').removeAttr('readonly');
+			$('.modi').attr('type', 'button');
+			$('.admin').removeClass('sr-only');
+		}
+		
+		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	    function execPostcode() {
+	    	new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('postCode').value = data.zonecode;
+	                document.getElementById("roadAddr").value = addr;
+	                
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("detailAddr").focus();
+	            }
+	        }).open();
+	    }
+		
+	    function register(){
+			var result = 1;
+			var email = $("#email").val();
+			var pwd = $("#pwd").val();
+			var name = $("#name").val();
+			var phone = $("#phone").val();
+			var postCode = $("#postCode").val();
+			var detailAddr = $("#detailAddr").val();
+			
+			if (email == '') result = 0;
+			if (pwd == '') result = 0;
+			if(name=='') result = 0;
+			else{
+				var reg = /^[가-힣]{2,6}$/;
+				if(!reg.test(name)) result=3;
+			}
+			if(phone =='') result = 0;
+			else{ 
+				var reg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
+				if(!reg.test(phone)) result = 2;
+			}
+			if(postCode==''||detailAddr=='') result = 0;
+			
+			if(result==0){
+				alert("필수 사항을 기입해주세요.");
+			}else if(result ==2){
+				alert("전화번호 양식이 맞지 않습니다.");
+			}else if(result ==3){
+				alert("올바른 이름을 입력해 주세요.");
+			}else{
+				var nearForm = $(this).closest('form');
+				nearForm.attr("action", "../ad/warehousing_check");
+				nearForm.submit();
+			}
+		}
+		
+	    $(document).ready(function() {
+    	  $('#detailModal').on('hide.bs.modal', function (event) {
+    		  $('table input:not(.dont)').removeClass('form-control').addClass('form-control-plaintext').attr('readonly','readonly');
+    		  $('.modi').attr('type', 'hidden');
+    		  $('#name').closest('tr').find('span').addClass('sr-only');
+    		  $('.admin').addClass('sr-only');
+    		});//모달 없어졌을 때..
+	    });//end of ready
+	</script>
 </body>
 </html>
