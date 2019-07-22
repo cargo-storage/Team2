@@ -135,25 +135,22 @@
 
       <div class="container">
 	<h1 align="center">Question</h1>
-     <table class="table">
+     <table class="table mx-3 table-hover table-bordered">
      	<tbody>
      		<tr>
 		        <td>no : ${bqDTO.no}</td>
    			</tr>
 			<tr>
-			   	<td>제목 :  ${bqDTO.subject}</td>
+			   	<td>제목 : ${bqDTO.subject}</td>
 			</tr>
 			<tr>
-			   	<td>내용 :</td>
-			   	<td>${bqDTO.content}</td>
+			   	<td>내용 :${bqDTO.content}</td>
 			</tr>
 			<tr>
-			   	<td>작성자 :</td>
-			   	<td>${bqDTO.name} ${bqDTO.email } </td>
+			   	<td>작성자 :${bqDTO.name} ${bqDTO.email } </td>
 			</tr>
 			<tr>
-			   	<td>작성일 :</td>
-			   	<td>${bqDTO.date}</td>
+			   	<td>작성일 : ${bqDTO.date}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -161,6 +158,8 @@
 		<c:if test="${bqDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >
 			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/QuestionModifyFormAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">수정</a>
 			<a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/QuestionDelAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">삭제</a>
+		</c:if>
+		<c:if test="${sessionScope.mdto.admin==1}" >
 			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/QuestionReplayFormAction.bo?no=${bqDTO.no}">답변</a>
 		</c:if>
 			<a class="btn btn-primary btn-sm" href="${contextPath}/bo/QuestionListAction.bo">목록</a>

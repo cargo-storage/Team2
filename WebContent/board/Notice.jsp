@@ -122,7 +122,7 @@
       <li class="sidebar-brand">
         <a href="CustomerSupport.jsp">고객지원</a>
       </li>
-		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+		<li><a href="${contextPath}/NoticeListAction.bo">공지사항</a></li>
 		<li><a href="FAQ.jsp">자주하는 질문</a></li>
 		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
 		<li><a href="#">1:1 실시간 상담</a></li>

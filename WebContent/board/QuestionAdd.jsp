@@ -79,6 +79,7 @@
   }
      
    </style>
+   
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
             <a class="navbar-brand" href="index.html">
                 TEAM2 WAREHOUSE
@@ -111,6 +112,17 @@
             </div>
         </nav>
         	<jsp:include page="../inc/header.jsp"></jsp:include>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script> 
+<script type="text/javascript"> 
+
+function fn_check(obj){ 
+  var str = 1; 
+  if(obj.checked){ 
+    str = "0; 
+ } 
+ document.getElementById("value").value = str; 
+} 
+</script> 
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
@@ -157,8 +169,9 @@
 		</div>
 		<div class="form-group" align="left">
 			<label for="secret">비밀글</label>
-			<input class="form-control" name="secret" id="secret" type="text"/>
+			<input class="form-control" name="secret" id="secret" type="checkbox" onclick="fn_check(this)"/>
 		</div>
+		
 		
 		<div align="right">
 			<input class="btn btn-primary btn-sm"  type="submit" value="글작성"/>

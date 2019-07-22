@@ -258,10 +258,10 @@ public class BoardqDAO {
 				   pstmt.setString(3, bqDTO.getEmail());
 				   pstmt.setString(4, bqDTO.getSubject());
 				   pstmt.setString(5, bqDTO.getContent());
-				   pstmt.setInt(6, bqDTO.getRe_ref());			//부모글 그룹번호 re_ref사용
-				   pstmt.setInt(7, bqDTO.getRe_lev()+1);		//부모글의 re_lev에 +1을 하여 들여쓰기
-				   pstmt.setInt(8, bqDTO.getRe_seq()+1);		//부모글의 re_seq에 +1을하여 답글을 단순서 정하기
-				   pstmt.setInt(9, bqDTO.getSecret());				
+				   pstmt.setInt(6, bqDTO.getSecret());
+				   pstmt.setInt(7, bqDTO.getRe_ref());			//부모글 그룹번호 re_ref사용
+				   pstmt.setInt(8, bqDTO.getRe_lev()+1);		//부모글의 re_lev에 +1을 하여 들여쓰기
+				   pstmt.setInt(9, bqDTO.getRe_seq()+1);		//부모글의 re_seq에 +1을하여 답글을 단순서 정하기	
 				   pstmt.setTimestamp(10, bqDTO.getDate());
 				   //답변달기 실행
 				   pstmt.executeUpdate();

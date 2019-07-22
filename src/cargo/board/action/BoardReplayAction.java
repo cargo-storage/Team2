@@ -16,7 +16,6 @@ public class BoardReplayAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		int re_ref = Integer.parseInt(request.getParameter("re_ref"));
 		
 		BoardqDTO bqDTO = new BoardqDTO();
 		String name = request.getParameter("name");
@@ -33,13 +32,12 @@ public class BoardReplayAction implements Action {
 		bqDTO.setSecret(secret);
 		bqDTO.setDate(new Timestamp (System.currentTimeMillis()));
 		bqDTO.setRe_ref(no);
-		bqDTO.setRe_lev(re_ref);
+
 		
 
 		System.out.println(subject);
 		System.out.println(content);
 		System.out.println(secret);
-		System.out.println(re_ref);
 		
 		BoardqDAO bqDAO = new BoardqDAO();
 		bqDAO.ReplayBoardq(bqDTO);
