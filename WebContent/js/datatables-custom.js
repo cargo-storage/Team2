@@ -18,7 +18,7 @@ function reservationModal(modal, result) {
 	modal.find('.res_day').text(result.res_day);
 	modal.find('.start_day').text(result.start_day);
 	modal.find('.end_day').text(result.end_day);
-	modal.find('.payment').text(result.payment);
+	modal.find('.payment').text(result.payment.toLocaleString()+"원");
 	modal.find('.name').text(result.name);
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
@@ -27,15 +27,72 @@ function reservationModal(modal, result) {
 }//end of reservationModal
 
 function itemsModal(modal,result) {
+	$('.calendar').pignoseCalendar({
+    	lang: 'ko',
+    	multiple: true,
+		init: function(context){
+	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+	    }
+    });//end of pignoseCalendar
 	
+	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
+	$('.pignose-calendar-body').addClass('clickX');
+	
+	modal.find('.item').text(result.item);
+	modal.find('.start_day').text(result.start_day);
+	modal.find('.end_day').text(result.end_day);
+	modal.find('.payment').text(result.payment.toLocaleString()+"원");
+	modal.find('.item_price').text(result.item_price.toLocaleString()+"원");
+	modal.find('.name').text(result.name);
+	modal.find('.phone').text(result.phone);
+	modal.find('.email').text(result.email);
+	modal.find('.postCode').text(result.postCode);
+	modal.find('.addr').text(result.roadAddr + " " + result.detailAddr);
 }//end of itemsModal
 
 function closedModal(modal,result) {
+	$('.calendar').pignoseCalendar({
+		lang: 'ko',
+		theme: 'dark',
+		multiple: true,
+		init: function(context){
+			$(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+		}
+	});//end of pignoseCalendar
 	
+	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
+	$('.pignose-calendar-body').addClass('clickX');
+	
+	modal.find('.item').text(result.item);
+	modal.find('.start_day').text(result.start_day);
+	modal.find('.end_day').text(result.end_day);
+	modal.find('.return_day').text(result.return_day);
+	modal.find('.payment').text(result.payment.toLocaleString()+"원");
+	modal.find('.item_price').text(result.item_price.toLocaleString()+"원");
+	modal.find('.name').text(result.name);
+	modal.find('.phone').text(result.phone);
+	modal.find('.email').text(result.email);
+	modal.find('.postCode').text(result.postCode);
+	modal.find('.addr').text(result.roadAddr + " " + result.detailAddr);
 }//end of closedModal
 
 function MemberModal(modal,result) {
-	
+	if(result.admin==1){
+		modal.find('#name').closest('tr').find('span').removeClass('sr-only');
+		$('#custom').removeAttr("checked","checked");
+		$('#admin').attr("checked","checked");
+	}else{
+		$('#admin').removeAttr("checked","checked");
+		$('#custom').attr("checked","checked");
+	}
+	modal.find('#reg_date').val(result.reg_date);
+	modal.find('#name').val(result.name);
+	modal.find('#phone').val(result.phone);
+	modal.find('#email').val(result.email);
+	modal.find('#pwd').val(result.pwd);
+	modal.find('#postCode').val(result.postCode);
+	modal.find('#roadAddr').val(result.roadAddr);
+	modal.find('#detailAddr').val(result.detailAddr);
 }//end of memberModal
 
 $(document).ready(function() {
@@ -80,6 +137,7 @@ $(document).ready(function() {
 	});//모달 나타났을때...
   
   $('#detailModal').on('hide.bs.modal', function (event) {
+	  $('#postCode').siblings('input').attr('type', 'hidden');
 	  $('#dataTable tbody tr.selected').removeClass('selected');
 	});//모달 없어졌을 때..
   

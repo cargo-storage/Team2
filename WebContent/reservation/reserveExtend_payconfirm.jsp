@@ -95,6 +95,9 @@
 			    	<tr>
 			    		<td colspan="2">
 			    			<a href="../index.jsp" class="btn btn-primary">메인으로 돌아가기</a>
+			    		<c:if test="${sessionScope.mdto.admin ==1}">
+			    			<a href="${contextPath}/ad/admin_main" class="btn btn-primary">관리자 메인으로</a>
+			    		</c:if>
 			    		</td>
 			    	</tr>
 			    </table>
