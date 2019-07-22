@@ -16,6 +16,7 @@ import cargo.board.action.BoardModifyAction;
 import cargo.board.action.BoardModifyFormAction;
 import cargo.board.action.BoardReplayAction;
 import cargo.board.action.BoardReplayFormAction;
+import cargo.board.action.BoardSearchAction;
 import cargo.board.action.BoardViewAction;
 import cargo.board.action.NoticeAddAction;
 import cargo.board.action.NoticeAddFormAction;
@@ -23,6 +24,7 @@ import cargo.board.action.NoticeDelAction;
 import cargo.board.action.NoticeListAction;
 import cargo.board.action.NoticeModifyAction;
 import cargo.board.action.NoticeModifyFromAction;
+import cargo.board.action.NoticeSearchAction;
 import cargo.board.action.NoticeViewAction;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
@@ -118,6 +120,15 @@ public class BoardController extends HttpServlet{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else if (command.equals("/QuestionSearchAction.bo")) {
+					action = new BoardSearchAction();
+					try {
+						forward=action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				
+				
 				
 				//-------------------------------Notice	시작
 			}else if (command.equals("/NoticeAddFormAction.bo")) {
@@ -164,6 +175,13 @@ public class BoardController extends HttpServlet{
 				}
 			}else if (command.equals("/NoticeDelAction.bo")) {
 				action = new NoticeDelAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if (command.equals("/NoticeSearchAction.bo")) {
+				action = new NoticeSearchAction();
 				try {
 					forward=action.execute(request, response);
 				} catch (Exception e) {

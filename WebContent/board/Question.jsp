@@ -125,15 +125,13 @@
 		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
 		<li><a href="FAQ.jsp">자주하는 질문</a></li>
 		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
-		<li><a href="#">1:1 실시간 상담</a></li>
+		<li><a href="#">1:1 실시간 상담</a></li> 
 		<li><a href="ViewMap.jsp">오시는 길</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
 </nav>
 <!-- 왼쪽메뉴 -->
-	<%int totalRowCount = 0;%> 
-<div>전체행의 수 : <%=totalRowCount%></div>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
            <div class="container" >
       <div class="boardq">
@@ -179,17 +177,19 @@
                   <tr>
                      <td colspan="2">
                         <ul class="pagination">
-                          <li class="page-item disabled"><a class="page-link" href="${contextPath}/bo.QuestionList.bo=?currentPage=${currentPage-1 }&pagePerRow=${pagePerRow}"> < </a></li>
-                          
-                          <li class="page-item"><a class="page-link" href="${contextPath}/bo.QuestionList.bo=?currentPage=0&pagePerRow=${pagePerRow}">${currentPage }</a></li>
-                          
-                          <li class="page-item"><a class="page-link" href="${contextPath}/bo.QuestionList.bo=?currentPage=${currentPage+1 }&pagePerRow=${pagePerRow}">></a></li>
+                        <c:if test="${currentPage > 1}">
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage-1}"> < </a></li>
+                        </c:if>  
+                        <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage}"> ${currentPage} </a></li>
+                        <c:if test="${currentPage < lastPage}"> 
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage+1}">></a></li>
+                        </c:if>																				
                         </ul>
                      </td>
                      <td colspan="3">
                                            
-                      	 <form action="Questionsearch.jsp">
-                         <input type="text" name="search" class="input_box" size="10">
+                      	 <form action="${pageContext.request.contextPath}/bo/QuestionSearchAction.bo">
+                         <input type="text" name="search" class="input_box" size="9">
                      	   <input type="submit" value="검색" class="btn btn-primary btn-sm">
                      	   <c:if test="${bqDTO.email != sessionScope.mdto.email}">
                          <a href="${contextPath}/bo/QuestionAddForm.bo" class="btn btn-primary btn-sm">문의하기</a>

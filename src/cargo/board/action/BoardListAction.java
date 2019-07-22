@@ -21,9 +21,12 @@ public class BoardListAction implements Action {
 		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+        
+       
+        
 		BoardqDAO bdDAO = new BoardqDAO();
 		int totalRowCount = bdDAO.getQuestionCount();
-		int pagePerRow = 15;
+		int pagePerRow = 16;
 		
 		ArrayList<BoardqDTO> list = bdDAO.getQuestionList(currentPage, pagePerRow);
 		// 현재페이지currentPage  총 열 개수totalRowCount  페이지당행 pagePerRow 마지막페이지lastPage
@@ -36,7 +39,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("list", list);
 	    
-	    
+		
 	    ActionForward forward = new ActionForward();	
 	   
 		forward.setPath("../board/Question.jsp");

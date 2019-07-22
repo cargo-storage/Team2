@@ -174,18 +174,20 @@
                <tfoot>
                   <tr>
                      <td colspan="2">
-                        <ul class="pagination">
-                          <li class="page-item disabled"><a class="page-link" href="#"> < </a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">></a></li>
+                         <ul class="pagination">
+                        <c:if test="${currentPage > 1}">
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage-1}"> < </a></li>
+                        </c:if>  
+                        <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage}"> ${currentPage} </a></li>
+                        <c:if test="${currentPage < lastPage}"> 
+                          <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage+1}">></a></li>
+                        </c:if>																				
                         </ul>
                      </td>
                      <td colspan="3">
                                            
-                      	 <form action="noticesearch.jsp">
-                         <input type="text" name="search" class="input_box" size="10">
+                      	 <form action="${pageContext.request.contextPath}/bo/NoticeSearchAction.bo">
+                         <input type="text" name="search" class="input_box" size="9">
                      	   <input type="submit" value="검색" class="btn btn-primary btn-sm">
                        <c:if test="${sessionScope.mdto.admin==1}">
                          <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-sm">작성하기</a>

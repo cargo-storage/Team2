@@ -28,8 +28,8 @@
            
    #page-wrapper {
     padding-left: 250px;
-  	padding-top: 83px;
-  	background-color: #999;
+     padding-top: 83px;
+     background-color: #999;
    }
   
   #sidebar-wrapper {
@@ -109,7 +109,7 @@
                 </form>
             </div>
         </nav>
-        	<jsp:include page="../inc/header.jsp"></jsp:include>
+           <jsp:include page="../inc/header.jsp"></jsp:include>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
@@ -122,11 +122,11 @@
       <li class="sidebar-brand">
         <a href="CustomerSupport.jsp">고객지원</a>
       </li>
-		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
-		<li><a href="FAQ.jsp">자주하는 질문</a></li>
-		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
-		<li><a href="#">1:1 실시간 상담</a></li>
-		<li><a href="ViewMap.jsp">오시는 길</a></li>
+      <li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+      <li><a href="FAQ.jsp">자주하는 질문</a></li>
+      <li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
+      <li><a href="#">1:1 실시간 상담</a></li>
+      <li><a href="ViewMap.jsp">오시는 길</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
@@ -134,37 +134,37 @@
 <!-- 왼쪽메뉴 -->
 
       <div class="container">
-	<h1 align="center">공지사항</h1>
+   <h1 align="center">공지사항</h1>
      <table class="table">
-     	<tbody>
-     		<tr>
-		        <td>no : ${bnDTO.no}</td>
-   			</tr>
-			<tr>
-			   	<td>제목 :  ${bnDTO.subject}</td>
-			</tr>
-			<tr>
-			   	<td>내용 :</td>
-			   	<td>${bnDTO.content}</td>
-			</tr>
-			<tr>
-			   	<td>작성자 :</td>
-			   	<td>${bnDTO.name}</td>
-			</tr>
-			<tr>
-			   	<td>작성일 :</td>
-			   	<td>${bnDTO.date}</td>
-			</tr>
-		</tbody>
-	</table>
-		<div align="right">
-		<c:if test="${bnDTO.email != sessionScope.email}">
-			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/NoticeModifyFormAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">수정</a>
-			
-			<a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/NoticeDelAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">삭제</a>
-		</c:if>
-			<a class="btn btn-primary btn-sm" href="${contextPath}/bo/NoticeListAction.bo">목록</a>
-		</div>
+        <tbody>
+           <tr>
+              <td>no : ${bnDTO.no}</td>
+            </tr>
+         <tr>
+               <td>제목 :  ${bnDTO.subject}</td>
+         </tr>
+         <tr>
+               <td>내용 :</td>
+               <td>${bnDTO.content}</td>
+         </tr>
+         <tr>
+               <td>작성자 :</td>
+               <td>${bnDTO.name}</td>
+         </tr>
+         <tr>
+               <td>작성일 :</td>
+               <td>${bnDTO.date}</td>
+         </tr>
+      </tbody>
+   </table>
+      <div align="right">
+      <c:if test="${bnDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >
+         <a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/NoticeModifyFormAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">수정</a>
+         
+         <a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/NoticeDelAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">삭제</a>
+      </c:if>
+         <a class="btn btn-primary btn-sm" href="${contextPath}/bo/NoticeListAction.bo">목록</a>
+      </div>
 </div>
 
      

@@ -10,7 +10,7 @@ import cargo.common.DTO.BoardnDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 
-public class NoticeListAction implements Action {
+public class NoticeSearchAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,12 +20,17 @@ public class NoticeListAction implements Action {
 		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+        
+       
+
+		String search = request.getParameter("search");
+
 		BoardnDAO bnDAO = new BoardnDAO();
 		int totalRowCount = bnDAO.getNoticeCount();
 		int pagePerRow = 16;
 		
-		ArrayList<BoardnDTO> list = bnDAO.getNoticeList(currentPage, pagePerRow);
-		
+		ArrayList<BoardnDTO> list = bnDAO.getSearch(currentPage, pagePerRow, search);
+		// 현재페이지currentPage  총 열 개수totalRowCount  페이지당행 pagePerRow 마지막페이지lastPage
 		int lastPage = totalRowCount/pagePerRow;
 	    if(totalRowCount % pagePerRow != 0) {
 	        lastPage++;
@@ -35,7 +40,7 @@ public class NoticeListAction implements Action {
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("list", list);
 	    
-	    
+		
 	    ActionForward forward = new ActionForward();	
 	   
 		forward.setPath("../board/Notice.jsp");

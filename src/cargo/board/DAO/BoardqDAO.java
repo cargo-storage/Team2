@@ -64,8 +64,8 @@ public class BoardqDAO {
 	         }
 	         //insert
 	         sql = "insert into boardq"
-	               +"(no, name,email, subject, content, secret ,re_ref, re_lev, re_seq, date,prent)"
-	               +"values(?,?,?,?,?,?,?,0,0,?,?)";
+	               +"(no, name,email, subject, content, secret ,re_ref, re_lev, re_seq, date)"
+	               +"values(?,?,?,?,?,?,?,0,0,?)";
 	         
 	         pstmt=con.prepareStatement(sql);
 	         pstmt.setInt(1, no); //num
@@ -76,7 +76,6 @@ public class BoardqDAO {
 	         pstmt.setInt(6, bqDTO.getSecret());
 	         pstmt.setInt(7, no);   //num 주글번호 기준 re_ref그룹번호
 	         pstmt.setTimestamp(8, bqDTO.getDate());
-	         pstmt.setInt(9, bqDTO.getPrent());
 	       
 	         
 	         //실행
@@ -187,13 +186,12 @@ public class BoardqDAO {
 		
 			try {
 				getConnection();
-				sql = "update boardq SET email=?, subject=?, content=?, secret=? where no=?";
+				sql = "update boardq SET subject=?, content=?, secret=? where no=?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, bqDTO.getEmail());
-				pstmt.setString(2, bqDTO.getSubject());
-				pstmt.setString(3, bqDTO.getContent());
-				pstmt.setInt(4, bqDTO.getSecret());
-				pstmt.setInt(5, bqDTO.getNo());
+				pstmt.setString(1, bqDTO.getSubject());
+				pstmt.setString(2, bqDTO.getContent());
+				pstmt.setInt(3, bqDTO.getSecret());
+				pstmt.setInt(4, bqDTO.getNo());
 				row = pstmt.executeUpdate();
 				System.out.println("수정완료");
 			} catch (Exception e) {
@@ -244,7 +242,6 @@ public class BoardqDAO {
 					   		//답변 달 답변글번호를 1로 지정
 					   no=1;
 				   }
-				   
 				   /*re_seq 답글순서 재배치*/
 				   //부모글 그룹과 같은 그룹이면서 부모글의 seq값보다 큰 답변글들은 seq값을 1증가시킨다
 				   sql="update boardq set re_seq=re_seq+1 where re_ref=? and re_seq>?";
@@ -276,9 +273,35 @@ public class BoardqDAO {
 			}
 		   }
 
-		
-		
-		
+		public ArrayList<BoardqDTO> getSearch(int currentPage, int pagePerRow, String search) {
+			ArrayList<BoardqDTO> list = new ArrayList<BoardqDTO>();
+			 
+			try {
+				getConnection();
+				sql = "select * from boardq where subject like ? order by re_ref desc, re_seq asc limit ?,?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+search+"%");
+				pstmt.setInt(2, (currentPage-1)*pagePerRow);
+				pstmt.setInt(3, pagePerRow);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					BoardqDTO bqDto = new BoardqDTO();
+					bqDto.setNo(rs.getInt("no"));
+					bqDto.setSubject(rs.getString("subject"));
+					bqDto.setName(rs.getString("name"));
+					bqDto.setDate(rs.getTimestamp("date"));
+					bqDto.setSecret(rs.getInt("secret"));
+					list.add(bqDto);		
+				}		
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {	
+				closeDB();
+			}
+			return list;
+		}
 	
 	
 	

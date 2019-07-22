@@ -14,7 +14,7 @@ public class NoticeModifyFromAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		int no=0;
-		String name = request.getParameter("name");
+		
 		if(request.getParameter("no") == null) {
 		    response.sendRedirect(request.getContextPath()+"/bo/NoticeListAction.bo");
 		}else {
