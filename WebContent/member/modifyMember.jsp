@@ -84,6 +84,7 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			
 			//비밀번호 갱신 숨김
 			$("#check").hide();
 			
@@ -91,7 +92,7 @@
 			$("#currentPwd").blur(function(){
 				var currentPwd = $(this).val();
 				if(currentPwd ==''){
-					$("#currentPwd").text("필수 입력 사항입니다.");
+					$("#currentPwdErr").text("필수 입력 사항입니다.");
 				}else{
 					$.ajax({
 						type: "post",
@@ -194,6 +195,7 @@
 				$("#currentPwdErr").text("필수 입력 사항입니다.");
 				result = 0;
 			}
+			
 			if(newPwd.val()=='') {
 				$("#newPwd").val(currentPwd.val());
 			} 
@@ -217,6 +219,14 @@
 				return false;
 			} 
 			
+		}
+
+		function Enter_Remove(){ // input 에서 enter 입력시 다음에 있는 button이 호출되는 현상때문에 
+
+		     // 엔터키의 코드는 13입니다.
+			if(event.keyCode == 13){
+				return false;
+			}
 		}
 	</script>
 </head>
@@ -255,7 +265,7 @@
 						</div>
 						<div class="form-group">
 							<label for="currentPwd">기존 비밀번호</label> 
-							<input type="password" class="form-control" id="currentPwd" placeholder="비밀번호를 입력해 주세요">
+							<input type="password" class="form-control" id="currentPwd" placeholder="비밀번호를 입력해 주세요" onkeydown="return Enter_Remove();">
 							<input type="button" class="pwdCheck" value="비밀번호 변경" onclick="pwdCheck()">
 							<span id="currentPwdErr" class="help-block"></span>
 						</div>

@@ -88,9 +88,9 @@ public class MemberController extends HttpServlet {
 				forward= new ActionForward();
 				String find = request.getParameter("find");
 				if(find.equals("email"))
-					forward.setPath("/member/findMember.jsp?find=email");
+					forward.setPath("/member/findMember.jsp?find=email"); // 이메일 찾기 페이지
 				else if(find.equals("pwd"))
-					forward.setPath("/member/findMember.jsp?find=pwd");
+					forward.setPath("/member/findMember.jsp?find=pwd"); // 비밀번호 찾기 페이지
 			}	else if (command.equals("/emailSearch.me")) { // 이메일 찾기
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);

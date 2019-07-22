@@ -23,6 +23,7 @@ public class PwdCheckAction implements Action {
 		forward.setAjax(true);
 		
 	
+	
 		int state = 0; //0: 비밀번호 틀림, 1: 비밀번호 같음
 		if(mdto.getPwd().equals(currentPwd))
 			state =	1;
