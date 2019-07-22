@@ -117,15 +117,23 @@
 				color: red;
 				font-size: 11px;
 			}
+					 	
         </style>
         
         <script type="text/javascript"> //login.js
 			$(function(){
-				
+			 	/* 마이 페이지 hover */
+			 	$("#navbardrop").mouseenter(function(){
+			 		$(".dropdown-menu").addClass("show");
+			 	});
+			 	$("#dropdown-menu").mouseleave(function(){
+			 		$(this).removeClass("show");
+			 	});
+	
 				if(${param.login!=null}){
 					$("#loginModal").modal('toggle');
 				}
-		
+
 				/* 이메일 저장 */
 				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 			    var key = getCookie("key");
@@ -279,7 +287,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.html">
+       <a class="navbar-brand" href="index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -313,11 +321,16 @@
             	</li> 
             </c:if>
            	<c:choose>
-               	<c:when test="${email != null }">
-               		<li class="nav-item">
-                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
-               		</li>               
-              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+               	<c:when test="${email ne null }">
+	               	<li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
+				      <div class="dropdown-menu" id="dropdown-menu">
+				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				      </div>
+				    </li>               
+              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">
@@ -914,9 +927,9 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="${contextPath }/member/findMember.jsp?find=email">이메일찾기</a></span> | 
-								<span><a href="${contextPath }/member/findMember.jsp?find=pwd">비밀번호찾기</a></span> | 
-								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
+								<span><a href="${contextPath }/me/findMember.me?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/me/findMember.me?find=pwd">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/me/join.me">회원가입</a></span>
 							</div>
 						</div>
 					</div>

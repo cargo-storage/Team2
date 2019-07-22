@@ -16,9 +16,12 @@ import cargo.member.action.EmailSearchAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
-import cargo.member.action.modifyMemberAction;
-import cargo.member.action.pwdCheckAction;
-import cargo.member.action.pwdSearchAction;
+import cargo.member.action.ModifyCheckAction;
+import cargo.member.action.ModifyMemberAction;
+import cargo.member.action.PwdCheckAction;
+import cargo.member.action.PwdSearchAction;
+import cargo.member.action.LeaveMemberAction;
+import cargo.member.action.MemberStatusAction;
 
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -61,8 +64,14 @@ public class MemberController extends HttpServlet {
 
 		try {
 			if (command.equals("/join.me")) { // 회원 가입
-				action = new JoinAction();
-				forward = action.execute(request, response);
+				String join = request.getParameter("join");
+				if(join==null){
+					forward = new ActionForward();
+					forward.setPath("/member/join.jsp");
+				}else{
+					action = new JoinAction();
+					forward = action.execute(request, response);
+				}
 			} else if (command.equals("/login.me")) { // 로그인
 				action = new LoginAction();
 				forward = action.execute(request, response);
@@ -75,22 +84,42 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/emailCheck.me")) { // 이메일 중복 확인
 				action = new EmailCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/emailSearch.me")) { // 이메일 찾기
+			} else if(command.equals("/findMember.me")){
+				forward= new ActionForward();
+				String find = request.getParameter("find");
+				if(find.equals("email"))
+					forward.setPath("/member/findMember.jsp?find=email"); // 이메일 찾기 페이지
+				else if(find.equals("pwd"))
+					forward.setPath("/member/findMember.jsp?find=pwd"); // 비밀번호 찾기 페이지
+			}	else if (command.equals("/emailSearch.me")) { // 이메일 찾기
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdSearch.me")) { // 비밀번호 찾기
-				action = new pwdSearchAction();
+				action = new PwdSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdCheck.me")) { // 기존 비밀번호 확인
-				action = new pwdCheckAction();
-				forward = action.execute(request, response);
-			} else if (command.equals("/mypage.me")) { //마이 페이지
-				action = new pwdSearchAction();
+				action = new PwdCheckAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
-				action = new modifyMemberAction();
+				action = new ModifyMemberAction();
 				forward = action.execute(request, response);
+			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
+				action = new ModifyCheckAction();
+				forward = action.execute(request, response);
+			} else if(command.equals("/mypage.me")) {
+				forward = new ActionForward();
+				String category = request.getParameter("category");
+				if(category.equals("info")) // 내 정보
+					forward.setPath("/member/mypage.jsp");
+				else if(category.equals("leave")) // 회원 탈퇴
+					forward.setPath("/member/mypage.jsp?content=leave");
+			}	else if (command.equals("/memberStatus.me")) { // 마이페이지 현황
+				action = new MemberStatusAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
+				
 			}
+			
 
 			// 모든 과정 후 페이지 이동부분
 			if (forward != null) {
