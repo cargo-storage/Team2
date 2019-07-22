@@ -44,20 +44,13 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
 					<div class="dropdown-menu" id="dropdown-menu">
-						<a class="dropdown-item" href="${contextPath }/member/mypage.jsp">내 정보</a>
+						<a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
 						<a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
 						<a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
 					</div>
 				</li>              
               	<a href="${contextPath }/me/logout.me" id="btn-logout" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
 				</c:if>
-	            <c:set var="email" value="${mdto.email }"/>
-	            <c:set var="name" value="${mdto.name }"/>
-	            <c:if test="${email eq null }">
-	                <div class="text-center">
-	                	<a href="#loginModal" class="btn btn-primary btn-navbar trigger-btn" data-toggle="modal">로그인/회원가입</a>
-	           		</div>
-           		</c:if> 
               </ul>
         </div>
     </nav>

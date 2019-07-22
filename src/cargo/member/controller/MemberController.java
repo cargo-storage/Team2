@@ -64,8 +64,14 @@ public class MemberController extends HttpServlet {
 
 		try {
 			if (command.equals("/join.me")) { // 회원 가입
-				action = new JoinAction();
-				forward = action.execute(request, response);
+				String join = request.getParameter("join");
+				if(join==null){
+					forward = new ActionForward();
+					forward.setPath("/member/join.jsp");
+				}else{
+					action = new JoinAction();
+					forward = action.execute(request, response);
+				}
 			} else if (command.equals("/login.me")) { // 로그인
 				action = new LoginAction();
 				forward = action.execute(request, response);
@@ -78,7 +84,14 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/emailCheck.me")) { // 이메일 중복 확인
 				action = new EmailCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/emailSearch.me")) { // 이메일 찾기
+			} else if(command.equals("/findMember.me")){
+				forward= new ActionForward();
+				String find = request.getParameter("find");
+				if(find.equals("email"))
+					forward.setPath("/member/findMember.jsp?find=email");
+				else if(find.equals("pwd"))
+					forward.setPath("/member/findMember.jsp?find=pwd");
+			}	else if (command.equals("/emailSearch.me")) { // 이메일 찾기
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/pwdSearch.me")) { // 비밀번호 찾기
@@ -93,12 +106,18 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
 				action = new ModifyCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/memberStatus.me")) { // 마이페이지 현황
+			} else if(command.equals("/mypage.me")) {
+				forward = new ActionForward();
+				String category = request.getParameter("category");
+				if(category.equals("info")) // 내 정보
+					forward.setPath("/member/mypage.jsp");
+				else if(category.equals("leave")) // 회원 탈퇴
+					forward.setPath("/member/mypage.jsp?content=leave");
+			}	else if (command.equals("/memberStatus.me")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
-				action = new LeaveMemberAction();
-				forward = action.execute(request, response);
+				
 			}
 			
 

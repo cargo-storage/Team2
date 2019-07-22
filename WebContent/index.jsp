@@ -325,7 +325,7 @@
 	               	<li class="nav-item dropdown">
 				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
 				      <div class="dropdown-menu" id="dropdown-menu">
-				        <a class="dropdown-item" href="${contextPath }/member/mypage.jsp">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
 				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
 				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
 				      </div>
@@ -927,9 +927,9 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="${contextPath }/member/findMember.jsp?find=email">이메일찾기</a></span> | 
-								<span><a href="${contextPath }/member/findMember.jsp?find=pwd">비밀번호찾기</a></span> | 
-								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
+								<span><a href="${contextPath }/me/findMember.me?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/me/findMember.me?find=pwd">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/me/join.me">회원가입</a></span>
 							</div>
 						</div>
 					</div>

@@ -37,7 +37,7 @@ public class MemberStatusAction implements Action {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("currentPage", currentPage);
-		forward.setPath("../member/mypage.jsp?content=memberStatus.jsp");
+		forward.setPath("/member/mypage.jsp?content=memberStatus.jsp");
 		
 		return forward;
 	}
