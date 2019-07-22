@@ -10,12 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
-import cargo.reservation.action.ResInfoAction;
-import cargo.reservation.action.ResInfoMoreAction;
-import cargo.reservation.action.ResPayAction;
-import cargo.reservation.action.ResCheckAction;
-import cargo.reservation.action.ResApplyAction;
-import cargo.reservation.action.SimplepaymentAction;
 
 public class MarketController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
