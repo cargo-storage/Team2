@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import cargo.admin.DTO.AdminDTO;
 import cargo.common.DTO.MemberDTO;
 import cargo.member.action.SMTPAuthenticator;
 
@@ -53,7 +54,7 @@ public class MemberDAO {
 	}// end of free
 
 	public int insertMember(MemberDTO mdto) { // 회원 가입
-		int result = 0; // 0: 실패, 1: 성공
+		int state = 0; // 0: 실패, 1: 성공
 
 		try {
 			con = connect();
@@ -70,7 +71,7 @@ public class MemberDAO {
 			pstmt.setInt(8, mdto.getAdmin());
 			pstmt.setTimestamp(9, mdto.getReg_date());
 
-			result = pstmt.executeUpdate();
+			state = pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			System.out.println("insertMember()에서 오류: " + e);
@@ -78,11 +79,11 @@ public class MemberDAO {
 			freeResource();
 		}
 
-		return result;
+		return state;
 	}
 
-	public int LoginMember(String email, String pwd) { // 로그인, 기존 비밀번호 확인
-		int state = 0; // 0: 아이디 없음, -1: 비밀번호 틀림, 1: 성공
+	public int LoginMember(String email, String pwd) { // 로그인, 기존 비밀번호 확인, 회원정보 수정
+		int state = 0; // 0: 이메일 없음, -1: 비밀번호 틀림, 1: 성공
 		try {
 			con = connect();
 			query = "SELECT * FROM member WHERE email=?";
@@ -250,6 +251,110 @@ public class MemberDAO {
 		} catch (Exception e) {
 			System.out.println("updateMember()에서 오류: " + e);
 		} finally {
+			freeResource();
+		}
+		return state;
+	}
+
+	public ArrayList memberStatus(String email, String category) { // 사용/예약 현황
+		ArrayList<AdminDTO> list = new ArrayList<>();
+		String item =
+				"SELECT '보관' as state, m.name, m.phone, m.email,"
+				+ " -1 as num, i.item, i.house,"
+				+ " null as res_day, i.start_day, i.end_day, null as return_day,"
+				+ " i.payment, i.item_price"
+				+ " FROM items as i"
+				+ " LEFT JOIN member as m"
+				+ " ON i.email = m.email"
+				+ " WHERE m.email=?";
+		
+		String cld=
+				"SELECT '완료' as state, ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
+				+ " c.email, -1 as num, c.item, c.house,"
+				+ " null as res_day, c.start_day, c.end_day, c.return_day,"
+				+ " c.payment, c.item_price"
+				+ " FROM closed as c"
+				+ " LEFT JOIN member as m"
+				+ " ON c.email = m.email"
+				+ " WHERE m.email=?";
+		
+		String resev = 
+				"SELECT '예약' as state, m.name, m.phone, m.email,"
+				+ " r.num, '-' as item, r.house,"
+				+ " r.res_day, r.start_day, r.end_day, null as return_day,"
+				+ " r.payment, -1 as item_price"
+				+ " FROM reservation as r"
+				+ " LEFT JOIN member as m"
+				+ " ON r.email = m.email"
+				+ " WHERE m.email=?";
+		if(category.equals("status")) {
+			query = "("+item+") UNION all ("+cld+")";
+		}else if(category.equals("reservation")){
+			query = resev;
+		}
+		
+		try {
+			con = connect();
+			pstmt = con.prepareStatement(query);
+			if(category.equals("status")) {
+				pstmt.setString(1, email);
+				pstmt.setString(2, email);
+			}else if(category.equals("reservation")){
+				pstmt.setString(1, email);
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				AdminDTO adto = new AdminDTO();
+				adto.setState(rs.getString("state"));
+				adto.setItem(rs.getString("item"));
+				adto.setHouse(rs.getString("house"));
+				adto.setRes_day(rs.getDate("res_day"));
+				adto.setStart_day(rs.getDate("start_day"));
+				adto.setEnd_day(rs.getDate("end_day"));
+				adto.setReturn_day(rs.getDate("return_day"));
+				adto.setPayment(rs.getInt("payment"));
+				adto.setItem_price(rs.getInt("item_price"));
+				
+				list.add(adto);
+			}
+		} catch (Exception e) {
+			System.out.println("memberList()에서 오류: " + e);
+		} finally {
+			freeResource();
+		}
+		return list;
+	}
+
+	public int deleteMember(String email, String pwd) { //회원 탈퇴
+		int state = 0; // 0: 실패, 1: 성공
+		
+		try {
+			con = connect();
+			query = "(SELECT email FROM items WHERE email=?) UNION ALL (SELECT email FROM reservation WHERE email=?)";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+			pstmt.setString(2, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				return 0; // 보관이나 예약 존재하기 때문에 탈퇴 안됨
+			}
+			else{
+				con = connect();
+				query = "DELETE FROM member WHERE email=? and pwd=?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, email);
+				pstmt.setString(2, pwd);
+				
+				state = pstmt.executeUpdate();
+			}
+			
+		}catch (Exception e) {
+			System.out.println("deleteMember()에서 오류: " + e);
+		}finally {
 			freeResource();
 		}
 		return state;

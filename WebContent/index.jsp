@@ -32,7 +32,6 @@
     	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 		
-        
         <style>
         	/* 중고 장터 */
         	.market-go{
@@ -117,15 +116,23 @@
 				color: red;
 				font-size: 11px;
 			}
+					 	
         </style>
         
         <script type="text/javascript"> //login.js
 			$(function(){
-				
+			 	/* 마이 페이지 hover */
+			 	$("#navbardrop").mouseenter(function(){
+			 		$(".dropdown-menu").addClass("show");
+			 	});
+			 	$("#dropdown-menu").mouseleave(function(){
+			 		$(this).removeClass("show");
+			 	});
+	
 				if(${param.login!=null}){
 					$("#loginModal").modal('toggle');
 				}
-		
+
 				/* 이메일 저장 */
 				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 			    var key = getCookie("key");
@@ -215,7 +222,14 @@
 			/* 간편견적 */
 			var go;
 			var day;
-		
+			
+			function inNumber(){
+		        if(event.keyCode<48 || event.keyCode>57){
+		           alert("숫자만 입력가능합니다.");
+		           event.returnValue=false;
+		        }
+		    }
+
 			$(function () {
 				
 				$("#ajaxbtn").on("click", function() {
@@ -260,9 +274,7 @@
 	
 	            //창 열기 버튼을 클릭했을경우
 	            $("#ajaxbtn").on("click",function(){
-	            	if($("#name").val()==""){
-	            		alert("이름을 입력하세요.");
-	            	}else if($("#size").val()==""){
+	            	if($("#size").val()==""){
 	            		alert("사이즈를 선택하세요.");
 	            	}else if($("#minday").val()==""){
 	            		alert("이용하실 일 수를 입력하세요.");
@@ -274,12 +286,14 @@
 	            });
         });
 		</script>
+   
     </head>
+    
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.html">
+       <a class="navbar-brand" href="index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -306,18 +320,22 @@
           	<c:set var="email" value="${sessionScope.mdto.email }"/>
           	<c:set var="name" value="${sessionScope.mdto.name }"/>
           	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
-         	
 			<c:if test="${admin == 1 }">
         		<li class="nav-item">
                 	<a class="nav-link page-scroll" href="${contextPath}/ad/admin_main">관리자</a>
             	</li> 
             </c:if>
            	<c:choose>
-               	<c:when test="${email != null }">
-               		<li class="nav-item">
-                   		<a class="nav-link page-scroll" href="${contextPath }/member/mypage.jsp">마이페이지</a>
-               		</li>               
-              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></a>
+               	<c:when test="${email ne null }">
+	               	<li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
+				      <div class="dropdown-menu" id="dropdown-menu">
+				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				      </div>
+				    </li>               
+              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">
@@ -329,47 +347,46 @@
         </div>
     </nav>
 
-        <!--hero header-->
+        <!-- 간편견적 -->
         <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
             <div class="container">
                 <div class="row vh-md-100">
                     <div class="col-md-7 my-md-auto text-center text-md-left">
                         <h1 class="display-3 text-white font-weight-bold">간편견적</h1>
-                        <p class="lead text-light my-4">간단하게 견적을 계산해 보세요!</p>
-		                      <!-- 간편검색 --> 
-		                       <div class="ml-auto">
-		                        <div class="card">
-		                            <div class="card-body p-4">
-		                                <form class="signup-form">
-		                                    <div class="form-group">
-		                                        <input type="email" class="form-control" id="name" name="name" placeholder="Customer Name">
-		                                    </div>
-		                                    <div class="form-group form-row" >
-			                                        <select class="col-md-6 form-control mx-2" id="size" name="size">
-			                                            <option value="">사이즈선택</option>
-			                                            <option value="A">A - 9㎥ : 3m x 3m x 1m</option>
-			                                            <option value="B">B - 50㎥ : 5m x 5m x 2m</option>
-			                                            <option value="C">C - 122.5㎥ : 7m x 7m x 2.5m</option>
-			                                            <option value="D">D - 300㎥ : 10m x 10m x 3m</option>
-			                                        </select>
-			                                        <input type="text" id="minday" name="minday"  class="form-control col-md-4 ml-2" placeholder="최소 대여기간 15">
-			                                        
-			                                        <span class="ml-3 text-muted lead">일</span>
-		                                    </div>
-		                                    <div class="form-group">
-		                                        <input type="button" id="ajaxbtn" value="계산하기" class="btn btn-primary btn-block">
-		                                        
-		                                    </div>
-		                                </form>
-		                            </div>
-		                        </div>
-		                       </div>
+                        <p class="lead text-light my-4">다양한 크기의 스토리지와 예상 비용을 빠르게 확인하실 수 있습니다.</p>
+                      	<!-- 간편검색 --> 
+                       	<div class="ml-auto">
+                        <div class="card">
+                        <div class="card-body p-4">
+                           <form class="signup-form">
+                               <div class="form-group">
+                                   <input type="text" class="form-control" id="name" name="name" placeholder="Customer Name">
+                               </div>
+                               <div class="form-group row">
+                              	<div class="col-md-6">
+                                   <select class="form-control" id="size" name="size">
+                                       <option value="">사이즈선택</option>
+                                       <option value="A">A - 3㎡ : 2m x 1.5m x 2m</option>
+                                       <option value="B">B - 6㎡ : 3m x 2m x 2m</option>
+                                       <option value="C">C - 8㎡ : 4m x 2m x 2m</option>
+                                       <option value="D">D - 15㎡ : 6m x 2.5m x 2.5m</option>
+                                   </select>
+                                </div>
+                                <div class="col-md-6 form-group form-row">
+                                	<input type="text" id="minday" name="minday" onkeypress="inNumber();" class="form-control" placeholder="최소 대여기간 15일">
+                                </div>
+                               </div>
+                               <div class="form-group">
+                                   <input type="button" id="ajaxbtn" value="계산하기" class="btn btn-primary btn-block">
+                               </div>
+                           </form>
+                        </div>
+                        </div>
+                       </div>
                     </div>
                 </div>
             </div>
-            
-
-
+            <!-- 간편견적 다이알로그 -->
 			<div id="dialog" title="간편견적">
 				<label for="rsname"><small>Name</small></label>
 				<input type="text" class="form-control" id="rsname" readonly="readonly">
@@ -384,15 +401,17 @@
         </section>
         
         
+        
+        
 
-       <!-- company section -->
+       <!-- 회사소개 -->
         <section class="py-7 bg-light" id="company">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-sm-9 mx-auto text-center">
-                        <span class="text-muted text-uppercase">Everything you need for PR</span>
-                        <h2 class="display-4">회사소개</h2>
-                        <p class="lead">고객의 취지에 맞게 설계하여 보관하는 공간! warehouse!</p>
+                        <span class="text-muted text-uppercase">Company</span>
+                        <h2 class="display-4">TEAM2 WAREHOUSE</h2>
+                        <p class="lead">고객이 필요로하는 다양한 크기의 공간을 제공하는 스토리지 기업</p>
                     </div>
                 </div>
                 <div class="row p-4 mt-5 bg-white raised-box rounded">
@@ -403,8 +422,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
                             </div>
                         </div>
-                        <h4 class="mt-2">다양한 보관 공간</h4>
-                        <p class="text-muted">고객의 의도에 맞게 원하시는 크기의<br> 보관공간을 선택하십시오.</p>
+                        <h4 class="mt-2">다양한 크기의 공간</h4>
+                        <p>작은 창고부터 컨테이너 사이즈까지,<br>필요한 크기의 공간을<br>자유롭게 선택하실 수 있습니다.</p>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -412,8 +431,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
                             </div>
                         </div>
-                        <h4 class="mt-2">안전한 포장 보관</h4>
-                        <p>보관물 손상걱정 No!<br> 모든 보관물을 포장하여<br> 보관하고있습니다.</p>
+                        <h4 class="mt-2">안전한 보관</h4>
+                        <p>보관물 손상걱정 NO!<br>온,습도 감지 센서를 이용한 실시간 관리로<br>안전하게 보관하고있습니다.</p>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -421,8 +440,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                             </div>
                         </div>
-                        <h4 class="mt-2">예약제 시스템</h4>
-                        <p>예약제 시스템으로 인한 <br> 유연하고 정확한 시간.</p>
+                        <h4 class="mt-2">사전예약 시스템</h4>
+                        <p>사전 예약 시스템으로<br>더욱 정확하고 편리하게<br>이용가능합니다.</p>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -430,8 +449,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                             </div>
                         </div>
-                        <h4 class="mt-2">중고장터 서비스</h4>
-                        <p>더이상 필요없는 물건은 저희에게 맡겨주세요!</p>
+                        <h4 class="mt-2">중고장터 / 판매대행</h4>
+                        <p>더 이상 필요없는 물건은<br>저희에게 맡겨주세요.</p>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -439,8 +458,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                             </div>
                         </div>
-                        <h4 class="mt-2">방문 입출고 서비스</h4>
-                        <p>무게,크기,시간 걱정마세요!<br>WAREHOUSE가 도와드리겠습니다!</p>
+                        <h4 class="mt-2">방문 입·출고 서비스</h4>
+                        <p>무게, 크기, 시간 걱정마세요.<br>TEAM2 WAREHOUSE가<br>도와드리겠습니다!</p>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -449,17 +468,8 @@
                             </div>
                         </div>
                         <h4 class="mt-2">온라인 실시간 문의</h4>
-                        <p>WAREHOUSE에게 궁금한 점<br>언제든 문의주세요!</p>
+                        <p>TEAM2 WAREHOUSE에게<br>궁금한 점이 있다면<br>언제든 문의주세요!</p>
                     </div>
-                </div>
-                <div class="row press mt-5">
-                    <div class="col-12 text-muted small-xl text-uppercase text-center mb-5">We have got our clients covered in</div>
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-1.png" alt=""></a></div>
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-2.png" alt=""></a></div>
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-3.png" alt=""></a></div>                                 
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-4.png" alt=""></a></div> 
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-5.png" alt=""></a></div>
-                    <div class="press-item col-lg-2 col-md-4 col-6"><a href="#"><img class="img-fluid" src="img/press/press-6.png" alt=""></a></div>
                 </div>
             </div>
         </section>
@@ -467,15 +477,15 @@
 
         
 
-        <!--houseinfo section-->
+        <!-- 이용안내 -->
         <section class="py-7" id="houseinfo">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto text-center">
-                        <span class="text-muted text-uppercase">Simple pricing</span>
+                        <span class="text-muted text-uppercase">Information</span>
                         <h2 class="display-4">이용안내</h2>
                         <p class="lead">
-                            Nam liber tempor cum eleifend option congue nihil imper. Nam liber tempor cum soluta nobis.
+                            TEAM2 WAREHOUSE의 보관 공간을 소개합니다.
                         </p>
                     </div>
                 </div>
@@ -485,64 +495,71 @@
                         <div class="card-group pricing-table">
                             <div class="card text-center bg-light">
                                 <div class="card-body">
-                                    <h4 class="card-title pt-3">A동</h4>
-                                    <h2 class="card-title text-primary pt-4">$99</h2>
-                                    <div class="text-muted mt-4">per month</div>
-                                    <ul class="list-unstyled pricing-list">
-                                        <li>대략적인</li>
-                                        <li>20 media submissions</li>
+                                    <h4 class="card-title pt-3">HOUSE A</h4>
+                                    <h2 class="card-title text-primary pt-4">￦55,000</h2>
+                                    <div class="text-muted">per day</div>
+                                    <ul class="list-unstyled pricing-list mt-4">
+                                        <li>
+                                        	<b>3㎡</b><br>
+                                        	<small>2m x 1.5m x 2m</small>
+                                        </li>
+                                        <li>SMALL</li>
                                     </ul>
-                                    <a href="#" class="btn btn-primary">
-                                        Get Started
-                                    </a>
                                 </div>
                             </div>
                             <div class="card bg-primary text-white text-center">
                                 <div class="card-body">
-                                    <h4 class="card-title text-white pt-3">B동</h4>
-                                    <h2 class="card-title text-white pt-4">$159</h2>
-                                    <div class="text-light mt-4">per month</div>
-                                    <ul class="list-unstyled pricing-list">
-                                        <li>정보들</li>
-                                        <li>50 media submissions</li>
+                                    <h4 class="card-title text-white pt-3">HOUSE B</h4>
+                                    <h2 class="card-title text-white pt-4">￦150,000</h2>
+                                    <div class="text-light">per day</div>
+                                    <ul class="list-unstyled pricing-list mt-4">
+                                        <li>
+                                        	<b>6㎡</b><br>
+                                        	<small>3m x 2m x 2m</small>
+                                        </li>
+                                        <li>MEDIUM</li>
                                     </ul>
-                                    <a href="#" class="btn btn-secondary">
-                                        Get started
-                                    </a>
                                 </div>
                             </div>
                             <div class="card text-center bg-light">
                                 <div class="card-body">
-                                    <h4 class="card-title pt-3">C동</h4>
-                                    <h2 class="card-title text-primary pt-4">$499</h2>
-                                    <div class="text-muted mt-4">per month</div>
-                                    <ul class="list-unstyled pricing-list">
-                                        <li>넣어요</li>
-                                        <li>200 media submissions</li>
+                                    <h4 class="card-title pt-3">HOUSE C</h4>
+                                    <h2 class="card-title text-primary pt-4">￦350,000</h2>
+                                    <div class="text-muted">per day</div>
+                                    <ul class="list-unstyled pricing-list mt-4">
+                                        <li>
+                                        	<b>8㎡</b><br>
+                                        	<small>4m x 2m x 2m</small>
+                                        </li>
+                                        <li>LARGE</li>
                                     </ul>
-                                    <a href="#" class="btn btn-primary">
-                                        Get Started
-                                    </a>
                                 </div>
                             </div>
                             <div class="card bg-primary text-white text-center">
                                 <div class="card-body">
-                                    <h4 class="card-title text-white pt-3">D동</h4>
-                                    <h2 class="card-title text-white pt-4">$159</h2>
-                                    <div class="text-light mt-4">per month</div>
-                                    <ul class="list-unstyled pricing-list">
-                                        <li>조정가능</li>
-                                        <li>50 media submissions</li>
+                                    <h4 class="card-title text-white pt-3">HOUSE D</h4>
+                                    <h2 class="card-title text-white pt-4">￦500,000</h2>
+                                    <div class="text-light">per day</div>
+                                    <ul class="list-unstyled pricing-list mt-4">
+                                        <li>
+                                        	<b>15㎡</b><br>
+                                        	<small>6m x 2.5m x 2.5m</small>
+                                        </li>
+                                        <li>CONTAINER</li>
                                     </ul>
-                                    <a href="#" class="btn btn-secondary">
-                                        Get started
-                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row mt-5">
+	                 <div class="mx-auto">
+	                 	<a href="button"class="btn btn-lg btn-primary mx-auto">자세히 보러가기</a>
+	                </div>
+                </div>
+                
+                <!-- <div class="row mt-5">
                     <div class="col-md-9 mx-auto">
                         <div class="row">
                             <div class="col-md-4 text-center">
@@ -574,14 +591,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
              
                 
             </div>
         </section>
         
         
-        <!--reservation section-->
+        <!--예약안내-->
         <section class="py-7 bg-light" id="reservation">
             <div class="container">
                 <div class="row">
@@ -590,13 +607,8 @@
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
                         <h2 class="display-4">예약안내</h2>
-                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
-                            Nam liber tempor cum soluta nobis.</p>
                         <ul class="features-list">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus mus.</li>
+                            <li>작은 창고부터 컨테이너 사이즈까지!<br>크기별로 4종류에 이르는 공간을 보유하고있는 <br>TEAM2 WAREHOUSE는 사전예약제로 운영되고 있습니다.<br>지금 바로 필요한 날짜와 공간을 확인 해 보세요!</li>
                         </ul>
                         <p class="lead mt-3">
                             <a href="${contextPath }/re/info.me?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
@@ -605,48 +617,6 @@
                         </p>
                     </div>
                 </div>
-<!--                 <div class="row mt-7">
-                    <div class="col-md-6 my-auto order-1 order-md-2">
-                        <img src="img/feature2.png" class="img-fluid d-block mx-auto" alt="Feature 2" />
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0 order-2 order-md-1">
-                        <h2 class="display-4">B동</h2>
-                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
-                            Nam liber tempor cum soluta nobis.</p>
-                        <ul class="features-list">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus mus.</li>
-                        </ul>
-                        <p class="lead mt-3">
-                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
-                                Sign up now <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-7">
-                    <div class="col-md-6 my-auto">
-                        <img src="img/feature3.png" class="img-fluid d-block mx-auto" alt="Feature 3" />
-                    </div>
-                    <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
-                        <h2 class="display-4">C동</h2>
-                        <p class="lead text-muted">Nam liber tempor cum eleifend option congue nihil imper. 
-                            Nam liber tempor cum soluta nobis.</p>
-                        <ul class="features-list">
-                            <li>Lorem ipsum dolor sit amet.</li>
-                            <li>Aenean commodo ligula eget dolor.</li>
-                            <li>Aenean massa.</li>
-                            <li>Cum sociis natoque penatibus mus.</li>
-                        </ul>
-                        <p class="lead mt-3">
-                            <a href="#" class="btn btn-primary btn-primary d-inline-flex flex-row align-items-center">
-                                Contact us <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
-                            </a>
-                        </p>
-                    </div>
-                </div> -->
             </div>
         </section>
         
@@ -655,19 +625,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-8 mx-auto text-center">
-                        <span class="text-muted small-xl text-uppercase">미수령물건을 판매로!</span>
+                        <span class="text-muted small-xl text-uppercase">TEAM2 WAREHOUSE MARKET</span>
                         <h2 class="display-4">중고장터</h2>
                     </div>
                 </div>
                 <div class="row mt-5">
-                	<div class="col-4 bg-dark">
+                	<div class="col-lg-4 bg-dark rounded">
                 		<div class="mx-auto review-wrapper">
                 			<div class="card border-0 review p-5 bg-dark">
                 				<div class="card-body">
-                					<img src="img/online-shop.png" width="200" class="rounded-circle d-block mx-auto"/>
-									<p class="market-go text-white">중고 장터 서비스</p>
-									<p class="text-white">미수령된 물건들은<br>중고장터에서 판매 가능합니다!</p>
-									<button type="button" class="btn btn-outline-success btn-lg text-white">바로가기 <i class="far fa-arrow-alt-circle-right"></i></button>
+                					<img src="img/online-shop.png" class="col-lg-12 rounded-circle d-block mx-auto"/>
+									<p class="market-go text-white">중고 장터</p>
+									<p class="text-white">미수령하신 물건들을<br>중고장터에서 판매 해 드립니다!</p>
+									<button type="button" class="btn btn-primary btn-lg text-white">T2 MARKET <i class="far fa-arrow-alt-circle-right"></i></button>
                 				</div>	
                 			</div>
                 		</div>
@@ -706,7 +676,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto text-center">
-                        <span class="text-muted text-uppercase">Answers to common questions</span>
+                        <span class="text-muted text-uppercase">Frequently Asked Questions</span>
                         <h2 class="display-4">FAQ</h2>
                     </div>
                 </div>
@@ -749,49 +719,6 @@
                                 <a href="#" class="btn btn-primary btn-sm">
                                     	문의게시판가기
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!--hero header-->
-        <section class="py-5 py-md-6 bg-hero inverse" id="signup" style="background-image: url(img/parallex.jpg)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 my-md-auto text-center text-md-left pb-5 pb-md-0">
-                        <h1 class="display-3 text-white">회원가입</h1>
-                        <p class="lead text-light">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.</p>
-                    </div>
-                    <div class="col-md-5 ml-auto">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <form class="signup-form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Full name">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Website">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email address">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" placeholder="Short description"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option value="">Plan type</option>
-                                            <option value="basic">Basic</option>
-                                            <option value="startup">Startup</option>
-                                            <option value="growth">Growth</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary btn-block">Create your account</button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>
@@ -864,31 +791,6 @@
             <i class="fa fa-angle-up" aria-hidden="true"></i>
         </div>
 
-        <!-- theme switcher (FOR DEMO ONLY - REMOVE FROM PRODUCTION)-->
-        <div class="switcher-wrap">
-            <div class="switcher-trigger">
-                <span class="fa fa-gear"></span>
-            </div>
-            <div class="color-switcher">
-                <h6>Color Switcher</h6>
-                <ul class="mt-3 clearfix">
-                    <li class="bg-green active" data-color="default" title="Default Green"></li>
-                    <li class="bg-purple" data-color="purple" title="Purple"></li>
-                    <li class="bg-blue" data-color="blue" title="Blue"></li>
-                    <li class="bg-red" data-color="red" title="Red"></li>
-                    <li class="bg-orange" data-color="orange" title="Orange"></li>
-                    <li class="bg-indigo" data-color="indigo" title="Indigo"></li>
-                    <li class="bg-black" data-color="black" title="Black"></li>
-                    <li class="bg-teal" data-color="teal" title="Teal"></li>
-                    <li class="bg-cyan" data-color="cyan" title="Cyan"></li>
-                    <li class="bg-pink" data-color="pink" title="Pink"></li>
-                </ul>
-                <p>These are just demo colors. You can <b>easily</b> create your own color scheme.</p>
-            </div>
-            <div class="mt-4">
-                <a href="https://wireddots.com/themes/lambda?utm_source=lambda-demos" class="btn btn-primary btn-block">Free Download</a>
-            </div>
-        </div>
        	<div id="loginModal" class="modal fade">
 				<div class="modal-dialog modal-login">
 					<div class="modal-content">
@@ -914,9 +816,9 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="${contextPath }/member/findMember.jsp?find=email">이메일찾기</a></span> | 
-								<span><a href="${contextPath }/member/findMember.jsp?find=pwd">비밀번호찾기</a></span> | 
-								<span><a href="${contextPath }/member/join.jsp">회원가입</a></span>
+								<span><a href="${contextPath }/me/findMember.me?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/me/findMember.me?find=pwd">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/me/join.me">회원가입</a></span>
 							</div>
 						</div>
 					</div>
