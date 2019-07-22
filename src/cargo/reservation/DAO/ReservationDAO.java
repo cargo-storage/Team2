@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -235,4 +236,60 @@ public class ReservationDAO {
         
         return price;
      }
+	
+	public String getMaxDateCalendar(String end_day, String house){
+		String sql="select start_day"
+				+ " from reservation"
+				+ " where end_day > ? and house =?";
+		
+		String next_start_day = "null";
+		try {
+			getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, end_day);
+			pstmt.setString(2, house);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				next_start_day = "'"+rs.getString(1)+"'";
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getMaxDateCalendar Error: "+e.getMessage());
+	        e.printStackTrace();
+		}finally{
+	           freeResource();
+	    }
+		
+		return next_start_day;
+	}//end of getMaxDateCalendar
+	
+	public int extendEnd_day(String state, String end_day, String payment, ArrayList<String> primary){
+		int result =0;
+		
+		String sql="update "+state
+				+ " set end_day =?, payment=payment+?"
+				+ " where "+primary.get(0)+"=?";
+		
+		try {
+			getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, end_day);
+			pstmt.setString(2, payment);
+			
+			if("reservation".equals(state)){
+				pstmt.setInt(3, Integer.parseInt(primary.get(1)));
+			}else{
+				pstmt.setString(3, primary.get(1));
+			}
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("extendEnd_day Error: "+e.getMessage());
+	        e.printStackTrace();
+		}finally{
+	           freeResource();
+	    }
+		return result;
+	}
 }
