@@ -137,7 +137,7 @@
    	}
    	
    	section{
-		background-image: url(../img/reservation2.jpg);
+		background-image: url(../img/reservation3.jpg);
 		background-size: cover;
 	}
 	.background{
