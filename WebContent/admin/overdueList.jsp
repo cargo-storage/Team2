@@ -17,9 +17,17 @@
 <!-- Page level plugin CSS-->
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
+<style type="text/css">
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-disabled a {
+	opacity: 0.9;
+  	background-color: #f44336;
+  	color: white;
+}
+</style>
 </head>
 <body id="page-top">
 	
@@ -115,9 +123,9 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
+	<!-- Detail Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="detailModalLabel">연체 상세 정보</h5>
@@ -139,15 +147,15 @@
 								<th>예정 보관 기간</th>
 								<td class="duration"></td>
 							</tr>
-							<tr class="bg-danger text-white">
+							<tr class="table-secondary">
 								<th>연채일</th>
 								<td class="overdue_day"></td>
 							</tr>
-							<tr>
+							<tr class="table-secondary">
 								<th>연체료</th>
 								<td class="arrears"></td>
 							</tr>
-							<tr>
+							<tr class="bg-danger text-white"> 
 								<th>남은 보증금</th>
 								<td class="now_deposit"></td>
 							</tr>
@@ -180,7 +188,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고로 이동</button>
+					<button type="button" class="btn btn-danger sub" value="overdue">연체 창고로 이동</button>
 					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
 					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 				</div>
@@ -198,6 +206,8 @@
 	<!-- Page level plugin JavaScript-->
 	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
 
 	<!-- Custom scripts for all pages-->
 	<script src="${contextPath}/js/sb-admin.js"></script>

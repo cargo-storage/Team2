@@ -230,7 +230,7 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
+	<!-- detail Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
@@ -290,13 +290,13 @@
 							</tr>
 							
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 						<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
 						<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					</div>
 				
 				</c:when>
@@ -354,14 +354,14 @@
 								<td class="addr"></td>
 							</tr>
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="items">
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고 이동</button>
 					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
 					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
 				</c:when>
 				
@@ -422,7 +422,7 @@
 								<td class="addr"></td>
 							</tr>
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="closed">
 				</div>
 				<div class="modal-footer">

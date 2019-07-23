@@ -19,6 +19,7 @@
 <!-- Page level plugin CSS-->
 <link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
@@ -135,7 +136,17 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-house="${adto.house}" data-email="${adto.email}">
+							<c:choose>
+								<c:when test="${adto.state eq '예약'}">
+								<tr data-toggle="modal" data-target="#reservationModal" data-cate="${adto.state}" data-primary="${adto.num}">
+								</c:when>
+								<c:when test="${adto.state eq '보관'}">
+								<tr data-toggle="modal" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								</c:when>
+								<c:when test="${adto.state eq '완료'}">
+								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								</c:when>
+							</c:choose>
 									<td><c:out value="${adto.state}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.phone}"/></td>
@@ -177,27 +188,223 @@
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+	
+	<!-- Detail Modals-->
+	
+	<!-- reservationModal -->
+	<div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
+			<form method="post" action="">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<h5 class="modal-title" id="reservationModalLabel">예약 상세 내역</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+				<div class="modal-body mx-auto container-fluid row">
+					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+					<table class='table col-lg-6 mx-auto my-auto'>
+						<tr>
+							<th colspan="2" class="text-center table-primary">예약 정보</th>
+						</tr>
+						<tr>
+							<th>예약 번호</th>
+							<td class="num"></td>
+						</tr>
+						<tr>
+							<th>예약일</th>
+							<td class="res_day"></td>
+						</tr>
+						<tr>
+							<th>시작일</th>
+							<td class="start_day"></td>
+						</tr>
+						<tr>
+							<th>예정 완료일</th>
+							<td class="end_day"></td>
+						</tr>
+						<tr>
+							<th>결제 가격</th>
+							<td class="payment"></td>
+						</tr>
+						<tr>
+							<th colspan="2" class="text-center table-primary">예약자 정보</th>
+						</tr>
+						<tr>
+							<th>이름</th>
+							<td class="name"></td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td class="email"></td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td class="phone"></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td class="addr"></td>
+						</tr>
+						
+					</table>
+					<input type="hidden" class="result" name="result">
+					<input type="hidden" name="state" value="reservation">
 				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				</div>
+			</form>
 			</div>
 		</div>
 	</div>
-
+	
+	<!-- ItemsModal -->
+	<div class="modal fade" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="itemsModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+			<form method="post" action="">
+			<div class="modal-header">
+				<h5 class="modal-title" id="itemsModalLabel">창고 상세 내역</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body  mx-auto container-fluid row">
+				<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+				<table class='table col-lg-6 mx-auto my-auto'>
+					<tr>
+						<th colspan="2" class="text-center table-primary">창고 정보</th>
+					</tr>
+					<tr>
+						<th>물품 ID</th>
+						<td class="item"></td>
+					</tr>
+					<tr>
+						<th>시작일</th>
+						<td class="start_day"></td>
+					</tr>
+					<tr>
+						<th>예정 완료일</th>
+						<td class="end_day"></td>
+					</tr>
+					<tr>
+						<th>결제 가격</th>
+						<td class="payment"></td>
+					</tr>
+					<tr>
+						<th class="text-truncate">보관중인 물건 가격</th>
+						<td class="item_price"></td>
+					</tr>
+					<tr>
+						<th colspan="2" class="text-center table-primary">고객 정보</th>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td class="name"></td>
+					</tr>
+					<tr>
+						<th>이메일</th>
+						<td class="email"></td>
+					</tr>
+					<tr>
+						<th>전화번호</th>
+						<td class="phone"></td>
+					</tr>
+					<tr>
+						<th>주소</th>
+						<td class="addr"></td>
+					</tr>
+				</table>
+				<input type="hidden" class="result" name="result">
+				<input type="hidden" name="state" value="items">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고 이동</button>
+				<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+				<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+			</div>
+			</form>
+			</div>
+		</div>
+	</div>
+	
+	<!-- ClosedModal -->
+	<div class="modal fade" id="ClosedModal" tabindex="-1" role="dialog" aria-labelledby="ClosedModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl" role="document">
+			<div class="modal-content">
+			<form method="post" action="">
+			<div class="modal-header">
+					<h5 class="modal-title" id="ClosedModalLabel">완료 상세 내역</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body  mx-auto container-fluid row">
+					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+					<table class='table col-lg-6 mx-auto my-auto'>
+						<tr>
+							<th colspan="2" class="text-center table-primary">물품 정보</th>
+						</tr>
+						<tr>
+							<th>물품 ID</th>
+							<td class="item"></td>
+						</tr>
+						<tr>
+							<th>시작일</th>
+							<td class="start_day"></td>
+						</tr>
+						<tr>
+							<th>예정 완료일</th>
+							<td class="end_day"></td>
+						</tr>
+						<tr>
+							<th>실제 완료일</th>
+							<td class="return_day"></td>
+						</tr>
+						<tr>
+							<th>결제 가격</th>
+							<td class="payment"></td>
+						</tr>
+						<tr>
+							<th class="text-truncate">물건 가격</th>
+							<td class="item_price"></td>
+						</tr>
+						<tr>
+							<th colspan="2" class="text-center table-primary">고객 정보</th>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td class="email"></td>
+						</tr>
+						<tr>
+							<th>이름</th>
+							<td class="name"></td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td class="phone"></td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td class="addr"></td>
+						</tr>
+					</table>
+					<input type="hidden" class="result" name="result">
+					<input type="hidden" name="state" value="closed">
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<!-- Bootstrap core JavaScript-->
 	<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
 	<script src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -208,7 +415,9 @@
 	<!-- Page level plugin JavaScript-->
 	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
+	
 	<!-- Custom scripts for all pages-->
 	<script src="${contextPath}/js/sb-admin.js"></script>
 
