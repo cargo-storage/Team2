@@ -110,10 +110,23 @@
             </div>
         </nav>
         	<jsp:include page="../inc/header.jsp"></jsp:include>
+        		       	
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
-
+	<c:if test="${bqDTO.secret == 1}">
+        	<c:choose>
+        	<c:when test="${bqDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}">
+        		
+        	</c:when>
+        	<c:when test="${bqDTO.email != sessionScope.mdto.email}">
+        		<script type="text/javascript">	
+        		alert("비밀글입니다");
+        		history.back();
+        		</script>
+        		</c:when>
+        	</c:choose>
+        	</c:if>
 <!-- 왼쪽메뉴 -->
 <nav id="page-wrapper">
   <!-- 사이드바 -->

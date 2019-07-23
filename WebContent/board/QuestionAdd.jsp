@@ -112,17 +112,7 @@
             </div>
         </nav>
         	<jsp:include page="../inc/header.jsp"></jsp:include>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script> 
-<script type="text/javascript"> 
 
-function fn_check(obj){ 
-  var str = 1; 
-  if(obj.checked){ 
-    str = "0; 
- } 
- document.getElementById("value").value = str; 
-} 
-</script> 
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
@@ -168,8 +158,11 @@ function fn_check(obj){
 			<textarea class="form-control" name="content" id="content" rows="5" cols="50"></textarea>
 		</div>
 		<div class="form-group" align="left">
-			<label for="secret">비밀글</label>
-			<input class="form-control" name="secret" id="secret" type="checkbox" onclick="fn_check(this)"/>
+			<label for="secret">비밀글 설정</label>
+			<select name="secret" id="secret">
+   				 <option value="0">전체공개</option>
+   				 <option value="1">비밀글</option>
+			</select>
 		</div>
 		
 		

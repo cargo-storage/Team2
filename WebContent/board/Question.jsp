@@ -113,6 +113,8 @@
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
+	
+
 
 <!-- 왼쪽메뉴 -->
 <nav id="page-wrapper">
@@ -153,6 +155,7 @@
 			<tr>
 				<td>${boardq.no}</td>
 				<td>
+					
 					<a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
 					${boardq.subject}
 					</a>
@@ -167,6 +170,7 @@
 				</td>
 				<td>${boardq.secret}</td>
 			</tr>
+				
 		</c:forEach>
                    </thead>
                <tbody>
