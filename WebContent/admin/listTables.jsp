@@ -278,7 +278,7 @@
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td class="phone"></td>
+								<td class="email"></td>
 							</tr>
 							<tr>
 								<th>전화번호</th>
@@ -308,10 +308,59 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-body  mx-auto container-fluid row">
+					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+						<table class='table col-lg-6 mx-auto my-auto'>
+							<tr>
+								<th colspan="2" class="text-center table-primary">창고 정보</th>
+							</tr>
+							<tr>
+								<th>물품 ID</th>
+								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>시작일</th>
+								<td class="start_day"></td>
+							</tr>
+							<tr>
+								<th>예정 완료일</th>
+								<td class="end_day"></td>
+							</tr>
+							<tr>
+								<th>결제 가격</th>
+								<td class="payment"></td>
+							</tr>
+							<tr>
+								<th class="text-truncate">보관중인 물건 가격</th>
+								<td class="item_price"></td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-center table-primary">고객 정보</th>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td class="name"></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td class="email"></td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td class="addr"></td>
+							</tr>
+						</table>
+						<input type="hidden" id="result" name="result">
+						<input type="hidden" name="state" value="items">
+				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+					<input type="button" class="btn btn-primary extend" value="예약 연장하기">
+					<input type="button" class="btn btn-primary toclosed" value="창고에서 빼기">
 				</div>
 				</c:when>
 				
@@ -322,10 +371,61 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-body  mx-auto container-fluid row">
+					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+						<table class='table col-lg-6 mx-auto my-auto'>
+							<tr>
+								<th colspan="2" class="text-center table-primary">물품 정보</th>
+							</tr>
+							<tr>
+								<th>물품 ID</th>
+								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>시작일</th>
+								<td class="start_day"></td>
+							</tr>
+							<tr>
+								<th>예정 완료일</th>
+								<td class="end_day"></td>
+							</tr>
+							<tr>
+								<th>실제 완료일</th>
+								<td class="return_day"></td>
+							</tr>
+							<tr>
+								<th>결제 가격</th>
+								<td class="payment"></td>
+							</tr>
+							<tr>
+								<th class="text-truncate">물건 가격</th>
+								<td class="item_price"></td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-center table-primary">고객 정보</th>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td class="email"></td>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td class="name"></td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td class="addr"></td>
+							</tr>
+						</table>
+						<input type="hidden" id="result" name="result">
+						<input type="hidden" name="state" value="closed">
+				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
 				</div>
 				</c:when>
 			</c:choose>

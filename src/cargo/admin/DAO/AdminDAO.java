@@ -328,7 +328,7 @@ public class AdminDAO {
 				map.put("postCode",rs.getInt("postCode"));
 				map.put("detailAddr",rs.getString("detailAddr"));
 				map.put("roadAddr",rs.getString("roadAddr"));
-				map.put("reg_date",rs.getDate("reg_date").toString());				
+				map.put("reg_date",rs.getTimestamp("reg_date").toString());				
 			}
 		} catch (Exception e) {
 			System.out.println("getMemberInfo err:"+e.getMessage());

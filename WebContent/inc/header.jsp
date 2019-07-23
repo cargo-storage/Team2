@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+       	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-transparent fixed-top sticky-navigation navbar-light bg-white shadow-bottom" id="lambda-navbar">
@@ -37,20 +38,27 @@
 	         	
 				<c:if test="${admin == 1 }">
         		<li class="nav-item">
-                	<a class="nav-link page-scroll" href="#">관리자</a>
+                	<a class="nav-link page-scroll" href="${contextPath}/ad/admin_main">관리자</a>
             	</li> 
 	            </c:if>
-               	<c:if test="${email ne null }">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
-					<div class="dropdown-menu" id="dropdown-menu">
-						<a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
-						<a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
-						<a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+               	<c:choose>
+               	<c:when test="${email ne null }">
+	               	<li class="nav-item dropdown">
+				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
+				      <div class="dropdown-menu" id="dropdown-menu">
+				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				      </div>
+				    </li>               
+              		<a href="${contextPath }/me/logout.me" class="btn btn-navbar btn-primary trigger-btn">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
+               	</c:when>
+               	<c:otherwise>
+               		<div class="text-center">
+						<a href="${contextPath}/co/login.go" class="btn btn-navbar btn-primary trigger-btn" data-toggle="modal">로그인/회원가입</a>
 					</div>
-				</li>              
-              	<a href="${contextPath }/me/logout.me" id="btn-logout" class="btn btn-primary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
-				</c:if>
+              	</c:otherwise>
+       			</c:choose>
               </ul>
         </div>
     </nav>
