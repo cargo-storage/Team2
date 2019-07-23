@@ -30,6 +30,14 @@
 			background-color: #f5f6f7;
 		}		
 		
+		section{
+			background-image: url(../img/join.jpg);
+		}
+		
+		.background{
+			background-color: rgba( 255, 255, 255, 0.95);
+		}
+		
 		.logo {
 			color: #00c853;
 		    text-decoration: none;
@@ -318,70 +326,73 @@
 	</script>
 </head>
 <body>
-
-	<div class="container mt-5">
-		<div class="page-header">
-			<div class="col-sm-9 col-lg-6 text-center m-auto">
-				<a class="logo" href="../index.jsp">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE</a>
-				<br>
-				<br>
+<jsp:include page="../inc/header.jsp"/>
+	<section class="py-7">
+		<div class="container">
+			<div class="row p-5 mt-5 background raised-box rounded">
+	            <div class="col-md-7 col-sm-9 mx-auto text-center mb-5">
+	                <span class="text-muted text-uppercase">JOIN US</span>
+	                <h2 class="display-4">회원가입</h2>
+	                <p class="lead">회원이 되어 다양한 혜택을 누리세요!</p>
+	            </div>
+	            <br>
+				<div class="col-sm-9 col-lg-6 m-auto">
+					<form action="${contextPath }/me/join.me?join=do" method="post" onsubmit="return register()">
+						<div class="form-group">
+							<label for="email">이메일</label>
+							<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">
+							<input type="button" id="postAuth"class="email-auth" value="이메일 인증" onclick="emailAuth()">
+							<div id="auth">
+								<input type="email" id="emailAuthNum" name="emailAuthNum" placeholder="인증번호 입력">
+								<button type="button" class="authCheck" onclick="authCheck()">인증 확인</button>
+							</div>
+							<span id="emailErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="pwd">비밀번호<span class="help-block">(영문/숫자/특수문자 혼합하여 8자이상 20글자 이하)</span></label> 
+							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해 주세요">
+							<span id="pwdErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="pwdCheck">비밀번호 확인</label>
+							<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
+							<span id="pwd2Err" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="name">성명</label>
+							<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
+							<span id="nameErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
+							<input type="tel" class="form-control" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요">
+							<span id="phoneErr" class="help-block"></span>
+						</div>
+						<div class="form-group">
+							<label for="detailAddr">집 주소</label>
+							<div style="width:100%; margin-bottom: 5px;">
+								<input type="text" id="postCode" name="postCode" class="post" placeholder="우편번호" readonly>
+								<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
+							</div>
+							<div style="width:100%; margin-bottom: 5px;">
+								<input type="text" id="roadAddr" name="roadAddr" class="post post1" placeholder="도로명주소" readonly>
+							</div>
+							<span id="guide" style="color:#999;display:none"></span>
+							<input type="text" id="detailAddr" name="detailAddr" class="post post1" placeholder="상세주소">
+							<span id="addrErr" class="help-block clear"></span>	
+						</div>
+						<br>
+						<br>
+						<div class="form-group text-center">
+							<button class="btn btn_submit">
+								회원가입 <i class="fa fa-check spaceLeft"></i>
+							</button>&nbsp;&nbsp;
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="col-sm-9 col-lg-6 m-auto">
-			<form action="${contextPath }/me/join.me" method="post" onsubmit="return register()">
-				<div class="form-group">
-					<label for="email">이메일</label>
-					<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">
-					<input type="button" id="postAuth"class="email-auth" value="이메일 인증" onclick="emailAuth()">
-					<div id="auth">
-						<input type="email" id="emailAuthNum" name="emailAuthNum" placeholder="인증번호 입력">
-						<button type="button" class="authCheck" onclick="authCheck()">인증 확인</button>
-					</div>
-					<span id="emailErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="pwd">비밀번호<span class="help-block">(영문/숫자/특수문자 혼합하여 8자이상 20글자 이하)</span></label> 
-					<input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호를 입력해 주세요">
-					<span id="pwdErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="pwdCheck">비밀번호 확인</label>
-					<input type="password" class="form-control" id="pwd2" placeholder="비밀번호를 다시한번 입력 해 주세요">
-					<span id="pwd2Err" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="name">성명</label>
-					<input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해 주세요">
-					<span id="nameErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="phone">휴대폰 번호<span class="help-block">(010-1234-1234 형식)</span></label>
-					<input type="tel" class="form-control" id="phone" name="phone" placeholder="휴대폰 번호를 입력해주세요">
-					<span id="phoneErr" class="help-block"></span>
-				</div>
-				<div class="form-group">
-					<label for="detailAddr">집 주소</label>
-					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="postCode" name="postCode" class="post" placeholder="우편번호" readonly>
-						<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
-					</div>
-					<div style="width:100%; margin-bottom: 5px;">
-						<input type="text" id="roadAddr" name="roadAddr" class="post post1" placeholder="도로명주소" readonly>
-					</div>
-					<span id="guide" style="color:#999;display:none"></span>
-					<input type="text" id="detailAddr" name="detailAddr" class="post post1" placeholder="상세주소">
-					<span id="addrErr" class="help-block clear"></span>	
-				</div>
-				<br>
-				<br>
-				<div class="form-group text-center">
-					<button class="btn btn_submit">
-						회원가입 <i class="fa fa-check spaceLeft"></i>
-					</button>&nbsp;&nbsp;
-				</div>
-			</form>
-		</div>
-	</div>
+	</section>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function execPostcode() {

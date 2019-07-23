@@ -43,9 +43,16 @@ public class EmailSearchAction implements Action {
 					int findCom = secretemail.lastIndexOf(".");
 					int endNum = secretemail.length();
 					
-					secretemail = secretemail.replace(3, findStd, "");
-					for(int i=3; i<findStd;i++){
-						secretemail.insert(i, "*");
+					if(findStd<=3){
+						secretemail = secretemail.replace(1, findStd, "");
+						for(int i=1;i<findStd;i++){
+							secretemail.insert(i,"*");
+						}
+					}else{
+						secretemail = secretemail.replace(3, findStd, "");
+						for(int i=3; i<findStd;i++){
+							secretemail.insert(i, "*");
+						}
 					}
 					secretemail = secretemail.replace(findStd+3, findCom, "");
 					for(int i=findStd+3; i<findCom;i++){
@@ -59,9 +66,7 @@ public class EmailSearchAction implements Action {
 					
 					obj.put("email", email);
 					obj.put("name", mdto.getName());
-					String reg_date = mdto.getReg_date().toString();
-					reg_date = reg_date.substring(0, 10);
-					obj.put("reg_date", reg_date); //날짜는 string 형식으로 바꿈
+					obj.put("reg_date", mdto.getReg_date()); //날짜는 string 형식으로 바꿈
 					
 					list.add(obj);
 				}
