@@ -111,12 +111,12 @@ public class AdminController extends HttpServlet {
 			
 			//창고에서 빼기 전에 체크
 			}else if("/release_check".equals(command)){
-				
-				
-			//창고 -> closed
-			}else if("/release_item".equals(command)){
 				action = new AdminReleaseItemAction();
 				forward = action.execute(request, response);
+				
+			//창고 -> closed
+			}else if("/item_to_closed".equals(command)){
+				
 			}
 			
 			

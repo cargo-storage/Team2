@@ -125,10 +125,64 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-body  mx-auto container-fluid row">
+					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
+						<table class='table col-lg-6 mx-auto my-auto'>
+							<tr>
+								<th colspan="2" class="text-center table-primary">창고 정보</th>
+							</tr>
+							<tr>
+								<th>물품 ID</th>
+								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>예정 보관 기간</th>
+								<td class="duration"></td>
+							</tr>
+							<tr class="bg-danger text-white">
+								<th>연채일</th>
+								<td class="overdue_day"></td>
+							</tr>
+							<tr>
+								<th>연체료</th>
+								<td class="arrears"></td>
+							</tr>
+							<tr>
+								<th>남은 보증금</th>
+								<td class="now_deposit"></td>
+							</tr>
+							<tr>
+								<th class="text-truncate">보관중인 물건 가격</th>
+								<td class="item_price"></td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-center table-primary">고객 정보</th>
+							</tr>
+							<tr>
+								<th>이름</th>
+								<td class="name"></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td class="email"></td>
+							</tr>
+							<tr>
+								<th>전화번호</th>
+								<td class="phone"></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td class="addr"></td>
+							</tr>
+						</table>
+						<input type="hidden" id="result" name="result">
+						<input type="hidden" name="state" value="items">
+				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+					<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고로 이동</button>
+					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 				</div>
 			</div>
 		</div>
@@ -150,5 +204,8 @@
 
 	<!-- Demo scripts for this page-->
 	<script src="${contextPath}/js/datatables-custom.js"></script>
+	<script type="text/javascript">
+	
+	</script>
 </body>
 </html>

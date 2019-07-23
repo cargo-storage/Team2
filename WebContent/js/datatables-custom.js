@@ -38,6 +38,11 @@ function itemsModal(modal,result) {
 	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
 	$('.pignose-calendar-body').addClass('clickX');
 	
+	var today = moment();
+	var end_day = moment(result.end_day,'YYYY-MM-DD');
+	if(moment.duration(today.diff(end_day)).asDays()>=1){
+		$('.modal-footer button[value="overdue"]').removeClass("sr-only");
+	}
 	modal.find('.item').text(result.item);
 	modal.find('.start_day').text(result.start_day);
 	modal.find('.end_day').text(result.end_day);
@@ -139,6 +144,7 @@ $(document).ready(function() {
   $('#detailModal').on('hide.bs.modal', function (event) {
 	  $('#postCode').siblings('input').attr('type', 'hidden');
 	  $('#dataTable tbody tr.selected').removeClass('selected');
+	  $('.modal-footer button[value="overdue"]').addClass("sr-only");
 	});//모달 없어졌을 때..
 
   $(".sub").on('click', function() {
@@ -150,6 +156,8 @@ $(document).ready(function() {
 	else if(button.val() == 'toitems') nearForm.attr("action", "../ad/warehousing_check");
 	//빼기
 	else if(button.val() == 'toclosed') nearForm.attr("action", "../ad/release_check");
+	//연체 창고 옮기기
+	else if(button.val() == 'overdue') nearForm.attr("action", "../ad/release_check");
 	
 	nearForm.submit();
   });//예약연장, 창고넣기, 창고 빼기 버튼 눌렀을 때
