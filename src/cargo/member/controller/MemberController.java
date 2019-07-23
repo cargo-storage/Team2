@@ -43,27 +43,14 @@ public class MemberController extends HttpServlet {
 
 		// 가상요청 주소 가져오기
 		String RequestURI = request.getRequestURI();
-		System.out.println(RequestURI);
-
 		String contextPath = request.getContextPath();
-		System.out.println(contextPath.length());
-		System.out.println(RequestURI.lastIndexOf("/"));
-
-		// System.out.println("??: "+request.getPathInfo()); xml로 했을땐 안되는듯?!
-
-		// String command=RequestURI.substring(contextPath.length()); //이건 선생님이
-		// 한것
-
-		// 이부분은 xml필터링을 *.me로 하지 않고 /폴더/*로 하였기 때문에 제가 바꾼것입니다.
-		// 그런데 /폴더/*로 하는게 관리하기 더 편하지 않나요? 겹치지도 않고 contextPath.length도 쓰지 않음
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
-		System.out.println(command);
 
 		ActionForward forward = null;
 		Action action = null;
 
 		try {
-			if (command.equals("/join.me")) { // 회원 가입
+			if (command.equals("/join")) { // 회원 가입
 				String join = request.getParameter("join");
 				if(join==null){
 					forward = new ActionForward();
@@ -72,51 +59,58 @@ public class MemberController extends HttpServlet {
 					action = new JoinAction();
 					forward = action.execute(request, response);
 				}
-			} else if (command.equals("/login.me")) { // 로그인
+			} else if (command.equals("/login")) { // 로그인
 				action = new LoginAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/logout.me")) { // 로그아웃
+			} else if (command.equals("/logout")) { // 로그아웃
 				action = new LogoutAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/emailAuth.me")) { // 이메일 인증
+			} else if (command.equals("/emailAuth")) { // 이메일 인증
 				action = new EmailAuthAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/emailCheck.me")) { // 이메일 중복 확인
+			} else if (command.equals("/emailCheck")) { // 이메일 중복 확인
 				action = new EmailCheckAction();
 				forward = action.execute(request, response);
-			} else if(command.equals("/findMember.me")){
+			} else if(command.equals("/findMember")){
 				forward= new ActionForward();
 				String find = request.getParameter("find");
 				if(find.equals("email"))
 					forward.setPath("/member/findMember.jsp?find=email"); // 이메일 찾기 페이지
 				else if(find.equals("pwd"))
 					forward.setPath("/member/findMember.jsp?find=pwd"); // 비밀번호 찾기 페이지
-			}	else if (command.equals("/emailSearch.me")) { // 이메일 찾기
+			}	else if (command.equals("/emailSearch")) { // 이메일 찾기
 				action = new EmailSearchAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/pwdSearch.me")) { // 비밀번호 찾기
+			} else if (command.equals("/pwdSearch")) { // 비밀번호 찾기
 				action = new PwdSearchAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/pwdCheck.me")) { // 기존 비밀번호 확인
+			} else if (command.equals("/pwdCheck")) { // 기존 비밀번호 확인
 				action = new PwdCheckAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/modifyMember.me")) { // 회원정보 수정
-				action = new ModifyMemberAction();
-				forward = action.execute(request, response);
-			} else if (command.equals("/modifyCheck.me")) { // 회원정보 수정 비밀번호 확인
+			} else if (command.equals("/modifyMember")) { // 회원정보 수정
+				String page = request.getParameter("page");
+				if(page == null){
+					forward = new ActionForward();
+					forward.setPath("/member/mypage.jsp?content=modifyMember.jsp");
+				}
+				else{
+					action = new ModifyMemberAction();
+					forward = action.execute(request, response);
+				}
+			} else if (command.equals("/modifyCheck")) { // 회원정보 수정 비밀번호 확인
 				action = new ModifyCheckAction();
 				forward = action.execute(request, response);
-			} else if(command.equals("/mypage.me")) {
+			} else if(command.equals("/mypage")) {
 				forward = new ActionForward();
 				String category = request.getParameter("category");
 				if(category.equals("info")) // 내 정보
 					forward.setPath("/member/mypage.jsp");
 				else if(category.equals("leave")) // 회원 탈퇴
 					forward.setPath("/member/mypage.jsp?content=leave");
-			}	else if (command.equals("/memberStatus.me")) { // 마이페이지 현황
+			}	else if (command.equals("/memberStatus")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/leaveMember.me")) { // 회원 탈퇴
+			} else if (command.equals("/leaveMember")) { // 회원 탈퇴
 				
 			}
 			

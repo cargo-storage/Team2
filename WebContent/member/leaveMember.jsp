@@ -22,7 +22,7 @@
 				<p class="lead">비밀번호를 한 번 더 입력하세요!</p>
 	      	</div>
       		<div class="m-auto">
-	      		<form action="${contextPath }/me/leaveMember.me" method="post" onsubmit="return leave()">
+	      		<form action="${contextPath }/me/leaveMember" method="post" onsubmit="return leave()">
 	      			<div class="form-group ml-6">
 		      			<label for="checkPwd">비밀번호</label>
 		      			<div class="row">

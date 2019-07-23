@@ -97,7 +97,7 @@
 					$.ajax({
 						type: "post",
 						async: false,
-						url: "${contextPath}/me/pwdCheck.me",
+						url: "${contextPath}/me/pwdCheck",
 						data: {currentPwd : currentPwd},
 						success: function(data){
 							if(data == 0){
@@ -244,7 +244,7 @@
 	      	<c:choose>
 	      		<c:when test="${requestScope.modifyCheck ne	1}">
 	      		<div class="m-auto">
-		      		<form action="${contextPath }/me/modifyCheck.me" method="post">
+		      		<form action="${contextPath }/me/modifyCheck" method="post">
 		      			<div class="form-group ml-6">
 			      			<label for="checkPwd">비밀번호</label>
 			      			<div class="row">
@@ -257,7 +257,7 @@
 	      		</div>
 	      		</c:when>
 	      		<c:otherwise>
-		      		<form action="${contextPath }/me/modifyMember.me?page=next" method="post" onsubmit="return modify()">
+		      		<form action="${contextPath }/me/modifyMember?page=next" method="post" onsubmit="return modify()">
 						<div class="form-group">
 							<label for="email">이메일</label>
 							<input type="email" class="form-control" id="email" name="email" value="${sessionScope.mdto.email }" readonly>
