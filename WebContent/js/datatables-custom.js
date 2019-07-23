@@ -140,16 +140,17 @@ $(document).ready(function() {
 	  $('#postCode').siblings('input').attr('type', 'hidden');
 	  $('#dataTable tbody tr.selected').removeClass('selected');
 	});//모달 없어졌을 때..
-  
-  $('.extend').on('click', function() {
-	var nearForm = $(this).closest('form');
-	nearForm.attr("action", "../ad/extend_reserv");
+
+  $(".sub").on('click', function() {
+	var button = $(this);
+	var nearForm = button.closest('form');
+	//연장
+	if(button.val() == 'extend') nearForm.attr("action", "../ad/extend_reserv");
+	//to창고
+	else if(button.val() == 'toitems') nearForm.attr("action", "../ad/warehousing_check");
+	//빼기
+	else if(button.val() == 'toclosed') nearForm.attr("action", "../ad/release_check");
+	
 	nearForm.submit();
-  });//end of extend on click
-  
-  $('.toitems').on('click', function() {
-	var nearForm = $(this).closest('form');
-	nearForm.attr("action", "../ad/warehousing_check");
-	nearForm.submit();
-  });//end of toitems on click
+  });//예약연장, 창고넣기, 창고 빼기 버튼 눌렀을 때
 });//end of onload

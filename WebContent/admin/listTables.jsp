@@ -295,8 +295,8 @@
 					</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<input type="button" class="btn btn-primary extend" value="예약 연장하기">
-						<input type="button" class="btn btn-primary toitems" value="창고에 넣기">
+						<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+						<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
 					</div>
 				
 				</c:when>
@@ -359,8 +359,8 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<input type="button" class="btn btn-primary extend" value="예약 연장하기">
-					<input type="button" class="btn btn-primary toclosed" value="창고에서 빼기">
+					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 				</div>
 				</c:when>
 				
