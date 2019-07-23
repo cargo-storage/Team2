@@ -50,11 +50,18 @@ public class ModifyMemberAction implements Action {
 		} else { // 성공했을 때
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("mdto", mdto);
 			String path = request.getContextPath();
-			forward.setPath(path+"/member/mypage.jsp");
+			
+			//관리자가 정보 수정 한 경우
+			if(request.getParameter("from") != null){
+				forward.setPath(path+"/ad/member_admin");
+				
+			}else{
+				HttpSession session = request.getSession();
+				session.setAttribute("mdto", mdto);
+				
+				forward.setPath(path+"/member/mypage.jsp");
+			}
 		}
 		return forward;
 	}

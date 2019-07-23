@@ -126,7 +126,7 @@
 					</button>
 				</div>
 				<div class="modal-body  mx-auto container-fluid">
-				<form action="../me/modifyMember.me"></form>
+				<form action="../me/modifyMember.me" method="post" id="modify">
 					<table class='table mx-auto my-auto'>
 						<tr>
 							<th colspan="2" class="text-center table-primary">회원 정보</th>
@@ -134,45 +134,45 @@
 						<tr>
 							<th>가입일</th>
 							<td>
-								<input type="text" name="reg_date" id="reg_date" class="form-control-plaintext dont" value="" readonly="readonly">
+								<input type="text" name="reg_date" id="reg_date" class="form-control-plaintext dont" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<th>이름 <span class="sr-only text-danger">(관리자)</span></th>
 							<td>
-								<input type="text" name="name" id="name" class="form-control-plaintext" value="" readonly="readonly">
+								<input type="text" name="name" id="name" class="form-control-plaintext" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<th>이메일</th>
 							<td>
-								<input type="text" name="email" id="email" class="form-control-plaintext dont" value="" readonly="readonly">
+								<input type="text" name="email" id="email" class="form-control-plaintext dont" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
 							<td>
-								<input type="text" name="pwd" id="pwd" class="form-control-plaintext" value="" readonly="readonly">
+								<input type="text" name="pwd" id="pwd" class="form-control-plaintext" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
 							<td>
-								<input type="text" name="phone" id="phone" class="form-control-plaintext" value="" readonly="readonly">
+								<input type="text" name="phone" id="phone" class="form-control-plaintext" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
 							<th>우편 번호</th>
 							<td class="row">
-								<input type="text" name="postCode" id="postCode" class="form-control-plaintext ml-3 col-6 dont" value="" readonly="readonly">
+								<input type="text" name="postCode" id="postCode" class="form-control-plaintext ml-3 col-6 dont" readonly="readonly">
 								<input type="hidden" class="btn btn-outline-primary col-5 modi" onclick="execPostcode()" value="우편번호 찾기">
 							</td>
 						</tr>
 						<tr>
 							<th>주소</th>
 							<td>
-								<input type="text" name="roadAddr" id="roadAddr" class="form-control-plaintext dont" value="" readonly="readonly">
-								<input type="text" name="detailAddr" id="detailAddr" class="form-control-plaintext" value="" readonly="readonly">
+								<input type="text" name="roadAddr" id="roadAddr" class="form-control-plaintext dont" readonly="readonly">
+								<input type="text" name="detailAddr" id="detailAddr" class="form-control-plaintext"  readonly="readonly">
 							</td>
 						</tr>
 						<tr class="sr-only admin">
@@ -194,11 +194,12 @@
 						</tr>
 					</table>
 					<input type="hidden" id="result" name="result">
-					<input type="hidden" name="state" value="member">
+					<input type="hidden" name="from" value="admin">
+					</form>
 				</div>
 				<div class="modal-footer">
 					<input class="btn btn-primary modi" type="hidden" onclick="register();" value="수정하기">
-					<button class="btn btn-info" type="button" onclick="makeChange();">고객 정보 수정</button>
+					<input class="btn btn-info" type="button" id="modistart" onclick="makeChange();" value="고객 정보 수정">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
@@ -227,6 +228,7 @@
 	<script type="text/javascript">
 		function makeChange() {
 			$('table input:not(.dont)').removeClass('form-control-plaintext').addClass('form-control').removeAttr('readonly');
+			$('#modistart').attr('type', 'hidden');
 			$('.modi').attr('type', 'button');
 			$('.admin').removeClass('sr-only');
 		}
@@ -259,6 +261,7 @@
 	        }).open();
 	    }
 		
+		//수정 클릭 시 양식 체크 후 만족하면  submit
 	    function register(){
 			var result = 1;
 			var email = $("#email").val();
@@ -289,9 +292,7 @@
 			}else if(result ==3){
 				alert("올바른 이름을 입력해 주세요.");
 			}else{
-				var nearForm = $(this).closest('form');
-				nearForm.attr("action", "../ad/warehousing_check");
-				nearForm.submit();
+				$("#modify").submit();
 			}
 		}
 		
@@ -299,6 +300,7 @@
     	  $('#detailModal').on('hide.bs.modal', function (event) {
     		  $('table input:not(.dont)').removeClass('form-control').addClass('form-control-plaintext').attr('readonly','readonly');
     		  $('.modi').attr('type', 'hidden');
+    		  $('#modistart').attr('type', 'button');
     		  $('#name').closest('tr').find('span').addClass('sr-only');
     		  $('.admin').addClass('sr-only');
     		});//모달 없어졌을 때..
