@@ -40,7 +40,17 @@
 		<servlet-name>ReserveController</servlet-name>
 		<url-pattern>/re/*</url-pattern>
 	</servlet-mapping>
-
+	
+	
+	<servlet>
+		<servlet-name>CommonController</servlet-name>
+		<servlet-class>cargo.common.controller.CommonController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommonController</servlet-name>
+		<url-pattern>/co/*</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

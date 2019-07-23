@@ -10,27 +10,8 @@
         <title>TEAM2 WAREHOUSE</title>
         <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
-        <!--Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-        <!--vendors styles-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-
-        <!-- Bootstrap CSS / Color Scheme -->
-        <link rel="stylesheet" href="css/default.css" id="theme-color">
-        <!-- font-awesome CSS -->
-       	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-		<link href="${contextPath }/css/font.css" rel="stylesheet">
-		
-		<!-- jquery.js -->
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<!-- bootstrap.min.js -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-		
-    	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-    	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
+         <!-- CSS/CDN links-->
+		<jsp:include page="inc/head_link.jsp"></jsp:include>
 		
         <style>
         	/* 중고 장터 */
@@ -347,58 +328,58 @@
         </div>
     </nav>
 
-        <!-- 간편견적 -->
-        <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
-            <div class="container">
-                <div class="row vh-md-100">
-                    <div class="col-md-7 my-md-auto text-center text-md-left">
-                        <h1 class="display-3 text-white font-weight-bold">간편견적</h1>
-                        <p class="lead text-light my-4">다양한 크기의 스토리지와 예상 비용을 빠르게 확인하실 수 있습니다.</p>
-                      	<!-- 간편검색 --> 
-                       	<div class="ml-auto">
-                        <div class="card">
-                        <div class="card-body p-4">
-                           <form class="signup-form">
-                               <div class="form-group">
-                                   <input type="text" class="form-control" id="name" name="name" placeholder="Customer Name">
-                               </div>
-                               <div class="form-group row">
-                              	<div class="col-md-6">
-                                   <select class="form-control" id="size" name="size">
-                                       <option value="">사이즈선택</option>
-                                       <option value="A">A - 3㎡ : 2m x 1.5m x 2m</option>
-                                       <option value="B">B - 6㎡ : 3m x 2m x 2m</option>
-                                       <option value="C">C - 8㎡ : 4m x 2m x 2m</option>
-                                       <option value="D">D - 15㎡ : 6m x 2.5m x 2.5m</option>
-                                   </select>
-                                </div>
-                                <div class="col-md-6 form-group form-row">
-                                	<input type="text" id="minday" name="minday" onkeypress="inNumber();" class="form-control" placeholder="최소 대여기간 15일">
-                                </div>
-                               </div>
-                               <div class="form-group">
-                                   <input type="button" id="ajaxbtn" value="계산하기" class="btn btn-primary btn-block">
-                               </div>
-                           </form>
-                        </div>
-                        </div>
-                       </div>
+     <!-- 간편견적 -->
+     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
+         <div class="container">
+             <div class="row vh-md-100">
+                 <div class="col-md-7 my-md-auto text-center text-md-left">
+                     <h1 class="display-3 text-white font-weight-bold">간편견적</h1>
+                     <p class="lead text-light my-4">다양한 크기의 스토리지와 예상 비용을 빠르게 확인하실 수 있습니다.</p>
+                   	<!-- 간편검색 --> 
+                    	<div class="ml-auto">
+                     <div class="card">
+                     <div class="card-body p-4">
+                        <form class="signup-form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Customer Name">
+                            </div>
+                            <div class="form-group row">
+                           	<div class="col-md-6">
+                                <select class="form-control" id="size" name="size">
+                                    <option value="">사이즈선택</option>
+                                    <option value="A">A - 3㎡ : 2m x 1.5m x 2m</option>
+                                    <option value="B">B - 6㎡ : 3m x 2m x 2m</option>
+                                    <option value="C">C - 8㎡ : 4m x 2m x 2m</option>
+                                    <option value="D">D - 15㎡ : 6m x 2.5m x 2.5m</option>
+                                </select>
+                             </div>
+                             <div class="col-md-6 form-group form-row">
+                             	<input type="text" id="minday" name="minday" onkeypress="inNumber();" class="form-control" placeholder="최소 대여기간 15일">
+                             </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="button" id="ajaxbtn" value="계산하기" class="btn btn-primary btn-block">
+                            </div>
+                        </form>
+                     </div>
+                     </div>
                     </div>
-                </div>
-            </div>
-            <!-- 간편견적 다이알로그 -->
-			<div id="dialog" title="간편견적">
-				<label for="rsname"><small>Name</small></label>
-				<input type="text" class="form-control" id="rsname" readonly="readonly">
-				<label for="rssize"><small>Size</small></label>
-			    <input type="text" class="form-control" id="rssize" readonly="readonly">
-			    <label for="rsminday"><small>Using day</small></label>
-			    <input type="text" class="form-control" id="rsminday" readonly="readonly">
-			    <label for="ajaxresult"><small>Price</small></label>
-			    <input type="text" class="form-control" id="ajaxresult" readonly="readonly" placeholder="예상견적"><br>
-			    <div class="text-center"><small><b>※ 확인을 눌러 예약페이지에서 예약해주세요.</b></small></div>
-			</div>
-        </section>
+                 </div>
+             </div>
+         </div>
+         <!-- 간편견적 다이알로그 -->
+		<div id="dialog" title="간편견적">
+			<label for="rsname"><small>Name</small></label>
+			<input type="text" class="form-control" id="rsname" readonly="readonly">
+			<label for="rssize"><small>Size</small></label>
+		    <input type="text" class="form-control" id="rssize" readonly="readonly">
+		    <label for="rsminday"><small>Using day</small></label>
+		    <input type="text" class="form-control" id="rsminday" readonly="readonly">
+		    <label for="ajaxresult"><small>Price</small></label>
+		    <input type="text" class="form-control" id="ajaxresult" readonly="readonly" placeholder="예상견적"><br>
+		    <div class="text-center"><small><b>※ 확인을 눌러 예약페이지에서 예약해주세요.</b></small></div>
+		</div>
+     </section>
         
         
         
@@ -418,7 +399,6 @@
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
                             <div class="icon-box-inner small-xs text-primary">
-                               <!-- <img src="./img/roomsize.PNG"> -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
                             </div>
                         </div>
@@ -555,45 +535,9 @@
                 </div>
                 <div class="row mt-5">
 	                 <div class="mx-auto">
-	                 	<a href="button"class="btn btn-lg btn-primary mx-auto">자세히 보러가기</a>
+	                 	<a href="${contextPath }/co/information.go"class="btn btn-lg btn-primary mx-auto">자세히 보러가기</a>
 	                </div>
                 </div>
-                
-                <!-- <div class="row mt-5">
-                    <div class="col-md-9 mx-auto">
-                        <div class="row">
-                            <div class="col-md-4 text-center">
-                                <div class="icon-box border-box">
-                                    <div class="icon-box-inner p-2 text-primary">
-                                        <span data-feather="umbrella"></span>
-                                    </div>
-                                </div>
-                                <h6 class="mb-2">Money-back guarantee</h6>
-                                <p class="text-muted small-xl">100% money back guarantee within 14 days. No worries.</p>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="icon-box border-box">
-                                    <div class="icon-box-inner p-2 text-primary">
-                                        <span data-feather="shield"></span>
-                                    </div>
-                                </div>
-                                <h6 class="mb-2">Secure payment</h6>
-                                <p class="text-muted small-xl">Money transfers are protected with a 256-bit SSL Protocol.</p>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <div class="icon-box border-box">
-                                    <div class="icon-box-inner p-2 text-primary">
-                                        <span data-feather="credit-card"></span>
-                                    </div>
-                                </div>
-                                <h6 class="mb-2">Payment methods</h6>
-                                <p class="text-muted small-xl">Pay with multiple payment methods — credit card, bank transfer or PayPal.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-             
-                
             </div>
         </section>
         
@@ -612,7 +556,7 @@
                         </ul>
                         <p class="lead mt-3">
                             <a href="${contextPath }/re/info.me?warehouse=A" class="btn btn-primary btn-sm d-inline-flex flex-row align-items-center">
-                                예약하러가기 <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
+                              	 예약하러가기 <span class="ml-1" width="18" height="18" data-feather="chevron-right"></span>
                             </a>
                         </p>
                     </div>
@@ -620,7 +564,7 @@
             </div>
         </section>
         
-        <!-- market section -->
+        <!-- 중고장터 -->
         <section class="py-7" id="market">
             <div class="container">
                 <div class="row">
@@ -671,7 +615,7 @@
             </div>
         </section>
 
-        <!-- faq section -->
+        <!-- FAQ -->
         <section class="py-7 bg-light" id="faq">
             <div class="container">
                 <div class="row">
@@ -727,70 +671,14 @@
         </section>
         
         <!--footer / contact-->
-        <footer class="py-6 bg-black" id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <h5 class="text-white">About Lambda</h5>
-                        <p class="about">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. 
-                            Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.</p>
-                        <ul class="list-inline social social-rounded social-sm">
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6 ml-auto">
-                        <h5 class="text-white">Lambda</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Products</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Publish</a></li>
-                            <li><a href="#">Outreach</a></li>
-                            <li><a href="#">Collaborate</a></li>
-                            <li><a href="#">Global</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Community</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Help forum</a></li>
-                            <li><a href="#">Slack channel</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Policies</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 text-muted text-center small-xl">
-                        <p>&copy; 2019 Lambda. All rights reserved.</p>
-                        Free Bootstrap 4 Multipurpose Landing Page Template by <a href="https://wireddots.com" target="_blank">Wired Dots</a>.
-                    </div>
-                </div>
-            </div>
-        </footer>
+		<jsp:include page="inc/footer.jsp"></jsp:include>
 
         <!--scroll to top-->
         <div class="scroll-top">
             <i class="fa fa-angle-up" aria-hidden="true"></i>
         </div>
-
+        
+        <!-- LOGIN MODAL -->	
        	<div id="loginModal" class="modal fade">
 				<div class="modal-dialog modal-login">
 					<div class="modal-content">
