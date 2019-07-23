@@ -36,8 +36,8 @@ public class AdminController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		System.out.println("---------------------------------");
-		System.out.println("관리자 영역");
+		System.out.println("--------------ADMIN--------------");
+		
 		String contextPath=request.getContextPath();
 		
 		//가상요청 주소 가져오기
@@ -126,12 +126,12 @@ public class AdminController extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 			}
-			System.out.println("---------------------------------\n");
 			
 		} catch (Exception e) {
 			System.out.println("AdminController err: "+e.getMessage());
 			e.printStackTrace();
 		}
+		System.out.println("---------------------------------\n");
 	}
 
 }
