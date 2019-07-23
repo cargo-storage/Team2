@@ -1,4 +1,29 @@
 function overdueModal(modal, result) {
+	$('.calendar').pignoseCalendar({
+		lang: 'ko',
+		multiple: true,
+		disabledRanges: [
+			[moment(result.end_day)+1, moment()]
+			],
+		init: function(context){
+			$(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+		}//end of init
+	});//end of pignoseCalendar
+	
+	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
+	$('.pignose-calendar-body').addClass('clickX');
+	
+	$('.modal-footer button[value="overdue"]').removeClass("sr-only");
+	modal.find('.item').text(result.item);
+	modal.find('.duration').text(result.start_day+"~"+result.end_day);
+	modal.find('.overdue_day').text(result.overdue_day);
+	modal.find('.arrears').text(result.arrears.toLocaleString()+"원");
+	modal.find('.now_deposit').text(result.now_deposit.toLocaleString()+"원");
+	modal.find('.item_price').text(result.item_price.toLocaleString()+"원");
+	modal.find('.name').text(result.name);
+	modal.find('.email').text(result.email);
+	modal.find('.phone').text(result.phone);
+	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
 	
 }//end of overdueModal
 
@@ -22,8 +47,7 @@ function reservationModal(modal, result) {
 	modal.find('.name').text(result.name);
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
-	modal.find('.postCode').text(result.postCode);
-	modal.find('.addr').text(result.roadAddr + " " + result.detailAddr);
+	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
 }//end of reservationModal
 
 function itemsModal(modal,result) {
@@ -38,6 +62,11 @@ function itemsModal(modal,result) {
 	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
 	$('.pignose-calendar-body').addClass('clickX');
 	
+	var today = moment();
+	var end_day = moment(result.end_day,'YYYY-MM-DD');
+	if(moment.duration(today.diff(end_day)).asDays()>=1){
+		$('.modal-footer button[value="overdue"]').removeClass("sr-only");
+	}
 	modal.find('.item').text(result.item);
 	modal.find('.start_day').text(result.start_day);
 	modal.find('.end_day').text(result.end_day);
@@ -46,8 +75,7 @@ function itemsModal(modal,result) {
 	modal.find('.name').text(result.name);
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
-	modal.find('.postCode').text(result.postCode);
-	modal.find('.addr').text(result.roadAddr + " " + result.detailAddr);
+	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
 }//end of itemsModal
 
 function closedModal(modal,result) {
@@ -72,8 +100,7 @@ function closedModal(modal,result) {
 	modal.find('.name').text(result.name);
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
-	modal.find('.postCode').text(result.postCode);
-	modal.find('.addr').text(result.roadAddr + " " + result.detailAddr);
+	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
 }//end of closedModal
 
 function MemberModal(modal,result) {
@@ -123,7 +150,7 @@ $(document).ready(function() {
 			data : allData,
 			dataType: 'text',
 			success : function(r) {
-				$('#result').val(r);
+				modal.find('.result').val(r);
 				
 				var result = JSON.parse(r);
 				if(cate=='overdue') overdueModal(modal, result);
@@ -139,17 +166,21 @@ $(document).ready(function() {
   $('#detailModal').on('hide.bs.modal', function (event) {
 	  $('#postCode').siblings('input').attr('type', 'hidden');
 	  $('#dataTable tbody tr.selected').removeClass('selected');
+	  $('.modal-footer button[value="overdue"]').addClass("sr-only");
 	});//모달 없어졌을 때..
-  
-  $('.extend').on('click', function() {
-	var nearForm = $(this).closest('form');
-	nearForm.attr("action", "../ad/extend_reserv");
+
+  $(".sub").on('click', function() {
+	var button = $(this);
+	var nearForm = button.closest('form');
+	//연장
+	if(button.val() == 'extend') nearForm.attr("action", "../ad/extend_reserv");
+	//to창고
+	else if(button.val() == 'toitems') nearForm.attr("action", "../ad/warehousing_check");
+	//빼기
+	else if(button.val() == 'toclosed') nearForm.attr("action", "../ad/release_check");
+	//연체 창고 옮기기
+	else if(button.val() == 'overdue') nearForm.attr("action", "../ad/release_check");
+	
 	nearForm.submit();
-  });//end of extend on click
-  
-  $('.toitems').on('click', function() {
-	var nearForm = $(this).closest('form');
-	nearForm.attr("action", "../ad/warehousing_check");
-	nearForm.submit();
-  });//end of toitems on click
+  });//예약연장, 창고넣기, 창고 빼기 버튼 눌렀을 때
 });//end of onload

@@ -14,6 +14,7 @@ import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminOverdueAction;
+import cargo.admin.action.AdminReleaseItemAction;
 import cargo.admin.action.AdminReservToItemsAction;
 import cargo.admin.action.AdminwarehousingCheckAction;
 import cargo.common.DTO.MemberDTO;
@@ -107,6 +108,15 @@ public class AdminController extends HttpServlet {
 			}else if("/reserve_to_items".equals(command)){
 				action = new AdminReservToItemsAction();
 				forward = action.execute(request, response);
+			
+			//창고에서 빼기 전에 체크
+			}else if("/release_check".equals(command)){
+				action = new AdminReleaseItemAction();
+				forward = action.execute(request, response);
+				
+			//창고 -> closed
+			}else if("/item_to_closed".equals(command)){
+				
 			}
 			
 			
