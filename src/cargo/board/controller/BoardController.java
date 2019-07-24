@@ -18,6 +18,7 @@ import cargo.board.action.BoardReplayAction;
 import cargo.board.action.BoardReplayFormAction;
 import cargo.board.action.BoardSearchAction;
 import cargo.board.action.BoardViewAction;
+import cargo.board.action.FAQAction;
 import cargo.board.action.NoticeAddAction;
 import cargo.board.action.NoticeAddFormAction;
 import cargo.board.action.NoticeDelAction;
@@ -127,6 +128,13 @@ public class BoardController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+			}else if (command.equals("/FAQ.bo")) {
+				action = new FAQAction();
+				try {
+					forward=action.execute(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				
 				

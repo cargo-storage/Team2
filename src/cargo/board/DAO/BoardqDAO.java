@@ -278,7 +278,7 @@ public class BoardqDAO {
 			 
 			try {
 				getConnection();
-				sql = "select * from boardq where subject like ? order by re_ref desc, re_seq asc limit ?,?";
+				sql = "select * from boardq where subject or name like ? order by re_ref desc, re_seq asc limit ?,?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, "%"+search+"%");
 				pstmt.setInt(2, (currentPage-1)*pagePerRow);

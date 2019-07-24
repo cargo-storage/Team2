@@ -76,39 +76,19 @@
     line-height: 3em;
  
   }
+  .hr1 {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+  }
+  .hr2 {
+    border: 0;
+    height: 3px;
+    background: #ccc;
+  }
      
    </style>
-   <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="index.html">
-                TEAM2 WAREHOUSE
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span data-feather="menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#company">회사소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#market">중고장터</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">고객지원</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">로그인/회원가입</a>
-                </form>
-            </div>
-        </nav>
+
            <jsp:include page="../inc/header.jsp"></jsp:include>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
@@ -123,7 +103,7 @@
         <a href="CustomerSupport.jsp">고객지원</a>
       </li>
       <li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
-      <li><a href="FAQ.jsp">자주하는 질문</a></li>
+      <li><a href="${contextPath}/bo/FAQ.bo">자주하는 질문</a></li>
       <li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
       <li><a href="#">1:1 실시간 상담</a></li>
       <li><a href="ViewMap.jsp">오시는 길</a></li>
@@ -137,25 +117,16 @@
    <h1 align="center">공지사항</h1>
      <table class="table">
         <tbody>
-           <tr>
-              <td>no : ${bnDTO.no}</td>
-            </tr>
-         <tr>
-               <td>제목 :  ${bnDTO.subject}</td>
-         </tr>
-         <tr>
-               <td>내용 :</td>
-               <td>${bnDTO.content}</td>
-         </tr>
-         <tr>
-               <td>작성자 :</td>
-               <td>${bnDTO.name}</td>
-         </tr>
-         <tr>
-               <td>작성일 :</td>
-               <td>${bnDTO.date}</td>
-         </tr>
-      </tbody>
+     		<div><h3>${bnDTO.subject}</h3>
+     		
+			<div> ${bnDTO.name} <span> &nbsp;&nbsp;&nbsp;&nbsp;${bnDTO.date}</span></div>
+			<hr class="hr1">
+			<br>
+			<div>${bnDTO.content}</div>
+			<br>
+			<hr class="hr2">
+			</div>
+		</tbody>
    </table>
       <div align="right">
       <c:if test="${bnDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >

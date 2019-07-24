@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
     <head>
@@ -75,37 +79,7 @@
   }
      
    </style>
-   <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="index.html">
-                TEAM2 WAREHOUSE
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span data-feather="menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#company">회사소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#market">중고장터</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">고객지원</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">로그인/회원가입</a>
-                </form>
-            </div>
-        </nav>
+ 	<jsp:include page="../inc/header.jsp"></jsp:include>
     </head>
     <script type="text/javascript">
 	$(function() {
@@ -154,22 +128,22 @@
 
 
 <!-- 왼쪽메뉴 -->
-<div id="page-wrapper">
+<nav id="page-wrapper">
   <!-- 사이드바 -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        <a href="#">고객지원</a>
+        <a href="CustomerSupport.jsp">고객지원</a>
       </li>
-		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
-		<li><a href="#">자주하는 질문</a></li>
-		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
-		<li><a href="#">1:1 실시간 상담</a></li>
-		<li><a href="#">오시는 길</a></li>
+      <li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+      <li><a href="${contextPath}/bo/FAQ.bo">자주하는 질문</a></li>
+      <li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
+      <li><a href="#">1:1 실시간 상담</a></li>
+      <li><a href="ViewMap.jsp">오시는 길</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
-</div>
+</nav>
 <!-- 왼쪽메뉴 -->
 
  <section class="py-7" id="company">

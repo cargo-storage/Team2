@@ -76,58 +76,28 @@
   }
      
    </style>
-   <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-            <a class="navbar-brand" href="index.html">
-                TEAM2 WAREHOUSE
-            </a>
-            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span data-feather="menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#company">회사소개</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#reservation">예약안내</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#market">중고장터</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="#faq">고객지원</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <a href="#signup" class="btn btn-outline-secondary btn-navbar page-scroll">로그인/회원가입</a>
-                </form>
-            </div>
-        </nav>
+   	<jsp:include page="../inc/header.jsp"></jsp:include>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
 
 <!-- 왼쪽메뉴 -->
-<div id="page-wrapper">
+<nav id="page-wrapper">
   <!-- 사이드바 -->
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
         <a href="CustomerSupport.jsp">고객지원</a>
       </li>
-		<li><a href="Notice.jsp">공지사항</a></li>
-		<li><a href="FAQ.jsp">자주하는 질문</a></li>
+		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+		<li><a href="${contextPath}/bo/FAQ.bo">자주하는 질문</a></li>
 		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
 		<li><a href="#">1:1 실시간 상담</a></li>
 		<li><a href="ViewMap.jsp">오시는 길</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
-</div>
+</nav>
 <!-- 왼쪽메뉴 -->
 
         
@@ -168,7 +138,7 @@
                             </div>
                         </div>
                         <h4 class="mt-2">고객상담</h4>
-                       <a href="${contextPath}/boardq/QuestionListAction.bo" class="btn btn-primary btn-sm">문의 하기</a>
+                       <a href="${contextPath}/bo/QuestionListAction.bo" class="btn btn-primary btn-sm">문의 하기</a>
                     </div>
                     <div class="col-md-4 col-sm-6 mb-5 text-center">
                         <div class="icon-box">
@@ -210,69 +180,6 @@
             </div>
         </section>
      
-
-        
-        <!--footer / contact-->
-        <footer class="py-6 bg-black" id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <h5 class="text-white">About Lambda</h5>
-                        <p class="about">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. 
-                            Laceaque quiae sitiorem rest non restibusaes maio es dem tumquam explabo.</p>
-                        <ul class="list-inline social social-rounded social-sm">
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-google-plus"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href=""><i class="fa fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6 ml-auto">
-                        <h5 class="text-white">Lambda</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Products</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Publish</a></li>
-                            <li><a href="#">Outreach</a></li>
-                            <li><a href="#">Collaborate</a></li>
-                            <li><a href="#">Global</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6">
-                        <h5 class="text-white">Community</h5>
-                        <ul class="list-unstyled mt-4">
-                            <li><a href="#">Help forum</a></li>
-                            <li><a href="#">Slack channel</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Policies</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12 text-muted text-center small-xl">
-                        <p>&copy; 2019 Lambda. All rights reserved.</p>
-                        Free Bootstrap 4 Multipurpose Landing Page Template by <a href="https://wireddots.com" target="_blank">Wired Dots</a>.
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-      
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
