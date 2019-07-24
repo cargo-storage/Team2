@@ -308,13 +308,21 @@ public class MemberDAO {
 			
 			while(rs.next()) {
 				AdminDTO adto = new AdminDTO();
+				
 				adto.setState(rs.getString("state"));
+				adto.setName(rs.getString("name"));
+				adto.setPhone(rs.getString("phone"));
+				adto.setEmail(rs.getString("email"));
+				
+				adto.setNum(rs.getInt("num"));
 				adto.setItem(rs.getString("item"));
 				adto.setHouse(rs.getString("house"));
+				
 				adto.setRes_day(rs.getDate("res_day"));
 				adto.setStart_day(rs.getDate("start_day"));
 				adto.setEnd_day(rs.getDate("end_day"));
 				adto.setReturn_day(rs.getDate("return_day"));
+				
 				adto.setPayment(rs.getInt("payment"));
 				adto.setItem_price(rs.getInt("item_price"));
 				
