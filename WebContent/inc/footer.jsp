@@ -44,7 +44,7 @@
                         	<li><a href="${contextPath }/me/join.me">회원가입</a></li>
                             <li><a href="${contextPath }/co/information.go">이용안내</a></li>
                             <li><a href="${contextPath }/re/info.me?warehouse=A">예약안내</a></li>
-                            <li><a href="#">중고장터</a></li>
+                            <li><a href="${contextPath }/mk/market.do">중고장터</a></li>
                         </ul>
                     </div>
 <!--                     </div> -->

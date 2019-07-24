@@ -27,7 +27,7 @@
                     <a class="nav-link page-scroll" href="${contextPath }/re/info.me?warehouse=A">예약안내</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#market">중고장터</a>
+                    <a class="nav-link page-scroll" href="${contextPath }/mk/market.do">중고장터</a>
                 </li>
 				<li class="nav-item">
 					<a class="nav-link page-scroll" href="#faq">FAQ</a>

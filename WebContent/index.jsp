@@ -104,6 +104,8 @@
 			$(function(){
 			 	/* 마이 페이지 hover */
 			 	$("#navbardrop").mouseenter(function(){
+			 		
+			 		
 			 		$(".dropdown-menu").addClass("show");
 			 	});
 			 	$("#dropdown-menu").mouseleave(function(){
@@ -581,7 +583,7 @@
                 					<img src="img/online-shop.png" class="col-lg-12 rounded-circle d-block mx-auto"/>
 									<p class="market-go text-white">중고 장터</p>
 									<p class="text-white">미수령하신 물건들을<br>중고장터에서 판매 해 드립니다!</p>
-									<button type="button" class="btn btn-primary btn-lg text-white">T2 MARKET <i class="far fa-arrow-alt-circle-right"></i></button>
+									<a href="${contextPath }/mk/market.do" class="btn btn-primary btn-lg text-white">T2 MARKET <i class="far fa-arrow-alt-circle-right"></i></a>
                 				</div>	
                 			</div>
                 		</div>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -75,7 +77,11 @@
 	    			<div class="col-lg-12 ftco-animate">
 	            <div class="comment-form-wrap pt-5">
 	            <h2 class="mb-3 font-weight-bold">POST ITEMS</h2>
-	                <form action="#" class="p-3 p-md-5 bg-light">
+	                
+	                
+	                
+	                <!-- ********************* 글쓰기 폼***************  -->
+	                <form action="${contextPath }/mk/postItem.do" class="p-3 p-md-5 bg-light">
 	                  <div class="form-group">
 	                    <label for="name">Name *</label>
 	                    <input type="text" class="form-control" id="name">
@@ -98,6 +104,10 @@
 	                  </div>
 
 	                </form>
+	                
+	                
+	                
+	                
 	              </div>
 	          </div>
 	          
