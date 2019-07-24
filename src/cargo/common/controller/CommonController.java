@@ -58,8 +58,6 @@ public class CommonController extends HttpServlet{
 			
 			
 			
-			
-			
 			// 모든 과정 후 페이지 이동부분
 			if (forward != null) {
 				if (forward.isAjax()) {

@@ -157,7 +157,7 @@
 						$.ajax({
 							type: "post",
 							async: false,
-							url: "${contextPath}/me/emailCheck.me",
+							url: "${contextPath}/me/emailCheck",
 							data: {email: email},
 							dataType: 'text',
 							success: function(data){
@@ -244,7 +244,7 @@
 					$.ajax({
 						type: "post",
 						async: false,
-						url: "${contextPath}/me/emailAuth.me",
+						url: "${contextPath}/me/emailAuth",
 						data: {email: email},
 						success: function(data){
 							var msg = JSON.parse(data);
@@ -337,7 +337,7 @@
 	            </div>
 	            <br>
 				<div class="col-sm-9 col-lg-6 m-auto">
-					<form action="${contextPath }/me/join.me?join=do" method="post" onsubmit="return register()">
+					<form action="${contextPath }/me/join?join=do" method="post" onsubmit="return register()">
 						<div class="form-group">
 							<label for="email">이메일</label>
 							<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력해 주세요">

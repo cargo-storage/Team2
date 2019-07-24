@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,7 @@
 	        "scrollCollapse": true
 	    } );
 	});
+
 </script>
 </head>
 
@@ -22,7 +25,7 @@
 	<c:when test="${sessionScope.mdto.email==null }">
 		<script type="text/javascript">
 			alert("로그인 후 이용 가능합니다.");
-			location.href="${contextPath}/index.jsp"
+			location.href="${contextPath}/co/login.go"
 		</script>
 	</c:when>
 </c:choose>
@@ -58,6 +61,7 @@
 									<th>실수령일</th>
 									<th>이용금액</th>
 									<th>상품가치</th>
+									<th>기간연장</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -71,6 +75,11 @@
 									<td><fmt:formatDate value="${adto.return_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
+									<td>
+									<c:if test="${adto.state eq '보관' }">
+										<a href="${contextPath }/me/extendReserv?category=status" class="btn-success btn-sm">연장하기</a>
+									</c:if>							
+									</td>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -85,6 +94,7 @@
 									<th>시작일</th>
 									<th>종료일</th>
 									<th>이용금액</th>
+									<th>기간연장</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -97,6 +107,11 @@
 									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
 									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd a hh:mm"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
+									<td>
+									<c:if test="${adto.state eq '예약' }">
+										<a href="${contextPath }/me/extendReserv?category=reservation" class="btn-success btn-sm">연장하기</a>
+									</c:if>							
+									</td>
 								</tr>
 							</c:forEach>
 							</tbody>
