@@ -13,6 +13,8 @@ import cargo.admin.action.AdminEachInfoAction;
 import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
+import cargo.admin.action.AdminMoveToOverdueAction;
+import cargo.admin.action.AdminEnterOverdueLocationAction;
 import cargo.admin.action.AdminOverdueAction;
 import cargo.admin.action.AdminReleaseItemAction;
 import cargo.admin.action.AdminReservToItemsAction;
@@ -117,6 +119,16 @@ public class AdminController extends HttpServlet {
 			//창고 -> closed
 			}else if("/item_to_closed".equals(command)){
 				
+			
+			//어느 연체 보관 창고에 보관할지 선택
+			}else if("/enter_overdue_location".equals(command)){
+				action = new AdminEnterOverdueLocationAction();
+				forward = action.execute(request, response);
+				
+			//연체 보관 창고로 옮기기
+			}else if("/move_to_overdue".equals(command)){
+				action = new AdminMoveToOverdueAction();
+				forward =action.execute(request, response);
 			}
 			
 			

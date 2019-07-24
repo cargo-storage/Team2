@@ -144,7 +144,7 @@
 								<tr data-toggle="modal" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
 								</c:when>
 								<c:when test="${adto.state eq '완료'}">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								<tr data-toggle="modal" data-target="#ClosedModal" data-cate="${adto.state}" data-primary="${adto.item}">
 								</c:when>
 							</c:choose>
 									<td><c:out value="${adto.state}"/></td>
@@ -253,7 +253,7 @@
 					<input type="hidden" name="state" value="reservation">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
 					<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
@@ -324,7 +324,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고 이동</button>
-				<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+				<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
 				<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 			</div>

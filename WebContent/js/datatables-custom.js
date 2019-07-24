@@ -17,6 +17,7 @@ function overdueModal(modal, result) {
 	modal.find('.item').text(result.item);
 	modal.find('.duration').text(result.start_day+"~"+result.end_day);
 	modal.find('.overdue_day').text(result.overdue_day);
+	modal.find('.payment').text(result.payment.toLocaleString()+"원");
 	modal.find('.arrears').text(result.arrears.toLocaleString()+"원");
 	modal.find('.now_deposit').text(result.now_deposit.toLocaleString()+"원");
 	modal.find('.item_price').text(result.item_price.toLocaleString()+"원");
@@ -179,7 +180,7 @@ $(document).ready(function() {
 	//빼기
 	else if(button.val() == 'toclosed') nearForm.attr("action", "../ad/release_check");
 	//연체 창고 옮기기
-	else if(button.val() == 'overdue') nearForm.attr("action", "../ad/release_check");
+	else if(button.val() == 'overdue') nearForm.attr("action", "../ad/enter_overdue_location");
 	
 	nearForm.submit();
   });//예약연장, 창고넣기, 창고 빼기 버튼 눌렀을 때
