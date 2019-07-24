@@ -22,7 +22,8 @@
 
 </head>
 <body id="page-top">
-	
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
 	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
@@ -42,10 +43,11 @@
 				</div>
 				<div class="card-body row">
 					<section class="col-lg-6">
+						<span class="text-danger">보관 중인 물건 반환 날짜를 선택해 주세요</span>
 						<div class="calendar"></div>
 					</section>
 					<section class="col-lg-6">
-					<form action="${contextPath}/ad/item_to_closed" method="post" id="itoc">
+					<form action="${contextPath}/ad/release_check_confirm" method="post" id="itoc">
 						<table class="table">
 							<tr>
 								<th colspan="2" class="table-info">고객  정보  ▼</th>
@@ -75,16 +77,16 @@
 								</td>
 							</tr>
 							<tr>
-								<th>보관 시작일</th>
-								<td>${map.start_day}</td>
+								<th>예정 보관 기간</th>
+								<td>${map.start_day} ~ ${map.end_day}</td>
 							</tr>
-							<tr bgcolor="#f2f2f2">
-								<th>결제하실 금액</th>
-								<td></td>
+							<tr>
+								<th>물건 반환일</th>
+								<td><input type="text" class="form-control" name="return_day" value="${today}" readonly="readonly"></td>
 							</tr>
-							<tr bgcolor="#f2f2f2">
+							<tr>
 								<th>물건 가격</th>
-								<td><input class="form-control" type="text" name="item_price" id="item_price"></td>
+								<td><fmt:formatNumber value="${map.item_price}" type="currency" currencySymbol="￦"/></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text-right">
@@ -95,7 +97,6 @@
 								</td>
 							</tr>
 						</table>
-						<input type="hidden" name="num" value="${map.num}">
 						<input type="hidden" name="item" value="${map.item}">
 						</form>
 					</section>
