@@ -19,7 +19,9 @@
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
+<style type="text/css">
 
+</style>
 </head>
 	<jsp:useBean id="now" class="java.util.Date" />
 	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
@@ -68,10 +70,15 @@
 							</tr>
 							<tr>
 								<th>창고 번호</th>
-								<td>${map.house}</td>
+								<td>
+									<c:choose>
+										<c:when test="${map.overdue eq '-'}"><c:out value="${map.house}"></c:out></c:when>
+										<c:otherwise><c:out value="${map.overdue}"></c:out></c:otherwise>
+									</c:choose>
+								</td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>결제한 가격</th>
 								<td><fmt:formatNumber value="${map.payment}" type="currency" currencySymbol="￦"/></td>
 							</tr>
 							<tr>
@@ -93,7 +100,7 @@
 							<tr>
 								<th>이동 후 창고</th>
 								<td>
-									<select id="overdue" class="form-control">
+									<select id="overdue" name="overdue" class="form-control">
 										<option value="D26" selected="selected">D26</option>
 										<option value="D27">D27</option>
 										<option value="D28">D28</option>

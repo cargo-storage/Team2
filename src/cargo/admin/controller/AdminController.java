@@ -147,6 +147,8 @@ public class AdminController extends HttpServlet {
 					RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
 				}
+			}else{
+				System.out.println("There is no forward...WHAT?!");
 			}
 			
 		} catch (Exception e) {

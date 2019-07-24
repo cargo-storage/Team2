@@ -23,7 +23,7 @@
 </head>
 <body id="page-top">
 	
-	<%@include file="Top.jsp"%>
+	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -129,7 +129,7 @@
 				<form action="../me/modifyMember.me" method="post" id="modify">
 					<table class='table mx-auto my-auto'>
 						<tr>
-							<th colspan="2" class="text-center table-primary">회원 정보</th>
+							<th colspan="2" class="text-center table-primary">회원 정보  ▼</th>
 						</tr>
 						<tr>
 							<th>가입일</th>
@@ -298,6 +298,7 @@
 		
 	    $(document).ready(function() {
     	  $('#detailModal').on('hide.bs.modal', function (event) {
+    		  $('#postCode').siblings('input').attr('type', 'hidden');
     		  $('table input:not(.dont)').removeClass('form-control').addClass('form-control-plaintext').attr('readonly','readonly');
     		  $('.modi').attr('type', 'hidden');
     		  $('#modistart').attr('type', 'button');

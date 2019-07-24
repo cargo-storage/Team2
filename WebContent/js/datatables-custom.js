@@ -25,6 +25,8 @@ function overdueModal(modal, result) {
 	modal.find('.email').text(result.email);
 	modal.find('.phone').text(result.phone);
 	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
+	if(result.overdue == '-') modal.find('.house').text(result.house);
+	else modal.find('.house').text(result.overdue);
 	
 }//end of overdueModal
 
@@ -52,13 +54,23 @@ function reservationModal(modal, result) {
 }//end of reservationModal
 
 function itemsModal(modal,result) {
+//	$('.calendar').pignoseCalendar({
+//    	lang: 'ko',
+//    	multiple: true,
+//		init: function(context){
+//	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+//	    }
+//    });//end of pignoseCalendar
 	$('.calendar').pignoseCalendar({
-    	lang: 'ko',
-    	multiple: true,
+		lang: 'ko',
+		multiple: true,
+		disabledRanges: [
+			[moment(result.end_day)+1, moment()]
+			],
 		init: function(context){
-	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
-	    }
-    });//end of pignoseCalendar
+			$(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
+		}//end of init
+	});//end of pignoseCalendar
 	
 	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
 	$('.pignose-calendar-body').addClass('clickX');
@@ -77,6 +89,8 @@ function itemsModal(modal,result) {
 	modal.find('.phone').text(result.phone);
 	modal.find('.email').text(result.email);
 	modal.find('.addr').html("("+result.postCode+") "+result.roadAddr + "<br>" + result.detailAddr);
+	if(result.overdue == '-') modal.find('.house').text(result.house);
+	else modal.find('.house').text(result.overdue);
 }//end of itemsModal
 
 function closedModal(modal,result) {
@@ -84,6 +98,9 @@ function closedModal(modal,result) {
 		lang: 'ko',
 		theme: 'dark',
 		multiple: true,
+		disabledRanges: [
+			[moment(result.end_day)+1, moment(result.return_day)]
+			],
 		init: function(context){
 			$(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
 		}
@@ -164,8 +181,7 @@ $(document).ready(function() {
 
 	});//모달 나타났을때...
   
-  $('#detailModal').on('hide.bs.modal', function (event) {
-	  $('#postCode').siblings('input').attr('type', 'hidden');
+  $('.modal').on('hide.bs.modal', function (event) {
 	  $('#dataTable tbody tr.selected').removeClass('selected');
 	  $('.modal-footer button[value="overdue"]').addClass("sr-only");
 	});//모달 없어졌을 때..

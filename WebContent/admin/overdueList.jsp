@@ -31,7 +31,7 @@
 </head>
 <body id="page-top">
 	
-	<%@include file="Top.jsp"%>
+	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -80,13 +80,18 @@
 							<c:forEach items="${list}" var="odto">
 								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-primary ="${odto.item}">
 									<td><fmt:formatDate value="${odto.end_day}" pattern="YYYY-MM-dd"/></td>
-									<td><c:out value="${odto.overdue}"/></td>
+									<td><c:out value="${odto.overdue_day}"/></td>
 									<td><fmt:formatNumber value="${odto.arrears}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${odto.now_deposit}" type="currency" currencySymbol="￦"/></td>
 									<td><c:out value="${odto.name}"/></td>
 									<td><c:out value="${odto.email}"/></td>
 									<td><c:out value="${odto.phone}"/></td>
-									<td><c:out value="${odto.house}"/></td>
+									<td>
+									<c:choose>
+										<c:when test="${odto.overdue eq '-'}"><c:out value="${odto.house}"/></c:when>
+										<c:otherwise><c:out value="${odto.overdue}"/></c:otherwise>
+									</c:choose>
+									</td>
 									<td><c:out value="${odto.item}"/></td>
 								</tr>
 							</c:forEach>
@@ -143,6 +148,10 @@
 							<tr>
 								<th>물품 ID</th>
 								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>창고 번호</th>
+								<td class="house"></td>
 							</tr>
 							<tr>
 								<th>결제 가격</th>

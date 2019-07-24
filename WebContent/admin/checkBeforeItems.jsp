@@ -48,7 +48,7 @@
 					<form action="${contextPath}/ad/reserve_to_items" method="post" id="rtoi">
 						<table class="table">
 							<tr>
-								<th colspan="2" class="table-info">고객  정보</th>
+								<th colspan="2" class="table-info">고객  정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이름(이메일)</th>
@@ -59,7 +59,7 @@
 								<td>${map.phone}</td>
 							</tr>
 							<tr>
-								<th colspan="2" class="table-info">물품 정보</th>
+								<th colspan="2" class="table-info">물품 정보  ▼</th>
 							</tr>
 							<tr>
 								<th class="text-primary">발급된 물품 ID</th>
@@ -67,7 +67,12 @@
 							</tr>
 							<tr>
 								<th>창고 번호</th>
-								<td>${map.house}</td>
+								<td>
+								<c:choose>
+									<c:when test="${map.overdue eq '-'}"><c:out value="${map.house}"/></c:when>
+									<c:otherwise><c:out value="${map.overdue}"/></c:otherwise>							
+								</c:choose>
+								</td>
 							</tr>
 							<tr>
 								<th>사용기간</th>
