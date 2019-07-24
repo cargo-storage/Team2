@@ -56,10 +56,10 @@
                 });
                 $("#frm").submit();	// 결제 성공시 하단 form submit
             } else {
-                msg = '결제에 실패하였습니다.<br>';
+                msg = '결제에 실패하였습니다. ';
                 msg += rsp.error_msg;
-                //실패시 이동할 페이지
                 alert(msg);
+                location.href="../re/info.me?warehouse=A";
             }
         });
         

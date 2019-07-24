@@ -26,6 +26,10 @@
     <script type="text/javascript">
     
     $(function() {
+    	
+    	$('#start_day').val("");
+    	$('#end_day').val("");
+    
      	
     	/* Datepicker 작동 관련 */
     	
