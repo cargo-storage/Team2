@@ -88,7 +88,7 @@
 		  
 		  <div class="my-3 p-3 background rounded shadow-sm">
 			    <p class="lead pb-2 mb-0"><b>추가 결제 정보</b>
-			    <br><small class="text-muted red">
+			    <br><small class="text-danger">
 			    <c:choose>
 					<c:when test="${state eq 'reservation'}">추가 보증금 10%가 결제됩니다.</c:when>
 					<c:otherwise>추가보증금 10%와 비용 모두 결제하셔야 합니다.</c:otherwise>

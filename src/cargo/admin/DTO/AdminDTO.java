@@ -4,29 +4,16 @@ import java.sql.Date;
 
 
 public class AdminDTO {
-	private String state, item, email, house, name, phone, roadAddr, detailAddr;
+	private String state, item, email, house, name, phone, roadAddr, detailAddr,overdue;
 	private int num, payment, item_price, postCode;
 	private Date start_day, end_day, res_day, return_day;
 	public AdminDTO(){}
-	public AdminDTO(String state, String item, String email, String house, String name, String phone, String roadAddr,
-			String detailAddr, int num, int payment, int item_price, int postCode, Date start_day,
-			Date end_day, Date res_day, Date return_day) {
-		this.state = state;
-		this.item = item;
-		this.email = email;
-		this.house = house;
-		this.name = name;
-		this.phone = phone;
-		this.roadAddr = roadAddr;
-		this.detailAddr = detailAddr;
-		this.num = num;
-		this.payment = payment;
-		this.item_price = item_price;
-		this.postCode = postCode;
-		this.start_day = start_day;
-		this.end_day = end_day;
-		this.res_day = res_day;
-		this.return_day = return_day;
+	
+	public String getOverdue() {
+		return overdue;
+	}
+	public void setOverdue(String overdue) {
+		this.overdue = overdue;
 	}
 	public String getState() {
 		return state;

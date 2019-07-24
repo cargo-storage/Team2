@@ -10912,3 +10912,10 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+/*연체 표시...*/
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-disabled a {
+	opacity: 0.9;
+  	background-color: #f44336;
+  	color: white;
+}
