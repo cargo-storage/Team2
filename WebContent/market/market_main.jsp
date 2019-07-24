@@ -89,7 +89,7 @@
 	    					<!-- for문돌릴거임 -->
 			    			<div class="col-md-4">
 			    				<div class="blog-entry ftco-animate">
-										<a href="${contextPath }/mk/showcontent.do" class="img img-2" style="background-image: url(../images/image_1.jpg);"></a>
+										<a href="${contextPath }/mk/showcontent.do?no=1" class="img img-2" style="background-image: url(../images/image_1.jpg);"></a>
 										<div class="text text-2 pt-2 mt-3">
 				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
 				              <div class="meta-wrap">

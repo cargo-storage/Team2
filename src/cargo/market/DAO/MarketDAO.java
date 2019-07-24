@@ -80,16 +80,83 @@ public class MarketDAO {
 		return null;
 	}
 	
-	public M_boardJoinDTO selectJoinItem(){ // board, item JOIN 객체 반환
-		return null;
+	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환
+		
+		M_boardJoinDTO bDTO = new M_boardJoinDTO();
+		
+		try {
+			
+			getConnection();
+			String sql = "SELECT * FROM m_item JOIN m_board ON m_item.item = m_board.item WHERE m_board.no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_no);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				
+				bDTO.setCategory(rs.getString("category"));
+				bDTO.setContent(rs.getString("content"));
+				bDTO.setDate(rs.getTimestamp("date"));
+				bDTO.setImage(rs.getString("image"));
+				bDTO.setItem(rs.getString("item"));
+				bDTO.setName(rs.getString("name"));
+				bDTO.setNo(rs.getInt("no"));
+				bDTO.setOnStock(rs.getInt("onStock"));
+				bDTO.setPrice(rs.getInt("price"));
+				bDTO.setStock(rs.getInt("stock"));
+				bDTO.setTitle(rs.getString("title"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectJoinItem");
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return bDTO;
 	}
 	
 	public void addComment(){// 댓글 등록
 		
 	}
 	
-	public ArrayList<M_board_replyDTO> selectAllComment(){// 댓글 등록
-		return null;
+	public int getTotalComment(int board_no){ // 댓글 갯수 가져오기
+		
+		return 0;
+	}
+	
+	public ArrayList<M_board_replyDTO> selectAllComment(int board_no){// 댓글 가져오기
+		
+		ArrayList<M_board_replyDTO> replyList = new ArrayList<>();
+		M_board_replyDTO rDTO ;
+		
+		try {
+			getConnection();
+			String sql = "SELECT * FROM m_board_reply WHERE board_no=? ORDER BY no";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_no);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				rDTO = new M_board_replyDTO();
+				rDTO.setBoard_no(board_no);
+				rDTO.setContent(rs.getString("content"));
+				rDTO.setDate(rs.getTimestamp("date"));
+				rDTO.setEmail(rs.getString("email"));
+				rDTO.setNo(rs.getInt("no"));
+				
+				replyList.add(rDTO);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectAllComment");
+			e.printStackTrace();
+		} finally {
+			freeResource();
+		}
+		
+		return replyList;
 	}
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 

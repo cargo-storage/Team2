@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
+import cargo.market.action.ShowContentAction;
 
 public class MarketController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -49,11 +50,9 @@ public class MarketController extends HttpServlet{
 			}else if(command.equals("/cart.do")){	// 장바구니 페이지로 이동
 				forward = new ActionForward();
 				forward.setPath("../market/market_cart.jsp");
-			}else if(command.equals("/showcontent.do")){	// 상세글보기 페이지로 이동 - DB작업해서 뿌리는걸로 수정!
-				
-				forward = new ActionForward();
-				forward.setPath("../market/market_content.jsp");
-				
+			}else if(command.equals("/showcontent.do")){	// 상세글보기 페이지로 이동 - DB작업해서 뿌리는걸로 수정, 글번호 넘겨야함
+				action = new ShowContentAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/postItem.do")){ // ${contextPath }/mk/postItem.do 글쓰기 액션
 				
 			}else if(command.equals("/modifyItem.do")){ // 글 수정 액션
@@ -63,10 +62,6 @@ public class MarketController extends HttpServlet{
 			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
 				
 			}
-				
-				
-				
-				
 				
 			
 			//모든 과정 후 페이지 이동부분

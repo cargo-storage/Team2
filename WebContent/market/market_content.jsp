@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+    
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,13 +46,21 @@
 		background-size: cover;
     }
     
+    .hover:HOVER{
+    	color: #00c853;
+    }
+    
+    .fontcolor{
+    	color: #00c853;
+    }
+    
     </style>
     
     
     
   </head>
   <body>
-
+d
 	<div id="colorlib-page">
 		
 		<!-- navbar -->
@@ -68,183 +78,97 @@
 				</div>
 			</section>
 			
+			
 			<section class="ftco-section">
 	    	<div class="container">
 	    		<div class="row">
-	    			<div class="col-lg-9 ftco-animate">
-	            <h2 class="mb-3 font-weight-bold">Innovative Agency</h2>
-	            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, eius mollitia suscipit, quisquam doloremque distinctio perferendis et doloribus unde architecto optio laboriosam porro adipisci sapiente officiis nemo accusamus ad praesentium? Esse minima nisi et. Dolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-	            <p>
-	              <img src="../images/image_1.jpg" alt="" class="img-fluid">
+	    		<div class="col-lg-8 ftco-animate px-4">
+	    		
+	    		<!-- 게시글 영역 -->
+	            <h2 class="mb-5 font-weight-bold d-inline">${requestScope.mjdto.title }</h2>
+	            <p class="float-right"><small>${mjdto.date } 등록</small></p>
+	            <p class="mt-5">
+	              <img src="${contextPath }/market/uploaded/${mjdto.image }" alt="" class="img-fluid">
 	            </p>
-	            <p>Molestiae cupiditate inventore animi, maxime sapiente optio, illo est nemo veritatis repellat sunt doloribus nesciunt! Minima laborum magni reiciendis qui voluptate quisquam voluptatem soluta illo eum ullam incidunt rem assumenda eveniet eaque sequi deleniti tenetur dolore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
-	            <h2 class="mb-3 mt-5 font-weight-bold">#2. Creative WordPress Themes</h2>
-	            <p>Temporibus ad error suscipit exercitationem hic molestiae totam obcaecati rerum, eius aut, in. Exercitationem atque quidem tempora maiores ex architecto voluptatum aut officia doloremque. Error dolore voluptas, omnis molestias odio dignissimos culpa ex earum nisi consequatur quos odit quasi repellat qui officiis reiciendis incidunt hic non? Debitis commodi aut, adipisci.</p>
-	            <p>
-	              <img src="../images/image_2.jpg" alt="" class="img-fluid">
-	            </p>
-	            <p>Quisquam esse aliquam fuga distinctio, quidem delectus veritatis reiciendis. Nihil explicabo quod, est eos ipsum. Unde aut non tenetur tempore, nisi culpa voluptate maiores officiis quis vel ab consectetur suscipit veritatis nulla quos quia aspernatur perferendis, libero sint. Error, velit, porro. Deserunt minus, quibusdam iste enim veniam, modi rem maiores.</p>
-	            <p>Odit voluptatibus, eveniet vel nihil cum ullam dolores laborum, quo velit commodi rerum eum quidem pariatur! Quia fuga iste tenetur, ipsa vel nisi in dolorum consequatur, veritatis porro explicabo soluta commodi libero voluptatem similique id quidem? Blanditiis voluptates aperiam non magni. Reprehenderit nobis odit inventore, quia laboriosam harum excepturi ea.</p>
-	            <p>Adipisci vero culpa, eius nobis soluta. Dolore, maxime ullam ipsam quidem, dolor distinctio similique asperiores voluptas enim, exercitationem ratione aut adipisci modi quod quibusdam iusto, voluptates beatae iure nemo itaque laborum. Consequuntur et pariatur totam fuga eligendi vero dolorum provident. Voluptatibus, veritatis. Beatae numquam nam ab voluptatibus culpa, tenetur recusandae!</p>
-	            <p>Voluptas dolores dignissimos dolorum temporibus, autem aliquam ducimus at officia adipisci quasi nemo a perspiciatis provident magni laboriosam repudiandae iure iusto commodi debitis est blanditiis alias laborum sint dolore. Dolores, iure, reprehenderit. Error provident, pariatur cupiditate soluta doloremque aut ratione. Harum voluptates mollitia illo minus praesentium, rerum ipsa debitis, inventore?</p>
-	            <div class="tag-widget post-tag-container mb-5 mt-5">
-	              <div class="tagcloud">
-	                <a href="#" class="tag-cloud-link">Life</a>
-	                <a href="#" class="tag-cloud-link">Sport</a>
-	                <a href="#" class="tag-cloud-link">Tech</a>
-	                <a href="#" class="tag-cloud-link">Travel</a>
-	              </div>
-	            </div>
-	            
 	            <div class="about-author d-flex p-4 bg-light">
-	              <div class="bio mr-5">
-	                <img src="../images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-	              </div>
 	              <div class="desc">
-	                <h3>George Washington</h3>
-	                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+	                <p>${mjdto.content }</p>
 	              </div>
 	            </div>
 
 
+				<!-- 댓글 영역 -->
 	            <div class="pt-5 mt-5">
-	              <h3 class="mb-5 font-weight-bold">6 Comments</h3>
-	              <ul class="comment-list">
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-
-	                  <ul class="children">
-	                    <li class="comment">
-	                      <div class="vcard bio">
-	                        <img src="../images/person_1.jpg" alt="Image placeholder">
-	                      </div>
-	                      <div class="comment-body">
-	                        <h3>John Doe</h3>
-	                        <div class="meta">October 03, 2018 at 2:21pm</div>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                        <p><a href="#" class="reply">Reply</a></p>
-	                      </div>
-
-
-	                      <ul class="children">
-	                        <li class="comment">
-	                          <div class="vcard bio">
-	                            <img src="../images/person_1.jpg" alt="Image placeholder">
-	                          </div>
-	                          <div class="comment-body">
-	                            <h3>John Doe</h3>
-	                            <div class="meta">October 03, 2018 at 2:21pm</div>
-	                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                            <p><a href="#" class="reply">Reply</a></p>
-	                          </div>
-
-	                            <ul class="children">
-	                              <li class="comment">
-	                                <div class="vcard bio">
-	                                  <img src="../images/person_1.jpg" alt="Image placeholder">
-	                                </div>
-	                                <div class="comment-body">
-	                                  <h3>John Doe</h3>
-	                                  <div class="meta">October 03, 2018 at 2:21pm</div>
-	                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                                  <p><a href="#" class="reply">Reply</a></p>
-	                                </div>
-	                              </li>
-	                            </ul>
-	                        </li>
-	                      </ul>
-	                    </li>
-	                  </ul>
-	                </li>
-
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-	              </ul>
-	              <!-- END comment-list -->
+	              <h4 class="mb-5 font-weight-bold">6 Comments</h4>
 	              
+	              <div class="comment-list">
+	                <div class="comment">
+	                <c:forEach var="mrdto" items="${replyList }">
+	                	 <div class="comment-body">
+		                    <h5 class="d-inline mr-5">${mrdto.email }</h5>
+		                    <small class='float-right'>${mrdto.date }</small>
+		                    <p class="mt-2">${mrdto.content } </p>
+	                  	</div>
+	                  	<hr>
+	                </c:forEach>
+	                </div>
+	              </div>
+	              
+	              
+	              <!-- 댓글 폼 -->
 	              <div class="comment-form-wrap pt-5">
-	                <h3 class="mb-5">Leave a comment</h3>
-	                <form action="#" class="p-3 p-md-5 bg-light">
-	                  <div class="form-group">
-	                    <label for="name">Name *</label>
-	                    <input type="text" class="form-control" id="name">
+	                <h5 class="mb-3">Leave a comment</h5>
+	                <form action="#" class="p-3 bg-light" method="post">
+	                  <div class="d-inline mb-1">
+	                    <label for="name" class="mr-5">Name</label>
+	                    <span>${mdto.name } <small> ( ${mdto.email } )</small></span>
+	                  </div>
+	                  <div class="float-right">
+	                    <input type="submit" value="comment" class="btn-white submit" style="border: none;">
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="email">Email *</label>
-	                    <input type="email" class="form-control" id="email">
+	                    <label for="message">Comment</label>
+	                    <textarea name="content" id="message" cols="30" rows="5" class="form-control"></textarea>
 	                  </div>
-	                  <div class="form-group">
-	                    <label for="website">Website</label>
-	                    <input type="url" class="form-control" id="website">
-	                  </div>
-
-	                  <div class="form-group">
-	                    <label for="message">Message</label>
-	                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-	                  </div>
-	                  <div class="form-group">
-	                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-	                  </div>
-
+	                  <input type="hidden" value="${mdto.name }" name="name">
+	                  <input type="hidden" value="${mdto.email }" name="email">
 	                </form>
 	              </div>
+	              
+	              
 	            </div>
 	          </div>
 	          
 	          
 	          
-	          <!-- .col-md-8 -->
-	    			<div class="col-lg-3 sidebar ftco-animate bg-light">
-	            <div class="sidebar-box">
-	              <form action="#" class="search-form">
-	                <div class="form-group">
-	                  <span class="icon icon-search"></span>
-	                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-	                </div>
-	              </form>
-	            </div>
+	          <!-- 우측메뉴 -->
+	    		<div class="col-lg-4 sidebar ftco-animate bg-light">
 	            <div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Categories</h3>
-	              <ul class="categories">
-	                <li><a href="#">Fashion <span>(6)</span></a></li>
-	                <li><a href="#">Technology <span>(8)</span></a></li>
-	                <li><a href="#">Travel <span>(2)</span></a></li>
-	                <li><a href="#">Food <span>(2)</span></a></li>
-	                <li><a href="#">Photography <span>(7)</span></a></li>
+	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
+	              <ul class="categories mt-3">
+	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
+	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
+	                
+	                <!-- 구매가능수량만큼 forEach -->
+	                <li><a>수량선택<span><select>
+	             <c:forEach var="i" begin='1' end="${mjdto.stock }">
+	                	<option value="${i }"/>${i }
+	             </c:forEach> 	
+	                </select></span></a></li>
+	                
+	                <!-- select 태그에 event 걸어서 계산하기! -->
+	                <li><a>결제예상가격 <span style="color: black;">가아격</span></a></li>
+	                <li>
+	                	<div class="row px-3 mt-3">
+	                	<a class="btn m-auto hover" href="#"><b>장바구니에 담기 </b></a>
+	                	<a class="btn m-auto hover" href="#"><b>바로구매</b></a>
+	                	</div>
+	                </li>
 	              </ul>
 	            </div>
 
 	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Popular Articles</h3>
+	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
 	              <div class="block-21 mb-4 d-flex">
 	                <a class="blog-img mr-4" style="background-image: url(../images/image_1.jpg);"></a>
 	                <div class="text">
@@ -280,106 +204,20 @@
 	              </div>
 	            </div>
 
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Tag Cloud</h3>
-	              <ul class="tagcloud">
-	                <a href="#" class="tag-cloud-link">animals</a>
-	                <a href="#" class="tag-cloud-link">human</a>
-	                <a href="#" class="tag-cloud-link">people</a>
-	                <a href="#" class="tag-cloud-link">cat</a>
-	                <a href="#" class="tag-cloud-link">dog</a>
-	                <a href="#" class="tag-cloud-link">nature</a>
-	                <a href="#" class="tag-cloud-link">leaves</a>
-	                <a href="#" class="tag-cloud-link">food</a>
-	              </ul>
-	            </div>
-
-							<div class="sidebar-box subs-wrap img" style="background-image: url(../images/bg_1.jpg);">
-								<div class="overlay"></div>
-								<h3 class="mb-4 sidebar-heading">Newsletter</h3>
-								<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia</p>
-	              <form action="#" class="subscribe-form">
-	                <div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Email Address">
-	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
-	                </div>
-	              </form>
-	            </div>
-
-	            <div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Archives</h3>
-	              <ul class="categories">
-	              	<li><a href="#">October 2018 <span>(10)</span></a></li>
-	                <li><a href="#">September 2018 <span>(6)</span></a></li>
-	                <li><a href="#">August 2018 <span>(8)</span></a></li>
-	                <li><a href="#">July 2018 <span>(2)</span></a></li>
-	                <li><a href="#">June 2018 <span>(7)</span></a></li>
-	                <li><a href="#">May 2018 <span>(5)</span></a></li>
-	              </ul>
-	            </div>
-
-
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Paragraph</h3>
-	              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
-	            </div>
 	          </div><!-- END COL -->
+	          
 	    		</div>
 	    	</div>
 	    </section>
-	    <footer class="ftco-footer ftco-bg-dark ftco-section">
-	      <div class="container px-md-5">
-	        <div class="row mb-5">
-	          <div class="col-md">
-	            <div class="ftco-footer-widget mb-4 ml-md-4">
-	              <h2 class="ftco-heading-2">Category</h2>
-	              <ul class="list-unstyled categories">
-	                <li><a href="#">Photography <span>(6)</span></a></li>
-	                <li><a href="#">Fashion <span>(8)</span></a></li>
-	                <li><a href="#">Technology <span>(2)</span></a></li>
-	                <li><a href="#">Travel <span>(2)</span></a></li>
-	              </ul>
-	            </div>
-	          </div>
-	          <div class="col-md">
-	             <div class="ftco-footer-widget mb-4">
-	              <h2 class="ftco-heading-2">Archives</h2>
-	              <ul class="list-unstyled categories">
-	              	<li><a href="#">November 2018 <span>(105)</span></a></li>
-	              	<li><a href="#">October 2018 <span>(212)</span></a></li>
-	                <li><a href="#">September 2018 <span>(150)</span></a></li>
-	                <li><a href="#">August 2018 <span>(100)</span></a></li>
-	                <li><a href="#">July 2018 <span>(200)</span></a></li>
-	              </ul>
-	            </div>
-	          </div>
-	          <div class="col-md">
-	            <div class="ftco-footer-widget mb-4">
-	            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-	            	<div class="block-23 mb-3">
-		              <ul>
-		                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-		                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-		                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-		              </ul>
-		            </div>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="row">
-	          <div class="col-md-12">
-
-	            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-	          </div>
-	        </div>
-	      </div>
-	    </footer>
+	    
+	    <!-- navbar -->
+		<jsp:include page="market_footer.jsp"></jsp:include>
+	    
 		</div><!-- END COLORLIB-MAIN -->
 	</div>
 		
-		  <!-- loader -->
+		
+  <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
@@ -400,8 +238,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="../js/google-map.js"></script>
   <script src="../js/main.js"></script>
-    
-		
 
 </body>
 </html>
