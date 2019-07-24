@@ -101,7 +101,7 @@
 			    	<tr>
 			    		<td colspan="2">
 			    			<input type="button" class="btn btn-danger" value="예약 확정" onclick="check();"> 
-			    			<a href="../index.jsp" class="btn btn-primary">메인으로 돌아가기</a>
+			    			<a href="${contextPath}/ad/admin_main" class="btn btn-primary">메인으로 돌아가기</a>
 			    		</td>
 			    	</tr>
 			    </table>
@@ -126,7 +126,7 @@
         <script type="text/javascript">
         function check() {
 			var check = confirm("고객님이 결제를 완료하셨습니까?");
-			alert(check);
+			
 			if(check){
 		        var nearForm = $('#exinfo');
 		    	nearForm.attr("action", "../re/reserv_ext_confirm");

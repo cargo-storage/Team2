@@ -17,15 +17,7 @@ public class ModifyMemberAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		
-		if(request.getParameter("page")==null) { //내정보 확인->정보수정 눌렸을 때
-			ActionForward forward = new ActionForward();
-			
-			request.setAttribute("modifyCheck", 0);
-			forward.setPath("../member/mypage.jsp?content=modifyMember.jsp");
-			return forward; //바로 return하기 때문에 else 필요 없음
-		}
-		//정보 수정 하기 버튼 눌렸을 때
+
 		String pwd = request.getParameter("pwd");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
@@ -35,6 +27,7 @@ public class ModifyMemberAction implements Action {
 		String email = request.getParameter("email");
 		int admin = Integer.parseInt(request.getParameter("admin"));
 		Timestamp reg_date = Timestamp.valueOf(request.getParameter("reg_date"));
+		
 		
 		MemberDTO mdto = new MemberDTO(email, pwd, name, phone, postCode, roadAddr, detailAddr, admin, reg_date);
 		MemberDAO mdao = new MemberDAO();
@@ -57,11 +50,18 @@ public class ModifyMemberAction implements Action {
 		} else { // 성공했을 때
 			forward = new ActionForward();
 			forward.setRedirect(true);
-						
-			HttpSession session = request.getSession();
-			session.setAttribute("mdto", mdto);
 			String path = request.getContextPath();
-			forward.setPath("../member/mypage.jsp");
+			
+			//관리자가 정보 수정 한 경우
+			if(request.getParameter("from") != null){
+				forward.setPath(path+"/ad/member_admin");
+				
+			}else{
+				HttpSession session = request.getSession();
+				session.setAttribute("mdto", mdto);
+				
+				forward.setPath(path+"/member/mypage.jsp");
+			}
 		}
 		return forward;
 	}

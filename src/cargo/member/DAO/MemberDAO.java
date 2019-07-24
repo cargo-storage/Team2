@@ -236,7 +236,7 @@ public class MemberDAO {
 		int state = 0; // 0: 실패, 1: 성공
 		try {
 			con = connect();
-			query = "UPDATE member SET pwd=?, name=?, phone=?, postCode=?, roadAddr=?, detailAddr=? WHERE email=?";
+			query = "UPDATE member SET pwd=?, name=?, phone=?, postCode=?, roadAddr=?, detailAddr=?, admin=? WHERE email=?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, mdto.getPwd());
 			pstmt.setString(2, mdto.getName());
@@ -244,7 +244,8 @@ public class MemberDAO {
 			pstmt.setInt(4, mdto.getPostCode());
 			pstmt.setString(5, mdto.getRoadAddr());
 			pstmt.setString(6, mdto.getDetailAddr());
-			pstmt.setString(7, mdto.getEmail());
+			pstmt.setInt(7, mdto.getAdmin());
+			pstmt.setString(8, mdto.getEmail());
 
 			state = pstmt.executeUpdate();
 

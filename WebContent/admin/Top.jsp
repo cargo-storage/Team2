@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-		<a class="navbar-brand mr-1" href="index.html">TEAM2 WAREHOUSE</a>
+		<a class="navbar-brand mr-1" href="../index.jsp">TEAM2 WAREHOUSE</a>
 
 		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
 			id="sidebarToggle" href="#">

@@ -328,7 +328,7 @@ public class AdminDAO {
 				map.put("postCode",rs.getInt("postCode"));
 				map.put("detailAddr",rs.getString("detailAddr"));
 				map.put("roadAddr",rs.getString("roadAddr"));
-				map.put("reg_date",rs.getDate("reg_date").toString());				
+				map.put("reg_date",rs.getTimestamp("reg_date").toString());				
 			}
 		} catch (Exception e) {
 			System.out.println("getMemberInfo err:"+e.getMessage());
@@ -342,11 +342,11 @@ public class AdminDAO {
 	public HashMap<String, Object> getOverdueInfo(String item) {
 		HashMap<String, Object> map = new HashMap<>();
 		sql=
-		"select datediff(curdate(),end_day) as overdue, datediff(curdate(),end_day)*w.price as arrears,"
+		"select datediff(curdate(),end_day) as overdue_day, datediff(curdate(),end_day)*w.price as arrears,"
 				+ " round((i.payment*0.1),-1)-(datediff(curdate(),end_day)*w.price) as now_deposit,"
 				+ " m.email, m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr,"
 				+ " w.house, w.price,"
-				+ " i.item ,i.start_day, i.end_day, i.payment, i.item_price"
+				+ " i.item ,i.start_day, i.end_day, i.payment, i.item_price, i.overdue"
 				+ " from items as i"
 				+ " join member as m on i.email = m.email"
 				+ " join warehouse as w on i.house = w.house"
@@ -359,7 +359,8 @@ public class AdminDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				map.put("overdue", rs.getInt("overdue")); 
+				map.put("overdue", rs.getString("overdue")); 
+				map.put("overdue_day", rs.getInt("overdue_day")); 
 				map.put("arrears", rs.getInt("arrears")); 
 				map.put("now_deposit", rs.getInt("now_deposit")); 
 				

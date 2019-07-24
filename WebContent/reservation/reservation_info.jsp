@@ -15,24 +15,15 @@
 	<title>RESERVATION - TEAM2 WAREHOUSE</title>
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
-	<!--Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<!-- CSS/CDN links-->
+	<jsp:include page="../inc/head_link.jsp"></jsp:include>
 	
-	<!--vendors styles-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-	
-	<!-- Bootstrap CSS / Color Scheme -->
-	<link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
-	<!-- font-awesome CSS -->
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	
 	<c:choose>   
 		<c:when test="${sessionScope.mdto.email==null }">
 			<script type="text/javascript">
 				alert("로그인 후 이용 가능합니다.");
-				location.href="${contextPath}/index.jsp?login=true";
+				location.href="${contextPath}/co/login.go";
 			</script>
 		</c:when>
 	</c:choose>
@@ -193,11 +184,9 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-		
-
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
