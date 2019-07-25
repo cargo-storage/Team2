@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%-- <fmt:formatDate value="${result.regDate}" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -60,8 +62,7 @@
 
 				<!-- 댓글 영역 -->
 	            <div class="pt-5 mt-5">
-	              <h4 class="mb-5 font-weight-bold">6 Comments</h4>
-	              
+	              <h4 class="mb-5 font-weight-bold"><span class="icon-chat"></span> ${totalComment } Comments</h4>
 	              <div class="comment-list">
 	                <div class="comment">
 	                <c:forEach var="mrdto" items="${replyList }">
@@ -83,7 +84,7 @@
 	                <form action="#" class="p-3 bg-light" method="post">
 	                  <div class="d-inline mb-1">
 	                    <label for="name" class="mr-5">Name</label>
-	                    <span>${mdto.name } <small> ( ${mdto.email } )</small></span>
+	                    <span style="color: #4a4a4a;">${mdto.name } <small> ( ${mdto.email } )</small></span>
 	                  </div>
 	                  <div class="float-right">
 	                    <input type="submit" value="comment" class="btn-white submit" style="border: none;">
@@ -104,9 +105,10 @@
 	          
 	          
 	          <!-- 우측메뉴 -->
-	    		<div class="col-lg-4 sidebar ftco-animate bg-light">
+	    	<div class="col-lg-4 sidebar ftco-animate bg-light">
 	            <div class="sidebar-box ftco-animate">
 	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
+	              
 	              <form> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
 	              <ul class="categories mt-3">
 	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
@@ -118,7 +120,6 @@
 	                	<option value="${i }"/>${i }
 	             </c:forEach> 	
 	                </select></span></a></li>
-	                <!-- select 태그에 event 걸어서 계산하기! -->
 	                <li><a>결제예상가격
 	                	<span id="totalprice" style="color: #00c853; weight: bolder;">${mjdto.price }</span>
 	                	</a></li>
@@ -137,6 +138,8 @@
 	              </form>
 	            </div>
 
+
+				<!-- 다른아이템 for문 돌릴거임 -->
 	            <div class="mt-5 sidebar-box ftco-animate">
 	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
 	              <div class="block-21 mb-4 d-flex">
@@ -184,6 +187,7 @@
 		<jsp:include page="market_footer.jsp"></jsp:include>
 	    
 		</div><!-- END COLORLIB-MAIN -->
+		
 	</div>
 		
 		

@@ -22,9 +22,10 @@ public class ShowContentAction implements Action{
 		MarketDAO mdao = new MarketDAO();
 		M_boardJoinDTO mjdto = mdao.selectJoinItem(board_no);
 		ArrayList<M_board_replyDTO> replyList = mdao.selectAllComment(board_no);
-		
+		int count = mdao.getTotalComment(board_no);		
 		request.setAttribute("mjdto", mjdto);
 		request.setAttribute("replyList", replyList);
+		request.setAttribute("totalComment", count);
 		
 		ActionForward forward = new ActionForward();
 		

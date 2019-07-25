@@ -123,7 +123,27 @@ public class MarketDAO {
 	
 	public int getTotalComment(int board_no){ // 댓글 갯수 가져오기
 		
-		return 0;
+		int count=0;
+		
+		try {
+			
+			getConnection();
+			String sql = "SELECT count(*) FROM m_board_reply WHERE board_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board_no);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			count = rs.getInt("count(*)");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return count;
 	}
 	
 	public ArrayList<M_board_replyDTO> selectAllComment(int board_no){// 댓글 가져오기
