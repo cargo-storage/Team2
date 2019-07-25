@@ -56,11 +56,23 @@
     
     </style>
     
+    <script type="text/javascript">
+    	
+   		function caltotal(){
+   			var quantity = parseInt(document.getElementById("quantity").value);
+   			var price = ${mjdto.price };
+   			var total = quantity * price;
+   			
+   			document.getElementById("totalprice").innerHTML = total;
+   			document.getElementById("price").value = total;
+   			document.getElementById("quantity").value = quantity;
+   		}
     
+    </script>
     
   </head>
   <body>
-d
+
 	<div id="colorlib-page">
 		
 		<!-- navbar -->
@@ -145,19 +157,21 @@ d
 	    		<div class="col-lg-4 sidebar ftco-animate bg-light">
 	            <div class="sidebar-box ftco-animate">
 	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
+	              <form> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
 	              <ul class="categories mt-3">
 	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
 	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
 	                
 	                <!-- 구매가능수량만큼 forEach -->
-	                <li><a>수량선택<span><select>
+	                <li><a>수량선택<span><select onchange="caltotal()" name="quantity" id="quantity">
 	             <c:forEach var="i" begin='1' end="${mjdto.stock }">
 	                	<option value="${i }"/>${i }
 	             </c:forEach> 	
 	                </select></span></a></li>
-	                
 	                <!-- select 태그에 event 걸어서 계산하기! -->
-	                <li><a>결제예상가격 <span style="color: black;">가아격</span></a></li>
+	                <li><a>결제예상가격
+	                	<span id="totalprice" style="color: #00c853; weight: bolder;">${mjdto.price }</span>
+	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
 	                	<a class="btn m-auto hover" href="#"><b>장바구니에 담기 </b></a>
@@ -165,6 +179,12 @@ d
 	                	</div>
 	                </li>
 	              </ul>
+	              		<!-- 넘길값세팅 -->
+	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
+	                	<input type="hidden" name="quantity" id="quantity_" value="1">
+	                	<input type="hidden" name="item" value="${mjdto.item }">
+	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	              </form>
 	            </div>
 
 	            <div class="sidebar-box ftco-animate">
