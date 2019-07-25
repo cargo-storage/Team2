@@ -7967,7 +7967,7 @@ h1, h2, h3, h4, h5,
 
 .ftco-bread .breadcrumbs {
   text-transform: uppercase;
-  font-size: 13px;
+/*   font-size: 13px; */
   letter-spacing: 1px;
   margin-bottom: 20px;
   z-index: 99; }
@@ -7975,7 +7975,14 @@ h1, h2, h3, h4, h5,
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     color: black; }
     .ftco-bread .breadcrumbs span a {
-      color: #bfbfbf; }
+      color: #808080; }
+     .ftco-bread .breadcrumbs span a:HOVER {
+      color: #00c853; }
+    .ftco-bread .breadcrumbs span .selected {
+    	font-weight: 800;
+    	color: #00c853;
+    }
+      
 
 .ftco-bread .bread {
   font-weight: 700;

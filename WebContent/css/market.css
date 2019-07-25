@@ -1,6 +1,5 @@
 @CHARSET "EUC-KR";
 
-
 #uppernav{
  	background-color: rgba( 0, 200, 83, 0.9);
  	padding-top: 0; 
@@ -39,5 +38,7 @@
 	font-weight: 800;
 	color: #000000;
 }
-
-    
+#all{
+	color: black;
+	
+}

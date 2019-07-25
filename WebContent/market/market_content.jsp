@@ -54,9 +54,7 @@
 	              <img src="${contextPath }/market/uploaded/${mjdto.image }" alt="${mjdto.image }" class="img-fluid">
 	            </p>
 	            <div class="about-author d-flex p-4 bg-light">
-	              <div class="">
 	                <p style="color: #4a4a4a;">${mjdto.content }</p>
-	              </div>
 	            </div>
 
 

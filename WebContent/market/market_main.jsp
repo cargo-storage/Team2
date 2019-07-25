@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Capture - Free Bootstrap 4 Template by Colorlib</title>
+    <title>TEAM2 WAREHOUSE MARKET</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -21,6 +21,7 @@
     		location.href="${contextPath}/co/login.go";
     	</script>
     </c:if>
+    
     
     
   </head>
@@ -40,10 +41,25 @@
 	    	<div class="container">
 	    		<div class="row">
 	    			<div class="col-lg-12">
-	    			
-	    			
-	    				<div class="row">
 	    				
+	    				<!-- 아이템분류 -->
+						<div class="ftco-bread mb-5">
+							<div class="row">
+					          <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
+								<p class="breadcrumbs" id="category" >
+									<span class="mr-2"><a class="selected" href="" ><b>ALL ITEMS</b></a></span>
+									<span class="mr-2"><a href="">FURNITURE</a></span>
+									<span class="mr-2"><a href="">ELECTRONIC</a></span>
+									<span class="mr-2"><a href="">TOOL/MATERIAL</a></span>
+									<span><a href="">OTHERS</a></span>
+								</p>
+							  </div>
+					        </div>
+						</div>
+	    	
+	    			
+	    				<!-- 아이템 영역 -->
+	    				<div class="row">
 	    					<!-- for문돌릴거임 -->
 			    			<div class="col-md-4">
 			    				<div class="blog-entry ftco-animate">
@@ -179,7 +195,6 @@
 			    		</div><!-- END-->
 			    		
 			    		
-			    		
 			    		<div class="row mt-5">
 			          <div class="col text-center">
 			            <div class="block-27">
@@ -198,8 +213,6 @@
 			        
 			        
 			    	</div>
-	    		
-	          
 	          
 	          
 	    		</div>
@@ -216,23 +229,8 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/jquery.easing.1.3.js"></script>
-  <script src="../js/jquery.waypoints.min.js"></script>
-  <script src="../js/jquery.stellar.min.js"></script>
-  <script src="../js/owl.carousel.min.js"></script>
-  <script src="../js/jquery.magnific-popup.min.js"></script>
-  <script src="../js/aos.js"></script>
-  <script src="../js/jquery.animateNumber.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/jquery.timepicker.min.js"></script>
-  <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
-  <script src="../js/main.js"></script>
+	<!-- bottom link -->
+	<jsp:include page="market_linkB.jsp"></jsp:include>
     
   </body>
 </html>
