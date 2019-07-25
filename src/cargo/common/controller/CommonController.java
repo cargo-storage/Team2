@@ -43,11 +43,9 @@ public class CommonController extends HttpServlet{
 			
 			if("/index.go".equals(command)){ // Team2/co/index.go --> 인덱스이동
 				forward = new ActionForward();
-				forward.setRedirect(true);
 				forward.setPath("../index.jsp");
 			}else if("/login.go".equals(command)){ // 인덱스(모달창바로띄우는)
 				forward = new ActionForward();
-				forward.setRedirect(true);
 				forward.setPath("../index.jsp?login=true");
 			}else if("/information.go".equals(command)){
 				forward = new ActionForward();
