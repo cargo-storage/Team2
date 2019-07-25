@@ -126,7 +126,7 @@
 					</button>
 				</div>
 				<div class="modal-body  mx-auto container-fluid">
-				<form action="../me/modifyMember.me" method="post" id="modify">
+				<form action="../me/modifyMember" method="post" id="modify">
 					<table class='table mx-auto my-auto'>
 						<tr>
 							<th colspan="2" class="text-center table-primary">회원 정보  ▼</th>
@@ -194,7 +194,7 @@
 						</tr>
 					</table>
 					<input type="hidden" id="result" name="result">
-					<input type="hidden" name="from" value="admin">
+					<input type="hidden" name="page" value="admin">
 					</form>
 				</div>
 				<div class="modal-footer">

@@ -162,7 +162,7 @@
 	var end_day ='${map.end_day}';
 	
 	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip()
+		$('[data-toggle="tooltip"]').tooltip();
 		
 		$('.calendar').pignoseCalendar({
 			lang: 'ko',
