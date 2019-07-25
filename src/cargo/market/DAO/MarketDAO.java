@@ -144,6 +144,7 @@ public class MarketDAO {
 				rDTO.setContent(rs.getString("content"));
 				rDTO.setDate(rs.getTimestamp("date"));
 				rDTO.setEmail(rs.getString("email"));
+				rDTO.setName(rs.getString("name"));
 				rDTO.setNo(rs.getInt("no"));
 				
 				replyList.add(rDTO);

@@ -13,44 +13,6 @@
     <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
     
-    
-    <style type="text/css">
-    
-    #uppernav{
-    	background-color: rgba( 0, 200, 83, 0.9);
-    	padding-top: 0; 
-    	padding-bottom: 0; 
-    	
-    }
-    .logosm{
-    	color: #ffffff;
-    	font-size: 1.5em;
-    	font-weight: bold;
-    	font-family: 'Nanum Gothic';
-    }
-    
-    .logosm:HOVER{
-    	color: #cdcdcd;
-    }
-    
-    .uppernav li a, .uppernav li {
-    	font-family: 'Nanum Gothic';
-    	color: white !important;
-    }
-    
-    .uppernav li:HOVER{
-    	color: #cdcdcd;
-    }
-    
-    #titlesec{
-/*     	background-image: url(../img/reservation2.jpg); */
-		background-size: cover;
-    }
-    
-    </style>
-    
-    
-    
   </head>
   <body>
 
@@ -60,16 +22,8 @@
 		<jsp:include page="market_nav.jsp"></jsp:include>
 		
 		<div class="mt-5">
-			<section class="ftco-section bg-light ftco-bread" id="titlesec">
-				<div class="container">
-				<div class="row no-gutters slider-text align-items-center">
-	          	<div class="col-md-9 ftco-animate">
-	            <h1 class="mb-3 bread">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE MARKET</h1>
-	            	<p>창고사용자가 미수령하거나 판매대행을 신청한 물품을 판매하는 중고장터입니다.<br>모든 물품 및 거래는 TEAM2 WAREHOUSE에서 관리합니다.</p>
-	          	</div>
-	        	</div>
-				</div>
-			</section>
+			<!-- header -->
+			<jsp:include page="market_header.jsp"></jsp:include>
 			
 			<section class="ftco-section mb-5">
 	    	<div class="container">

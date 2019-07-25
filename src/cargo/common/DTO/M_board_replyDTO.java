@@ -5,21 +5,24 @@ import java.sql.Timestamp;
 public class M_board_replyDTO {
 	
 	int no, board_no;
-	String content, email;
+	String content, email, name;
 	Timestamp date;
 	
 	public M_board_replyDTO(){
 		
 	}
-	
-	public M_board_replyDTO(int no, int board_no, String content, String email, Timestamp date) {
+	 
+
+	public M_board_replyDTO(int no, int board_no, String content, String email, String name, Timestamp date) {
 		super();
 		this.no = no;
 		this.board_no = board_no;
 		this.content = content;
 		this.email = email;
+		this.name = name;
 		this.date = date;
 	}
+
 
 	public int getNo() {
 		return no;
@@ -53,6 +56,14 @@ public class M_board_replyDTO {
 		this.email = email;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Timestamp getDate() {
 		return date;
 	}
@@ -60,6 +71,8 @@ public class M_board_replyDTO {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
+	
+	
 	
 	
 	

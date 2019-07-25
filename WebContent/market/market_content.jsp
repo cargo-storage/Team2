@@ -12,50 +12,7 @@
     
    <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
-    
-    <style type="text/css">
-    
-    #uppernav{
-    	background-color: rgba( 0, 200, 83, 0.9);
-    	padding-top: 0; 
-    	padding-bottom: 0; 
-    	
-    }
-    .logosm{
-    	color: #ffffff;
-    	font-size: 1.5em;
-    	font-weight: bold;
-    	font-family: 'Nanum Gothic';
-    }
-    
-    .logosm:HOVER{
-    	color: #cdcdcd;
-    }
-    
-    .uppernav li a, .uppernav li {
-    	font-family: 'Nanum Gothic';
-    	color: white !important;
-    }
-    
-    .uppernav li:HOVER{
-    	color: #cdcdcd;
-    }
-    
-    #titlesec{
-/*     	background-image: url(../img/reservation2.jpg); */
-		background-size: cover;
-    }
-    
-    .hover:HOVER{
-    	color: #00c853;
-    }
-    
-    .fontcolor{
-    	color: #00c853;
-    }
-    
-    </style>
-    
+	
     <script type="text/javascript">
     	
    		function caltotal(){
@@ -79,16 +36,8 @@
 		<jsp:include page="market_nav.jsp"></jsp:include>
 		
 		<div class="mt-5">
-			<section class="ftco-section bg-light ftco-bread" id="titlesec">
-				<div class="container">
-				<div class="row no-gutters slider-text align-items-center">
-	          	<div class="col-md-9 ftco-animate">
-	            <h1 class="mb-3 bread">TEAM2 <i class="fas fa-warehouse"></i> WAREHOUSE MARKET</h1>
-	            	<p>창고사용자가 미수령하거나 판매대행을 신청한 물품을 판매하는 중고장터입니다.<br>모든 물품 및 거래는 TEAM2 WAREHOUSE에서 관리합니다.</p>
-	          	</div>
-	        	</div>
-				</div>
-			</section>
+			<!-- header -->
+			<jsp:include page="market_header.jsp"></jsp:include>
 			
 			
 			<section class="ftco-section">
@@ -98,13 +47,13 @@
 	    		
 	    		<!-- 게시글 영역 -->
 	            <h2 class="mb-5 font-weight-bold d-inline">${requestScope.mjdto.title }</h2>
-	            <p class="float-right"><small>${mjdto.date } 등록</small></p>
+	            <p class="float-right"><small><span class="icon-calendar"></span> ${mjdto.date }</small></p>
 	            <p class="mt-5">
-	              <img src="${contextPath }/market/uploaded/${mjdto.image }" alt="" class="img-fluid">
+	              <img src="${contextPath }/market/uploaded/${mjdto.image }" alt="${mjdto.image }" class="img-fluid">
 	            </p>
 	            <div class="about-author d-flex p-4 bg-light">
-	              <div class="desc">
-	                <p>${mjdto.content }</p>
+	              <div class="">
+	                <p style="color: #4a4a4a;">${mjdto.content }</p>
 	              </div>
 	            </div>
 
@@ -117,7 +66,8 @@
 	                <div class="comment">
 	                <c:forEach var="mrdto" items="${replyList }">
 	                	 <div class="comment-body">
-		                    <h5 class="d-inline mr-5">${mrdto.email }</h5>
+		                    <h5 class="d-inline mr-5">${mrdto.name }</h5>
+		                    <small>(${mrdto.email })</small>
 		                    <small class='float-right'>${mrdto.date }</small>
 		                    <p class="mt-2">${mrdto.content } </p>
 	                  	</div>
@@ -187,7 +137,7 @@
 	              </form>
 	            </div>
 
-	            <div class="sidebar-box ftco-animate">
+	            <div class="mt-5 sidebar-box ftco-animate">
 	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
 	              <div class="block-21 mb-4 d-flex">
 	                <a class="blog-img mr-4" style="background-image: url(../images/image_1.jpg);"></a>

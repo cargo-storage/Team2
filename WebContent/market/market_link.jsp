@@ -29,3 +29,6 @@
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    
+    <link href="${contextPath }/css/font.css" rel="stylesheet">
+    <link href="${contextPath }/css/market.css" rel="stylesheet">
