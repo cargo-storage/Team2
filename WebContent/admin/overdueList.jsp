@@ -31,7 +31,7 @@
 </head>
 <body id="page-top">
 	
-	<%@include file="Top.jsp"%>
+	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -80,13 +80,18 @@
 							<c:forEach items="${list}" var="odto">
 								<tr data-toggle="modal" data-target="#detailModal" data-cate='overdue' data-primary ="${odto.item}">
 									<td><fmt:formatDate value="${odto.end_day}" pattern="YYYY-MM-dd"/></td>
-									<td><c:out value="${odto.overdue}"/></td>
+									<td><c:out value="${odto.overdue_day}"/></td>
 									<td><fmt:formatNumber value="${odto.arrears}" type="currency" currencySymbol="￦"/></td>
 									<td><fmt:formatNumber value="${odto.now_deposit}" type="currency" currencySymbol="￦"/></td>
 									<td><c:out value="${odto.name}"/></td>
 									<td><c:out value="${odto.email}"/></td>
 									<td><c:out value="${odto.phone}"/></td>
-									<td><c:out value="${odto.house}"/></td>
+									<td>
+									<c:choose>
+										<c:when test="${odto.overdue eq '-'}"><c:out value="${odto.house}"/></c:when>
+										<c:otherwise><c:out value="${odto.overdue}"/></c:otherwise>
+									</c:choose>
+									</td>
 									<td><c:out value="${odto.item}"/></td>
 								</tr>
 							</c:forEach>
@@ -133,15 +138,24 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
+				<form action="" method="post">
 				<div class="modal-body  mx-auto container-fluid row">
 					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 						<table class='table col-lg-6 mx-auto my-auto'>
 							<tr>
-								<th colspan="2" class="text-center table-primary">창고 정보</th>
+								<th colspan="2" class="text-center table-primary">창고 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>물품 ID</th>
 								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>창고 번호</th>
+								<td class="house"></td>
+							</tr>
+							<tr>
+								<th>결제 가격</th>
+								<td class="payment"></td>
 							</tr>
 							<tr>
 								<th>예정 보관 기간</th>
@@ -164,7 +178,7 @@
 								<td class="item_price"></td>
 							</tr>
 							<tr>
-								<th colspan="2" class="text-center table-primary">고객 정보</th>
+								<th colspan="2" class="text-center table-primary">고객 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이름</th>
@@ -183,15 +197,16 @@
 								<td class="addr"></td>
 							</tr>
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="items">
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger sub" value="overdue">연체 창고로 이동</button>
-					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-danger sub" value="overdue">연체 창고 이동</button>
+					<button type="button" class="btn btn-primary sub" value="extend">예약 연장</button>
 					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

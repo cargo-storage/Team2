@@ -313,12 +313,12 @@
 	               	<li class="nav-item dropdown">
 				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
 				      <div class="dropdown-menu" id="dropdown-menu">
-				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
-				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
-				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				        <a class="dropdown-item" href="${contextPath }/me/mypage?category=info">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus?category=reservation">예약 현황</a>
 				      </div>
 				    </li>               
-              		<a href="${contextPath }/me/logout.me" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
+              		<a href="${contextPath }/me/logout" class="btn btn-outline-secondary btn-navbar">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">
@@ -689,7 +689,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
-							<form action="${contextPath }/me/login.me" method="post" onsubmit="return login()">
+							<form action="${contextPath }/me/login" method="post" onsubmit="return login()">
 								<div class="form-group">
 									<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
 									<span id="emailErr" class="help-block"></span>
@@ -706,9 +706,9 @@
 								<input type="checkbox" id="emailSaveCheck"><span class="text-muted hint-text">이메일 기억</span>
 							</div>	
 							<div class="hint-text">			
-								<span><a href="${contextPath }/me/findMember.me?find=email">이메일찾기</a></span> | 
-								<span><a href="${contextPath }/me/findMember.me?find=pwd">비밀번호찾기</a></span> | 
-								<span><a href="${contextPath }/me/join.me">회원가입</a></span>
+								<span><a href="${contextPath }/me/findMember?find=email">이메일찾기</a></span> | 
+								<span><a href="${contextPath }/me/findMember?find=pwd">비밀번호찾기</a></span> | 
+								<span><a href="${contextPath }/me/join">회원가입</a></span>
 							</div>
 						</div>
 					</div>

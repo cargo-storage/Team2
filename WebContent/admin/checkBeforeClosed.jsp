@@ -22,7 +22,8 @@
 
 </head>
 <body id="page-top">
-	
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
 	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
@@ -42,13 +43,14 @@
 				</div>
 				<div class="card-body row">
 					<section class="col-lg-6">
+						<span class="text-danger">보관 중인 물건 반환 날짜를 선택해 주세요</span>
 						<div class="calendar"></div>
 					</section>
 					<section class="col-lg-6">
-					<form action="${contextPath}/ad/item_to_closed" method="post" id="itoc">
+					<form action="${contextPath}/ad/release_check_confirm" method="post" id="itoc">
 						<table class="table">
 							<tr>
-								<th colspan="2" class="table-info">고객  정보</th>
+								<th colspan="2" class="table-info">고객  정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이름(이메일)</th>
@@ -59,7 +61,7 @@
 								<td>${map.phone}</td>
 							</tr>
 							<tr>
-								<th colspan="2" class="table-info">물품 정보</th>
+								<th colspan="2" class="table-info">물품 정보  ▼</th>
 							</tr>
 							<tr>
 								<th class="text-primary">물품 ID</th>
@@ -67,19 +69,24 @@
 							</tr>
 							<tr>
 								<th>창고 번호</th>
-								<td>${map.house}</td>
+								<td>
+								<c:choose>
+									<c:when test="${map.overdue eq '-'}"><c:out value="${map.house}"/></c:when>
+									<c:otherwise><c:out value="${map.overdue}"/></c:otherwise>							
+								</c:choose>
+								</td>
 							</tr>
 							<tr>
-								<th>보관 시작일</th>
-								<td>${map.start_day}</td>
+								<th>예정 보관 기간</th>
+								<td>${map.start_day} ~ ${map.end_day}</td>
 							</tr>
-							<tr bgcolor="#f2f2f2">
-								<th>결제하실 금액</th>
-								<td></td>
+							<tr>
+								<th>물건 반환일</th>
+								<td><input type="text" class="form-control" name="return_day" value="${today}" readonly="readonly"></td>
 							</tr>
-							<tr bgcolor="#f2f2f2">
+							<tr>
 								<th>물건 가격</th>
-								<td><input class="form-control" type="text" name="item_price" id="item_price"></td>
+								<td><fmt:formatNumber value="${map.item_price}" type="currency" currencySymbol="￦"/></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text-right">
@@ -90,7 +97,6 @@
 								</td>
 							</tr>
 						</table>
-						<input type="hidden" name="num" value="${map.num}">
 						<input type="hidden" name="item" value="${map.item}">
 						</form>
 					</section>
@@ -139,10 +145,7 @@
 		
 		$('.calendar').pignoseCalendar({
 	    	lang: 'ko',
-	    	multiple: true,
-			init: function(context){
-		          $(this).pignoseCalendar('set', start_day+"~"+end_day);
-		    }
+	    	minDate: moment(end_day)-1
 	    });//end of pignoseCalendar
 		
 		//날짜는 클릭 못하게 여기서는 보여주는것만 하는거

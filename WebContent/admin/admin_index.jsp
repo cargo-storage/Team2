@@ -27,8 +27,9 @@
 </head>
 
 <body id="page-top">
-
-	<%@include file="Top.jsp"%>
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
+	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -136,15 +137,38 @@
 							</tfoot>
 							<tbody>
 							<c:forEach items="${list}" var="adto">
+							<fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd" var="start_day"/>
+							<fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd" var="end_day"/>
+							<!-- 끔찍한 구간 발생.....!!!! -->
 							<c:choose>
 								<c:when test="${adto.state eq '예약'}">
-								<tr data-toggle="modal" data-target="#reservationModal" data-cate="${adto.state}" data-primary="${adto.num}">
+									<c:choose>
+										<c:when test="${start_day == today}">
+										<tr data-toggle="modal" class="bg-info text-white" data-target="#reservationModal" data-cate="${adto.state}" data-primary="${adto.num}">
+										</c:when>
+										<c:when test="${start_day < today}">
+										<tr data-toggle="modal" class="bg-primary text-white" data-target="#reservationModal" data-cate="${adto.state}" data-primary="${adto.num}">
+										</c:when>
+										<c:otherwise>
+										<tr data-toggle="modal" data-target="#reservationModal" data-cate="${adto.state}" data-primary="${adto.num}">
+										</c:otherwise>
+									</c:choose>
 								</c:when>
 								<c:when test="${adto.state eq '보관'}">
-								<tr data-toggle="modal" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
+									<c:choose>
+										<c:when test="${end_day == today}">
+										<tr data-toggle="modal" class="bg-warning text-dark" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
+										</c:when>
+										<c:when test="${end_day < today}">
+										<tr data-toggle="modal" class="bg-danger text-white" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
+										</c:when>
+										<c:otherwise>
+										<tr data-toggle="modal" data-target="#itemsModal" data-cate="${adto.state}" data-primary="${adto.item}">
+										</c:otherwise>
+									</c:choose>
 								</c:when>
 								<c:when test="${adto.state eq '완료'}">
-								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
+								<tr data-toggle="modal" data-target="#ClosedModal" data-cate="${adto.state}" data-primary="${adto.item}">
 								</c:when>
 							</c:choose>
 									<td><c:out value="${adto.state}"/></td>
@@ -152,9 +176,14 @@
 									<td><c:out value="${adto.phone}"/></td>
 									<td><c:out value="${adto.email}"/></td>
 									<td><c:out value="${adto.item}"/></td>
-									<td><c:out value="${adto.house}"/></td>
-									<td><fmt:formatDate value="${adto.start_day}" pattern="YYYY-MM-dd"/></td>
-									<td><fmt:formatDate value="${adto.end_day}" pattern="YYYY-MM-dd"/></td>
+									<td>
+									<c:choose>
+										<c:when test="${adto.overdue eq '-'}"><c:out value="${adto.house}"/></c:when>
+										<c:otherwise><c:out value="${adto.overdue}"/></c:otherwise>							
+									</c:choose>
+									</td>
+									<td><c:out value="${start_day}"/></td>
+									<td><c:out value="${end_day}"/></td>
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 								</tr>
 							</c:forEach>
@@ -206,7 +235,7 @@
 					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 					<table class='table col-lg-6 mx-auto my-auto'>
 						<tr>
-							<th colspan="2" class="text-center table-primary">예약 정보</th>
+							<th colspan="2" class="text-center table-primary">예약 정보  ▼</th>
 						</tr>
 						<tr>
 							<th>예약 번호</th>
@@ -229,7 +258,7 @@
 							<td class="payment"></td>
 						</tr>
 						<tr>
-							<th colspan="2" class="text-center table-primary">예약자 정보</th>
+							<th colspan="2" class="text-center table-primary">예약자 정보  ▼</th>
 						</tr>
 						<tr>
 							<th>이름</th>
@@ -253,7 +282,7 @@
 					<input type="hidden" name="state" value="reservation">
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
 					<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 				</div>
@@ -277,11 +306,15 @@
 				<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 				<table class='table col-lg-6 mx-auto my-auto'>
 					<tr>
-						<th colspan="2" class="text-center table-primary">창고 정보</th>
+						<th colspan="2" class="text-center table-primary">창고 정보  ▼</th>
 					</tr>
 					<tr>
 						<th>물품 ID</th>
 						<td class="item"></td>
+					</tr>
+					<tr>
+						<th>창고 번호</th>
+						<td class="house"></td>
 					</tr>
 					<tr>
 						<th>시작일</th>
@@ -300,7 +333,7 @@
 						<td class="item_price"></td>
 					</tr>
 					<tr>
-						<th colspan="2" class="text-center table-primary">고객 정보</th>
+						<th colspan="2" class="text-center table-primary">고객 정보  ▼</th>
 					</tr>
 					<tr>
 						<th>이름</th>
@@ -324,7 +357,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고 이동</button>
-				<button type="button" class="btn btn-primary sub" value="extend">예약 연장하기</button>
+				<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
 				<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 			</div>
@@ -348,7 +381,7 @@
 					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 					<table class='table col-lg-6 mx-auto my-auto'>
 						<tr>
-							<th colspan="2" class="text-center table-primary">물품 정보</th>
+							<th colspan="2" class="text-center table-primary">물품 정보  ▼</th>
 						</tr>
 						<tr>
 							<th>물품 ID</th>
@@ -375,7 +408,7 @@
 							<td class="item_price"></td>
 						</tr>
 						<tr>
-							<th colspan="2" class="text-center table-primary">고객 정보</th>
+							<th colspan="2" class="text-center table-primary">고객 정보  ▼</th>
 						</tr>
 						<tr>
 							<th>이메일</th>

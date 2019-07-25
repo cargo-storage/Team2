@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cargo.admin.action.AdminAllInfoAction;
+import cargo.admin.action.AdminClosedConfirmAction;
 import cargo.admin.action.AdminEachInfoAction;
 import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
+import cargo.admin.action.AdminMoveToOverdueAction;
+import cargo.admin.action.AdminEnterOverdueLocationAction;
 import cargo.admin.action.AdminOverdueAction;
 import cargo.admin.action.AdminReleaseItemAction;
 import cargo.admin.action.AdminReservToItemsAction;
@@ -109,14 +112,29 @@ public class AdminController extends HttpServlet {
 				action = new AdminReservToItemsAction();
 				forward = action.execute(request, response);
 			
-			//창고에서 빼기 전에 체크
+			//창고에서 빼기 전에 언제 반환 하는지 체크
 			}else if("/release_check".equals(command)){
 				action = new AdminReleaseItemAction();
+				forward = action.execute(request, response);
+			
+			//반환 날짜 받고 추가결제 있는지 확인
+			}else if("/release_check_confirm".equals(command)){
+				action = new AdminClosedConfirmAction();
 				forward = action.execute(request, response);
 				
 			//창고 -> closed
 			}else if("/item_to_closed".equals(command)){
 				
+			
+			//어느 연체 보관 창고에 보관할지 선택
+			}else if("/enter_overdue_location".equals(command)){
+				action = new AdminEnterOverdueLocationAction();
+				forward = action.execute(request, response);
+				
+			//연체 보관 창고로 옮기기
+			}else if("/move_to_overdue".equals(command)){
+				action = new AdminMoveToOverdueAction();
+				forward =action.execute(request, response);
 			}
 			
 			
@@ -135,6 +153,8 @@ public class AdminController extends HttpServlet {
 					RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
 				}
+			}else{
+				System.out.println("There is no forward...WHAT?!");
 			}
 			
 		} catch (Exception e) {

@@ -59,7 +59,7 @@ public class AdminDAO {
 				"select '예약' as state, m.name, m.phone, m.email,"
 				+ " r.num, '-' as item, r.house,"
 				+ " r.res_day, r.start_day, r.end_day, null as return_day,"
-				+ " r.payment, -1 as item_price"
+				+ " r.payment, -1 as item_price, '-' as overdue"
 				+ " from reservation as r"
 				+ " left join member as m"
 				+ " on r.email = m.email";
@@ -68,7 +68,7 @@ public class AdminDAO {
 				"select '보관' as state, m.name, m.phone, m.email,"
 				+ " -1 as num, i.item, i.house,"
 				+ " null as res_day, i.start_day, i.end_day, null as return_day,"
-				+ " i.payment, i.item_price"
+				+ " i.payment, i.item_price, i.overdue"
 				+ " from items as i"
 				+ " left join member as m"
 				+ " on i.email = m.email";
@@ -81,7 +81,7 @@ public class AdminDAO {
 				"select '완료' as state, ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
 				+ " c.email, -1 as num, c.item, c.house,"
 				+ " null as res_day, c.start_day, c.end_day, c.return_day,"
-				+ " c.payment, c.item_price"
+				+ " c.payment, c.item_price, '-' as overdue"
 				+ " from closed as c"
 				+ " left join member as m"
 				+ " on c.email = m.email";
@@ -113,6 +113,7 @@ public class AdminDAO {
 				dto.setNum(rs.getInt("num"));
 				dto.setItem(rs.getString("item"));
 				dto.setHouse(rs.getString("house"));
+				dto.setOverdue(rs.getString("overdue"));
 				
 				dto.setRes_day(rs.getDate("res_day"));
 				dto.setStart_day(rs.getDate("start_day"));
@@ -171,12 +172,11 @@ public class AdminDAO {
 	
 	public ArrayList<OverdueDTO> getOverdueTable() {
 		ArrayList<OverdueDTO> list = new ArrayList<>();
-		sql=
-				"select datediff(curdate(),end_day) as overdue, datediff(curdate(),end_day)*w.price as arrears,"
+		sql="select datediff(curdate(),end_day) as overdue_day, datediff(curdate(),end_day)*w.price as arrears,"
 						+ " round((i.payment*0.1),-1)-(datediff(curdate(),end_day)*w.price) as now_deposit,"
 						+ " m.email, m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr,"
 						+ " w.house, w.price,"
-						+ " i.item ,i.start_day, i.end_day, i.payment, i.item_price"
+						+ " i.item ,i.start_day, i.end_day, i.payment, i.item_price, i.overdue"
 						+ " from items as i"
 						+ " join member as m on i.email = m.email"
 						+ " join warehouse as w on i.house = w.house"
@@ -188,11 +188,11 @@ public class AdminDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				int overdue = rs.getInt("overdue");
+				int overdue_day = rs.getInt("overdue_day");
 				int arrears = rs.getInt("arrears");
 				int now_deposit = rs.getInt("now_deposit");
 				
-				OverdueDTO odto = new OverdueDTO(overdue, arrears, now_deposit);
+				OverdueDTO odto = new OverdueDTO(overdue_day, arrears, now_deposit);
 				
 				odto.setHouse(rs.getString("house"));
 				odto.setPrice(rs.getInt("price"));
@@ -209,6 +209,7 @@ public class AdminDAO {
 				odto.setPayment(rs.getInt("payment"));
 				odto.setItem_price(rs.getInt("item_price"));
 				odto.setItem(rs.getString("item"));
+				odto.setOverdue(rs.getString("overdue"));
 				
 				list.add(odto);
 			}
@@ -231,7 +232,7 @@ public class AdminDAO {
 		 *로 DB에서 가져옵니다.
 		 *null 피하기 위해.. Date경우에는 표시해줄때 꼬일 것 같아서 그냥 null로 받아옵니다.*/
 		String resev = 
-				"select '-' as item, r.num, r.email, r.house,"
+				"select '-' as item, r.num, r.email, r.house, '-' as overdue,"
 				+ " r.start_day,  r.end_day, r.res_day, r.payment, -1 as item_price, null as return_day,"
 				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
 				+ " from reservation as r"
@@ -240,7 +241,7 @@ public class AdminDAO {
 				+ " where r.num =?";
 		
 		String itm =
-				"select i.item, -1 as num, i.email, i.house,"
+				"select i.item, -1 as num, i.email, i.house, i.overdue,"
 				+ " i.start_day, i.end_day, null as res_day, i.payment, i.item_price, null as return_day,"
 				+ " m.name, m.phone, m.postCode, m.roadAddr, m.detailAddr"
 				+ " from items as i"
@@ -253,7 +254,7 @@ public class AdminDAO {
 		 * String이  null 이면 '탈퇴한 회원'
 		 * int null 이면 -1*/
 		String cld=
-				"select c.item, null as num, c.email, c.house,"
+				"select c.item, null as num, c.email, c.house, '-' as overdue,"
 				+ " c.start_day, c.end_day, null as res_day, c.payment, c.item_price, c.return_day,"
 				+ " ifnull(m.name, '탈퇴한 회원') as name, ifnull(m.phone, '탈퇴한 회원') as phone,"
 				+ " ifnull(m.postCode, -1) as postCode, ifnull(m.roadAddr, '탈퇴한 회원') as roadAddr,"
@@ -287,6 +288,7 @@ public class AdminDAO {
 				map.put("detailAddr",rs.getString("detailAddr"));
 				map.put("house",rs.getString("house"));
 				map.put("item",rs.getString("item"));
+				map.put("overdue",rs.getString("overdue"));
 				
 				map.put("num",rs.getInt("num"));
 				map.put("postCode",rs.getInt("postCode"));
@@ -441,5 +443,26 @@ public class AdminDAO {
 			freeResource();
 		}
 	}//end of reservToitems
+
+	public void updateOverdue(String overdue, String item) {
+		try {
+			sql = "update items"
+					+ " set overdue=?"
+					+ " where item=?";
+		
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, overdue);
+			pstmt.setString(2, item);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("updateOverdue err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of updateOverdue
 	
 }
