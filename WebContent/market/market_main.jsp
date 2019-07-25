@@ -18,7 +18,7 @@
     <c:if test="${email==null }">
     	<script type="text/javascript">
     		alert("로그인 후 이용가능합니다.");
-    		location.href="${contextPath}/index.jsp?login=true";
+    		location.href="${contextPath}/co/login.go";
     	</script>
     </c:if>
     
