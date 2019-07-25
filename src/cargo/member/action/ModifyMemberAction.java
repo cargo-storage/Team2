@@ -53,7 +53,7 @@ public class ModifyMemberAction implements Action {
 			String path = request.getContextPath();
 			
 			//관리자가 정보 수정 한 경우
-			if(request.getParameter("from") != null){
+			if(request.getParameter("page").equals("admin")){
 				forward.setPath(path+"/ad/member_admin");
 				
 			}else{
