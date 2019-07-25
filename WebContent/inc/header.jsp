@@ -93,7 +93,7 @@
 		});
 
 		function setcount() {
-			if (count++ > 600){ // 10분 뒤 모달 띄우기
+			if (count++ == 600){ // 10분 뒤 모달 띄우기
 				$("#timerModal").modal();
 				timer = setInterval(msg_time,1000);
 			}
