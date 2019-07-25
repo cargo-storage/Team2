@@ -66,8 +66,10 @@ public class MemberController extends HttpServlet {
 				action = new LoginAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/logout")) { // 로그아웃
-				action = new LogoutAction();
-				forward = action.execute(request, response);
+				request.getSession().invalidate();
+				response.getWriter().print("<script>");
+				response.getWriter().print("alert('로그아웃 되었습니다.'); location.href='../co/index.go';");
+				response.getWriter().print("</script>");
 			} else if (command.equals("/emailAuth")) { // 이메일 인증
 				action = new EmailAuthAction();
 				forward = action.execute(request, response);

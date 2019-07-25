@@ -269,14 +269,81 @@
 	            });
         });
 		</script>
-   
+		<!-- 세션 타임아웃 -->
+  		<c:if test="${sessionScope.mdto ne null }">
+   		<script> 
+			var setTime = 59; //카운트 시간
+			var count = 0; //모달 띄우는 시간
+			var timer;
+			
+			setInterval(setcount,1000); //1초마다 setcount함수를 실행(1000=>1초)
+			
+			$(function(){
+				$("#extendTime").click(function(){
+					count = 0;
+					setTime = 59;
+					clearInterval(timer);		// 타이머 해제
+					$("#timeMsg").html("60초");
+				});
+				
+				$("#timerModal").on("show.bs.modal", function(){
+					$("body").removeAttr('onmousemove'); //모달 띄워져 있을 때 mousemove 없앰
+				});
+				
+				$("#timerModal").on("hide.bs.modal", function(){
+					$("body").attr('onmousemove','count=0'); //모달 없어지면 다시 mousemove 생성
+				});
+			});
+
+			function setcount() {
+				if (count++ == 600){ // 10분 뒤 모달 띄우기
+					$("#openTimer").trigger("click");
+					timer = setInterval(msg_time,1000);
+				}
+			}
+			
+			function msg_time() {	// 1초씩 카운트
+				msg = (setTime % 60) + "초";	// 남은 시간 계산
+				$("#timeMsg").html(msg);						
+				setTime--;					// 1초씩 감소
+				
+				if (setTime < 0) {			// 시간이 종료 되었으면..	
+					clearInterval(timer);		// 타이머 해제
+					location.href="${contextPath}/me/logout";
+				}
+			}		
+   		</script>
+  		</c:if>
     </head>
-    
-    <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
+<body data-spy="scroll" data-target="#lambda-navbar" data-offset="0" onmousemove="count=0">
+<!-- 세션 타임아웃 -->
+<span data-toggle="modal" data-target="#timerModal" data-backdrop="static" id="openTimer"></span>      
+  <!-- The Modal -->
+  <div class="modal" id="timerModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title text-danger text-center">* 알림 *</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body p-0">
+        	<h5 class="text-center">10분간 움직임이 없어<br> 60초 후 로그아웃 됩니다.</h5>
+         	<h3 class="text-center">남은 시간: <span id="timeMsg" class="text-danger">60초</span></h3>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer pt-0 pb-2 pr-2">
+        	<button class="btn btn-success btn-sm" id="extendTime" data-dismiss="modal">연장하기</button>
+        	<a href="${contextPath}/me/logout" class="btn btn-danger btn-sm">로그아웃</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.jsp">
+       <a class="navbar-brand" href="${contextPath }/index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -331,7 +398,7 @@
     </nav>
 
      <!-- 간편견적 -->
-     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
+     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(${contextPath}/img/main-1.jpg)">
          <div class="container">
              <div class="row vh-md-100">
                  <div class="col-md-7 my-md-auto text-center text-md-left">
