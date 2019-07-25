@@ -341,7 +341,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.jsp">
+       <a class="navbar-brand" href="${contextPath }/index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -396,7 +396,7 @@
     </nav>
 
      <!-- 간편견적 -->
-     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
+     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(${contextPath}/img/main-1.jpg)">
          <div class="container">
              <div class="row vh-md-100">
                  <div class="col-md-7 my-md-auto text-center text-md-left">
