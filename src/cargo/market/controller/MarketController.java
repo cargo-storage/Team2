@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
+import cargo.market.action.MarketMainAction;
 import cargo.market.action.ShowContentAction;
 
 public class MarketController extends HttpServlet{
@@ -41,9 +42,8 @@ public class MarketController extends HttpServlet{
 		try {
 			
 			if(command.equals("/market.do")){	// 메인페이지로 이동 - DB작업수정해야함
-				
-				forward = new ActionForward();
-				forward.setPath("../market/market_main.jsp");
+				action = new MarketMainAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/uploaditem.do")){	// 글쓰기 페이지로 이동
 				forward = new ActionForward();
 				forward.setPath("../market/market_post.jsp");

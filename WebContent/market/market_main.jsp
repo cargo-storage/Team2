@@ -47,155 +47,23 @@
 							<div class="row">
 					          <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
 								<p class="breadcrumbs" id="category" >
-									<span class="mr-2"><a class="selected" href="" ><b>ALL ITEMS</b></a></span>
-									<span class="mr-2"><a href="">FURNITURE</a></span>
-									<span class="mr-2"><a href="">ELECTRONIC</a></span>
-									<span class="mr-2"><a href="">TOOL/MATERIAL</a></span>
-									<span><a href="">OTHERS</a></span>
+									<span class="mr-2"><a class="selected" href="./market.do?cate=all" ><b>ALL ITEMS</b></a></span>
+									<span class="mr-2"><a href="./market.do?cate=fur">FURNITURE</a></span>
+									<span class="mr-2"><a href="./market.do?cate=elec">ELECTRONIC</a></span>
+									<span class="mr-2"><a href="./market.do?cate=mat">TOOL/MATERIAL</a></span>
+									<span><a href="./market.do?cate=oth">OTHERS</a></span>
 								</p>
 							  </div>
 					        </div>
 						</div>
 	    	
 	    			
-	    				<!-- 아이템 영역 -->
-	    				<div class="row">
-	    					<!-- for문돌릴거임 -->
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="${contextPath }/mk/showcontent.do?no=1" class="img img-2" style="background-image: url(../images/image_1.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<!-- for문돌릴거임 -->
-			    			
-			    			
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_2.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_3.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_4.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_5.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_6.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_7.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    			<div class="col-md-4">
-			    				<div class="blog-entry ftco-animate">
-										<a href="single.html" class="img img-2" style="background-image: url(../images/image_8.jpg);"></a>
-										<div class="text text-2 pt-2 mt-3">
-				              <h3 class="mb-2"><a href="single.html">The Photography Technique</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span>Dec 14, 2018</span>
-				              		<span><a href="single.html">Photography</a></span>
-				              		<span>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				            </div>
-									</div>
-			    			</div>
-			    		</div><!-- END-->
-			    		
-			    		
-			    		<div class="row mt-5">
+	    	<!-- 아이템 영역 -->
+	    	<div class="row">
+	    	<jsp:include page="${category }"></jsp:include>
+			 </div>
+			    	
+			    	<div class="d-block row mt-5">
 			          <div class="col text-center">
 			            <div class="block-27">
 			              <ul>
@@ -210,12 +78,10 @@
 			            </div>
 			          </div>
 			        </div>
-			        
-			        
-			    	</div>
 	          
 	          
 	    		</div>
+	    	</div>
 	    	</div>
 	    </section>
 	    

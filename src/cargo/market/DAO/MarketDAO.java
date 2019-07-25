@@ -68,8 +68,52 @@ public class MarketDAO {
 		return 0;
 	}
 	
-	public ArrayList<M_boardDTO> selectAllItem(){ // m_board 목록 불러오기 
-		return null;
+	public ArrayList<M_boardDTO> selectBList(String category){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
+
+		ArrayList<M_boardDTO> boardList = new ArrayList<>();
+		M_boardDTO bDTO;
+		
+		try {
+			String sql ="";
+			getConnection();
+			
+			switch (category) {
+			case "all": sql = "SELECT * FROM m_board ORDER BY no DESC";
+				break;
+			case "fur": sql = "SELECT * FROM m_board WHERE item LIKE 'F%' ORDER BY no DESC";
+				break;
+			case "elec": sql = "SELECT * FROM m_board WHERE item LIKE 'E%' ORDER BY no DESC";
+				break;
+			case "mat": sql = "SELECT * FROM m_board WHERE item LIKE 'M%' ORDER BY no DESC";
+				break;
+			case "oth": sql = "SELECT * FROM m_board WHERE item LIKE 'O%' ORDER BY no DESC";
+				break;
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				bDTO = new M_boardDTO();
+				bDTO.setContent(rs.getString("content"));
+				bDTO.setDate(rs.getTimestamp("date"));
+				bDTO.setImage(rs.getString("image"));
+				bDTO.setItem(rs.getString("item"));
+				bDTO.setNo(rs.getInt("no"));
+				bDTO.setOnStock(rs.getInt("onStock"));
+				bDTO.setTitle(rs.getString("title"));
+				
+				boardList.add(bDTO);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("error in selectAllItem()");
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return boardList;
 	}
 	
 	public M_boardDTO selectBoardItem(){ // board 테이블 1개
