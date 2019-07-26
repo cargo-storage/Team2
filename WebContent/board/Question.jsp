@@ -127,9 +127,9 @@
             <c:choose>
             <c:when test="${boardq.re_lev > 0 }">
             <c:forEach begin="0" step="1" end="${boardq.re_lev}" >
-            <span style="padding-left: 20px"></span>   
+            <span style="padding-left: 10px"></span>   
             </c:forEach>
-            <span style="font-size: 12px;">답변</span>
+            <span style="font-size: 12px;">ㄴ</span>
                <a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
                ${boardq.subject}
                </a>
@@ -189,7 +189,7 @@
 </div>
      
 
-        
+         <jsp:include page="../inc/footer.jsp"></jsp:include>
      
 
       

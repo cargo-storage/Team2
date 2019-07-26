@@ -154,7 +154,7 @@
 
      
 
-
+<jsp:include page="../inc/footer.jsp"></jsp:include>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

@@ -211,10 +211,10 @@ public class BoardnDAO {
 
 public ArrayList<BoardnDTO> getSearch(int currentPage, int pagePerRow, String search) {
 		ArrayList<BoardnDTO> list = new ArrayList<BoardnDTO>();
-		 
+		
 		try {
 			getConnection();
-			sql = "select * from boardn where subject like ? order by no limit ?,?";
+			sql = "select * from boardn where subject or name like ? order by no limit ?,?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%"+search+"%");
 			pstmt.setInt(2, (currentPage-1)*pagePerRow);

@@ -252,7 +252,7 @@
               
   </section>
 
-        
+        <jsp:include page="../inc/footer.jsp"></jsp:include>
     
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

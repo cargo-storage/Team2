@@ -138,7 +138,7 @@
 
         
         <!--footer / contact-->
-    
+    <jsp:include page="../inc/footer.jsp"></jsp:include>
 
       
 
