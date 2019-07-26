@@ -1,7 +1,7 @@
 package cargo.admin.DAO;
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -464,5 +464,33 @@ public class AdminDAO {
 			freeResource();
 		}
 	}//end of updateOverdue
+
+	public void itemsToClosed(Date return_day, String item) {
+		try {
+			sql = "insert into closed(item, item_price, email, house, start_day, end_day, return_day, payment)"
+				+ " select item, item_price, email, house, start_day, end_day, ? as return_day, payment"
+				+ " from items where item = ?";
+		
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setDate(1, return_day);
+			pstmt.setString(2, item);
+			
+			pstmt.executeUpdate();
+			
+			sql ="delete from items"
+					+ " where item=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("itemsToClosed err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}
 	
 }

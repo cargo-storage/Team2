@@ -37,17 +37,18 @@
 				<li class="breadcrumb-item active">보관 완료하기</li>
 			</ol>
 			
-			<div class="card mb-3">
+			<div class="card mb-3" id="first">
+			
 				<div class="card-header">
 					<i class="fas"></i> 보관 중인 물건 정보
 				</div>
 				<div class="card-body row">
 					<section class="col-lg-6">
-						<span class="text-danger">보관 중인 물건 반환 날짜를 선택해 주세요</span>
+						<h5 class="text-danger" align="center">보관 종료날짜를 선택해 주세요</h5>
 						<div class="calendar"></div>
 					</section>
 					<section class="col-lg-6">
-					<form action="${contextPath}/ad/release_check_confirm" method="post" id="itoc">
+					<form action="${contextPath}/ad/item_to_closed" method="post" id="itoc">
 						<table class="table">
 							<tr>
 								<th colspan="2" class="table-info">고객  정보  ▼</th>
@@ -81,8 +82,8 @@
 								<td>${map.start_day} ~ ${map.end_day}</td>
 							</tr>
 							<tr>
-								<th>물건 반환일</th>
-								<td><input type="text" class="form-control" name="return_day" value="${today}" readonly="readonly"></td>
+								<th>보관 종료일</th>
+								<td><input type="text" class="form-control" name="return_day" id="return_day" value="${today}" readonly="readonly"></td>
 							</tr>
 							<tr>
 								<th>물건 가격</th>
@@ -90,16 +91,57 @@
 							</tr>
 							<tr>
 								<td colspan="2" class="text-right">
-									<button class="btn btn-info " type="button" onclick="check();"
-									data-toggle="tooltip" data-placement="left" title="고객이 연체료 결제를 완료한 후 창고에 넣기 버튼을 누르세요.">
-									출고 하기</button>
-									<input class="btn btn-secondary" type="button" value="취소하기" onclick="history.back();">
+									<a href="#second"><button class="btn btn-info " type="button" onclick="check();">
+									보증금 계산</button></a>
+									<a href="${contextPath}/ad/listTables?category=items"><input class="btn btn-secondary" type="button" value="취소하기"></a>
 								</td>
 							</tr>
 						</table>
 						<input type="hidden" name="item" value="${map.item}">
 						</form>
 					</section>
+				</div>
+				<div class="card dom"></div>
+			</div>
+			<div class="card mb-3" id="second">
+				<div class="card-header">
+					<i class="fas"></i> 보증금 확인
+				</div>
+				<div class="card-body row">
+					<table class="table">
+						<tr>
+							<th>예정 보관 기간</th>
+							<td>${map.start_day} ~ ${map.end_day}</td>
+						</tr>
+						<tr>
+							<th>보관 비용</th>
+							<td><fmt:formatNumber value="${map.payment}" type="currency" currencySymbol="￦"/></td>
+						</tr>
+						<tr class="table-secondary">
+							<th>실제 종료일</th>
+							<td class="return_day"></td>
+						</tr>
+						<tr class="ifoverdue table-warning">
+							<th>연체일</th>
+							<td class="overdue_day"></td>
+						</tr>
+						<tr class="ifoverdue table-warning">
+							<th>연체 금액</th>
+							<td class="arrears"></td>
+						</tr>
+						<tr class="bg-danger text-white">
+							<th>보증금</th>
+							<td class="now_deposit"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="right">
+								<button class="btn btn-warning" type="button" onclick="go();"
+								data-toggle="tooltip" data-placement="left" title="보증금 계산을 마친 뒤 클릭">
+								보관 종료</button>
+								<A href="#first"><button class="btn btn-secondary" onclick="backtofirst();">취소하기</button></A>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -139,29 +181,72 @@
 	<script type="text/javascript">
 	var start_day = '${map.start_day}';
 	var end_day ='${map.end_day}';
-	
+	var price = ${price};
+	var payment = ${map.payment};
 	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip()
+		$('[data-toggle="tooltip"]').tooltip();
 		
 		$('.calendar').pignoseCalendar({
 	    	lang: 'ko',
-	    	minDate: moment(end_day)-1
+	    	minDate: moment(start_day)+1,
+	    	select: function(date, context) {
+	             if(date[0] == null){
+	            	 alert("반환 날짜를 선택하세요!");
+	            	 var today=moment().format('YYYY[-]MM[-]DD');
+	            	 $('.calendar').pignoseCalendar('set', today);
+	            	 $('#return_day').val(today);
+	             }else{
+	            	 $('#return_day').val(date[0]._i);
+	             }
+	        }
 	    });//end of pignoseCalendar
-		
-		//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
-		$('.pignose-calendar-body').addClass('clickX');
 	});//end of ready
 	
 	function check() {
-		if($('#item_price').val()=="") alert("보관할 물건의 가격을 입력해 주세요!");
+		var return_day = $('#return_day').val();
+		if(return_day=="") alert("보관 종료일을 선택해 주세요!");
 		else{
-			var check = confirm("결제를 완료하셨습니까?");
-			if(check) $('#rtoi').submit();
-			else return false;
+			var check = confirm("보관 종료일이 "+return_day+"입니까?");
+			if(check){ 
+				$('#first').addClass('clickX');
+				$('.dom').show();
+				$('#second').show();
+				var return_day = $('#return_day').val();
+				var overdue_day = (moment(return_day)-moment(end_day))/(60*60*24*1000);
+				if(overdue_day < 0) overdue_day = 0;
+				var arrears = overdue_day*price;
+				var now_deposit = (payment*0.1)-arrears;
+
+				$('.return_day').text(return_day);
+				if(overdue_day > 0){
+					$('.overdue_day').text(overdue_day);
+					$('.arrears').text("￦"+arrears.toLocaleString()+"원");
+					$('.ifoverdue').show();
+				}
+				
+				if(now_deposit <= 0){
+					$('.now_deposit').siblings('th').text('받아야 하는 연체료');
+					$('.now_deposit').text("￦"+Math.abs(now_deposit).toLocaleString()+"원");
+				}else{
+					$('.now_deposit').siblings('th').text('돌려드릴 보증금');
+					$('.now_deposit').text("￦"+now_deposit.toLocaleString()+"원");
+				}
+			}else return false;
 		}
+	}//end of check
+	
+	function backtofirst() {
+		$('#first').removeClass('clickX');
+		$('.dom').hide();
+		$('#second').hide();
+	}//end of backtofirst
+	
+	function go() {
+		var check = confirm("고객과 보증금 계산을 완료하셨습니까? 자료 이동을 시작합니다.");
+		if(check){
+			$('#itoc').submit();
+		}else return false;
 	}
 	</script>
-	<!-- Demo scripts for this page-->
-<%-- 	<script src="${contextPath}/js/datatables-custom.js"></script> --%>
 </body>
 </html>

@@ -21,7 +21,14 @@
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
-
+<style type="text/css">
+/*연체 표시...*/
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-disabled a {
+	opacity: 0.9;
+  	background-color: #f44336;
+  	color: white;
+}
+</style>
 </head>
 <body id="page-top">
 	<jsp:useBean id="now" class="java.util.Date" />
@@ -59,7 +66,7 @@
 									<th>예약일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -71,7 +78,7 @@
 									<th>예약일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -112,7 +119,7 @@
 									<th>이메일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</thead>
@@ -124,7 +131,7 @@
 									<th>이메일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</tfoot>
@@ -175,7 +182,7 @@
 									<th>시작일</th>
 									<th>종료일</th>
 									<th>실수령일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</thead>
@@ -187,7 +194,7 @@
 									<th>시작일</th>
 									<th>종료일</th>
 									<th>실수령일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</tfoot>
@@ -275,7 +282,7 @@
 								<td class="end_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
@@ -340,7 +347,7 @@
 								<td class="end_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
@@ -408,7 +415,7 @@
 								<td class="return_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
