@@ -22,8 +22,6 @@
     	</script>
     </c:if>
     
-    
-    
 </head>
 <body>
 
@@ -45,20 +43,26 @@
    				<!-- 아이템분류 -->
 				<div class="ftco-bread mb-5">
 				<div class="row">
-			    <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
-					<p class="breadcrumbs" id="category" >
-						<span class="mr-2"><a href="./market.do?cate=all" <c:if test="${category=='all'||category==null }">class="selected"</c:if>>
-							ALL ITEMS</a></span>
-						<span class="mr-2"><a href="./market.do?cate=fur" <c:if test="${category=='fur' }">class="selected"</c:if>>
-							FURNITURE</a></span>
-						<span class="mr-2"><a href="./market.do?cate=elec" <c:if test="${category=='elec' }">class="selected"</c:if>>
-							ELECTRONIC</a></span>
-						<span class="mr-2"><a href="./market.do?cate=mat" <c:if test="${category=='mat' }">class="selected"</c:if>>
-							TOOL/MATERIAL</a></span>
-						<span><a href="./market.do?cate=oth" <c:if test="${category=='oth' }">class="selected"</c:if>>
-							OTHERS</a></span>
-					</p>
-				</div>
+				    <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
+						<p class="breadcrumbs" id="category" >
+							<span class="mr-2"><a href="./market.do?cate=all" <c:if test="${category=='all'||category==null }">class="selected"</c:if>>
+								ALL ITEMS</a></span>
+							<span class="mr-2"><a href="./market.do?cate=fur" <c:if test="${category=='fur' }">class="selected"</c:if>>
+								FURNITURE</a></span>
+							<span class="mr-2"><a href="./market.do?cate=elec" <c:if test="${category=='elec' }">class="selected"</c:if>>
+								ELECTRONIC</a></span>
+							<span class="mr-2"><a href="./market.do?cate=mat" <c:if test="${category=='mat' }">class="selected"</c:if>>
+								TOOL/MATERIAL</a></span>
+							<span><a href="./market.do?cate=oth" <c:if test="${category=='oth' }">class="selected"</c:if>>
+								OTHERS</a></span>
+						</p>
+					</div>
+					<form action="#" class="search-form">
+		                <div class="form-group">
+		                  <a href="#"><span class="icon icon-search"></span></a>
+		                  <input type="text" class="rounded form-control" placeholder="Type a keyword and hit enter">
+		            	</div>
+		            </form>
 			    </div>
 				</div>
 	    	
@@ -70,14 +74,14 @@
 					<div class="col-md-4">
 					<div class="blog-entry ftco-animate">
 						<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}" class="img"
-						style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
+							style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
 						<div class="text text-2 pt-2 mt-3">
-					    	<h3 class="mb-2"><a href="single.html">${bdto.title }</a></h3>
+					    	<h3 class="mb-2 d-inline"><a href="single.html">${bdto.title }</a></h3>
 					    	<div class="meta-wrap">
 								<p class="meta">
-					         		<span>${bdto.date}</span>
-				<%-- 	         		<span><a href="single.html">${bdto.price }</a></span> --%>
-				<!-- 	         		<span>5 Comment</span> -->
+					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
+			<%-- 	         		<span><a href="single.html">${bdto.price }</a></span> --%>
+			<!-- 	         		<span>5 Comment</span> -->
 					         	</p>
 					        </div>
 					    	<p class="mb-4">${bdto.content }</p>
