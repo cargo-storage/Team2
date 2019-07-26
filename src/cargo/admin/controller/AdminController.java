@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cargo.admin.action.AdminAllInfoAction;
-import cargo.admin.action.AdminClosedConfirmAction;
 import cargo.admin.action.AdminEachInfoAction;
 import cargo.admin.action.AdminExtendReservAction;
+import cargo.admin.action.AdminItemsToClosedAction;
 import cargo.admin.action.AdminMemberAction;
 import cargo.admin.action.AdminModalAction;
 import cargo.admin.action.AdminMoveToOverdueAction;
@@ -40,7 +40,7 @@ public class AdminController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		System.out.println("--------------ADMIN--------------");
+		System.out.println("------------------ADMIN------------------");
 		
 		String contextPath=request.getContextPath();
 		
@@ -116,15 +116,11 @@ public class AdminController extends HttpServlet {
 			}else if("/release_check".equals(command)){
 				action = new AdminReleaseItemAction();
 				forward = action.execute(request, response);
-			
-			//반환 날짜 받고 추가결제 있는지 확인
-			}else if("/release_check_confirm".equals(command)){
-				action = new AdminClosedConfirmAction();
-				forward = action.execute(request, response);
 				
 			//창고 -> closed
 			}else if("/item_to_closed".equals(command)){
-				
+				action = new AdminItemsToClosedAction();
+				forward = action.execute(request, response);
 			
 			//어느 연체 보관 창고에 보관할지 선택
 			}else if("/enter_overdue_location".equals(command)){
@@ -161,7 +157,7 @@ public class AdminController extends HttpServlet {
 			System.out.println("AdminController err: "+e.getMessage());
 			e.printStackTrace();
 		}
-		System.out.println("---------------------------------\n");
+		System.out.println("-----------------------------------------\n");
 	}
 
 }
