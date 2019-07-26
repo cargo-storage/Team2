@@ -28,8 +28,8 @@
            
    #page-wrapper {
     padding-left: 250px;
-  	padding-top: 83px;
-  	background-color: #999;
+     padding-top: 83px;
+     background-color: #999;
    }
   
   #sidebar-wrapper {
@@ -78,11 +78,11 @@
   }
      
    </style>
-        	<jsp:include page="../inc/header.jsp"></jsp:include>
+           <jsp:include page="../inc/header.jsp"></jsp:include>
     </head>
     <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
-	
+   
 
 
 <!-- 왼쪽메뉴 -->
@@ -93,11 +93,11 @@
       <li class="sidebar-brand">
         <a href="CustomerSupport.jsp">고객지원</a>
       </li>
-		<li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
-		<li><a href="${contextPath}/bo/FAQ.bo">자주하는 질문</a></li>
-		<li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
-		<li><a href="#">1:1 실시간 상담</a></li> 
-		<li><a href="ViewMap.jsp">오시는 길</a></li>
+      <li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+      <li><a href="${contextPath}/bo/FAQ.bo">자주하는 질문</a></li>
+      <li><a href="${contextPath}/bo/QuestionListAction.bo">문의 하기</a></li>
+      <li><a href="#">1:1 실시간 상담</a></li> 
+      <li><a href="ViewMap.jsp">오시는 길</a></li>
     </ul>
   </div>
   <!-- /사이드바 -->
@@ -120,35 +120,39 @@
                      
                   </tr>
                   
-		<c:forEach var="boardq" items="${list}">
-			<tr>
-				<td>${boardq.no}</td>
-				<td>
-				<c:choose>
-				<c:when test="${boardq.re_lev = 1 }">
-				<c:forEach begin="0" end="${boardq.re_lev }" step="1">
-				<span style="padding-right: 20px"></span>
-					
-					<a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
-					${boardq.subject}
-					
-					</a>
-					</c:forEach>
-				</c:when>
-				</c:choose>
-				</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
-					${boardq.name}
-					</a>
-				</td>
-				<td>
-					<fmt:formatDate value="${boardq.date}"/>
-				</td>
-				<td>${boardq.secret}</td>
-			</tr>
-				
-		</c:forEach>
+      <c:forEach var="boardq" items="${list}">
+         <tr>
+            <td>${boardq.no}</td>
+            <td>
+            <c:choose>
+            <c:when test="${boardq.re_lev > 0 }">
+            <c:forEach begin="0" step="1" end="${boardq.re_lev}" >
+            <span style="padding-left: 20px"></span>   
+            </c:forEach>
+            <span style="font-size: 12px;">답변</span>
+               <a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
+               ${boardq.subject}
+               </a>
+            </c:when>
+            <c:otherwise>
+            <a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
+               ${boardq.subject}
+               </a>
+            </c:otherwise>
+            </c:choose>
+            </td>
+            <td>
+               <a href="${pageContext.request.contextPath}/bo/QuestionViewAction.bo?no=${boardq.no}">
+               ${boardq.name}
+               </a>
+            </td>
+            <td>
+               <fmt:formatDate value="${boardq.date}"/>
+            </td>
+            <td>${boardq.secret}</td>
+         </tr>
+            
+      </c:forEach>
                    </thead>
                <tbody>
             
@@ -164,15 +168,15 @@
                         <li class="page-item disabled"><a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage}"> ${currentPage} </a></li>
                         <c:if test="${currentPage < lastPage}"> 
                           <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage+1}">></a></li>
-                        </c:if>																				
+                        </c:if>                                                            
                         </ul>
                      </td>
                      <td colspan="3">
                                            
-                      	 <form action="${pageContext.request.contextPath}/bo/QuestionSearchAction.bo">
+                          <form action="${pageContext.request.contextPath}/bo/QuestionSearchAction.bo">
                          <input type="text" name="search" class="input_box" size="9">
-                     	   <input type="submit" value="검색" class="btn btn-primary btn-sm">
-                     	   <c:if test="${bqDTO.email != sessionScope.mdto.email}">
+                           <input type="submit" value="검색" class="btn btn-primary btn-sm">
+                           <c:if test="${bqDTO.email != sessionScope.mdto.email}">
                          <a href="${contextPath}/bo/QuestionAddForm.bo" class="btn btn-primary btn-sm">문의하기</a>
                          </c:if>
                         </form>
