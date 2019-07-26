@@ -29,7 +29,7 @@ public class MarketMainAction implements Action{
 		MarketDAO mdao = new MarketDAO();
 		ArrayList<M_boardDTO> boardList = mdao.selectBList(category);
 		
-		request.setAttribute("category", "market_list.jsp");
+		request.setAttribute("category", category);
 		request.setAttribute("boardList", boardList);
 		
 		System.out.println(category);
