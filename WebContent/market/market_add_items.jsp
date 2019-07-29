@@ -51,6 +51,7 @@
 		<!-- END COLORLIB-MAIN -->
 	</div>
 	
-	<jsp:include page="market_link_js.jsp"/>
+	<!-- bottom link -->
+	<jsp:include page="market_link_js.jsp"></jsp:include>
 </body>
 </html>
