@@ -193,7 +193,7 @@ public class MarketDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()){
+			while(rs.next()){
 				M_itemDTO iDTO = new M_itemDTO();
 				
 				iDTO.setCategory(rs.getString("category"));
@@ -212,7 +212,7 @@ public class MarketDAO {
 			freeResource();
 		}
 		return list;
-	}
+	}//end of selelctAllItmes
 	
 	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환
 		

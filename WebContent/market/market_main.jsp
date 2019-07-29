@@ -160,7 +160,7 @@ ${nowPage }&nbsp;${nowGroup }&nbsp;${recPerPage }&nbsp;${pagePerGroup }&nbsp;${t
 
 
 <!-- bottom link -->
-<jsp:include page="market_linkB.jsp"></jsp:include>
+<jsp:include page="market_link_js.jsp"></jsp:include>
     
 </body>
 </html>
