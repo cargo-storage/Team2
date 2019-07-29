@@ -22,6 +22,7 @@
     	</script>
     </c:if>
     
+    
 </head>
 <body>
 
@@ -57,12 +58,16 @@
 								OTHERS</a></span>
 						</p>
 					</div>
-					<form action="#" class="search-form">
+					
+					<!-- 검색 -->
+					<form action="./market.do" class="search-form" id="searchFrm">
 		                <div class="form-group">
-		                  <a href="#"><span class="icon icon-search"></span></a>
-		                  <input type="text" class="rounded form-control" placeholder="Type a keyword and hit enter">
+		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
+		                  <input type="hidden" name="cate" value="${category }">
+		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
 		            	</div>
 		            </form>
+		            
 			    </div>
 				</div>
 	    	
@@ -97,16 +102,33 @@
 		            <div class="block-27">
 		              <ul>
 		                <li><a href="#">&lt;</a></li>
+		                
+		                
+		                
 		                <li class="active"><span>1</span></li>
 		                <li><a href="#">2</a></li>
 		                <li><a href="#">3</a></li>
 		                <li><a href="#">4</a></li>
 		                <li><a href="#">5</a></li>
+		                
+		                
+		                
+		                
+		                
 		                <li><a href="#">&gt;</a></li>
 		              </ul>
 		            </div>
 		          </div>
 		        </div>
+		        
+		        
+		
+		        
+		        
+		        
+		        
+		        
+		        
 	    	</div>
 	    	</div>
 	    	</div>

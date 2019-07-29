@@ -123,8 +123,10 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover" href="#"><b>장바구니에 담기 </b></a>
-	                	<a class="btn m-auto hover" href="#"><b>바로구매</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="#"><b>장바구니</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
+	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
 	                	</div>
 	                </li>
 	              </ul>

@@ -64,11 +64,33 @@ public class MarketDAO {
 		
 	}
 	
-	public int getTotalItem(){// m_board 게시글 총 갯수 불러오기
-		return 0;
+	public int getTotal(){// m_board 게시글 총 갯수 불러오기
+		
+		int count=0;
+		
+		try {
+			
+			getConnection();
+			String sql = "SELECT count(*) FROM m_board";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			count = rs.getInt("count(*)");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return count;
+		
 	}
 	
-	public ArrayList<M_boardDTO> selectBList(String category){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
+	public ArrayList<M_boardDTO> selectBList(String category, String keyWord){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
 
 		ArrayList<M_boardDTO> boardList = new ArrayList<>();
 		M_boardDTO bDTO;
@@ -78,17 +100,27 @@ public class MarketDAO {
 			getConnection();
 			
 			switch (category) {
-			case "all": sql = "SELECT * FROM m_board ORDER BY no DESC";
-				break;
-			case "fur": sql = "SELECT * FROM m_board WHERE item LIKE 'F%' ORDER BY no DESC";
-				break;
-			case "elec": sql = "SELECT * FROM m_board WHERE item LIKE 'E%' ORDER BY no DESC";
-				break;
-			case "mat": sql = "SELECT * FROM m_board WHERE item LIKE 'M%' ORDER BY no DESC";
-				break;
-			case "oth": sql = "SELECT * FROM m_board WHERE item LIKE 'O%' ORDER BY no DESC";
-				break;
+			
+				case "all": sql = "SELECT * FROM m_board";
+					break;
+				case "fur": sql = "SELECT * FROM m_board WHERE item LIKE 'F%'";
+					break;
+				case "elec": sql = "SELECT * FROM m_board WHERE item LIKE 'E%'";
+					break;
+				case "mat": sql = "SELECT * FROM m_board WHERE item LIKE 'M%'";
+					break;
+				case "oth": sql = "SELECT * FROM m_board WHERE item LIKE 'O%'";
+					break;
 			}
+			
+			if(keyWord != ""){
+				if(category.equals("all")) sql += " WHERE title LIKE '%"+keyWord+"%'";
+				else sql +=  " AND title LIKE '%"+keyWord+"%'";
+			}
+				
+			sql += " ORDER BY no DESC";
+			
+			System.out.println(sql);
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -106,14 +138,16 @@ public class MarketDAO {
 				boardList.add(bDTO);
 			}
 			
-			
 		} catch (Exception e) {
 			System.out.println("error in selectAllItem()");
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
+		
 		return boardList;
+		
+		
 	}
 	
 	public M_boardDTO selectBoardItem(){ // board 테이블 1개
@@ -229,3 +263,5 @@ public class MarketDAO {
 	}
 	
 }
+
+
