@@ -30,13 +30,41 @@
 						<div class="col-lg-12 ftco-animate">
 							<div class="comment-form-wrap pt-5">
 								<h2 class="mb-3 font-weight-bold">ITEMS TABLE</h2>
-								<table>
-									<tr>
-										<th></th>
-									</tr>
-									<tr>
-										
-									</tr>
+								<table class="table table-bordered" id="dataTable">
+									<thead>
+										<tr>
+											<th>물품ID</th>
+											<th>이름</th>
+											<th>가격</th>
+											<th>카테고리</th>
+											<th>재고</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>물품ID</th>
+											<th>이름</th>
+											<th>가격</th>
+											<th>카테고리</th>
+											<th>재고</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr>
+											<td>물품ID</td>
+											<td>이름</td>
+											<td>가격</td>
+											<td>
+												<select class="custom-select">
+												  <option selected value=""></option>
+												  <option value="1"></option>
+												  <option value="2"></option>
+												  <option value="3"></option>
+												</select>
+											</td>
+											<td>재고</td>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 						</div>
@@ -51,6 +79,6 @@
 		<!-- END COLORLIB-MAIN -->
 	</div>
 	
-	<jsp:include page="market_link_js_new.jsp"/>
+	<jsp:include page="market_link_js.jsp"/>
 </body>
 </html>
