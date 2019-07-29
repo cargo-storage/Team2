@@ -197,9 +197,6 @@ public class MarketDAO {
 		return bDTO;
 	}
 	
-	public void addComment(){// 댓글 등록
-		
-	}
 	
 	public int getTotalComment(int board_no){ // 댓글 갯수 가져오기
 		
@@ -259,6 +256,28 @@ public class MarketDAO {
 		
 		return replyList;
 	}
+	
+	public void insertReply(M_board_replyDTO mrdto) {   //댓글작성
+
+	      try {
+	         getConnection();
+	         String sql="insert into m_board_reply values(?,?,?,?,?,?)";
+	         pstmt=conn.prepareStatement(sql);
+	         pstmt.setInt(1, mrdto.getNo());
+	         pstmt.setInt(2, mrdto.getBoard_no());
+	         pstmt.setString(3, mrdto.getContent());
+	         pstmt.setString(4, mrdto.getEmail());
+	         pstmt.setString(5, mrdto.getName());
+	         pstmt.setTimestamp(6, mrdto.getDate());
+	         
+	         pstmt.executeUpdate();
+	         System.out.println("작성 완료");      
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }finally {
+	         freeResource();
+	      }
+	   }
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
 		
