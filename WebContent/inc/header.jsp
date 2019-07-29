@@ -51,7 +51,7 @@
 				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
 				      </div>
 				    </li>               
-              		<a href="${contextPath }/me/logout.me" class="btn btn-navbar btn-primary trigger-btn">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
+              		<a href="${contextPath }/me/logout" class="btn btn-navbar btn-primary trigger-btn">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">

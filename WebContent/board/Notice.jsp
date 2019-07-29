@@ -32,7 +32,13 @@
 		<div class="col-sm-10 mr-auto ml-auto" id="content">
         <div class="container mt-5">
       	
-            <h1 class="text-center">공지사항</h1>
+      	<div class="row">
+                <div class="col-md-7 col-sm-9 mx-auto text-center">
+            <h1 class="text-center mb-0">공지사항</h1>
+            <span class="text-muted">Notice</span>
+        	</div>
+        </div>
+            
             <table class="table mt-5 table-hover table-bordered">
                   <tr class="text-center bg-light">
                      <th width="5%">번호</th>  
@@ -46,15 +52,14 @@
 					<td><a href="${contextPath }/bo/NoticeViewAction.bo?no=${boardn.no}">
 						${boardn.subject}
 					</a></td>
-					<td class="text-center"><a href="${contextPath}/bo/NoticeViewAction.bo?no=${boardn.no}">
-						${boardn.name}
-					</a></td>
+					<td class="text-center">${boardn.name}</td>
 					<td class="text-center"><fmt:formatDate value="${boardn.date}"/></td>
 				</tr>
 		</c:forEach>
             </table>
             
-	            <ul class="pagination d-inline-block mx-auto">
+            <div class="col-md-12 mx-auto">
+	            <ul class="pagination mb-0 float-right">
 	       <c:if test="${currentPage > 1}">
 	              <li class="page-item">
 	              	<a class="page-link" href="${contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage-1}">&lt;</a>
@@ -69,17 +74,15 @@
 	              </li>
 	       </c:if>																				
 	            </ul>
-	            
-           <div class="row d-inline-block">
-            <form action="${contextPath}/bo/NoticeSearchAction.bo">
-             
-                <input type="text" name="search" class="form-control d-inline col-md-4">
-            	<input type="submit" value="검색" class="btn btn-primary btn-sm ml-2">
+	       </div>    
+	        
+            <form action="${contextPath}/bo/NoticeSearchAction.bo" class="col-md-6 mx-auto" style="clear: both;">
+                <input type="text" name="search" class="form-control d-inline col-md-5">
+            	<input type="submit" value="검색" class="btn btn-primary btn-md ml-2 col-md-2">
        <c:if test="${sessionScope.mdto.admin == 1}">
-                <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-sm ml-2">작성하기</a>
+                <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-md ml-2 col-md-2">작성하기</a>
     	</c:if>
             </form>
-            </div>	
 	            
          </div>
       	</div>
