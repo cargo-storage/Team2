@@ -341,7 +341,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="index.jsp">
+       <a class="navbar-brand" href="${contextPath }/index.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -396,7 +396,7 @@
     </nav>
 
      <!-- 간편견적 -->
-     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(img/main-1.jpg)">
+     <section class="py-7 py-md-0 bg-hero" id="home" style="background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)), url(${contextPath}/img/main-1.jpg)">
          <div class="container">
              <div class="row vh-md-100">
                  <div class="col-md-7 my-md-auto text-center text-md-left">
@@ -614,7 +614,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 my-auto">
-                        <img src="img/feature1.png" class="img-fluid d-block mx-auto" alt="Feature 1" />
+                        <img src="${contextPath }/img/feature1.png" class="img-fluid d-block mx-auto" alt="Feature 1" />
                     </div>
                     <div class="col-md-6 my-auto text-center text-md-left pt-5 pt-md-0">
                         <h2 class="display-4">예약안내</h2>
@@ -645,7 +645,7 @@
                 		<div class="mx-auto review-wrapper">
                 			<div class="card border-0 review p-5 bg-dark">
                 				<div class="card-body">
-                					<img src="img/online-shop.png" class="col-lg-12 rounded-circle d-block mx-auto"/>
+                					<img src="${contextPath }/img/online-shop.png" class="col-lg-12 rounded-circle d-block mx-auto"/>
 									<p class="market-go text-white">중고 장터</p>
 									<p class="text-white">미수령하신 물건들을<br>중고장터에서 판매 해 드립니다!</p>
 									<button type="button" class="btn btn-primary btn-lg text-white">T2 MARKET <i class="far fa-arrow-alt-circle-right"></i></button>
@@ -657,21 +657,21 @@
 	                    <div class="col-md-12 mx-auto review-wrapper slick-reviews">
 	                        <div class="card border-0 review p-5 raised-box">
 	                            <div class="card-body">
-	                                <img src="img/client-1.jpg" class="img-review rounded d-block mx-auto" alt="Client 1"/>
+	                                <img src="${contextPath }/img/client-1.jpg" class="img-review rounded d-block mx-auto" alt="Client 1"/>
 	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
 	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다.</span></div>
 	                            </div>
 	                        </div>
 	                        <div class="card border-0 review p-5 raised-box">
 	                            <div class="card-body">
-	                                <img src="img/client-2.jpg" class="img-review rounded d-block mx-auto" alt="Client 2"/>
+	                                <img src="${contextPath }/img/client-2.jpg" class="img-review rounded d-block mx-auto" alt="Client 2"/>
 	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
 	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span></div>
 	                            </div>
 	                        </div>
 	                        <div class="card border-0 review p-5 raised-box">
 	                            <div class="card-body">
-	                                <img src="img/client-3.jpg" class="img-review rounded d-block mx-auto" alt="Client 3"/>
+	                                <img src="${contextPath }/img/client-3.jpg" class="img-review rounded d-block mx-auto" alt="Client 3"/>
 	                                <p class="quote">물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳</p>
 	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span> </div>   
 	                            </div>
@@ -784,6 +784,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-        <script src="js/scripts.js"></script>
+        <script src="${contextPath }/js/scripts.js"></script>
     </body>
 </html>

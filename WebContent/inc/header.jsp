@@ -149,7 +149,7 @@
                     <a class="nav-link page-scroll" href="#company">회사소개</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#houseinfo">이용안내</a>
+                    <a class="nav-link page-scroll" href="${contextPath }/co/information.go">이용안내</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="${contextPath }/re/info.me?warehouse=A">예약안내</a>

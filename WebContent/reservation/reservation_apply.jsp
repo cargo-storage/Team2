@@ -26,6 +26,10 @@
     <script type="text/javascript">
     
     $(function() {
+    	
+    	$('#start_day').val("");
+    	$('#end_day').val("");
+    
      	
     	/* Datepicker 작동 관련 */
     	
@@ -137,7 +141,7 @@
    	}
    	
    	section{
-		background-image: url(../img/reservation2.jpg);
+		background-image: url(../img/reservation3.jpg);
 		background-size: cover;
 	}
 	.background{

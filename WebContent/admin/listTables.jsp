@@ -21,13 +21,20 @@
 
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
-
+<style type="text/css">
+/*연체 표시...*/
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-disabled a {
+	opacity: 0.9;
+  	background-color: #f44336;
+  	color: white;
+}
+</style>
 </head>
 <body id="page-top">
 	<jsp:useBean id="now" class="java.util.Date" />
 	<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
 	
-	<%@include file="Top.jsp"%>
+	<jsp:include page="Top.jsp"/>
 	<div id="content-wrapper">
 
 		<div class="container-fluid">
@@ -59,7 +66,7 @@
 									<th>예약일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 								</tr>
 							</thead>
 							<tfoot>
@@ -71,7 +78,7 @@
 									<th>예약일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 								</tr>
 							</tfoot>
 							<tbody>
@@ -112,7 +119,7 @@
 									<th>이메일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</thead>
@@ -124,7 +131,7 @@
 									<th>이메일</th>
 									<th>시작일</th>
 									<th>종료일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</tfoot>
@@ -143,7 +150,16 @@
 								<tr data-toggle="modal" data-target="#detailModal" data-cate="${adto.state}" data-primary="${adto.item}">
 								</c:otherwise>
 							</c:choose>
-									<td><c:out value="${adto.house}"/></td>
+									<td>
+									<c:choose>
+										<c:when test="${adto.overdue eq '-'}">
+											<c:out value="${adto.house}"/>
+										</c:when>
+										<c:otherwise>
+											<c:out value="${adto.overdue}"/>
+										</c:otherwise>							
+									</c:choose>
+									</td>
 									<td><c:out value="${adto.item}"/></td>
 									<td><c:out value="${adto.name}"/></td>
 									<td><c:out value="${adto.email}"/></td>
@@ -166,7 +182,7 @@
 									<th>시작일</th>
 									<th>종료일</th>
 									<th>실수령일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</thead>
@@ -178,7 +194,7 @@
 									<th>시작일</th>
 									<th>종료일</th>
 									<th>실수령일</th>
-									<th>이용금액</th>
+									<th>보관비용</th>
 									<th>상품가치</th>
 								</tr>
 							</tfoot>
@@ -230,7 +246,7 @@
 	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
 	</a>
 
-	<!-- Logout Modal-->
+	<!-- detail Modal-->
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
@@ -247,7 +263,7 @@
 						<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 						<table class='table col-lg-6 mx-auto my-auto'>
 							<tr>
-								<th colspan="2" class="text-center table-primary">예약 정보</th>
+								<th colspan="2" class="text-center table-primary">예약 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>예약 번호</th>
@@ -266,11 +282,11 @@
 								<td class="end_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
-								<th colspan="2" class="text-center table-primary">예약자 정보</th>
+								<th colspan="2" class="text-center table-primary">예약자 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이름</th>
@@ -290,13 +306,13 @@
 							</tr>
 							
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
+						<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
+						<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<input type="button" class="btn btn-primary extend" value="예약 연장하기">
-						<input type="button" class="btn btn-primary toitems" value="창고에 넣기">
 					</div>
 				
 				</c:when>
@@ -312,11 +328,15 @@
 					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 						<table class='table col-lg-6 mx-auto my-auto'>
 							<tr>
-								<th colspan="2" class="text-center table-primary">창고 정보</th>
+								<th colspan="2" class="text-center table-primary">창고 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>물품 ID</th>
 								<td class="item"></td>
+							</tr>
+							<tr>
+								<th>창고 번호</th>
+								<td class="house"></td>
 							</tr>
 							<tr>
 								<th>시작일</th>
@@ -327,7 +347,7 @@
 								<td class="end_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
@@ -335,7 +355,7 @@
 								<td class="item_price"></td>
 							</tr>
 							<tr>
-								<th colspan="2" class="text-center table-primary">고객 정보</th>
+								<th colspan="2" class="text-center table-primary">고객 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이름</th>
@@ -354,13 +374,14 @@
 								<td class="addr"></td>
 							</tr>
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="items">
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-danger sub sr-only" value="overdue">연체 창고 이동</button>
+					<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
+					<button type="button" class="btn btn-primary sub" value="toclosed">창고에서 빼기</button>
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<input type="button" class="btn btn-primary extend" value="예약 연장하기">
-					<input type="button" class="btn btn-primary toclosed" value="창고에서 빼기">
 				</div>
 				</c:when>
 				
@@ -375,7 +396,7 @@
 					<div class="col-lg-6 mb-3 calendar" id="calendar" ></div>
 						<table class='table col-lg-6 mx-auto my-auto'>
 							<tr>
-								<th colspan="2" class="text-center table-primary">물품 정보</th>
+								<th colspan="2" class="text-center table-primary">물품 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>물품 ID</th>
@@ -394,7 +415,7 @@
 								<td class="return_day"></td>
 							</tr>
 							<tr>
-								<th>결제 가격</th>
+								<th>보관 비용</th>
 								<td class="payment"></td>
 							</tr>
 							<tr>
@@ -402,7 +423,7 @@
 								<td class="item_price"></td>
 							</tr>
 							<tr>
-								<th colspan="2" class="text-center table-primary">고객 정보</th>
+								<th colspan="2" class="text-center table-primary">고객 정보  ▼</th>
 							</tr>
 							<tr>
 								<th>이메일</th>
@@ -421,7 +442,7 @@
 								<td class="addr"></td>
 							</tr>
 						</table>
-						<input type="hidden" id="result" name="result">
+						<input type="hidden" class="result" name="result">
 						<input type="hidden" name="state" value="closed">
 				</div>
 				<div class="modal-footer">
