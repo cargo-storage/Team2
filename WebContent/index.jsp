@@ -11,7 +11,7 @@
         <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
          <!-- CSS/CDN links-->
-		<jsp:include page="${contextPath }/inc/head_link.jsp"></jsp:include>
+		<jsp:include page="inc/head_link.jsp"></jsp:include>
 		
         <style>
         	/* 중고 장터 */

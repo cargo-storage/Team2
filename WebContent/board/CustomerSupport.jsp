@@ -1,27 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Lambda - Free Bootstrap 4 Multipurpose Landing Page Template</title>
-        <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-        <!--Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<%	request.setCharacterEncoding("utf-8"); %>  
 
-        <!--vendors styles-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-
-        <!-- Bootstrap CSS / Color Scheme -->
-        <link rel="stylesheet" href="../css/default.css" id="theme-color">
-        <!-- font-awesome CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>CUSTOMER SUPPORT - TEAM2 WAREHOUSE</title>
+	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
+	
+	<!-- CSS/CDN links-->
+	<jsp:include page="../inc/head_link.jsp"></jsp:include>
         <style>
            
    #page-wrapper {
@@ -76,10 +69,13 @@
   }
      
    </style>
-   	<jsp:include page="../inc/header.jsp"></jsp:include>
-    </head>
-    <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
+   
+   
+</head>
+<body data-spy="scroll" data-target="#lambda-navbar" data-offset="0">
 
+<!--navigation in page-->
+<jsp:include page="../inc/header.jsp"></jsp:include>
 
 <!-- 왼쪽메뉴 -->
 <nav id="page-wrapper">
@@ -179,6 +175,11 @@
                 </div>
             </div>
         </section>
+
+
+	
+<!--footer -->
+<jsp:include page="../inc/footer.jsp"></jsp:include>
      
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
