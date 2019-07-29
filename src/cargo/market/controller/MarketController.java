@@ -12,6 +12,7 @@ import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.ShowContentAction;
+import cargo.market.action.ShowItemsAction;
 
 public class MarketController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -31,8 +32,13 @@ public class MarketController extends HttpServlet{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
+		System.out.println("-------------------MARKET-------------------");
+		
 		String RequestURI = request.getRequestURI();
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
+		
+		System.out.println("RequestURI: "+RequestURI);
+		System.out.println("command: "+command);
 		
 		ActionForward forward = null;
 		Action action= null;
@@ -61,6 +67,9 @@ public class MarketController extends HttpServlet{
 				
 			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
 				
+			}else if(command.equals("/show_items.do")){// item 추가
+				action = new ShowItemsAction();
+				forward = action.execute(request, response);
 			}
 				
 			
@@ -68,21 +77,26 @@ public class MarketController extends HttpServlet{
 			if(forward !=null){
 				if(forward.isAjax()){
 					//Ajax방식이였으면 이동시키지 말아야합니다.
+					System.out.println("Ajax!");
 				}else if(forward.isRedirect()){
 					//sendRedirect 방식으로 보내는 경우
 					response.sendRedirect(forward.getPath());
+					System.out.println("sendRedirect");
 				}else{
 					//Dispatcher방식으로 보낼 때 forwarding 해준다
 					RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
+					System.out.println("dispatch");
 				}
+			}else{
+				System.out.println("There is no forward...WHAT?!");
 			}
 			
 		} catch (Exception e) {
-			System.out.println("MarketController 에러" + e);
+			System.out.println("MarketController 에러: " + e.getMessage());
 			e.printStackTrace();
-			
 		}
+		System.out.println("--------------------------------------------\n");
 	}
 
 }

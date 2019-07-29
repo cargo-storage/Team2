@@ -156,8 +156,62 @@ public class MarketDAO {
 		return null;
 	}
 	
-	public M_itemDTO selectItem(){ // item 테이블 1개
-		return null;
+	public M_itemDTO selectItem(String item){ // item 테이블 1개
+		M_itemDTO iDTO = new M_itemDTO();
+		
+		try {
+			getConnection();
+			String sql = "SELECT * FROM m_item WHERE item=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				iDTO.setCategory(rs.getString("category"));
+				iDTO.setItem(rs.getString("item"));
+				iDTO.setName(rs.getString("name"));
+				iDTO.setPrice(rs.getInt("price"));
+				iDTO.setStock(rs.getInt("stock"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return iDTO;
+	}
+	
+	public ArrayList<M_itemDTO> selectAllItems(){ // item 테이블 전체
+		ArrayList<M_itemDTO> list = new ArrayList<>();
+		
+		try {
+			
+			getConnection();
+			String sql = "SELECT * FROM m_item";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				M_itemDTO iDTO = new M_itemDTO();
+				
+				iDTO.setCategory(rs.getString("category"));
+				iDTO.setItem(rs.getString("item"));
+				iDTO.setName(rs.getString("name"));
+				iDTO.setPrice(rs.getInt("price"));
+				iDTO.setStock(rs.getInt("stock"));
+				
+				list.add(iDTO);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectAllItems :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return list;
 	}
 	
 	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환

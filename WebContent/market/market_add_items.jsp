@@ -30,6 +30,7 @@
 						<div class="col-lg-12 ftco-animate">
 							<div class="comment-form-wrap pt-5">
 								<h2 class="mb-3 font-weight-bold">ITEMS TABLE</h2>
+								<form method="post">
 								<table class="table table-bordered" id="dataTable">
 									<thead>
 										<tr>
@@ -50,22 +51,34 @@
 										</tr>
 									</tfoot>
 									<tbody>
+									<c:forEach var="idto" items="${list}">
 										<tr>
-											<td>물품ID</td>
-											<td>이름</td>
-											<td>가격</td>
+											<td>${idto.item}</td>
+											<td>${idto.name}</td>
+											<td>${idto.price}</td>
+											<td>${idto.category}</td>
+											<td>${idto.stock}</td>
+										</tr>
+									</c:forEach>
+									</tbody>
+									<tbody>
+										<tr>
+											<td><input type="button" class="btn-lg btn-success" value="입력"></td>
+											<td><input type="text" name="name" class="form-control" placeholder="이름"></td>
+											<td><input type="text" name="price" class="form-control" placeholder="가격"></td>
 											<td>
-												<select class="custom-select">
-												  <option selected value=""></option>
-												  <option value="1"></option>
-												  <option value="2"></option>
-												  <option value="3"></option>
+												<select class="custom-select-lg" name="category">
+												  <option value="fur">가구</option>
+												  <option value="mat">공구</option>
+												  <option value="elec">전자제품</option>
+												  <option selected value="oth">기타</option>
 												</select>
 											</td>
-											<td>재고</td>
+											<td><input type="text" name="stock" class="form-control" placeholder="재고"></td>
 										</tr>
 									</tbody>
 								</table>
+								</form>
 							</div>
 						</div>
 					</div>
