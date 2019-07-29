@@ -10,7 +10,7 @@
 <!-- Core plugin JavaScript-->
 <script src="${contextPath}/vendor/jquery/jquery-migrate-3.0.1.min.js"></script>
 <script src="${contextPath}/vendor/etc/popper.min.js"></script>
-<script src="${contextPath}/vendor/jquery/jquery.easing.1.3.js"></script>
+<script src="${contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="${contextPath}/vendor/jquery/jquery.waypoints.min.js"></script>
 <script src="${contextPath}/vendor/jquery/jquery.stellar.min.js"></script>
 <script src="${contextPath}/vendor/etc/owl.carousel.min.js"></script>
