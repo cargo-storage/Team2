@@ -90,7 +90,7 @@ public class MarketDAO {
 		
 	}
 	
-	public ArrayList<M_boardDTO> selectBList(String category, String keyWord){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
+	public ArrayList<M_boardDTO> selectBList(String category, String keyWord, int startRecNum, int recPerPage){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
 
 		ArrayList<M_boardDTO> boardList = new ArrayList<>();
 		M_boardDTO bDTO;
@@ -118,12 +118,14 @@ public class MarketDAO {
 				else sql +=  " AND title LIKE '%"+keyWord+"%'";
 			}
 				
-			sql += " ORDER BY no DESC";
-			
-			System.out.println(sql);
+			sql += " ORDER BY no DESC LIMIT ?, ?";
 			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRecNum-1);
+			pstmt.setInt(2, recPerPage);
 			rs = pstmt.executeQuery();
+			
+			System.out.println(sql);
 			
 			while(rs.next()){
 				bDTO = new M_boardDTO();

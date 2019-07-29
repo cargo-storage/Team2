@@ -22,6 +22,13 @@
     	</script>
     </c:if>
     
+    <script type="text/javascript">
+    	function goPage(page){
+    		location.href=""
+    	}
+    
+    </script>
+    
     
 </head>
 <body>
@@ -96,43 +103,48 @@
 		</c:forEach>
 				</div>
 			    	
-		    	<!-- 페이징 -->
+				<!-- 페이징-->
 		    	<div class="d-block row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
-		                <li><a href="#">&lt;</a></li>
-		                
-		                
-		                
-		                <li class="active"><span>1</span></li>
+			<%-- <c:if test="${not paging.isFirstGroup}">
+						<li><a href="${contextPath }/mk/market.do?page=${paging.startPageNum -1}">&lt;</a></li>
+			</c:if>  --%>
+		    <c:forEach var="i" begin="${paging.startPageNum }" end="${paging.lastPageNum }">
+		    	<c:choose>
+	                <c:when test="${i eq paging.nowPage}"><li class="active"><span>${i }</span></li></c:when>
+	                <c:otherwise><li><a href="${contextPath }/mk/market.do?page=${i}">${i }</a></li></c:otherwise>
+            	</c:choose>
+		    </c:forEach>
+		   <%--  <c:if test="${not paging.isLastGroup}">
+						<li><a href="${contextPath }/mk/market.do?page=${paging.lastPageNum +1}">&gt;</a></li>
+			</c:if> --%>            
+		                <!-- <li class="active"><span>1</span></li>
 		                <li><a href="#">2</a></li>
 		                <li><a href="#">3</a></li>
 		                <li><a href="#">4</a></li>
 		                <li><a href="#">5</a></li>
-		                
-		                
-		                
-		                
-		                
-		                <li><a href="#">&gt;</a></li>
+		                <li><a href="#">&gt;</a></li> -->
 		              </ul>
 		            </div>
 		          </div>
-		        </div>
-		        
-		        
-		
-		        
-		        
-		        
+		        </div> 
 		        
 		        
 		        
 	    	</div>
 	    	</div>
+	    	</div>
+	    	
+	 <div>   			
+${nowPage }&nbsp;${nowGroup }&nbsp;${recPerPage }&nbsp;${pagePerGroup }&nbsp;${totalRecord }
+&nbsp;${totalPage }&nbsp;${totalGroup }&nbsp;${lastPageNum }&nbsp;${startPageNum }
+&nbsp;${isFirstGroup }&nbsp;${isLastGroup }
 	    	</div>
 		</section>
+		
+
 	    
 	    <!-- footer -->
 		<jsp:include page="market_footer.jsp"></jsp:include>
