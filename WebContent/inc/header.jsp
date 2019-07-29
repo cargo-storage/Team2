@@ -30,7 +30,7 @@
                     <a class="nav-link page-scroll" href="${contextPath }/mk/market.do">중고장터</a>
                 </li>
 				<li class="nav-item">
-					<a class="nav-link page-scroll" href="#faq">FAQ</a>
+					<a class="nav-link page-scroll" href="#faq">고객지원</a>
 				</li>
 				<c:set var="email" value="${sessionScope.mdto.email }"/>
 	          	<c:set var="name" value="${sessionScope.mdto.name }"/>

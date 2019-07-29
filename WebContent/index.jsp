@@ -729,7 +729,7 @@
                             <div class="col-lg-6 col-md-8 mx-auto">
                                 <div class="font-weight-bold lead">Still have more questions?</div>
                                 <p class="text-muted">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore.</p>
-                                <a href="#" class="btn btn-primary btn-sm">
+                                <a href="${contextPath}/bo/NoticeListAction.bo"" class="btn btn-primary btn-sm">
                                     	문의게시판가기
                                 </a>
                             </div>
