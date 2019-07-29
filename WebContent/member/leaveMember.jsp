@@ -9,7 +9,7 @@
 </head>
 <script type="text/javascript">
 	function leave(){
-		return confirm("회원을 탈퇴하시겠습니까?")
+		return confirm("회원을 탈퇴하시겠습니까?");
 	}
 </script>
 <body>
