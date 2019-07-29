@@ -34,8 +34,8 @@
                         <h5 class="text-white">TEAM2</h5>
                         <ul class="list-unstyled mt-4">
                             <li><a href="#">회사소개</a></li>
-                            <li><a href="#">공지사항</a></li>
-                            <li><a href="#">FAQ</a></li>
+                            <li><a href="${contextPath}/bo/NoticeListAction.bo">공지사항</a></li>
+                            <li><a href="${contextPath}/bo/FAQ.bo">FAQ</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 col-sm-6 mx-auto">

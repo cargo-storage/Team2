@@ -429,6 +429,17 @@ public class AdminDAO {
 			
 			pstmt.executeUpdate();
 			
+			sql="update warehouse"
+					+ " set isEmpty = 1"
+					+ " where house = ( "
+					+ " select house "
+					+ " from items"
+					+ " where item = ?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.executeUpdate();
+			
 			sql ="delete from reservation"
 					+ " where num=?";
 			
@@ -457,6 +468,17 @@ public class AdminDAO {
 			
 			pstmt.executeUpdate();
 			
+			sql="update warehouse"
+					+ " set isEmpty = 0"
+					+ " where house = ( "
+					+ " select house"
+					+ " from items"
+					+ " where item = ?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("updateOverdue err:"+e.getMessage());
 			e.printStackTrace();
@@ -476,6 +498,17 @@ public class AdminDAO {
 			pstmt.setDate(1, return_day);
 			pstmt.setString(2, item);
 			
+			pstmt.executeUpdate();
+			
+			sql="update warehouse"
+					+ " set isEmpty = 0"
+					+ " where house = ( "
+					+ " select house"
+					+ " from closed"
+					+ " where item = ?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, item);
 			pstmt.executeUpdate();
 			
 			sql ="delete from items"
