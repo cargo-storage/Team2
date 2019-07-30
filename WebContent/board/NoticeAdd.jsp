@@ -30,7 +30,7 @@
 		<jsp:include page="board_menu.jsp"></jsp:include>
 			
 		<div class="col-sm-10 mr-auto ml-auto" id="content">
-        <div class="container mt-5">
+        <div class="container my-5">
       	
 		<div class="row">
                 <div class="col-md-7 col-sm-9 mx-auto text-center">
@@ -77,7 +77,6 @@
 
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
