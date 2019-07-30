@@ -1,53 +1,70 @@
 package cargo.common.DTO;
 
+import java.sql.Timestamp;
+
+
 public class BoardDTO {
 
 	
-	String name, email, website, message;
-
+	String item, title, image, content;
+	Timestamp date;
 	
 	public BoardDTO() {
 	}
+
 	
-	public BoardDTO(String name, String email, String website, String message) {
+
+	public BoardDTO(String item, String title, String image, String content, Timestamp date) {
 		super();
-		this.name = name;
-		this.email = email;
-		this.website = website;
-		this.message = message;
+		this.item = item;
+		this.title = title;
+		this.image = image;
+		this.content = content;
+		this.date = date;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public String getItem() {
+		return item;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setItem(String item) {
+		this.item = item;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getWebsite() {
-		return website;
+	public String getImage() {
+		return image;
 	}
 
-	public void setWebsite(String website) {
-		this.website = website;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getContent() {
+		return content;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setContent(String content) {
+		this.content = content;
 	}
+
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+	
 	
 	
 	

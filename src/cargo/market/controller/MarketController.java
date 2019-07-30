@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
+import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
@@ -62,8 +63,11 @@ public class MarketController extends HttpServlet{
 			}else if(command.equals("/deleteItem.do")){ // 글 삭제 액션
 				
 			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
-				
-			}
+	            action = new AddCommentAction();
+	            forward=action.execute(request, response);
+	         }   
+			
+
 				
 			
 			//모든 과정 후 페이지 이동부분

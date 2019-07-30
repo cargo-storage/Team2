@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -58,22 +59,14 @@ public class MarketDAO {
 		String sql="";
 		try {
 			getConnection();
-			sql = "select max(num) from m_board";
-			
+
+			sql="insert into m_board(item,title,content,image,date) values(?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				num = rs.getInt(1)+1; //1번열 가장큰번호 + 1
-			}
-			System.out.println("num="+num);
-			
-			sql="insert into m_board(num,name,email,website,message) values(?,?,?,?,?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			pstmt.setString(2, bb.getName());
-			pstmt.setString(3, bb.getEmail());
-			pstmt.setString(4, bb.getWebsite());
-			pstmt.setString(5, bb.getMessage());
+			pstmt.setString(1, bb.getItem());
+			pstmt.setString(2, bb.getTitle());
+			pstmt.setString(3, bb.getContent());
+			pstmt.setString(4, bb.getImage());
+			pstmt.setTimestamp(5, bb.getDate());
 			
 			pstmt.executeUpdate();
 			
@@ -228,9 +221,6 @@ public class MarketDAO {
 		return bDTO;
 	}
 	
-	public void addComment(){// 댓글 등록
-		
-	}
 	
 	public int getTotalComment(int board_no){ // 댓글 갯수 가져오기
 		
@@ -290,6 +280,27 @@ public class MarketDAO {
 		
 		return replyList;
 	}
+	
+	public void insertReply(M_board_replyDTO mrdto) {   //댓글작성
+
+        try {
+           getConnection();
+           String sql="insert into m_board_reply(board_no, content, email, name, date) values(?,?,?,?,?)";
+           pstmt=conn.prepareStatement(sql);
+           pstmt.setInt(1, mrdto.getBoard_no());
+           pstmt.setString(2, mrdto.getContent());
+           pstmt.setString(3, mrdto.getEmail());
+           pstmt.setString(4, mrdto.getName());
+           pstmt.setTimestamp(5, mrdto.getDate());
+           
+           pstmt.executeUpdate();
+           System.out.println("작성 완료");      
+        } catch (Exception e) {
+           e.printStackTrace();
+        }finally {
+           freeResource();
+        }
+     }
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
 		

@@ -18,6 +18,8 @@ public class MarketMainAction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
+		MarketDAO mdao = new MarketDAO();
+		
 		String category = "all";
 		String keyWord = "";
 		int curPage = 1;
@@ -26,8 +28,6 @@ public class MarketMainAction implements Action{
 		if(request.getParameter("keyword") != null) keyWord = request.getParameter("keyword");
 		if(request.getParameter("page")!= null) curPage = Integer.parseInt(request.getParameter("page"));
 		
-		
-		MarketDAO mdao = new MarketDAO();
 		
 		
 		Paging paging = new Paging();
@@ -40,25 +40,18 @@ public class MarketMainAction implements Action{
 		int recPerPage = paging.getRecPerPage();
 		
 		
-		
 		ArrayList<M_boardDTO> boardList = mdao.selectBList(category, keyWord, startNum, recPerPage);
+		
 		
 		request.setAttribute("category", category);
 		request.setAttribute("boardList", boardList);
-		
-		
-		
-		
-		/*paging.setPageNo(1);
-		paging.setPageSize(10);
-		paging.setTotalCount();*/
-
 		request.setAttribute("paging", paging);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("../market/market_main.jsp");
 		
 		return forward;
+		
 	}
 
 }

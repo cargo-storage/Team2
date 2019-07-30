@@ -1,5 +1,6 @@
 package cargo.market.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -22,21 +23,20 @@ public class PostItemAction implements Action{
 		
 		BoardDTO bb = new BoardDTO();
 	
-		bb.setName(request.getParameter("name"));
-		bb.setEmail(request.getParameter("email"));
-		bb.setWebsite(request.getParameter("website"));
-		bb.setMessage(request.getParameter("message"));	
+		bb.setItem(request.getParameter("item"));
+		bb.setTitle(request.getParameter("title"));
+		bb.setImage(request.getParameter("image"));
+		bb.setContent(request.getParameter("content"));
+		bb.setDate(new Timestamp(System.currentTimeMillis()));
 		
 		MarketDAO mdao = new MarketDAO();
 		mdao.postItem(bb);
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("../market/.jsp");
+		forward.setPath(request.getContextPath()+"/mk/market.do");
 		return forward;
 	}
-
-	
 	
 	
 	

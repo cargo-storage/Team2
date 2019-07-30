@@ -86,12 +86,14 @@
 									<td><c:out value="${odto.name}"/></td>
 									<td><c:out value="${odto.email}"/></td>
 									<td><c:out value="${odto.phone}"/></td>
-									<td>
 									<c:choose>
-										<c:when test="${odto.overdue eq '-'}"><c:out value="${odto.house}"/></c:when>
-										<c:otherwise><c:out value="${odto.overdue}"/></c:otherwise>
+										<c:when test="${odto.overdue eq '-'}">
+											<td class="text-danger font-weight-bold"><c:out value="${odto.house}"/></td>
+										</c:when>
+										<c:otherwise>
+											<td><c:out value="${odto.overdue}"/></td>
+										</c:otherwise>
 									</c:choose>
-									</td>
 									<td><c:out value="${odto.item}"/></td>
 								</tr>
 							</c:forEach>

@@ -190,6 +190,12 @@
 								    	관리자
 								  </label>
 								</div>
+								<div class="form-check">
+								  <input class="form-check-input dont" type="radio" name="admin" id="market" value="2">
+								  <label class="form-check-label" for="market">
+								    	중고장터 관리자
+								  </label>
+								</div>
 							</td>
 						</tr>
 					</table>

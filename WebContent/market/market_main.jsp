@@ -22,13 +22,6 @@
     	</script>
     </c:if>
     
-    <script type="text/javascript">
-    	function goPage(page){
-    		location.href=""
-    	}
-    
-    </script>
-    
     
 </head>
 <body>
@@ -103,29 +96,25 @@
 		</c:forEach>
 				</div>
 			    	
+			    	
 				<!-- 페이징-->
 		    	<div class="d-block row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
-			<%-- <c:if test="${not paging.isFirstGroup}">
+			<c:if test="${paging.prevGroup==false}">
 						<li><a href="${contextPath }/mk/market.do?page=${paging.startPageNum -1}">&lt;</a></li>
-			</c:if>  --%>
+			</c:if> 
 		    <c:forEach var="i" begin="${paging.startPageNum }" end="${paging.lastPageNum }">
 		    	<c:choose>
+		    		<c:when test="${i eq 0}"><li class="active"><span>${1 }</span></li></c:when>
 	                <c:when test="${i eq paging.nowPage}"><li class="active"><span>${i }</span></li></c:when>
 	                <c:otherwise><li><a href="${contextPath }/mk/market.do?page=${i}">${i }</a></li></c:otherwise>
             	</c:choose>
 		    </c:forEach>
-		   <%--  <c:if test="${not paging.isLastGroup}">
+		    <c:if test="${paging.nextGroup == false}">
 						<li><a href="${contextPath }/mk/market.do?page=${paging.lastPageNum +1}">&gt;</a></li>
-			</c:if> --%>            
-		                <!-- <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li> -->
+			</c:if>            
 		              </ul>
 		            </div>
 		          </div>
@@ -137,11 +126,6 @@
 	    	</div>
 	    	</div>
 	    	
-	 <div>   			
-${nowPage }&nbsp;${nowGroup }&nbsp;${recPerPage }&nbsp;${pagePerGroup }&nbsp;${totalRecord }
-&nbsp;${totalPage }&nbsp;${totalGroup }&nbsp;${lastPageNum }&nbsp;${startPageNum }
-&nbsp;${isFirstGroup }&nbsp;${isLastGroup }
-	    	</div>
 		</section>
 		
 
@@ -160,7 +144,7 @@ ${nowPage }&nbsp;${nowGroup }&nbsp;${recPerPage }&nbsp;${pagePerGroup }&nbsp;${t
 
 
 <!-- bottom link -->
-<jsp:include page="market_linkB.jsp"></jsp:include>
+<jsp:include page="market_link_js.jsp"></jsp:include>
     
 </body>
 </html>

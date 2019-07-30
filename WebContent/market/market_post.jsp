@@ -37,21 +37,29 @@
 	                <!-- ********************* 글쓰기 폼***************  -->
 	                <form action="${contextPath }/mk/postItem.do" class="p-3 p-md-5 bg-light">
 	                  <div class="form-group">
-	                    <label for="name">Name *</label>
-	                    <input type="text" class="form-control" id="name">
+	                    <label for="name">Item *</label>
+	                    <input type="text" class="form-control" name="item">
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="email">Email *</label>
-	                    <input type="email" class="form-control" id="email">
+	                    <label for="name">Title *</label>
+	                    <input type="text" class="form-control" name="title">
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="website">Website</label>
-	                    <input type="url" class="form-control" id="website">
+	                    <label for="name">Image *</label>
+	                    <input type="text" class="form-control" name="image">
 	                  </div>
+<!-- 	                  <div class="form-group"> -->
+<!-- 	                    <label for="email">Title *</label> -->
+<!-- 	                    <input type="email" class="form-control" id="title"> -->
+<!-- 	                  </div> -->
+<!-- 	                  <div class="form-group"> -->
+<!-- 	                    <label for="website">Image</label> -->
+<!-- 	                    <input type="url" class="form-control" id="image"> -->
+<!-- 	                  </div> -->
 
 	                  <div class="form-group">
-	                    <label for="message">Message</label>
-	                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+	                    <label for="message">Content</label>
+	                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
 	                  </div>
 	                  <div class="form-group">
 	                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
@@ -81,23 +89,8 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/jquery.easing.1.3.js"></script>
-  <script src="../js/jquery.waypoints.min.js"></script>
-  <script src="../js/jquery.stellar.min.js"></script>
-  <script src="../js/owl.carousel.min.js"></script>
-  <script src="../js/jquery.magnific-popup.min.js"></script>
-  <script src="../js/aos.js"></script>
-  <script src="../js/jquery.animateNumber.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/jquery.timepicker.min.js"></script>
-  <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
-  <script src="../js/main.js"></script>
+<!-- bottom link -->
+<jsp:include page="market_link_js.jsp"></jsp:include>
     
 		
 
