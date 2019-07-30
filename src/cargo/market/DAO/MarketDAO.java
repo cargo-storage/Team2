@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -180,9 +182,63 @@ public class MarketDAO {
 		return null;
 	}
 	
-	public M_itemDTO selectItem(){ // item 테이블 1개
-		return null;
+	public M_itemDTO selectItem(String item){ // item 테이블 1개
+		M_itemDTO iDTO = new M_itemDTO();
+		
+		try {
+			getConnection();
+			String sql = "SELECT * FROM m_item WHERE item=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				iDTO.setCategory(rs.getString("category"));
+				iDTO.setItem(rs.getString("item"));
+				iDTO.setName(rs.getString("name"));
+				iDTO.setPrice(rs.getInt("price"));
+				iDTO.setStock(rs.getInt("stock"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return iDTO;
 	}
+	
+	public ArrayList<M_itemDTO> selectAllItems(){ // item 테이블 전체
+		ArrayList<M_itemDTO> list = new ArrayList<>();
+		
+		try {
+			
+			getConnection();
+			String sql = "SELECT * FROM m_item";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				M_itemDTO iDTO = new M_itemDTO();
+				
+				iDTO.setCategory(rs.getString("category"));
+				iDTO.setItem(rs.getString("item"));
+				iDTO.setName(rs.getString("name"));
+				iDTO.setPrice(rs.getInt("price"));
+				iDTO.setStock(rs.getInt("stock"));
+				
+				list.add(iDTO);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectAllItems :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return list;
+	}//end of selelctAllItmes
 	
 	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환
 		
@@ -304,6 +360,62 @@ public class MarketDAO {
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
 		
+	}
+
+	public String makeItemID(String category) {
+		String ID = "";
+
+		try {
+			SimpleDateFormat form = new SimpleDateFormat("MMdd");
+			boolean same=true;
+			getConnection();
+			
+			while(same){
+				ID = Character.toUpperCase(category.charAt(0))+form.format(new Date());
+				System.out.println(ID);
+				
+				for(int i=0; i<4; i++){
+					Random rd = new Random();
+					ID += rd.nextInt(9)+1;
+				}
+				
+				String sql = "select item from M_item where item like ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, ID);
+				rs = pstmt.executeQuery();
+				
+				if(!rs.next()) same = false;
+			}
+		} catch (SQLException e) {
+			System.out.println("error in makeItemID :"+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			freeResource();
+		}
+		return ID;
+	}
+
+	public void insertMItem(M_itemDTO idto) {
+		try {
+			getConnection();
+			String sql ="insert into m_item(item, name, price, category, stock) values(?,?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idto.getItem());
+			pstmt.setString(2, idto.getName());
+			pstmt.setInt(3, idto.getPrice());
+			pstmt.setString(4, idto.getCategory());
+			pstmt.setInt(5, idto.getStock());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("error in insertMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
 	}
 	
 }
