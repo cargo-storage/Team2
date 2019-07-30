@@ -32,7 +32,7 @@
 						<div class="col-lg-12 ftco-animate">
 							<div class="comment-form-wrap pt-5">
 								<h2 class="mb-3 font-weight-bold">ITEMS TABLE</h2>
-								<form method="post">
+								<form method="post" action="${contextPath}/mk/add_item.do">
 								<table class="table table-bordered" id="dataTable">
 									<thead>
 										<tr>
@@ -56,9 +56,9 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td><input type="button" class="btn-lg btn-success" value="입력" onclick="addItem();"></td>
+											<td><input type="submit" class="btn-lg btn-success" value="입력" onclick="addItem();"></td>
 											<td><input type="text" name="name" id="name" class="form-control" placeholder="이름"></td>
-											<td><input type="text" name="price" id="price" class="form-control" placeholder="가격" onKeyPress="return numkeyCheck(event)"></td>
+											<td><input type="text" name="price" id="price" class="form-control" placeholder="가격" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 											<td>
 												<select class="custom-select-lg" name="category" id="category">
 												  <option value="fur">가구</option>
@@ -67,7 +67,7 @@
 												  <option selected value="oth">기타</option>
 												</select>
 											</td>
-											<td><input type="text" name="stock" id="stock" class="form-control" placeholder="재고" onKeyPress="return numkeyCheck(event)"></td>
+											<td><input type="text" name="stock" id="stock" class="form-control" placeholder="재고" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 										</tr>
 									</tfoot>
 								</table>
@@ -105,12 +105,6 @@
 			alert("재고를 입력하세요");
 			return false;
 		}
-	}
-	
-	function numkeyCheck(e){
-		var keyValue = e.keyCode; 
-		if( ((keyValue >= 48) && (keyValue <= 57)) ) return true;
-		else return false; 
 	}
 
 	$(document).ready(function() {

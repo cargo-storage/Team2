@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -316,6 +319,62 @@ public class MarketDAO {
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
 		
+	}
+
+	public String makeItemID(String category) {
+		String ID = "";
+
+		try {
+			SimpleDateFormat form = new SimpleDateFormat("MMdd");
+			boolean same=true;
+			getConnection();
+			
+			while(same){
+				ID = Character.toUpperCase(category.charAt(0))+form.format(new Date());
+				System.out.println(ID);
+				
+				for(int i=0; i<4; i++){
+					Random rd = new Random();
+					ID += rd.nextInt(9)+1;
+				}
+				
+				String sql = "select item from M_item where item like ?";
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, ID);
+				rs = pstmt.executeQuery();
+				
+				if(!rs.next()) same = false;
+			}
+		} catch (SQLException e) {
+			System.out.println("error in makeItemID :"+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			freeResource();
+		}
+		return ID;
+	}
+
+	public void insertMItem(M_itemDTO idto) {
+		try {
+			getConnection();
+			String sql ="insert into m_item(item, name, price, category, stock) values(?,?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idto.getItem());
+			pstmt.setString(2, idto.getName());
+			pstmt.setInt(3, idto.getPrice());
+			pstmt.setString(4, idto.getCategory());
+			pstmt.setInt(5, idto.getStock());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("error in insertMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
 	}
 	
 }

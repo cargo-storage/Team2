@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
+import cargo.market.action.AddItemAction;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.ShowContentAction;
 import cargo.market.action.ShowItemsAction;
@@ -67,8 +68,12 @@ public class MarketController extends HttpServlet{
 				
 			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
 				
-			}else if(command.equals("/show_items.do")){// item 추가
+			}else if("/show_items.do".equals(command)){// M_item select
 				action = new ShowItemsAction();
+				forward = action.execute(request, response);
+				
+			}else if("/add_item.do".equals(command)){// add item into M_item
+				action = new AddItemAction();
 				forward = action.execute(request, response);
 			}
 				
