@@ -40,12 +40,15 @@
 	    	<div class="container">
 	    	<div class="row">
 	    	<div class="col-lg-12">
-	    				
+	    			
+		    		
    				<!-- 아이템분류 -->
-				<div class="ftco-bread mb-5">
+				<div class="ftco-bread my-3">
 				<div class="row">
-				    <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
-						<p class="breadcrumbs" id="category" >
+					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6">ITEMS</h3>
+					
+				    <div class="col-md-6 ftco-animatev fadeInUp ftco-animated">
+						<p class="breadcrumbs" id="category" style="letter-spacing: 0.1em;">
 							<span class="mr-2"><a href="./market.do?cate=all" <c:if test="${category=='all'||category==null }">class="selected"</c:if>>
 								ALL ITEMS</a></span>
 							<span class="mr-2"><a href="./market.do?cate=fur" <c:if test="${category=='fur' }">class="selected"</c:if>>
@@ -58,16 +61,7 @@
 								OTHERS</a></span>
 						</p>
 					</div>
-					
-					<!-- 검색 -->
-					<form action="./market.do" class="search-form" id="searchFrm">
-		                <div class="form-group">
-		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
-		                  <input type="hidden" name="cate" value="${category }">
-		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
-		            	</div>
-		            </form>
-		            
+				
 			    </div>
 				</div>
 	    	
@@ -120,6 +114,14 @@
 		          </div>
 		        </div> 
 		        
+		        	<!-- 검색 -->
+					<form action="./market.do" class="search-form col-md-2 d-inline-block bg-white" id="searchFrm">
+ 		                <div class="form-group">
+ 		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
+		                  <input type="hidden" name="cate" value="${category }">
+ 		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
+ 		            	</div>
+ 		            </form>
 		        
 		        
 	    	</div>

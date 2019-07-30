@@ -55,7 +55,7 @@
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">
-						<a href="${contextPath}/co/login.go" class="btn btn-navbar btn-primary trigger-btn" data-toggle="modal">로그인/회원가입</a>
+						<a href="${contextPath}/co/login.go" class="btn btn-navbar btn-primary trigger-btn">로그인/회원가입</a>
 					</div>
               	</c:otherwise>
        			</c:choose>
