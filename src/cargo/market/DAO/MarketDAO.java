@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import cargo.common.DTO.BoardDTO;
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
@@ -52,7 +53,37 @@ public class MarketDAO {
 	}
 	
 	
-	public void postItem(){ // m_board insert 글쓰기 - 파일업로드 해야함
+	public void postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
+		int num = 0;
+		String sql="";
+		try {
+			getConnection();
+			sql = "select max(num) from m_board";
+			
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getInt(1)+1; //1번열 가장큰번호 + 1
+			}
+			System.out.println("num="+num);
+			
+			sql="insert into m_board(num,name,email,website,message) values(?,?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, bb.getName());
+			pstmt.setString(3, bb.getEmail());
+			pstmt.setString(4, bb.getWebsite());
+			pstmt.setString(5, bb.getMessage());
+			
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		
 		
 	}
 	

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.action.MarketMainAction;
+import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
 
 public class MarketController extends HttpServlet{
@@ -54,7 +55,8 @@ public class MarketController extends HttpServlet{
 				action = new ShowContentAction();
 				forward = action.execute(request, response);
 			}else if(command.equals("/postItem.do")){ // ${contextPath }/mk/postItem.do 글쓰기 + 파일업로드 액션
-				
+				action = new PostItemAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/modifyItem.do")){ // 글 수정 액션
 				
 			}else if(command.equals("/deleteItem.do")){ // 글 삭제 액션
