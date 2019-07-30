@@ -22,13 +22,6 @@
     	</script>
     </c:if>
     
-    <script type="text/javascript">
-    	function goPage(page){
-    		location.href=""
-    	}
-    
-    </script>
-    
     
 </head>
 <body>
@@ -47,12 +40,15 @@
 	    	<div class="container">
 	    	<div class="row">
 	    	<div class="col-lg-12">
-	    				
+	    			
+		    		
    				<!-- 아이템분류 -->
-				<div class="ftco-bread mb-5">
+				<div class="ftco-bread my-3">
 				<div class="row">
-				    <div class="col-md-9 ftco-animatev fadeInUp ftco-animated">
-						<p class="breadcrumbs" id="category" >
+					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6">ITEMS</h3>
+					
+				    <div class="col-md-6 ftco-animatev fadeInUp ftco-animated">
+						<p class="breadcrumbs" id="category" style="letter-spacing: 0.1em;">
 							<span class="mr-2"><a href="./market.do?cate=all" <c:if test="${category=='all'||category==null }">class="selected"</c:if>>
 								ALL ITEMS</a></span>
 							<span class="mr-2"><a href="./market.do?cate=fur" <c:if test="${category=='fur' }">class="selected"</c:if>>
@@ -65,16 +61,7 @@
 								OTHERS</a></span>
 						</p>
 					</div>
-					
-					<!-- 검색 -->
-					<form action="./market.do" class="search-form" id="searchFrm">
-		                <div class="form-group">
-		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
-		                  <input type="hidden" name="cate" value="${category }">
-		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
-		            	</div>
-		            </form>
-		            
+				
 			    </div>
 				</div>
 	    	
@@ -103,45 +90,44 @@
 		</c:forEach>
 				</div>
 			    	
+			    	
 				<!-- 페이징-->
 		    	<div class="d-block row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
-			<%-- <c:if test="${not paging.isFirstGroup}">
+			<c:if test="${paging.prevGroup==false}">
 						<li><a href="${contextPath }/mk/market.do?page=${paging.startPageNum -1}">&lt;</a></li>
-			</c:if>  --%>
+			</c:if> 
 		    <c:forEach var="i" begin="${paging.startPageNum }" end="${paging.lastPageNum }">
 		    	<c:choose>
+		    		<c:when test="${i eq 0}"><li class="active"><span>${1 }</span></li></c:when>
 	                <c:when test="${i eq paging.nowPage}"><li class="active"><span>${i }</span></li></c:when>
 	                <c:otherwise><li><a href="${contextPath }/mk/market.do?page=${i}">${i }</a></li></c:otherwise>
             	</c:choose>
 		    </c:forEach>
-		   <%--  <c:if test="${not paging.isLastGroup}">
+		    <c:if test="${paging.nextGroup == false}">
 						<li><a href="${contextPath }/mk/market.do?page=${paging.lastPageNum +1}">&gt;</a></li>
-			</c:if> --%>            
-		                <!-- <li class="active"><span>1</span></li>
-		                <li><a href="#">2</a></li>
-		                <li><a href="#">3</a></li>
-		                <li><a href="#">4</a></li>
-		                <li><a href="#">5</a></li>
-		                <li><a href="#">&gt;</a></li> -->
+			</c:if>            
 		              </ul>
 		            </div>
 		          </div>
 		        </div> 
 		        
+		        	<!-- 검색 -->
+					<form action="./market.do" class="search-form col-md-2 d-inline-block bg-white" id="searchFrm">
+ 		                <div class="form-group">
+ 		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
+		                  <input type="hidden" name="cate" value="${category }">
+ 		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
+ 		            	</div>
+ 		            </form>
 		        
 		        
 	    	</div>
 	    	</div>
 	    	</div>
 	    	
-	 <div>   			
-${nowPage }&nbsp;${nowGroup }&nbsp;${recPerPage }&nbsp;${pagePerGroup }&nbsp;${totalRecord }
-&nbsp;${totalPage }&nbsp;${totalGroup }&nbsp;${lastPageNum }&nbsp;${startPageNum }
-&nbsp;${isFirstGroup }&nbsp;${isLastGroup }
-	    	</div>
 		</section>
 		
 

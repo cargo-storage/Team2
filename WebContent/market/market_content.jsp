@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Capture - Free Bootstrap 4 Template by Colorlib</title>
+    <title>ITEMS - TEAM2 WAREHOUSE MARKET</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -77,24 +77,26 @@
 	              
 	              
 	              <!-- 댓글 폼 -->
-	              <div class="comment-form-wrap pt-5">
-	                <h5 class="mb-3">Leave a comment</h5>
-	                <form action="#" class="p-3 bg-light" method="post">
-	                  <div class="d-inline mb-1">
-	                    <label for="name" class="mr-5">Name</label>
-	                    <span style="color: #4a4a4a;">${mdto.name } <small> ( ${mdto.email } )</small></span>
-	                  </div>
-	                  <div class="float-right">
-	                    <input type="submit" value="comment" class="btn-white submit" style="border: none;">
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="message">Comment</label>
-	                    <textarea name="content" id="message" cols="30" rows="5" class="form-control"></textarea>
-	                  </div>
-	                  <input type="hidden" value="${mdto.name }" name="name">
-	                  <input type="hidden" value="${mdto.email }" name="email">
-	                </form>
-	              </div>
+                 <div class="comment-form-wrap pt-5">
+                   <h5 class="mb-3">Leave a comment</h5>
+	                 <form action="${contextPath}/mk/addComment.do" class="p-3 bg-light" method="post">
+	                   <div class="d-inline mb-1">
+	                     <label for="name" class="mr-5">Name</label>
+	                     <span style="color: #4a4a4a;">${mdto.name } <small> ( ${mdto.email } )</small></span>
+	                   </div>
+	                   <div class="float-right">
+	                     <input type="submit" value="comment" class="btn-white submit" style="border: none;">
+	                   </div>
+	                   <div class="form-group">
+	                     <label for="message">Comment</label>
+	                     <textarea name="content" id="message" cols="30" rows="5" class="form-control"></textarea>
+	                   </div>
+                   		<input type="hidden" value="${mjdto.no }" name="board_no">
+	                   	<input type="hidden" value="${mdto.name }" name="name">
+	                   	<input type="hidden" value="${mdto.email }" name="email">
+	                 </form>
+                 </div>
+
 	              
 	              
 	            </div>
@@ -123,7 +125,7 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover col-md-4" href="#"><b>장바구니</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="${contextPath }/mk/addcart.do"><b>장바구니</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
@@ -195,23 +197,7 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/jquery.easing.1.3.js"></script>
-  <script src="../js/jquery.waypoints.min.js"></script>
-  <script src="../js/jquery.stellar.min.js"></script>
-  <script src="../js/owl.carousel.min.js"></script>
-  <script src="../js/jquery.magnific-popup.min.js"></script>
-  <script src="../js/aos.js"></script>
-  <script src="../js/jquery.animateNumber.min.js"></script>
-  <script src="../js/bootstrap-datepicker.js"></script>
-  <script src="../js/jquery.timepicker.min.js"></script>
-  <script src="../js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="../js/google-map.js"></script>
-  <script src="../js/main.js"></script>
-
+	<jsp:include page="market_link_js.jsp"/>
+	
 </body>
 </html>

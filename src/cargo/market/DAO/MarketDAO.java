@@ -14,6 +14,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import cargo.common.DTO.BoardDTO;
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
@@ -55,7 +56,29 @@ public class MarketDAO {
 	}
 	
 	
-	public void postItem(){ // m_board insert 글쓰기 - 파일업로드 해야함
+	public void postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
+		int num = 0;
+		String sql="";
+		try {
+			getConnection();
+
+			sql="insert into m_board(item,title,content,image,date) values(?,?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bb.getItem());
+			pstmt.setString(2, bb.getTitle());
+			pstmt.setString(3, bb.getContent());
+			pstmt.setString(4, bb.getImage());
+			pstmt.setTimestamp(5, bb.getDate());
+			
+			pstmt.executeUpdate();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		
 		
 	}
 	
@@ -254,9 +277,6 @@ public class MarketDAO {
 		return bDTO;
 	}
 	
-	public void addComment(){// 댓글 등록
-		
-	}
 	
 	public int getTotalComment(int board_no){ // 댓글 갯수 가져오기
 		
@@ -316,6 +336,27 @@ public class MarketDAO {
 		
 		return replyList;
 	}
+	
+	public void insertReply(M_board_replyDTO mrdto) {   //댓글작성
+
+        try {
+           getConnection();
+           String sql="insert into m_board_reply(board_no, content, email, name, date) values(?,?,?,?,?)";
+           pstmt=conn.prepareStatement(sql);
+           pstmt.setInt(1, mrdto.getBoard_no());
+           pstmt.setString(2, mrdto.getContent());
+           pstmt.setString(3, mrdto.getEmail());
+           pstmt.setString(4, mrdto.getName());
+           pstmt.setTimestamp(5, mrdto.getDate());
+           
+           pstmt.executeUpdate();
+           System.out.println("작성 완료");      
+        } catch (Exception e) {
+           e.printStackTrace();
+        }finally {
+           freeResource();
+        }
+     }
 	
 	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
 		

@@ -25,8 +25,8 @@ public class Paging {
 	private int lastRecNum; // 현재페이지의 마지막 글 번호
 	private int startRecNum; // 현재페이지의 첫 번째 글 번호
 	
-	boolean isFirstGroup;
-	boolean isLastGroup;
+	boolean prevGroup;
+	boolean nextGroup;
 	
 	
 /*
@@ -35,9 +35,6 @@ public class Paging {
 	private int next_startPage;
 	
 	private int prev_lastPage; // 이전그룹 마지막페이지
-	
-	private int lastRecNum; // 현재페이지의 마지막 글 번호
-	private int startRecNum; // 현재페이지의 첫 번째 글 번호
  */  
 	
 	public void setRecPerPage(int recPerPage) {
@@ -68,21 +65,21 @@ public void setTotalRecord(int nowPage) {
 		this.totalPage = totalRecord / recPerPage + (totalRecord%recPerPage >0 ? 1 : 0);
 	}
 	public void setTotalGroup(){
-		this.totalGroup = totalPage / pagePerGroup + (totalPage%pagePerGroup >0 ? 1 : 0);
+		this.totalGroup = totalPage / pagePerGroup + (totalPage%pagePerGroup > 0 ? 1 : 0);
 	}
 	
-	public void setFirstGroup() {
-		this.isFirstGroup = nowGroup == 0 ? true : false;
+	public void setPrevGroup() {
+		this.prevGroup = nowGroup == 1 ? true : false;
 	}
-	public void setLastGroup() {
-		this.isLastGroup = nowGroup == totalGroup ? true : false;
+	public void setNextGroup() {
+		this.nextGroup = nowGroup == totalGroup ? true : false;
 	}
 	
 	public void setLastRecNum() {
 		this.lastRecNum = nowPage*recPerPage;
 	}
 	public void setStartRecNum() {
-		this.startRecNum = lastRecNum - (recPerPage-1);
+		this.startRecNum = lastRecNum - recPerPage + 1;
 	}
 	
 	private void makePaging(int nowPage){
@@ -91,16 +88,17 @@ public void setTotalRecord(int nowPage) {
 		
 		setNowPage(nowPage);
 		setTotalPage();
+		setTotalGroup();
 		
 		setNowGroup();
 		setLastPageNum();
 		setStartPageNum();
 		
 		
-		setFirstGroup();
-		setLastGroup();
-		setStartRecNum();
+		setPrevGroup();
+		setNextGroup();
 		setLastRecNum();
+		setStartRecNum();
 		
 		
 		if(nowPage < 0) setNowPage(1);
@@ -112,47 +110,13 @@ public void setTotalRecord(int nowPage) {
 		System.out.println("nowGroup "+nowGroup);
 		System.out.println("totalPage "+ totalPage);
 		System.out.println("lastPage "+ lastPageNum);
+		System.out.println("startRecNum" + startRecNum);
+		System.out.println("lastRecNum" + lastRecNum);
+		System.out.println("recperpage" + recPerPage);
+		System.out.println(nowGroup);
+		System.out.println(totalGroup);
+		System.out.println(totalPage%pagePerGroup);
 		
-			
-		
-		/*if (this.totalCount == 0) return; // 게시 글 전체 수가 없는 경우
-        if (this.pageNo == 0) this.setPageNo(1); // 기본 값 설정
-        if (this.pageSize == 0) this.setPageSize(10); // 기본 값 설정
-
-        int finalPage = (totalCount + (pageSize - 1)) / pageSize; // 마지막 페이지
-        if (this.pageNo > finalPage) this.setPageNo(finalPage); // 기본 값 설정
-
-        if (this.pageNo < 0 || this.pageNo > finalPage) this.pageNo = 1; // 현재 페이지 유효성 체크
-
-        boolean isNowFirst = pageNo == 1 ? true : false; // 시작 페이지 (전체)
-        boolean isNowFinal = pageNo == finalPage ? true : false; // 마지막 페이지 (전체)
-
-        int startPage = ((pageNo - 1) / 10) * 10 + 1; // 시작 페이지 (페이징 네비 기준)
-        int endPage = startPage + 10 - 1; // 끝 페이지 (페이징 네비 기준)
-
-        if (endPage > finalPage) { // [마지막 페이지 (페이징 네비 기준) > 마지막 페이지] 보다 큰 경우
-            endPage = finalPage;
-        }
-
-        this.setFirstPageNo(1); // 첫 번째 페이지 번호
-
-        if (isNowFirst) {
-            this.setPrevPageNo(1); // 이전 페이지 번호
-        } else {
-            this.setPrevPageNo(((pageNo - 1) < 1 ? 1 : (pageNo - 1))); // 이전 페이지 번호
-        }
-
-        this.setStartPageNo(startPage); // 시작 페이지 (페이징 네비 기준)
-        this.setEndPageNo(endPage); // 끝 페이지 (페이징 네비 기준)
-
-        if (isNowFinal) {
-            this.setNextPageNo(finalPage); // 다음 페이지 번호
-        } else {
-            this.setNextPageNo(((pageNo + 1) > finalPage ? finalPage : (pageNo + 1))); // 다음 페이지 번호
-        }
-
-        this.setFinalPageNo(finalPage); // 마지막 페이지 번호
-*/
 
 		
 	}
@@ -184,11 +148,11 @@ public void setTotalRecord(int nowPage) {
 	public int getStartPageNum() {
 		return startPageNum;
 	}
-	public boolean isFirstGroup() {
-		return isFirstGroup;
+	public boolean getPrevGroup() {
+		return prevGroup;
 	}
-	public boolean isLastGroup() {
-		return isLastGroup;
+	public boolean getNextGroup() {
+		return nextGroup;
 	}
 	public int getLastRecNum() {
 		return lastRecNum;
@@ -197,6 +161,4 @@ public void setTotalRecord(int nowPage) {
 		return startRecNum;
 	}
 	
-	
-
 }
