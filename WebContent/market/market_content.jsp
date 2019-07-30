@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Capture - Free Bootstrap 4 Template by Colorlib</title>
+    <title>ITEMS - TEAM2 WAREHOUSE MARKET</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -125,7 +125,7 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover col-md-4" href="#"><b>장바구니</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="${contextPath }/mk/addcart.do"><b>장바구니</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
