@@ -75,7 +75,7 @@
             </div>
                 
                <!--  FAQ시작 -->
-             <div class="col-md-10 mx-auto mt-5">
+             <div class="col-md-10 mx-auto mt-3 p-5">
              <div id="service" class="view">
 				<div class="card">
 					<div class="card-header">
@@ -121,7 +121,7 @@
 			<div id="reserve" class="view">
 				<div class="card">
 					<div class="card-header">
-						<i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse6"> 계약기간은 어떻게 되나요? </a>
+						<h5 class="mb-0"><i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse6"> 계약기간은 어떻게 되나요? </a></h5>
 					</div>
 					<div id="collapse6" class="collapse" data-parent="#reserve">
 						<div class="card-body">최소 15일에서 시작됩니다. 15일 미만의 경우 별도 문의 바랍니다. </div>
@@ -129,7 +129,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse7"> 계약시 필요한 비용은 어떻게 되나요?</a>
+						<h5 class="mb-0"><i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse7"> 계약시 필요한 비용은 어떻게 되나요?</a></h5>
 					</div>
 					<div id="collapse7" class="collapse" data-parent="#reserve">
 						<div class="card-body">창고의 크기에 따른 보증금과 이용금액이 다르니 담당자에게 문의 바랍니다. </div>
@@ -137,7 +137,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse9"> 중도 해약시 위약금이 있나요? </a>
+						<h5 class="mb-0"><i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse9"> 중도 해약시 위약금이 있나요? </a></h5>
 					</div>
 					<div id="collapse9" class="collapse" data-parent="#reserve">
 						<div class="card-body">별도의 위약금이 발생됩니다. 해지 수수료에 대한 내용은 담당자에 문의 바랍니다.</div>
@@ -145,7 +145,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse8"> 택배로 물건을 맡기고 찾을 수 있나요? </a>
+						<h5 class="mb-0"><i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse8"> 택배로 물건을 맡기고 찾을 수 있나요? </a></h5>
 					</div>
 					<div id="collapse8" class="collapse" data-parent="#reserve">
 						<div class="card-body"> 택배를 이용한 박스의 입고/출고가 가능합니다. (택배비/운반비 별도)<br>직접 물품 입출고 또한 가능하며, 해당 지점 영업시간내 가능합니다.<Br>방문 수거/배송 서비스도 제공 예정입니다.</div>
@@ -153,7 +153,7 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse10"> 맡겨놓은 물품을 폐기하고 싶을때는 어떻게 하나요? </a>
+						<h5 class="mb-0"><i class="far fa-question-circle" style="color: green"></i> <a class="card-link" data-toggle="collapse" href="#collapse10"> 맡겨놓은 물품을 폐기하고 싶을때는 어떻게 하나요? </a></h5>
 					</div>
 					<div id="collapse10" class="collapse" data-parent="#reserve">
 						<div class="card-body"> 폐기 서비스를 제공합니다. 10만원의 폐기비용이 발생합니다.</div>

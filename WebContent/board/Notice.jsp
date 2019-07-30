@@ -30,7 +30,7 @@
 		<jsp:include page="board_menu.jsp"></jsp:include>
 			
 		<div class="col-sm-10 mr-auto ml-auto" id="content">
-        <div class="container mt-5">
+        <div class="container my-5">
       	
       	<div class="row">
                 <div class="col-md-7 col-sm-9 mx-auto text-center">
@@ -58,14 +58,14 @@
 		</c:forEach>
             </table>
             
-            <div class="col-md-12 mx-auto">
-	            <ul class="pagination mb-0 float-right">
+            <div class="col-md-8 float-left mr-auto my-1">
+	            <ul class="ml-auto mb-auto p-0">
 	       <c:if test="${currentPage > 1}">
 	              <li class="page-item">
 	              	<a class="page-link" href="${contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage-1}">&lt;</a>
 	              </li>
 	       </c:if>  
-	            <li class="page-item">
+	            <li class="page-item d-inline-block">
 	            	<a class="page-link" href="${contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage}"> ${currentPage} </a>
 	            </li>
 	       <c:if test="${currentPage < lastPage}"> 
@@ -76,11 +76,15 @@
 	            </ul>
 	       </div>    
 	        
-            <form action="${contextPath}/bo/NoticeSearchAction.bo" class="col-md-6 mx-auto" style="clear: both;">
-                <input type="text" name="search" class="form-control d-inline col-md-5">
-            	<input type="submit" value="검색" class="btn btn-primary btn-md ml-2 col-md-2">
-       <c:if test="${sessionScope.mdto.admin == 1}">
-                <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-md ml-2 col-md-2">작성하기</a>
+            <form action="${contextPath}/bo/NoticeSearchAction.bo" class="d-inline-block col-md-4 px-0">
+       	<c:if test="${sessionScope.mdto.admin == 1}">
+       			<input type="text" name="search" class="form-control d-inline col-md-6 my-1">
+            	<input type="submit" value="검색" class="btn btn-primary btn-md col-md-2 my-1">
+                <a href="${contextPath}/bo/NoticeAddFormAction.bo" class="btn btn-primary btn-md col-md-3 my-1">작성하기</a>
+    	</c:if>
+    	<c:if test="${sessionScope.mdto.admin != 1}">
+    			<input type="text" name="search" class="form-control d-inline ml-2 col-md-7">
+            	<input type="submit" value="검색" class="btn btn-primary btn-md ml-2 col-md-4">
     	</c:if>
             </form>
 	            
