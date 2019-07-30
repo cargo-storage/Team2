@@ -4,7 +4,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>    
 <!DOCTYPE html>
 
-
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
 
@@ -32,3 +32,5 @@
     
     <link href="${contextPath }/css/font.css" rel="stylesheet">
     <link href="${contextPath }/css/market.css" rel="stylesheet">
+   
+    

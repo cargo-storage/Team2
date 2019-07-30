@@ -25,6 +25,12 @@
    			document.getElementById("totalprice").innerHTML = total;
    			document.getElementById("price").value = total;
    			document.getElementById("quantity").value = quantity;
+   			document.getElementById("quantity_").value = quantity;
+   		}
+   		
+   		function cart(){
+   			var cfrm = document.getElementById("cartForm");
+   			cfrm.submit();
    		}
     
     </script>
@@ -109,7 +115,7 @@
 	            <div class="sidebar-box ftco-animate">
 	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
 	              
-	              <form> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
+	              
 	              <ul class="categories mt-3">
 	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
 	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
@@ -125,18 +131,21 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover col-md-4" href="${contextPath }/mk/addcart.do"><b>장바구니</b></a>
+	                	<a class="btn m-auto hover col-md-4" onclick="cart()"><b>장바구니</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
 	                	</div>
 	                </li>
 	              </ul>
+	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
 	              		<!-- 넘길값세팅 -->
 	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
 	                	<input type="hidden" name="quantity" id="quantity_" value="1">
 	                	<input type="hidden" name="item" value="${mjdto.item }">
 	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	                	<input type="hidden" name="category" value="${mjdto.category }">
+	                	<input type="hidden" name="img" value="${mjdto.image }">
 	              </form>
 	            </div>
 
