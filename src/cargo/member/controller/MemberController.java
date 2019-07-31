@@ -110,9 +110,12 @@ public class MemberController extends HttpServlet {
 				String category = request.getParameter("category");
 				if(category.equals("info")) // 내 정보
 					forward.setPath("/member/mypage.jsp");
-				else if(category.equals("leave")) // 회원 탈퇴
+				else if(category.equals("leave")) // 회원 탈퇴 페이지
 					forward.setPath("/member/mypage.jsp?content=leave");
-			}	else if (command.equals("/memberStatus")) { // 마이페이지 현황
+			} else if(command.equals("/leaveMember")) { // 회원 탈퇴
+				action = new LeaveMemberAction();
+				forward = action.execute(request, response);
+			} else if (command.equals("/memberStatus")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/extendReserv")) { // 보관 연장

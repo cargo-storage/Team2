@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,84 +8,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>MY PAGE - TEAM2 WAREHOUSE</title>
-	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
-	
-	<!--Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	
-	<!-- Bootstrap CSS / Color Scheme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
-	
-	<!-- Bootstrap CSS / Color Scheme -->
-    <link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
-    
-	<!-- font-awesome CSS -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-	<link href="${contextPath }/css/font.css" rel="stylesheet">
-	
-	<!-- jquery.js -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<!-- 주소 api -->
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	
-	<!-- Page level plugin CSS -->
-	<link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-	<link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
-	
-	<style>
-		section{
-		margin-top: 83px;
-		}
-		#sidebar{
-			background-color: #f8f9fa;
-			height: 1000px;
-		}
-		ul{
-			list-style: none;
-		}
-		
-		ul li{
-			font-size: 20px;
-		}
-		
-		@media(max-width: 1489px){
-			#sidebar{
-				display: none;
-			}
-		}
-		
-		#sidebar ul li a{
-			color: darkslategrey;
-		}
-		
-		#sidebar ul li a:HOVER{
-			color: #00953e;
-		}
-		
-		.post {
-			height: calc(1.5em + .75rem + 2px);
-			padding: .375rem .75rem;
-			font-weight: 400;
-			line-height: 1.5;
-			color: #495057;
-			background-color: #fff;
-			background-clip: padding-box;
-			border: 1px solid #ced4da;
-			border-radius: .25rem;
-			transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-		}
-		
-		.post_btn{
-			height: calc(1.5em + .75rem + 2px);
-			padding: .375rem .75rem;
-		}
-		
-		.post1 {
-			width: 100%;
-		}
-	
-</style>
+
+	<!-- mypage.css -->
+	<link href="${contextPath }/css/member/mypage.css" rel="stylesheet">
 </head>
 <body>
 	
@@ -126,24 +51,9 @@
 		</div>
 	</div>
 </section>
-<jsp:include page="../inc/footer.jsp"></jsp:include>
+<jsp:include page="../inc/footer.jsp"/>
+<!-- 주소 api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-	
-	<!-- Bootstrap core JavaScript-->
-	<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
-	<script src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Core plugin JavaScript-->
-	<script src="${contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-	<!-- Page level plugin JavaScript-->
-	<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
-	<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="${contextPath}/js/sb-admin.js"></script>
-
-	<!-- Demo scripts for this page-->
-	<script src="${contextPath}/js/datatables-custom.js"></script>
 </body>
 </html>

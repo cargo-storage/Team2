@@ -7130,8 +7130,8 @@ Custom CSS
 .img-raised {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
 
-.raised-box {
-  box-shadow: 0 15px 35px 0 rgba(52, 58, 64, 0.07); }
+/* .raised-box {
+  box-shadow: 0 15px 35px 0 rgba(52, 58, 64, 0.07); } 그림자 없애기 은빈 수정함 */
 
 .img-review {
   max-width: 300px; /* 은빈 수정함 */
