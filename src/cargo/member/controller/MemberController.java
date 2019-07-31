@@ -42,6 +42,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 
+		System.out.println("=============== Member ==============");
 		// 가상요청 주소 가져오기
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI: " + RequestURI);
@@ -143,5 +144,6 @@ public class MemberController extends HttpServlet {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+		System.out.println("=====================================");
 	}
 }

@@ -10,7 +10,7 @@
    String category = request.getParameter("category");
    
    MemberDAO mdao = new MemberDAO();
-   ArrayList<AdminDTO> list = mdao.memberStatus("lee@cargo.kr", "status");
+   ArrayList<AdminDTO> list = mdao.memberStatus(email, category);
    
    JSONArray jList = new JSONArray();
    

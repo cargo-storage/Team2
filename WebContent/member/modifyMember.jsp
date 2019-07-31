@@ -28,11 +28,11 @@
 	      		<c:when test="${requestScope.modifyCheck ne	1}">
 	      		<div class="m-auto">
 		      		<form action="${contextPath }/me/modifyCheck" method="post">
-		      			<div class="form-group ml-6">
+		      			<div class="form-group ml-3">
 			      			<label for="checkPwd">비밀번호</label>
 			      			<div class="row">
-				      			<input type="password" class="form-control col-8 mr-3" id="checkPwd" name="checkPwd" placeholder="비밀번호를 입력해 주세요">
-				      			<input type="submit" class="btn btn-primary btn-block btn-lg col-2" value="확인" style="height: calc(1.5em + .75rem + 2px); line-height: 0.6">
+				      			<input type="password" class="form-control col-sm-8" id="checkPwd" name="checkPwd" placeholder="비밀번호를 입력해 주세요">&nbsp;&nbsp;
+				      			<input type="submit" class="btn btn-primary col-sm-2" value="확인" style="height: calc(1.5em + 1.2rem + 2px); line-height: 0.6">
 		      				</div>
 		      			</div>
 		      			<input type="hidden" name="email" value="${sessionScope.mdto.email }">
@@ -76,18 +76,15 @@
 						</div>
 						<div class="form-group">
 							<label for="detailAddr">집 주소</label>
-							<div style="width:100%; margin-bottom: 5px;">
-								<input type="text" id="postCode" name="postCode" class="post" value="${sessionScope.mdto.postCode }" readonly>
-								<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
+							<div class="row">
+								<input type="text" id="postCode" name="postCode" class="form-control ml-3 mb-2 col-4 col-sm-3" value="${sessionScope.mdto.postCode }" readonly> &nbsp;&nbsp;
+								<input type="button" onclick="execPostcode()" class="post_btn col-6 col-sm-3" value="우편번호 찾기">
 							</div>
-							<div style="width:100%; margin-bottom: 5px;">
-								<input type="text" id="roadAddr" name="roadAddr" class="post post1" value="${sessionScope.mdto.roadAddr }" readonly>
-							</div>
+							<input type="text" id="roadAddr" name="roadAddr" class="form-control mb-2" value="${sessionScope.mdto.roadAddr }" readonly>
 							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="detailAddr" name="detailAddr" class="post post1" value="${sessionScope.mdto.detailAddr }">
+							<input type="text" id="detailAddr" name="detailAddr" class="form-control" value="${sessionScope.mdto.detailAddr }">
 							<span id="addrErr" class="help-block clear"></span>	
 						</div>
-						<br>
 						<br>
 						<input type="hidden" name="admin" value="${sessionScope.mdto.admin }">
 						<input type="hidden" name="reg_date" value="${sessionScope.mdto.reg_date }">
