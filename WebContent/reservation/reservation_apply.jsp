@@ -20,9 +20,10 @@
     <title>RESERVATION - TEAM2 WAREHOUSE</title>
     <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
-	<!-- CSS/CDN links-->
-	<jsp:include page="../inc/head_link.jsp"></jsp:include>
 
+	<!--navigation in page js때문에 위에 둠-->
+	<jsp:include page="../inc/header.jsp"></jsp:include>
+	
     <script type="text/javascript">
     
     $(function() {
@@ -131,8 +132,7 @@
         		}
           }
           
-      }); // function() - 끝
-      
+      }); // function() - 끝      
     </script>
     
     <style type="text/css">
@@ -153,8 +153,7 @@
 
     <body class="bg-light">
 	
-	<!--navigation in page-->
-	<jsp:include page="../inc/header.jsp"></jsp:include>
+
 	<section class="py-7">
     	<div class="container">
            	<div class="row">

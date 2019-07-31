@@ -14,10 +14,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>RESERVATION - TEAM2 WAREHOUSE</title>
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
+
 	
-	<!-- CSS/CDN links-->
-	<jsp:include page="../inc/head_link.jsp"></jsp:include>
-	
+	<!--navigation in page js때문에 위에 둠-->
+	<jsp:include page="../inc/header.jsp"></jsp:include>
 	
 	<c:choose>   
 		<c:when test="${sessionScope.mdto.email==null }">
@@ -104,8 +104,6 @@
 
 <body>
 
-<!--navigation in page-->
-<jsp:include page="../inc/header.jsp"></jsp:include>
         
 	<section class="py-7">
 		<div class="container">
