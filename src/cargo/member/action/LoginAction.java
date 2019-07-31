@@ -19,8 +19,8 @@ public class LoginAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		String email = request.getParameter("email");
-		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("current_email");
+		String pwd = request.getParameter("current_pwd");
 
 		MemberDAO mdao = new MemberDAO();
 		int state = mdao.LoginMember(email, pwd);

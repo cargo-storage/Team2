@@ -4,113 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-	<style>
-		.modal-login {
-		width: 350px;
-		}
-	
-		.modal-login .modal-content {
-			padding: 20px;
-			border-radius: 1px;
-			border: none;
-		}
-		
-		.modal-login .modal-header {
-			border-bottom: none;
-			position: relative;
-			justify-content: center;
-		}
-		
-		.modal-login h4 {
-			text-align: center;
-			font-size: 26px;
-		}
-		
-		.modal-login .form-control, .modal-login .btn {
-			min-height: 40px;
-			border-radius: 1px;
-		}
-		
-		.modal-login .close {
-			position: absolute;
-			top: -5px;
-			right: -5px;
-		}
-		
-		.modal-login .btn {
-			background: #3498db;
-			border: none;
-			line-height: normal;
-			font-size: 1.25rem;
-		}
-		
-		.modal-login .btn:hover, .modal-login .btn:focus {
-			background: #248bd0;
-		}
-		
-		.modal-login .hint-text, .modal-login .hint-text a{
-			color: #14ba9a;
-			font-size: 12px;
-			font-weight: bold;
-			line-height: 3;
-			margin: 0 7px;
-		}
-		
-		.trigger-btn {
-			display: inline-block;
-		}
-		
-		.help-block {
-			color: red;
-			font-size: 11px;
-		}
-	</style>
-	<!-- 세션 타임아웃 -->
-	<c:if test="${sessionScope.mdto ne null }">
- 	<script> 
-		var setTime = 59; //카운트 시간
-		var count = 0; //모달 띄우는 시간
-		var timer;
-		
-		setInterval(setcount,1000); //1초마다 setcount함수를 실행(1000=>1초)
-		
-		$(function(){
-			$("#extendTime").click(function(){
-				count = 0;
-				setTime = 59;
-				clearInterval(timer);		// 타이머 해제
-				$("#timeMsg").html("60초");
-			});
-			
-			$("#timerModal").on("show.bs.modal", function(){
-				$("body").removeAttr('onmousemove'); //모달 띄워져 있을 때 mousemove 없앰
-			});
-			
-			$("#timerModal").on("hide.bs.modal", function(){
-				$("body").attr('onmousemove','count=0'); //모달 없어지면 다시 mousemove 생성
-			});
-		});
-
-		function setcount() {
-			if (count++ == 600){ // 10분 뒤 모달 띄우기
-				$("#timerModal").modal();
-				timer = setInterval(msg_time,1000);
-			}
-		}
-		
-		function msg_time() {	// 1초씩 카운트
-			msg = (setTime % 60) + "초";	// 남은 시간 계산
-			$("#timeMsg").html(msg);						
-			setTime--;					// 1초씩 감소
-			
-			if (setTime < 0) {			// 시간이 종료 되었으면..	
-				clearInterval(timer);		// 타이머 해제
-				location.href="${contextPath}/me/logout";
-			}
-		}		
-  	</script>
- 	</c:if>
+	<!-- CSS/CDN links-->
+	<jsp:include page="head_css.jsp"/>
+	<!-- login.css -->
+	<link href="../css/member/login.css" rel="stylesheet"/>
 </head>
 <body onmousemove="count=0">
 	<!-- 세션 타임아웃 -->
@@ -201,12 +98,12 @@
 				<div class="modal-body">
 					<form action="${contextPath }/me/login" method="post" onsubmit="return login()">
 						<div class="form-group">
-							<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
-							<span id="emailErr" class="help-block"></span>
+							<input type="text" class="form-control" id="current_email" name="current_email" placeholder="EMAIL">
+							<span id="current_emailErr" class="help-block"></span>
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="PASSWORD">
-							<span id="pwErr" class="help-block"></span>
+							<input type="password" class="form-control" id="current_pwd" name="current_pwd" placeholder="PASSWORD">
+							<span id="current_pwdErr" class="help-block"></span>
 						</div>
 						<div class="form-group">
 							<input type="submit" class="btn btn-primary btn-block btn-lg" value="LOGIN">
@@ -225,6 +122,17 @@
 		</div>
 	</div>
 	</c:if>
+	<!-- CSS/CDN links-->
+	<jsp:include page="head_js.jsp"/>
+
+	<!-- 세션 타임아웃 -->
+	<c:if test="${sessionScope.mdto ne null }">
+		<script src="${contextPath }/js/member/sessionTime.js"></script> 
+	</c:if>
+	<!-- login.js -->
+	<script src="${contextPath }/js/member/login.js"></script> 
+	
+	
 </body>
 </html>
    

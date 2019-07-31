@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- Page level plugin CSS -->
+<link href="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="${contextPath}/vendor/datatables/select.bootstrap4.min.css" rel="stylesheet">
+
 <script type="text/javascript">
 	$(function(){
 	    $('#dataTable').DataTable( {
@@ -19,7 +23,6 @@
 
 </script>
 </head>
-
 <body>
 <c:choose>   
 	<c:when test="${sessionScope.mdto.email==null }">
@@ -123,5 +126,8 @@
 			</div>
 		</div>
 	</div>
+<!-- Page level plugin JavaScript-->
+<script src="${contextPath}/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="${contextPath}/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 </body>
 </html>
