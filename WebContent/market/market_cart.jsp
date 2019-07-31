@@ -13,15 +13,55 @@
 	<jsp:include page="market_link.jsp"></jsp:include>
     
     <script type="text/javascript">
-	    $(document).ready(function() {
-	    	
-	    	
-	    	
-	        $('.checkAll').click(function() {
-	          $('.cb').prop('checked', this.checked);
-	        });
+		$(document).ready(function() {
 	        
-	      });
+			// 체크박스 모두선택
+			$('.checkAll').click(function() {
+		         // $('.cb').prop('checked', this.checked); --> 체크만 하고싶으면 요거 써도 됨!
+	
+		         var chk = $(this).is(":checked");
+		          if(chk){
+		        	  $(".cb").prop('checked', true);
+		        	  $(".totalPrice").text($("#firstTotal").val());
+		          }else{
+		        	  $(".cb").prop('checked', false);
+		        	  $(".totalPrice").text("0");
+		          }
+			});
+			
+			// 장바구니 선택삭제
+			$('#delCart').on("click", function(){
+				var id= new Array();
+				$(".cb:checked").each(function(){
+					 var test = $(this).closest("tr").find('input#itemId').val(); // string
+					 id.push(test);
+				});
+				location.href="${contextPath}/mk/delCart.do?id="+id;
+			});
+			
+		});
+	    
+		// 개별 체크박스 선택 시 총 가격 변경
+	    function changeTotal(checkbox){
+	    	var cbox = parseInt(checkbox.value);
+	    	var total = parseInt($("#totalPrice").text());
+	    	if(checkbox.checked==true)	{
+	    		cbox = total+ cbox;
+	    		$(".totalPrice").text(cbox);
+	    	}else{
+	    		if($(".checkAll").is(":checked")==true) {$(".checkAll").prop('checked', false);} // 모두체크 해제
+	    		if(total != 0){ // total price가 0이 아닌경우 마이너스 계산
+		    		cbox = total-cbox;
+		    		$(".totalPrice").text(cbox);
+		    	}
+	    	}
+	    }
+		
+		// 주문
+	    function order(btn){
+			var orderType = btn.value;
+			alert(orderType);
+		}
     
     </script>
     
@@ -57,27 +97,29 @@
 	              </thead>
 	              <tbody>
 	            <c:set var="total" value="${0 }"/>
-	            <c:set var="i" value="${0 }"/>
 	            <c:forEach var="item" items="${sessionScope.cart.itemList }">
 	            	<tr height="60px" id="itemTable">
-	            		<td width='5%'><input type="checkbox" class="cb item_${i }" checked></td>
+	            		<td width='5%'><input type="checkbox" onclick="changeTotal(this)" class="cb" value="${item.price * item.quantity }" checked></td>
 	            		<td width='10%'>
 	            			<img alt="${item.img }" src="${contextPath }/market/uploaded/${item.img}">
 	            		</td>
-	              		<td width='45%'>&nbsp;&nbsp; ${item.name }</td>
+	              		<td width='45%'>&nbsp;&nbsp; ${item.name }
+	              			<input type="hidden" value="${item.item }" id="itemId">
+	              		</td>
 	              		<td width='15%'>${item.price }</td>
 	              		<td width='10%'>${item.quantity }</td>
 	              		<td width='15%'>${item.price * item.quantity }</td>
 	            	</tr>
-	            	<input type="hidden" value="${item.price * item.quantity }" id="price_${i }">
-	            	<c:set var="i" value="${i+1 }"/>
 	            	<c:set var="total" value="${total+ item.price * item.quantity }"/>
 	            </c:forEach>
 	              </tbody>
 	              <tfoot>
 	              	<tr>
 	              		<td colspan='3'><h5 class="mt-3 mb-0">총 결제예상금액</h5></td>
-	              		<td colspan='3'><h5 class="mt-3 mb-0 fontcolor">${total }</h5></td>
+	              		<td colspan='3'>
+	              			<h5 class="mt-3 mb-0 fontcolor totalPrice">${total }</h5>
+	              			<input type="hidden" value="${total }" id="firstTotal">
+	              		</td>
 	              	</tr>
 	              </tfoot>
 	              </table>
@@ -87,29 +129,28 @@
 	          
 	          <!-- 우측 결제영역 -->
 	          
-	          
 	          <div class="col-lg-2 sidebar ftco-animate bg-light">
 	          	
 	          	<div class="sidebar-box mt-4 mx-auto text-center">
 	          		<small class="d-inline-block">결제예상금액</small>
 	          		<h4 class="d-inline-block">TOTAL</h4>
-	          		<h4 class="fontcolor d-inline-block">${total }</h4>
+	          		<h4 class="fontcolor totalPrice"  id="totalPrice">${total }</h4>
 				</div>	  
 				        
 	          	<div class="sidebar-box mt-4 mx-auto text-center">
 	          		<small class="d-inline-block">주문</small>
-					<h4 class="d-inline-block">ORDER</h4>
+					<h4 class="">ORDER</h4>
 	                <div class="form-group" id="order">
-	                  <input type="button" value="선택삭제" class="rounded mt-2 btn submit mx-auto">
-	                  <input type="button" value="선택주문" class="rounded mt-2 btn submit mx-auto">
-	                  <input type="button" value="전체주문" class="rounded mt-2 btn submit mx-auto">
+	                  <input type="button" id="delCart" value="선택삭제" class="rounded mt-2 btn submit mx-auto"> <!-- 완뇨 -->
+	                  <input type="button" onclick="order(this)" value="선택주문" class="rounded mt-2 btn submit mx-auto"> <!-- closest? -->
+	                  <input type="button" onclick="order(this)" value="전체주문" class="rounded mt-2 btn submit mx-auto"> <!-- 카트 전체를 넘기면 됨. -->
 	                </div>
 	            </div>
 	          
 	          
 	    	
 
-	            <div class="sidebar-box ftco-animate">
+	            <!-- <div class="sidebar-box ftco-animate">
 	            	<h3 class="sidebar-heading">Categories</h3>
 	              <ul class="categories">
 	                <li><a href="#">Fashion <span>(6)</span></a></li>
@@ -118,7 +159,7 @@
 	                <li><a href="#">Food <span>(2)</span></a></li>
 	                <li><a href="#">Photography <span>(7)</span></a></li>
 	              </ul>
-	            </div>
+	            </div> -->
 	          </div><!-- END COL -->
 	    		</div>
 	    	</div>

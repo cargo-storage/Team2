@@ -40,10 +40,10 @@ public class AddCartAction implements Action {
 		
 		cart.push(cdto);
 		
-		request.setAttribute("cart", cart);
+		session.setAttribute("cart", cart);
 		
 		ActionForward forward = new ActionForward();
-		forward.setAjax(true);
+		forward.setAjax(true); // Ajax는 아니지만.... 전송 X
 		
 		PrintWriter out = response.getWriter();
 		

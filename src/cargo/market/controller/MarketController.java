@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.action.AddItemAction;
+import cargo.market.action.DelCartAction;
 import cargo.market.action.AddCartAction;
 import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
@@ -80,10 +81,13 @@ public class MarketController extends HttpServlet{
 			}else if("/add_item.do".equals(command)){// add item into M_item
 				action = new AddItemAction();
 				forward = action.execute(request, response);
-			} else if(command.equals("/addCart.do")){
+			}else if(command.equals("/addCart.do")){
 	        	action = new AddCartAction();
 	        	forward = action.execute(request, response);
-	        } 
+	        }else if(command.equals("/delCart.do")){
+	        	action = new DelCartAction();
+	        	forward = action.execute(request, response);
+	        }
       
 			//모든 과정 후 페이지 이동부분
 			if(forward !=null){

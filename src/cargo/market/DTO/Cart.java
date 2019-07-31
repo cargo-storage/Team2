@@ -11,6 +11,23 @@ public class Cart {
 		return itemList;
 	}
 	
+	// 물건삭제
+	public void popList(String[] list){
+		
+		for(String id:list){
+			System.out.println("삭제할물품 "+id);
+			for(CartDTO dto: itemList){
+				if(id.equals(dto.getItem())){
+					System.out.println("dto "+dto.getItem());
+					itemList.remove(dto);
+					break;
+				}
+			}
+		}
+		
+	}
+	
+	// 물건추가
 	public void push(CartDTO cdto){
 		
 		boolean check = false;

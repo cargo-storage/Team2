@@ -23,7 +23,6 @@
    			var total = quantity * price;
    			
    			document.getElementById("totalprice").innerHTML = total;
-   			document.getElementById("price").value = total;
    			document.getElementById("quantity").value = quantity;
    			document.getElementById("quantity_").value = quantity;
    		}
@@ -121,7 +120,7 @@
 	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
 	                
 	                <!-- 구매가능수량만큼 forEach -->
-	                <li><a>수량선택<span><select onchange="caltotal()" name="quantity" id="quantity">
+	                <li><a>수량선택<span><select onchange="caltotal()" id="quantity">
 	             <c:forEach var="i" begin='1' end="${mjdto.stock }">
 	                	<option value="${i }"/>${i }
 	             </c:forEach> 	
@@ -150,7 +149,7 @@
 	            </div>
 
 
-				<!-- 다른아이템 for문 돌릴거임 -->
+				<!-- 최근 본 아이템 for문 돌릴거임 -->
 	            <div class="mt-5 sidebar-box ftco-animate">
 	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
 	              <div class="block-21 mb-4 d-flex">

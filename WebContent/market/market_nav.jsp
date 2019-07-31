@@ -39,7 +39,7 @@
             	<c:choose>
                	<c:when test="${email != null }">
 	               	<li class="nav-item">         
-	              		<a href="${contextPath }/me/logout.me" class="nav-link"><small>로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></small></a>
+	              		<a href="${contextPath }/me/logout" class="nav-link"><small>로그아웃 <i class="fas fa-arrow-alt-circle-right"></i></small></a>
 	              	</li>
                	</c:when>
                	<c:otherwise>
