@@ -52,7 +52,7 @@
                     <a class="nav-link page-scroll" href="${contextPath }/re/info.me?warehouse=A">예약안내</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#market">중고장터</a>
+                    <a class="nav-link page-scroll" href="${contextPath }/mk/market.do">중고장터</a>
                 </li>
 				<li class="nav-item">
 					<a class="nav-link page-scroll" href="${contextPath }/bo/NoticeListAction.bo">고객지원</a>
@@ -80,7 +80,7 @@
                	</c:when>
                	<c:otherwise>
                		<div class="text-center">
-						<a href="${contextPath}/co/login.go" class="btn btn-navbar btn-primary trigger-btn" data-toggle="modal" data-target="#loginModal">로그인/회원가입</a>
+						<a href="${contextPath}/co/login.go" class="btn btn-navbar btn-primary trigger-btn">로그인/회원가입</a>
 					</div>
               	</c:otherwise>
        			</c:choose>
