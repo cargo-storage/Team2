@@ -5,7 +5,7 @@ import java.sql.Date;
 public class M_orderDTO { // 아이템 단위로 들어감.
 	
 	int no, price, quantity;
-	String item, name, category, email;
+	String item, name, category, email, order_id;
 	Date date;
 	
 	public M_orderDTO() {
@@ -48,6 +48,14 @@ public class M_orderDTO { // 아이템 단위로 들어감.
 		this.quantity = quantity;
 	}
 
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+
+	public String getOrder_id() {
+		return order_id;
+	}
+	
 	public String getItem() {
 		return item;
 	}

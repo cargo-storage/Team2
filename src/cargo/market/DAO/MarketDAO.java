@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +20,10 @@ import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
 import cargo.common.DTO.M_board_replyDTO;
 import cargo.common.DTO.M_itemDTO;
+import cargo.common.DTO.M_orderDTO;
 import cargo.common.DTO.ReservationDTO;
 import cargo.common.DTO.WarehouseDTO;
+import cargo.market.DTO.CartDTO;
 
 public class MarketDAO {
 	
@@ -358,7 +360,32 @@ public class MarketDAO {
         }
      }
 	
-	public void orderItem(){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
+	public void orderItem(M_orderDTO odto){ // 아이템 주문 - 결제 후 order 테이블로 삽입. 
+		
+		try {
+	           getConnection();
+	           String sql="insert into m_order(order_id, item, name, quantity, price, category, email, date) values(?,?,?,?,?,?,?,?)";
+	           pstmt=conn.prepareStatement(sql);
+	           
+	           pstmt.setString(1, odto.getOrder_id());
+	           pstmt.setString(2, odto.getItem());
+	           pstmt.setString(3, odto.getName());
+	           pstmt.setInt(4, odto.getQuantity());
+	           pstmt.setInt(5, odto.getPrice());
+	           pstmt.setString(6, odto.getCategory());
+	           pstmt.setString(7, odto.getEmail());
+	           pstmt.setDate(8, odto.getDate());
+	           
+	           pstmt.executeUpdate();
+	          
+	           
+	        } catch (Exception e) {
+        	   System.out.println("error in orderItem");  
+	           e.printStackTrace();
+	        }finally {
+	           freeResource();
+	        }
+		
 		
 	}
 
@@ -371,7 +398,7 @@ public class MarketDAO {
 			getConnection();
 			
 			while(same){
-				ID = Character.toUpperCase(category.charAt(0))+form.format(new Date());
+				ID = Character.toUpperCase(category.charAt(0))+form.format(new java.util.Date());
 				System.out.println(ID);
 				
 				for(int i=0; i<4; i++){
@@ -417,6 +444,121 @@ public class MarketDAO {
 			freeResource();
 		}
 	}
+	
+	
+	/* 주문번호 생성 메서드 */
+	private String createOrderId() {
+		
+		StringBuffer orderId_ = new StringBuffer();
+		
+		java.util.Date date= new java.util.Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		String today = format.format(date);
+		
+		for (int i = 0; i < 4; ++i) {
+			int randNum = (int) (Math.random() * 10.0D);
+			orderId_.append(randNum);
+		}
+		String orderId = today+orderId_.toString();
+		return orderId;
+	}
+	
+	private void insertOrderId(String orderid, String email){
+		try {
+			getConnection();
+			String sql ="INSERT INTO m_order_id VALUES(?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, orderid);
+			pstmt.setString(2, email);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("error in insertOrderId :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+	}
+	
+	public void MItemStockUpdate(int stock, String item){
+		
+		try {
+			getConnection();
+			String sql ="UPDATE m_item SET stock=stock-? WHERE item=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, stock);
+			pstmt.setString(2, item);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("error in MItemStockUpdate :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+	}
+	
+	// 전체주문 - 오버로딩
+	public void insertMOrder(String email, List<CartDTO> clist){
+		String orderId = createOrderId();
+		insertOrderId(orderId, email);
+		System.out.println(orderId);
+		
+		for(CartDTO dto: clist){
+			
+			M_orderDTO odto = new M_orderDTO();
+			Date today = new Date(new java.util.Date().getTime());
+			
+			odto.setCategory(dto.getCategory());
+			odto.setEmail(email);
+			odto.setDate(today);
+			odto.setItem(dto.getItem());
+			odto.setOrder_id(orderId);
+			odto.setPrice(dto.getPrice());
+			odto.setQuantity(dto.getQuantity());
+			odto.setName(dto.getName());
+			
+			orderItem(odto);
+			MItemStockUpdate(dto.getQuantity(), dto.getItem());
+		}
+		
+	}
+	
+	// 부분주문 - 오버로딩
+	public void insertMOrder(String email, List<CartDTO> clist, String[] idArray){
+		String orderId = createOrderId();
+		insertOrderId(orderId, email);
+		System.out.println(orderId);
+		
+		for(String id: idArray){
+			for(CartDTO dto: clist){
+				if(id.equals(dto.getItem())){
+					
+					M_orderDTO odto = new M_orderDTO();
+					Date today = new Date(new java.util.Date().getTime());
+					
+					odto.setCategory(dto.getCategory());
+					odto.setEmail(email);
+					odto.setDate(today);
+					odto.setItem(dto.getItem());
+					odto.setOrder_id(orderId);
+					odto.setPrice(dto.getPrice());
+					odto.setQuantity(dto.getQuantity());
+					odto.setName(dto.getName());
+					
+					orderItem(odto);
+					MItemStockUpdate(dto.getQuantity(), dto.getItem());
+				}
+			}	
+		}
+	}
+	
 	
 }
 

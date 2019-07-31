@@ -15,6 +15,7 @@ import cargo.market.action.DelCartAction;
 import cargo.market.action.AddCartAction;
 import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
+import cargo.market.action.OrderCartAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
 import cargo.market.action.ShowItemsAction;
@@ -86,6 +87,12 @@ public class MarketController extends HttpServlet{
 	        	forward = action.execute(request, response);
 	        }else if(command.equals("/delCart.do")){
 	        	action = new DelCartAction();
+	        	forward = action.execute(request, response);
+	        }else if(command.equals("/payCart.do")){
+	        	forward = new ActionForward();
+				forward.setPath("../market/market_dopay.jsp");
+	        }else if(command.equals("/orderCart.do")){
+	        	action = new OrderCartAction();
 	        	forward = action.execute(request, response);
 	        }
       

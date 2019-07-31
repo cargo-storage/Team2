@@ -11,8 +11,11 @@
     
     <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    
     
     <script type="text/javascript">
+    
 		$(document).ready(function() {
 	        
 			// 체크박스 모두선택
@@ -60,9 +63,24 @@
 		// 주문
 	    function order(btn){
 			var orderType = btn.value;
-			alert(orderType);
+			var totalPrice = $("#totalPrice").text();
+			
+			if(orderType=="선택주문"){
+				
+				var id= new Array();
+				$(".cb:checked").each(function(){
+					 var test = $(this).closest("tr").find('input#itemId').val(); // string
+					 id.push(test);
+				});
+				
+				location.href="${contextPath}/mk/payCart.do?total="+totalPrice+"&id="+id;
+				
+			}else{
+				location.href="${contextPath}/mk/payCart.do?total="+totalPrice;
+			}
+			
 		}
-    
+
     </script>
     
   </head>
@@ -141,9 +159,9 @@
 	          		<small class="d-inline-block">주문</small>
 					<h4 class="">ORDER</h4>
 	                <div class="form-group" id="order">
-	                  <input type="button" id="delCart" value="선택삭제" class="rounded mt-2 btn submit mx-auto"> <!-- 완뇨 -->
-	                  <input type="button" onclick="order(this)" value="선택주문" class="rounded mt-2 btn submit mx-auto"> <!-- closest? -->
-	                  <input type="button" onclick="order(this)" value="전체주문" class="rounded mt-2 btn submit mx-auto"> <!-- 카트 전체를 넘기면 됨. -->
+	                  <input type="button" id="delCart" value="선택삭제" class="rounded mt-2 btn submit mx-auto">
+	                  <input type="button" onclick="order(this)" value="선택주문" class="rounded mt-2 btn submit mx-auto"> 
+	                  <input type="button" onclick="order(this)" value="전체주문" class="rounded mt-2 btn submit mx-auto"> 
 	                </div>
 	            </div>
 	          
