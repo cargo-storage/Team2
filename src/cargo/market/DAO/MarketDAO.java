@@ -91,19 +91,26 @@ public class MarketDAO {
 	
 	public boolean modifyItem(BoardDTO bb){ // m_board 글수정
 		
-		String sql ="UPDATE m_board SET title=?,image=?,content=? WHERE no=?";
-		
 		try {
 			
 			getConnection();
 			
+			String sql ="UPDATE m_board SET title=?, image=?,content=? WHERE no=?";
+			
+			if(bb.getPath()==null) sql ="UPDATE m_board SET title=?,content=? WHERE no=?";
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, bb.getTitle());
-			pstmt.setString(2, bb.getPath());
-			pstmt.setString(3, bb.getContent());
-			pstmt.setInt(4, bb.getNo());
-			
+			if(bb.getPath()==null) {
+				pstmt.setString(1, bb.getTitle());
+				pstmt.setString(2, bb.getContent());
+				pstmt.setInt(3, bb.getNo());
+			}else {
+				pstmt.setString(1, bb.getTitle());
+				pstmt.setString(2, bb.getPath());
+				pstmt.setString(3, bb.getContent());
+				pstmt.setInt(4, bb.getNo());
+			}
+
 			pstmt.executeUpdate();
 			
 			return true;
