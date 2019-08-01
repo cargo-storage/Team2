@@ -239,6 +239,45 @@ public class MarketDAO {
 		return list;
 	}//end of selelctAllItmes
 	
+
+	public void updateMItem(M_itemDTO idto) {
+		try {
+			getConnection();
+			String sql = "update M_item set name=?, category=?, price=?, stock=? where item=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idto.getName());
+			pstmt.setString(2, idto.getCategory());
+			pstmt.setInt(3, idto.getPrice());
+			pstmt.setInt(4, idto.getStock());
+			pstmt.setString(5, idto.getItem());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("error in updateMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of updateMItem
+	
+	public void deleteMItem(String item) {
+		try {
+			getConnection();
+			String sql = "delete from m_item where item=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error in deleteMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of deleteMItem
+	
 	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환
 		
 		M_boardJoinDTO bDTO = new M_boardJoinDTO();
@@ -600,7 +639,6 @@ public class MarketDAO {
 		
 		return oList;
 	}
-	
 }
 
 
