@@ -25,6 +25,9 @@
 	               <li class="nav-item">
 	                   <a class="nav-link" href="${contextPath }/mk/cart.do">장바구니</a>
 	               </li>
+	               <li class="nav-item">
+	                   <a class="nav-link" href="${contextPath }/mk/orderInfo.do">주문확인</a>
+	               </li>
 	        <c:set var="email" value="${sessionScope.mdto.email }"/>
           	<c:set var="name" value="${sessionScope.mdto.name }"/>
           	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
