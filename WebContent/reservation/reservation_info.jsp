@@ -14,7 +14,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>RESERVATION - TEAM2 WAREHOUSE</title>
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
-
 	
 	<!--navigation in page js때문에 위에 둠-->
 	<jsp:include page="../inc/header.jsp"></jsp:include>

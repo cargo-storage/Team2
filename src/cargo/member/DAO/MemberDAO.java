@@ -329,7 +329,7 @@ public class MemberDAO {
 				list.add(adto);
 			}
 		} catch (Exception e) {
-			System.out.println("memberList()에서 오류: " + e);
+			System.out.println("memberStatus()에서 오류: " + e);
 		} finally {
 			freeResource();
 		}
