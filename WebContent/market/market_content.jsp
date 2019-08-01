@@ -120,10 +120,8 @@
 	          
 	          <!-- 우측메뉴 -->
 	    	<div class="col-lg-4 sidebar ftco-animate bg-light">
-	            <div class="sidebar-box ftco-animate">
+	            <div class="sidebar-box ftco-animate mt-3">
 	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
-	              
-	              
 	              <ul class="categories mt-3">
 	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
 	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
@@ -169,40 +167,23 @@
 
 				<!-- 최근 본 아이템 for문 돌릴거임 -->
 	            <div class="mt-5 sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
+	              <h3 class="sidebar-heading fontcolor">RECENTLY</h3>
+	              
+	              <c:forEach var="cookieDTO" items="${requestScope.cookies }">
 	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_1.jpg);"></a>
+	                <a class="blog-img mr-4"
+	                style="background-image: url(${contextPath }/market/uploaded/${cookieDTO.image });"></a>
 	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+	                  <h3 class="heading"><a href="${contextPath}/mk/showcontent.do?no=${cookieDTO.no}"><b>${cookieDTO.name }</b></a></h3>
 	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+	                    <div class="d-block"><span class="icon-calendar"></span>${cookieDTO.date }</div>
+	                    <div><i class="fas fa-won-sign"></i> ${cookieDTO.price }</div>
+<!-- 	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
 	                  </div>
 	                </div>
 	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_2.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_3.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
+	              </c:forEach>
+	             
 	            </div>
 
 	          </div><!-- END COL -->
