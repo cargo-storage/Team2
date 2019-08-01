@@ -35,25 +35,25 @@
 	                
 	                
 	                <!-- ********************* 글쓰기 폼***************  -->
-	                <form action="${contextPath }/mk/postItem.do" class="p-3 p-md-5 bg-light" enctype="multipart/form-data" method="post">
+	                <form action="${contextPath }/mk/modifyItem.do?no=${mjdto.no }" class="p-3 p-md-5 bg-light" enctype="multipart/form-data" method="post">
 	                  <div class="form-group">
 	                    <label for="name">Item *</label>
-	                    <input type="text" class="form-control" name="item">
+	                    <input type="text" class="form-control" name="item" value=${mjdto.item }>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="name">Title *</label>
-	                    <input type="text" class="form-control" name="title">
+	                    <input type="text" class="form-control" name="title" value=${mjdto.title }>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="name">Image *</label>
-	                    <input type="file" class="form-control" name="image">
+	                    <input type="file" class="form-control" name="image" value=${mjdto.image }>
 	                  </div>
 	                  <div class="form-group">
 	                    <label for="message">Content</label>
-	                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+	                    <textarea name="content" cols="30" rows="10" class="form-control">${mjdto.content }</textarea>
 	                  </div>
 	                  <div class="form-group">
-	                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+	                    <input type="submit" value="Modify" class="btn py-3 px-4 btn-primary">
 	                  </div>
 
 	                </form>

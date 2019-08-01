@@ -128,6 +128,9 @@
 	                	<a class="btn m-auto hover col-md-4" href="${contextPath }/mk/addcart.do"><b>장바구니</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="./modifyView.do?no=${mjdto.no }"><b>수정</b></a>
+	                	<a class="btn m-auto hover col-md-4" href="./deleteItem.do?no=${mjdto.no }"><b>삭제</b></a>
+	                	
 	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
 	                	</div>
 	                </li>

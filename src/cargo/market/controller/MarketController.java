@@ -14,6 +14,9 @@ import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
+import cargo.market.action.deleteItemAction;
+import cargo.market.action.modifyItemAction;
+import cargo.market.action.modifyViewAction;
 
 public class MarketController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -58,10 +61,15 @@ public class MarketController extends HttpServlet{
 			}else if(command.equals("/postItem.do")){ // ${contextPath }/mk/postItem.do 글쓰기 + 파일업로드 액션
 				action = new PostItemAction();
 				forward = action.execute(request, response);
+			}else if(command.equals("/modifyView.do")){ // 글 수정 액션
+				action = new modifyViewAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/modifyItem.do")){ // 글 수정 액션
-				
+				action = new modifyItemAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/deleteItem.do")){ // 글 삭제 액션
-				
+				action = new deleteItemAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
 	            action = new AddCommentAction();
 	            forward=action.execute(request, response);

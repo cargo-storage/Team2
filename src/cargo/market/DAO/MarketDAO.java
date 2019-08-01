@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cargo.common.DTO.BoardDTO;
+import cargo.common.DTO.BoardqDTO;
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
@@ -54,37 +55,99 @@ public class MarketDAO {
 	}
 	
 	
-	public void postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
-		int num = 0;
-		String sql="";
+	public boolean postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
+		
+		boolean result = false;
+		
+		StringBuffer sql = new StringBuffer();
+		sql.append("Insert into m_board(item,title,content,image,date)");
+		sql.append("values (?,?,?,?,?)");
+	
 		try {
 			getConnection();
 
-			sql="insert into m_board(item,title,content,image,date) values(?,?,?,?,?)";
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, bb.getItem());
 			pstmt.setString(2, bb.getTitle());
 			pstmt.setString(3, bb.getContent());
-			pstmt.setString(4, bb.getImage());
+			pstmt.setString(4, bb.getPath());
 			pstmt.setTimestamp(5, bb.getDate());
+			
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				result = true;
+			}
+		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+			freeResource();
+			System.out.println("db결과:"+ result);
+			return result;		
+		}
+		
+	
+	
+	public boolean modifyItem(BoardDTO bb){ // m_board 글수정
+		
+		String sql ="UPDATE m_board SET title=?,image=?,content=? WHERE no=?";
+		
+		try {
+			
+			getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, bb.getTitle());
+			pstmt.setString(2, bb.getPath());
+			pstmt.setString(3, bb.getContent());
+			pstmt.setInt(4, bb.getNo());
 			
 			pstmt.executeUpdate();
 			
-		}catch (Exception e) {
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("modifyboard 오류:"+e.getMessage());
+		}finally {
+			freeResource();
+		}
+		return false;
+	}
+	
+	
+	
+	
+	public boolean deleteItem(int no){ // m_board 글삭제
+		
+		int result = 0;
+		
+		String sql="DELETE FROM m_board WHERE no=?";
+		
+		try {
+			
+			getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("11");
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				return false;
+			}else {
+				return true;
+			}
+			
+		}catch(Exception e) {
+			System.out.println("deleteItem오류:"+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
+		return false;
 		
-		
-		
-	}
-	
-	public void modifyItem(){ // m_board 글수정
-		
-	}
-	
-	public void deleteItem(){ // m_board 글삭제
 		
 	}
 	
