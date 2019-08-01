@@ -23,13 +23,22 @@
    			var total = quantity * price;
    			
    			document.getElementById("totalprice").innerHTML = total;
+   			document.getElementById("total").value = total;
    			document.getElementById("quantity").value = quantity;
-   			document.getElementById("quantity_").value = quantity;
+   			document.getElementById("quantity1").value = quantity;
+   			document.getElementById("quantity2").value = quantity;
    		}
    		
    		function cart(){
+   			var check = confirm("이 상품을 장바구니에 담으시겠습니까?");
    			var cfrm = document.getElementById("cartForm");
-   			cfrm.submit();
+   			if(check==true)	cfrm.submit();
+   		}
+   		
+   		function buy(){
+   			var check = confirm("이 상품을 주문하시겠습니까?");
+   			var frm = document.getElementById("orderForm");
+   			if(check==true)	frm.submit();
    		}
     
     </script>
@@ -131,20 +140,29 @@
 	                <li>
 	                	<div class="row px-3 mt-3">
 	                	<a class="btn m-auto hover col-md-4" onclick="cart()"><b>장바구니</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
+	                	<a class="btn m-auto hover col-md-4" onclick="buy()"><b>바로구매</b></a>
 	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
 	                	</div>
 	                </li>
 	              </ul>
-	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
+	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 카트폼 -->
 	              		<!-- 넘길값세팅 -->
 	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
-	                	<input type="hidden" name="quantity" id="quantity_" value="1">
+	                	<input type="hidden" name="quantity" id="quantity1" value="1">
 	                	<input type="hidden" name="item" value="${mjdto.item }">
 	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
 	                	<input type="hidden" name="category" value="${mjdto.category }">
 	                	<input type="hidden" name="img" value="${mjdto.image }">
+	              </form>
+	              <form id="orderForm" method="post" action="${contextPath }/mk/payItem.do?no=${mjdto.no}"> <!-- 바로주문 폼 -->
+	              		<!-- 넘길값세팅 -->
+	              		<input type="hidden" name="price" value="${mjdto.price }">
+	                	<input type="hidden" name="quantity" id="quantity2" value="1">
+	                	<input type="hidden" name="item" value="${mjdto.item }">
+	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	                	<input type="hidden" name="category" value="${mjdto.category }">
+	                	<input type="hidden" name="total" id="total" value="${mjdto.price }">
 	              </form>
 	            </div>
 

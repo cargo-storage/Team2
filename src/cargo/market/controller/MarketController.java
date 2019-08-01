@@ -16,6 +16,8 @@ import cargo.market.action.AddCartAction;
 import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.OrderCartAction;
+import cargo.market.action.OrderConfirmAction;
+import cargo.market.action.OrderItemAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
 import cargo.market.action.ShowItemsAction;
@@ -93,6 +95,15 @@ public class MarketController extends HttpServlet{
 				forward.setPath("../market/market_dopay.jsp");
 	        }else if(command.equals("/orderCart.do")){
 	        	action = new OrderCartAction();
+	        	forward = action.execute(request, response);
+	        }else if(command.equals("/payItem.do")){
+	        	forward = new ActionForward();
+				forward.setPath("../market/market_dopay2.jsp");
+	        }else if(command.equals("/orderItem.do")){
+	        	action = new OrderItemAction();
+	        	forward = action.execute(request, response);
+	        }else if(command.equals("/confirmOrder.do")){
+	        	action = new OrderConfirmAction();
 	        	forward = action.execute(request, response);
 	        }
       

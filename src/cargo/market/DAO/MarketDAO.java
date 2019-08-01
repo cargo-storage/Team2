@@ -15,14 +15,11 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cargo.common.DTO.BoardDTO;
-import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
 import cargo.common.DTO.M_board_replyDTO;
 import cargo.common.DTO.M_itemDTO;
 import cargo.common.DTO.M_orderDTO;
-import cargo.common.DTO.ReservationDTO;
-import cargo.common.DTO.WarehouseDTO;
 import cargo.market.DTO.CartDTO;
 
 public class MarketDAO {
@@ -447,7 +444,7 @@ public class MarketDAO {
 	
 	
 	/* 주문번호 생성 메서드 */
-	private String createOrderId() {
+	public String createOrderId() {
 		
 		StringBuffer orderId_ = new StringBuffer();
 		
@@ -463,7 +460,7 @@ public class MarketDAO {
 		return orderId;
 	}
 	
-	private void insertOrderId(String orderid, String email){
+	public void insertOrderId(String orderid, String email){
 		try {
 			getConnection();
 			String sql ="INSERT INTO m_order_id VALUES(?,?)";
@@ -505,7 +502,7 @@ public class MarketDAO {
 	}
 	
 	// 전체주문 - 오버로딩
-	public void insertMOrder(String email, List<CartDTO> clist){
+	public String insertMOrder(String email, List<CartDTO> clist){
 		String orderId = createOrderId();
 		insertOrderId(orderId, email);
 		System.out.println(orderId);
@@ -528,10 +525,12 @@ public class MarketDAO {
 			MItemStockUpdate(dto.getQuantity(), dto.getItem());
 		}
 		
+		return orderId;
+		
 	}
 	
 	// 부분주문 - 오버로딩
-	public void insertMOrder(String email, List<CartDTO> clist, String[] idArray){
+	public String insertMOrder(String email, List<CartDTO> clist, String[] idArray){
 		String orderId = createOrderId();
 		insertOrderId(orderId, email);
 		System.out.println(orderId);
@@ -557,8 +556,50 @@ public class MarketDAO {
 				}
 			}	
 		}
+		return orderId;
 	}
 	
+	public ArrayList<M_orderDTO> getOrders(String order_id){
+		
+		ArrayList<M_orderDTO> oList = new ArrayList<>();
+		
+		try {
+			
+			getConnection();
+			String sql ="SELECT * FROM m_order_id i NATURAL JOIN m_order o WHERE order_id=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				M_orderDTO oDTO = new M_orderDTO();
+				
+				oDTO.setDate(rs.getDate("date"));
+				oDTO.setCategory(rs.getString("category"));
+				oDTO.setEmail(rs.getString("email"));
+				oDTO.setItem(rs.getString("item"));
+				oDTO.setName(rs.getString("name"));
+				oDTO.setNo(rs.getInt("no"));
+				oDTO.setOrder_id(order_id);
+				oDTO.setPrice(rs.getInt("price"));
+				oDTO.setQuantity(rs.getInt("quantity"));
+				
+				oList.add(oDTO);
+			
+			}
+			
+		} catch (Exception e) {
+			System.out.println("error in MItemStockUpdate :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return oList;
+	}
 	
 }
 

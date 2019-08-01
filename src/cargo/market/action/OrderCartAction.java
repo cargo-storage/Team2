@@ -20,6 +20,7 @@ public class OrderCartAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		String email = request.getParameter("email");
 		MarketDAO mdao = new MarketDAO();
+		String order_id;
 		
 		HttpSession session = request.getSession();
 		Cart cart = (Cart) session.getAttribute("cart");
@@ -28,18 +29,19 @@ public class OrderCartAction implements Action {
 		if(request.getParameter("id")==""){// 카트전체주문
 			
 			System.out.println("전체주문");
-			mdao.insertMOrder(email, clist);
+			order_id = mdao.insertMOrder(email, clist);
 			
 		}else{// 부분주문 아이디값 있음!
 			
 			System.out.println("선택주문");
 			String id = request.getParameter("id");
 			String[] idArray = id.split(",");
-			mdao.insertMOrder(email, clist, idArray);
+			order_id = mdao.insertMOrder(email, clist, idArray);
 		}
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("../market/market_payConfirm.jsp");
+		forward.setPath("../mk/confirmOrder.do");
+		request.setAttribute("order_id", order_id);
 		
 		return forward;
 	}
