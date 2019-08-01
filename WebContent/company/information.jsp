@@ -12,9 +12,6 @@
 <title>RESERVATION - TEAM2 WAREHOUSE</title>
 <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
-<!-- CSS/CDN links-->
-<jsp:include page="../inc/head_link.jsp"></jsp:include>		
-
 <style type="text/css">
    	#inputArea{
 	   	background-color: rgba(108, 117, 125, 0.2);

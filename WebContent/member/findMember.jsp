@@ -3,7 +3,6 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<%	request.setCharacterEncoding("utf-8"); %>  
 
 <!DOCTYPE html>
 <html>
@@ -12,156 +11,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>TEAM2 WAREHOUSE RESERVATION</title>
-	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
-	<!--Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	
-	<!--vendors styles-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-	
-	<!-- Bootstrap CSS / Color Scheme -->
-	<link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
-	<!-- font-awesome CSS -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
-	<link href="${contextPath }/css/font.css" rel="stylesheet">
-	
-	<!-- jquery.js -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<!-- bootstrap.min.js -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-	<style>
-	
-		section{
-			background-image: url(../img/search.jpg);
-		}
-		
-		.background{
-			background-color: rgba( 255, 255, 255, 1);
-		}
-		
-		/* Style the tab */
-		.tab {
-		  overflow: hidden;
-		  border: 1px solid #ccc;
-		  background-color: #f1f1f1;
-		}
-		
-		/* Style the buttons inside the tab */
-		.tab button {
-		  background-color: inherit;
-		  float: left;
-		  border: none;
-		  outline: none;
-		  cursor: pointer;
-		  padding: 14px 16px;
-		  transition: 0.3s;
-		  font-size: 17px;
-		  border-top: 5px solid #f1f1f1;
-		}
-		
-		/* Change background color of buttons on hover */
-		.tab button:hover {
-		  background-color: #ddd;
-		  border-top: 5px solid #ddd;
-		}
-		
-		/* Create an active/current tablink class */
-		.tab button.active {
-		  border-top: 5px solid #00c583;
-		}
-		
-		/* Style the tab content */
-		.tabcontent {
-		  padding: 20px 26px;
-		  border: 1px solid #ccc;
-		  border-top: none;
-		}
-		
-		.help-block {
-			color: red;
-			font-size: 12px;
-		}
-	</style>	
-	<script type="text/javascript">
-		$(function(){			
-			//이름 확인
-			$("#name").blur(function(){
-				var name = $(this).val();
-				var reg = /^[가-힣]{2,5}$/;
-				if(!reg.test(name)){
-					$("#nameErr").text("정확한 이름을 입력하세요.");
-				}else{ $("#nameErr").text(''); }
-			});
-			
-			//휴대폰 확인
-			$("#phone").blur(function(){
-				var phone = $(this).val();
-				var reg = /^01([0|1|6|7|8|9]?)-([0-9]{3,4})-([0-9]{4})$/;
-				if(!reg.test(phone)){
-					$("#phoneErr").text("양식에 맞는 휴대폰 번호를 입력하세요");
-				}else{ $("#phoneErr").text(''); }
-			});
-			
-			//이메일 확인
-			$("#email").blur(function(){
-				var email = $(this).val();
-				var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-				if(!reg.test(email)){
-					$("#emailErr").text("이메일 형식이 맞지 않습니다.");
-				}
-			});
-		});
-		
-		function emailSearch(){
-			var name = $("#name").val();
-			var phone = $("#phone").val();
-			
-			if(name ==''){
-				$("#nameErr").text("필수 입력 사항입니다.");
-			}
-			else if(phone ==''){
-				$("#phoneErr").text("필수 입력 사항입니다.");
-			}
-			else if($("#nameErr").text()!='' || $("#phoneErr").text()!=''){
-				alert("오류 사항을 확인 후 다시 입력해주세요.");
-				return false;
-			}
-		}
-		
-		function pwdSearch(){
-			var email = $("#email").val();
-			if(email==''){
-				$("#emailErr").text("이메일을 입력해주세요.");
-			}else if($("#emailErr").text()!=''){
-				alert("오류 사항을 확인 후 다시 입력해주세요.");
-				return false;
-			}else{
-				$.ajax({
-					type: "post",
-					async: false,
-					url: "${contextPath}/me/pwdSearch",
-					data: {email: email},
-					success: function(data){ // 0: 실패, 1: 성공, -1: 이메일은 존재하나 메일 발송에 실패한 경우
-						if(data == 0){
-							alert("해당 이메일로 등록된 회원이 없습니다.");
-						}else if(data == -1){
-							alert("임시 비밀번호 발급에 실패했습니다. \n다시 시도해주시기 바랍니다.");
-						}else{
-							alert(email+"로 임시 비밀번호를 발급했습니다. \n다시 로그인 해주시기 바랍니다.");
-							location.href="${contextPath}/co/index.go";
-						}
-					},
-					error: function(){
-						alert("서버 내부 에러가 발생했습니다.");
-					}
-				});
-			}	
-		}
-	</script>
+	<!-- findMember.css -->
+	<link href="${contextPath }/css/member/findMember.css" rel="stylesheet">	
 </head>
 
 <body class="bg-light">
@@ -230,7 +82,7 @@
 		 			<div class="form-group">
 		 				<label for="email">이메일</label>
 		 				<input type="text" class="form-control" id="email" placeholder="EMAIL">
-		 				<span id="pwdSearchErr" class="help-block"></span>
+		 				<span id="emailErr" class="help-block"></span>
 		 			</div>
 					<div class="form-group">
 						<input type="button" class="btn btn-primary btn-block btn-lg mt-5" onclick="pwdSearch()" value="임시 비밀번호 발송">
@@ -241,13 +93,7 @@
 		</div>
 	</div>
 </section>
-    
-	
-
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<!-- findMember.js -->
+<script src="../js/member/findMember.js"></script>
 </body>
 </html>
