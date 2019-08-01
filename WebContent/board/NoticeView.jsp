@@ -47,7 +47,7 @@
 		<div class="card-header py-5 px-4" style="min-height: 300px;">${bnDTO.content}</div>
 		<hr>
 		<div align="right">
-      <c:if test="${bnDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >
+      <c:if test="${sessionScope.mdto.admin==1}" >
 			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/NoticeModifyFormAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">수정</a>
 			<a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/NoticeDelAction.bo?no=${bnDTO.no}&email=${bnDTO.email}">삭제</a>
       </c:if>

@@ -687,7 +687,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto text-center">
-                        <span class="text-muted text-uppercase">Frequently Asked Questions</span>
+                        <span class="text-muted text-uppercase">Customer Support</span>
                         <h2 class="display-4">FAQ</h2>
                     </div>
                 </div>
@@ -695,40 +695,41 @@
                     <div class="col-md-9 mx-auto">
                         <div class="row mt-4">
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem ipsum dolor sit amet?</h5>
+                                <h5>보관 불가능한 물품? </h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                               	변질우려가 있는 물품, 동식물, 현금(통장)및 유가증권<br>
+								화재의 위험이 있는 위험물, 도난물품, 도검류, 권총 등 <Br>
+								 불법 무기류와 미풍양속을 해치는 물품
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem sit andigen daepeditem amet?</h5>
+                                <h5>견적이 어떻게 되나요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                    	보관기간과 용량에 따라 달라지니 <br>
+                                    	자세한 사항은 상담문의에 질문해주시면 상세하게 답변 드리겠습니다.
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem ipsum dolor sit andigen daepeditem amet?</h5>
+                                <h5>보안은 어떤가요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                   	이용고객의 소중한 물품과 개인정보 보호를 위하여 <br>
+                                   24시간 365일 유인.무인 보안체계를 갖추어 이용고객이 편리하고 안심하게 사용할 수 있습니다
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem sit andigen daepeditem amet dem tumquam explabo?</h5>
+                                <h5>온도, 습도는 어떻게 관리하나요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                   	고객님의 물품을 최상의 상태로 유지하기 위해,<br>
+                                   	24시간 에어컨과 제습기를 가동하고 있습니다
                                 </p>
                             </div>
                         </div>
                         <div class="row text-center my-5">
                             <div class="col-lg-6 col-md-8 mx-auto">
-                                <div class="font-weight-bold lead">Still have more questions?</div>
-                                <p class="text-muted">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore.</p>
-                                <a href="${contextPath}/bo/NoticeListAction.bo"" class="btn btn-primary btn-sm">
-                                    	문의게시판가기
+                                <div class="font-weight-bold lead">더 자세하게 알아보려면?</div>
+                                <p class="text-muted"></p>
+                                <a href="${contextPath}/bo/NoticeListAction.bo" class="btn btn-primary btn-sm">
+                                    	고객지원 페이지로 이동
                                 </a>
                             </div>
                         </div>

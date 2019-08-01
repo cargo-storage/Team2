@@ -16,6 +16,8 @@
 	<jsp:include page="../inc/head_link.jsp"></jsp:include>
 	<link href="${contextPath }/css/board.css" rel="stylesheet">
 
+
+
 </head>
 <body>
 
@@ -70,32 +72,79 @@
 	           new daum.roughmap.Lander({
 	              "timestamp" : "1563237107174",
 	              "key" : "ud7a",
-	              "mapWidth" : "640",
-	              "mapHeight" : "360"
+	              "mapWidth" : "840",
+	              "mapHeight" : "460"
 	           }).render();
 	        </script>
-	               
-			<table class="t2 mx-auto mt-3">
-				<tr>
-					<td>지하철</td>
-					<td>8번출구 와서 꺽어</td>
+	            
+	               <div class="row p-4 mt-5 bg-white raised-box rounded">
+                    <div class="col-md-4 col-sm-6 mb-5 text-center">
+                        <div class="icon-box">
+                          
+                            <i class="fas fa-map-marker"  style="color: green;font-size: 1.8em;"></i> 
+							
+                        </div>
+                        <h4 class="mt-2">주소</h4>
+                        <span>부산광역시 부산진구 부전동 112-3번지<br> 삼한골든게이트 7층</span>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-5 text-center">
+                        <div class="icon-box">
+                            <i class="fas fa-phone"style="color: green;font-size: 1.8em;" ></i>
+                        </div>
+                        <h4 class="mt-2">전화번호</h4>
+                       <span>051-803-0909</span>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-5 text-center">
+                        <div class="icon-box">
+                           <i class="fas fa-phone-alt"style="color: green;font-size: 1.8em;"></i>
+                        </div>
+                        <h4 class="mt-2">팩스</h4>
+                       <span>051-803-0979</span>
+                    </div>   
+                    	
+			<table class="mx-auto">
+			
+				<tr height="90px">
+					<td width="15%"><i class="fas fa-subway" style="color: green">&nbsp;</i><b>지하철</b></td>
+					<td>(도보4분) 1,2호선 서면역 8번 출구<br>직진 180m > 미니스탑에서 좌회전 70m (쉐보레자동차 7층)</td>
 				</tr>
-				<tr>
-					<td>버스</td>
-					<td>138타고와서 가</td>
+				<tr height="90px">
+					<td width="15%"><i class="fas fa-bus" style="color: green"></i>&nbsp;<b>버스</b></td>
+					<td><b>서면 전포초등학교</b><br>10, 29, 43, 52, 80, 111, 5-1, 57, 99, 20, 부산진구11<br>
+					<b>서면 NC백화점</b><br>24, 85, 138-1, 160, 남구10, 부산진구12<br>
+					<b>부전도서관</b><br> 20, 133, 169-1						
+					</td>
 				</tr>
-				<tr>
-					<td>승용차</td>
-					<td>주차는 아무대나</td>
+				<tr height="110px">
+					<td width="15%"><i class="fas fa-parking" style="color: green;"></i>&nbsp;<b>주차</b></td>
+					<td>본 건물 내 주차는 유료주차이므로 별도로 발행해드리지 않습니다.<br>
+						건물 지하1층에 주차장 이용이 가능하십니다.<br>
+						(주차요금 : 30분당 1,000원)			
+					</td>
 				</tr>
 			</table>
-		</div>
-
+			 
+            
+                </div>
+			
+		        
+						
+		</div>		
+			
+                
+                    
+            
+			
         </div>
+        
       	</div>
+      	
 		</div>
+		
 		</div>
+		
 	</section>
+	
 
         
 <!--footer -->
