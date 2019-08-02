@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +11,77 @@
     
     <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     
+    
+    <script type="text/javascript">
+    
+		$(document).ready(function() {
+	        
+			// 체크박스 모두선택
+			$('.checkAll').click(function() {
+		         // $('.cb').prop('checked', this.checked); --> 체크만 하고싶으면 요거 써도 됨!
+	
+		         var chk = $(this).is(":checked");
+		          if(chk){
+		        	  $(".cb").prop('checked', true);
+		        	  $(".totalPrice").text($("#firstTotal").val());
+		          }else{
+		        	  $(".cb").prop('checked', false);
+		        	  $(".totalPrice").text("0");
+		          }
+			});
+			
+			// 장바구니 선택삭제
+			$('#delCart').on("click", function(){
+				var id= new Array();
+				$(".cb:checked").each(function(){
+					 var test = $(this).closest("tr").find('input#itemId').val(); // string
+					 id.push(test);
+				});
+				location.href="${contextPath}/mk/delCart.do?id="+id;
+			});
+			
+		});
+	    
+		// 개별 체크박스 선택 시 총 가격 변경
+	    function changeTotal(checkbox){
+	    	var cbox = parseInt(checkbox.value);
+	    	var total = parseInt($("#totalPrice").text());
+	    	if(checkbox.checked==true)	{
+	    		cbox = total+ cbox;
+	    		$(".totalPrice").text(cbox);
+	    	}else{
+	    		if($(".checkAll").is(":checked")==true) {$(".checkAll").prop('checked', false);} // 모두체크 해제
+	    		if(total != 0){ // total price가 0이 아닌경우 마이너스 계산
+		    		cbox = total-cbox;
+		    		$(".totalPrice").text(cbox);
+		    	}
+	    	}
+	    }
+		
+		// 주문
+	    function order(btn){
+			var orderType = btn.value;
+			var totalPrice = $("#totalPrice").text();
+			
+			if(orderType=="선택주문"){
+				
+				var id= new Array();
+				$(".cb:checked").each(function(){
+					 var test = $(this).closest("tr").find('input#itemId').val(); // string
+					 id.push(test);
+				});
+				
+				location.href="${contextPath}/mk/payCart.do?total="+totalPrice+"&id="+id;
+				
+			}else{
+				location.href="${contextPath}/mk/payCart.do?total="+totalPrice;
+			}
+			
+		}
+
+    </script>
     
   </head>
   <body>
@@ -25,149 +96,79 @@
 			<jsp:include page="market_header.jsp"></jsp:include>
 			
 			<section class="ftco-section">
-	    	<div class="container">
+	    	<div class="container mb-5">
 	    		<div class="row">
 	    			<div class="col-lg-10 ftco-animate pt-2">
 	            
 
 	              <h3 class="mb-5 font-weight-bold"><i class="fas fa-shopping-cart"></i> CART</h3>
 	              
-	              <table class="table">
-	              	<tr class="text-center font-weight-bold bg-light">
-		              	<td width='5%'>check</td>
-	              		<td colspan='2'>상품명</td>
-	              		<td width='15%'>상품가격</td>
+	              <table class="table text-center">
+	              <thead>
+	              	<tr class="text-center font-weight-bold bg-light" style="font-family: 'Jeju Gothic' !important;">
+		              	<td width='5%'><input type="checkbox" class="checkAll" checked></td>
+	              		<td colspan="2">상품명</td>
+	              		<td width='15%'>가격</td>
 	              		<td width='10%'>수량</td>
 	              		<td width='15%'>총 가격</td>
 	              	</tr>
-	              
+	              </thead>
+	              <tbody class="tbody">
+	            <c:set var="total" value="${0 }"/>
+	            <c:forEach var="item" items="${sessionScope.cart.itemList }">
+	            	<tr height="60px" id="itemTable">
+	            		<td width='5%'><input type="checkbox" onclick="changeTotal(this)" class="cb" value="${item.price * item.quantity }" checked></td>
+	            		<td width='10%'>
+	            			<img alt="${item.img }" src="${contextPath }/market/uploaded/${item.img}">
+	            		</td>
+	              		<td width='45%'>&nbsp;&nbsp; ${item.name }
+	              			<input type="hidden" value="${item.item }" id="itemId">
+	              		</td>
+	              		<td width='15%'>${item.price }</td>
+	              		<td width='10%'>${item.quantity }</td>
+	              		<td width='15%'>${item.price * item.quantity }</td>
+	            	</tr>
+	            	<c:set var="total" value="${total+ item.price * item.quantity }"/>
+	            </c:forEach>
+	              </tbody>
+	              <tfoot>
+	              	<tr>
+	              		<td colspan='3'><h5 class="mt-3 mb-0">총 결제예상금액</h5></td>
+	              		<td colspan='3'>
+	              			<h5 class="mt-3 mb-0 fontcolor totalPrice">${total }</h5>
+	              			<input type="hidden" value="${total }" id="firstTotal">
+	              		</td>
+	              	</tr>
+	              </tfoot>
 	              </table>
-	              
-	              
-	              
-	              <ul class="comment-list">
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-
-	                  <ul class="children">
-	                    <li class="comment">
-	                      <div class="vcard bio">
-	                        <img src="../images/person_1.jpg" alt="Image placeholder">
-	                      </div>
-	                      <div class="comment-body">
-	                        <h3>John Doe</h3>
-	                        <div class="meta">October 03, 2018 at 2:21pm</div>
-	                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                        <p><a href="#" class="reply">Reply</a></p>
-	                      </div>
-
-
-	                      <ul class="children">
-	                        <li class="comment">
-	                          <div class="vcard bio">
-	                            <img src="../images/person_1.jpg" alt="Image placeholder">
-	                          </div>
-	                          <div class="comment-body">
-	                            <h3>John Doe</h3>
-	                            <div class="meta">October 03, 2018 at 2:21pm</div>
-	                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                            <p><a href="#" class="reply">Reply</a></p>
-	                          </div>
-
-	                            <ul class="children">
-	                              <li class="comment">
-	                                <div class="vcard bio">
-	                                  <img src="../images/person_1.jpg" alt="Image placeholder">
-	                                </div>
-	                                <div class="comment-body">
-	                                  <h3>John Doe</h3>
-	                                  <div class="meta">October 03, 2018 at 2:21pm</div>
-	                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                                  <p><a href="#" class="reply">Reply</a></p>
-	                                </div>
-	                              </li>
-	                            </ul>
-	                        </li>
-	                      </ul>
-	                    </li>
-	                  </ul>
-	                </li>
-
-	                <li class="comment">
-	                  <div class="vcard bio">
-	                    <img src="../images/person_1.jpg" alt="Image placeholder">
-	                  </div>
-	                  <div class="comment-body">
-	                    <h3>John Doe</h3>
-	                    <div class="meta">October 03, 2018 at 2:21pm</div>
-	                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-	                    <p><a href="#" class="reply">Reply</a></p>
-	                  </div>
-	                </li>
-	              </ul>
-	              <!-- END comment-list -->
-	              
-	              <div class="comment-form-wrap pt-5">
-	                <h3 class="mb-5">Leave a comment</h3>
-	                <form action="#" class="p-3 p-md-5 bg-light">
-	                  <div class="form-group">
-	                    <label for="name">Name *</label>
-	                    <input type="text" class="form-control" id="name">
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="email">Email *</label>
-	                    <input type="email" class="form-control" id="email">
-	                  </div>
-	                  <div class="form-group">
-	                    <label for="website">Website</label>
-	                    <input type="url" class="form-control" id="website">
-	                  </div>
-
-	                  <div class="form-group">
-	                    <label for="message">Message</label>
-	                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-	                  </div>
-	                  <div class="form-group">
-	                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-	                  </div>
-
-	                </form>
-	              </div>
 	          </div>
 	          
 	          
 	          
-	          <!-- .col-md-8 -->
-	    			<div class="col-lg-2 sidebar ftco-animate bg-light">
-	            <div class="sidebar-box">
-	              <form action="#" class="search-form">
-	                <div class="form-group">
-	                  <span class="icon icon-search"></span>
-	                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+	          <!-- 우측 결제영역 -->
+	          
+	          <div class="col-lg-2 sidebar ftco-animate bg-light">
+	          	
+	          	<div class="sidebar-box mt-4 mx-auto text-center">
+	          		<small class="d-inline-block">결제예상금액</small>
+	          		<h4 class="d-inline-block">TOTAL</h4>
+	          		<h4 class="fontcolor totalPrice"  id="totalPrice">${total }</h4>
+				</div>	  
+				        
+	          	<div class="sidebar-box mt-4 mx-auto text-center">
+	          		<small class="d-inline-block">주문</small>
+					<h4 class="">ORDER</h4>
+	                <div class="form-group" id="order">
+	                  <input type="button" id="delCart" value="선택삭제" class="rounded mt-2 btn submit mx-auto">
+	                  <input type="button" onclick="order(this)" value="선택주문" class="rounded mt-2 btn submit mx-auto"> 
+	                  <input type="button" onclick="order(this)" value="전체주문" class="rounded mt-2 btn submit mx-auto"> 
 	                </div>
-	              </form>
 	            </div>
-	            <div class="sidebar-box ftco-animate">
+	          
+	          
+	    	
+
+	            <!-- <div class="sidebar-box ftco-animate">
 	            	<h3 class="sidebar-heading">Categories</h3>
 	              <ul class="categories">
 	                <li><a href="#">Fashion <span>(6)</span></a></li>
@@ -176,88 +177,7 @@
 	                <li><a href="#">Food <span>(2)</span></a></li>
 	                <li><a href="#">Photography <span>(7)</span></a></li>
 	              </ul>
-	            </div>
-
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Popular Articles</h3>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_1.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_2.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_3.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Tag Cloud</h3>
-	              <ul class="tagcloud">
-	                <a href="#" class="tag-cloud-link">animals</a>
-	                <a href="#" class="tag-cloud-link">human</a>
-	                <a href="#" class="tag-cloud-link">people</a>
-	                <a href="#" class="tag-cloud-link">cat</a>
-	                <a href="#" class="tag-cloud-link">dog</a>
-	                <a href="#" class="tag-cloud-link">nature</a>
-	                <a href="#" class="tag-cloud-link">leaves</a>
-	                <a href="#" class="tag-cloud-link">food</a>
-	              </ul>
-	            </div>
-
-							<div class="sidebar-box subs-wrap img" style="background-image: url(../images/bg_1.jpg);">
-								<div class="overlay"></div>
-								<h3 class="mb-4 sidebar-heading">Newsletter</h3>
-								<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia</p>
-	              <form action="#" class="subscribe-form">
-	                <div class="form-group">
-	                  <input type="text" class="form-control" placeholder="Email Address">
-	                  <input type="submit" value="Subscribe" class="mt-2 btn btn-white submit">
-	                </div>
-	              </form>
-	            </div>
-
-	            <div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Archives</h3>
-	              <ul class="categories">
-	              	<li><a href="#">October 2018 <span>(10)</span></a></li>
-	                <li><a href="#">September 2018 <span>(6)</span></a></li>
-	                <li><a href="#">August 2018 <span>(8)</span></a></li>
-	                <li><a href="#">July 2018 <span>(2)</span></a></li>
-	                <li><a href="#">June 2018 <span>(7)</span></a></li>
-	                <li><a href="#">May 2018 <span>(5)</span></a></li>
-	              </ul>
-	            </div>
-
-
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Paragraph</h3>
-	              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
-	            </div>
+	            </div> -->
 	          </div><!-- END COL -->
 	    		</div>
 	    	</div>

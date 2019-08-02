@@ -5,18 +5,18 @@ import java.sql.Date;
 public class M_orderDTO { // 아이템 단위로 들어감.
 	
 	int no, price, quantity;
-	String item, name, category, email;
+	String item, name, category, email, order_id;
 	Date date;
 	
 	public M_orderDTO() {
 	}
 	
-	public M_orderDTO(int no, int price, int quantity, String item, String name, String category, String email,
+	public M_orderDTO(int price, int quantity, String order_id, String item, String name, String category, String email,
 			Date date) {
 		super();
-		this.no = no;
 		this.price = price;
 		this.quantity = quantity;
+		this.order_id = order_id;
 		this.item = item;
 		this.name = name;
 		this.category = category;
@@ -48,6 +48,14 @@ public class M_orderDTO { // 아이템 단위로 들어감.
 		this.quantity = quantity;
 	}
 
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
+	}
+
+	public String getOrder_id() {
+		return order_id;
+	}
+	
 	public String getItem() {
 		return item;
 	}

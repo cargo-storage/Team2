@@ -1,5 +1,6 @@
-package cargo.market.DAO;
+package cargo.market.DTO;
 
+import cargo.market.DAO.MarketDAO;
 
 public class Paging {
 	

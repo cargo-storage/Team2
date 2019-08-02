@@ -11,7 +11,13 @@
         <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 
          <!-- CSS/CDN links-->
-		<jsp:include page="inc/head_link.jsp"></jsp:include>
+		<jsp:include page="inc/head_css.jsp"></jsp:include>
+		<!-- login.css -->
+		<link href="${contextPath }/css/member/login.css" rel="stylesheet"/>
+		
+		<!-- CSS/CDN links 밑에 자바 스크립트 때문에 위로 올려둠-->
+		<jsp:include page="inc/head_js.jsp"/>
+		
 		
         <style>
         	/* 중고 장터 */
@@ -35,69 +41,7 @@
 				-webkit-line-clamp: 3; 
 				-webkit-box-orient: vertical;
 				text-align: center;
-			}
-			
-			/* login */
-			.modal-login {
-			width: 350px;
-			}
-		
-			.modal-login .modal-content {
-				padding: 20px;
-				border-radius: 1px;
-				border: none;
-			}
-			
-			.modal-login .modal-header {
-				border-bottom: none;
-				position: relative;
-				justify-content: center;
-			}
-			
-			.modal-login h4 {
-				text-align: center;
-				font-size: 26px;
-			}
-			
-			.modal-login .form-control, .modal-login .btn {
-				min-height: 40px;
-				border-radius: 1px;
-			}
-			
-			.modal-login .close {
-				position: absolute;
-				top: -5px;
-				right: -5px;
-			}
-			
-			.modal-login .btn {
-				background: #3498db;
-				border: none;
-				line-height: normal;
-				font-size: 1.25rem;
-			}
-			
-			.modal-login .btn:hover, .modal-login .btn:focus {
-				background: #248bd0;
-			}
-			
-			.modal-login .hint-text, .modal-login .hint-text a{
-				color: #14ba9a;
-				font-size: 12px;
-				font-weight: bold;
-				line-height: 3;
-				margin: 0 7px;
-			}
-			
-			.trigger-btn {
-				display: inline-block;
-			}
-			
-			.help-block {
-				color: red;
-				font-size: 11px;
-			}
-					 	
+			}					 	
         </style>
         
         <script type="text/javascript"> //login.js
@@ -115,107 +59,39 @@
 				if(${param.login!=null}){
 					$("#loginModal").modal('toggle');
 				}
-
-				/* 이메일 저장 */
-				// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
-			    var key = getCookie("key");
-			    $("#email").val(key); 
-			     
-			    if($("#email").val() != ''){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
-			        $("#emailSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
-			    }
-			     
-			    $("#emailSaveCheck").change(function(){ // 체크박스에 변화가 있다면,
-			        if($("#emailSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-			            setCookie("key", $("#email").val(), 7); // 7일 동안 쿠키 보관
-			        }else{ // ID 저장하기 체크 해제 시,
-			            deleteCookie("key");
-			        }
-			    });
-			        
-				$("#email").blur(function(){
-					if($(this).val()==''){
-						$("#emailErr").text("필수 입력 사항입니다.");
-						$("#emailErr").show();
-					}else{
-						$("#emailErr").hide();
-						if($("#emailSaveCheck").is(":checked")){ // ID 저장하기를 체크한 상태라면,
-				            setCookie("key", $("#email").val(), 7); // 7일 동안 쿠키 보관
-				            }
-					}
-				});
 				
-				$("#pw").blur(function(){
-					if($(this).val() ==''){
-						$("#pwErr").text("필수 입력 사항입니다.");
-						$("#pwErr").show();
-					}else{ $("#pwErr").hide(); }
-				});
-			});
-			
-		 	function login(){
-		 		var result = 0;
-		 		var email = $("#email");
-				var pw = $("#pw");
-		
-				if (email.val() == '') {
-					$("#emailErr").text("필수 입력 사항입니다.");
-					$("#emailErr").show();
-					result = 1;
-				}
-				if (pw.val() == '') {
-					$("#pwErr").text("필수 입력 사항입니다.");
-					$("#pwErr").show();
-					result = 1;
-				}
-				if(result==1){
-					alert("필수 사항을 기입해주세요.");
-					return false;
-				}
-		 	};
-		 	
-		 	/* 쿠키관련 */
-		 	function setCookie(cookieName, value, exdays){
-			    var exdate = new Date();
-			    exdate.setDate(exdate.getDate() + exdays);
-			    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-			    document.cookie = cookieName + "=" + cookieValue;
-			}
-			 
-			function deleteCookie(cookieName){
-			    var expireDate = new Date();
-			    expireDate.setDate(expireDate.getDate() - 1);
-			    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-			}
-			 
-			function getCookie(cookieName) {
-			    cookieName = cookieName + '=';
-			    var cookieData = document.cookie;
-			    var start = cookieData.indexOf(cookieName);
-			    var cookieValue = '';
-			    if(start != -1){
-			        start += cookieName.length;
-			        var end = cookieData.indexOf(';', start);
-			        if(end == -1)end = cookieData.length;
-			        cookieValue = cookieData.substring(start, end);
-			    }
-			    return unescape(cookieValue);
-			}
-			
-			/* 간편견적 */
-			var go;
-			var day;
-			
-			function inNumber(){
-		        if(event.keyCode<48 || event.keyCode>57){
-		           alert("숫자만 입력가능합니다.");
-		           event.returnValue=false;
-		        }
-		    }
-
-			$(function () {
+				//창 열기 버튼을 클릭했을경우
+	            $("#ajaxbtn").on("click",function(){
+	            	if($("#size").val()==""){
+	            		alert("사이즈를 선택하세요.");
+	            	}else if($("#minday").val()==""){
+	            		alert("이용하실 일 수를 입력하세요.");
+	            	}else if(parseInt($("#minday").val())<15){
+	            		alert("최소 15일 이상 사용가능합니다.");
+	            	}else{
+	            		$("#dialog").dialog("open"); //다이얼로그창 오픈                
+	            	}
+	            });
 				
-				$("#ajaxbtn").on("click", function() {
+	          //$("#dialog").dialog();
+	            $("#dialog").dialog({
+	                autoOpen:false, //자동으로 열리지않게
+	                position:[100,200], //x,y  값을 지정
+	                //"center", "left", "right", "top", "bottom"
+	                modal:true, //모달대화상자
+	                resizable:false, //크기 조절 못하게
+	                width: 350,
+	                height: 525,
+	                buttons:{
+	                    "확인" : function(){
+	                    	location.href='${contextPath}/re/info.me?warehouse='+$("#rssize").val();
+	                    },"취소" : function(){
+	                        $(this).dialog("close");
+	                    }
+	                }
+	            });
+	            
+	            $("#ajaxbtn").on("click", function() {
 					go = $("#size").val(); //A,B,C,D
 					day = $("#minday").val();
 					//var AllData = {'minday': day,'house': go};
@@ -233,87 +109,21 @@
 						}
 					});//end of ajax
 				});//end of onclick
-			});
-			
-			$(function(){
-	            
-				//$("#dialog").dialog();
-	            $("#dialog").dialog({
-	                autoOpen:false, //자동으로 열리지않게
-	                position:[100,200], //x,y  값을 지정
-	                //"center", "left", "right", "top", "bottom"
-	                modal:true, //모달대화상자
-	                resizable:false, //크기 조절 못하게
-	                width: 350,
-	                height: 525,
-	                buttons:{
-	                    "확인" : function(){
-	                    	location.href='${contextPath}/re/info.me?warehouse='+$("#rssize").val();
-	                    },"취소" : function(){
-	                        $(this).dialog("close");
-	                    }
-	                }
-	            });
-	
-	            //창 열기 버튼을 클릭했을경우
-	            $("#ajaxbtn").on("click",function(){
-	            	if($("#size").val()==""){
-	            		alert("사이즈를 선택하세요.");
-	            	}else if($("#minday").val()==""){
-	            		alert("이용하실 일 수를 입력하세요.");
-	            	}else if(parseInt($("#minday").val())<15){
-	            		alert("최소 15일 이상 사용가능합니다.");
-	            	}else{
-	            		$("#dialog").dialog("open"); //다이얼로그창 오픈                
-	            	}
-	            });
-        });
-		</script>
-		<!-- 세션 타임아웃 -->
-  		<c:if test="${sessionScope.mdto ne null }">
-   		<script> 
-			var setTime = 59; //카운트 시간
-			var count = 0; //모달 띄우는 시간
-			var timer;
-			
-			setInterval(setcount,1000); //1초마다 setcount함수를 실행(1000=>1초)
-			
-			$(function(){
-				$("#extendTime").click(function(){
-					count = 0;
-					setTime = 59;
-					clearInterval(timer);		// 타이머 해제
-					$("#timeMsg").html("60초");
-				});
-				
-				$("#timerModal").on("show.bs.modal", function(){
-					$("body").removeAttr('onmousemove'); //모달 띄워져 있을 때 mousemove 없앰
-				});
-				
-				$("#timerModal").on("hide.bs.modal", function(){
-					$("body").attr('onmousemove','count=0'); //모달 없어지면 다시 mousemove 생성
-				});
-			});
+       		});
 
-			function setcount() {
-				if (count++ == 600){ // 10분 뒤 모달 띄우기
-					$("#openTimer").trigger("click");
-					timer = setInterval(msg_time,1000);
-				}
-			}
+							
+			/* 간편견적 */
+			var go;
+			var day;
 			
-			function msg_time() {	// 1초씩 카운트
-				msg = (setTime % 60) + "초";	// 남은 시간 계산
-				$("#timeMsg").html(msg);						
-				setTime--;					// 1초씩 감소
-				
-				if (setTime < 0) {			// 시간이 종료 되었으면..	
-					clearInterval(timer);		// 타이머 해제
-					location.href="${contextPath}/me/logout";
-				}
-			}		
-   		</script>
-  		</c:if>
+			function inNumber(){
+		        if(event.keyCode<48 || event.keyCode>57){
+		           alert("숫자만 입력가능합니다.");
+		           event.returnValue=false;
+		        }
+		    }
+		</script>
+
     </head>
 <body data-spy="scroll" data-target="#lambda-navbar" data-offset="0" onmousemove="count=0">
 <!-- 세션 타임아웃 -->
@@ -758,12 +568,12 @@
 						<div class="modal-body">
 							<form action="${contextPath }/me/login" method="post" onsubmit="return login()">
 								<div class="form-group">
-									<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
-									<span id="emailErr" class="help-block"></span>
+									<input type="text" class="form-control" id="current_email" name="current_email" placeholder="EMAIL">
+									<span id="current_emailErr" class="help-block"></span>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" id="pwd" name="pwd" placeholder="PASSWORD">
-									<span id="pwErr" class="help-block"></span>
+									<input type="password" class="form-control" id="current_pwd" name="current_pwd" placeholder="PASSWORD">
+									<span id="current_pwdErr" class="help-block"></span>
 								</div>
 								<div class="form-group">
 									<input type="submit" class="btn btn-primary btn-block btn-lg" value="LOGIN">
@@ -781,7 +591,14 @@
 					</div>
 				</div>
 			</div>
-
+		
+		<!-- 세션 타임아웃 -->
+  		<c:if test="${sessionScope.mdto ne null }">
+   			<script src="js/member/sessionTime.js"></script> 
+  		</c:if>
+  		<!-- login.js -->
+  		<script src="js/member/login.js"></script>
+  		
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>

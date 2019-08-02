@@ -45,7 +45,7 @@
    				<!-- 아이템분류 -->
 				<div class="ftco-bread my-3">
 				<div class="row">
-					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6">ITEMS</h3>
+					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6"><i class="fas fa-store"></i> ITEMS</h3>
 					
 				    <div class="col-md-6 ftco-animatev fadeInUp ftco-animated">
 						<p class="breadcrumbs" id="category" style="letter-spacing: 0.1em;">
@@ -89,10 +89,20 @@
 					</div>
 		</c:forEach>
 				</div>
+			    
+			    
+			    		        
+        		<!-- 검색 -->
+				<form action="./market.do" class="search-form bg-white col-md-3 ml-auto" id="searchFrm">
+	                <div class="form-group">
+	                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
+                  		<input type="hidden" name="cate" value="${category }">
+	                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
+	            	</div>
+	            </form>
 			    	
-			    	
-				<!-- 페이징-->
-		    	<div class="d-block row mt-5">
+<!-- 페이징 : 검색어 있을 시 ! -->
+		    	<div class="d-block row mt-3 mb-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
@@ -113,15 +123,6 @@
 		            </div>
 		          </div>
 		        </div> 
-		        
-		        	<!-- 검색 -->
-					<form action="./market.do" class="search-form col-md-2 d-inline-block bg-white" id="searchFrm">
- 		                <div class="form-group">
- 		                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
-		                  <input type="hidden" name="cate" value="${category }">
- 		                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
- 		            	</div>
- 		            </form>
 		        
 		        
 	    	</div>

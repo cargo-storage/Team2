@@ -10,7 +10,7 @@ import cargo.common.DTO.M_boardDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.DAO.MarketDAO;
-import cargo.market.DAO.Paging;
+import cargo.market.DTO.Paging;
 
 public class MarketMainAction implements Action{
 
