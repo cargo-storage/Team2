@@ -80,12 +80,12 @@
             </table>
                
             <div class="col-md-8 float-left mr-auto my-1">
-	             <ul class="ml-auto mb-auto p-0">
+	             <ul class="pagination">
             	<c:if test="${currentPage > 1}">
                 	<li class="page-item">
                 		<a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage-1}">&lt;</a>
                 	</li>
-            	</c:if>  
+            	</c:if>               	 
                     <li class="page-item d-inline-block">
                     	<a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage}"> ${currentPage} </a>
                     </li>
@@ -93,7 +93,7 @@
                     <li class="page-item">
                     	<a class="page-link" href="${pageContext.request.contextPath}/bo/QuestionListAction.bo?currentPage=${currentPage+1}">&gt;</a>
                     </li>
-            	</c:if>                                                            
+            	</c:if>                                                     
                 </ul>
              </div>
                                            

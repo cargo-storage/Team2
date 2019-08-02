@@ -30,43 +30,16 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
     
     String house = request.getParameter("house");
     ReservationDAO dao = new ReservationDAO();
+    
+
+    request.setAttribute("res_day", today);
+    
 	
 	ArrayList<ItemsDTO> rList = dao.getCurReservation(house);
 	ArrayList<ReservationDTO> rList2 = dao.getReservation(house);
 	
-	
-	ArrayList<String> sdayList = new ArrayList<>();
-	
-	for(int i=0;i<rList.size();i++){
-		ItemsDTO idto = rList.get(i);
-		String start_day = formatter.format(idto.getStart_day());
-		sdayList.add(start_day);
-	}
-	
-	for(int i=0;i<rList2.size();i++){
-		ReservationDTO rdto = rList2.get(i);
-		String start_day = formatter.format(rdto.getStart_day());
-		sdayList.add(start_day);
-	}
-	
-	ArrayList<String> edayList = new ArrayList<>();
-	
-	for(int i=0;i<rList.size();i++){
-		ItemsDTO idto = rList.get(i);
-		String end_day = formatter.format(idto.getEnd_day());
-		edayList.add(end_day);
-	}
-	
-	for(int i=0;i<rList2.size();i++){
-		ReservationDTO rdto = rList2.get(i);
-		String end_day = formatter.format(rdto.getEnd_day());
-		edayList.add(end_day);
-	}
-
-    request.setAttribute("res_day", today);
-	
-    request.setAttribute("sList", sdayList);
-    request.setAttribute("eList", edayList);
+	request.setAttribute("rList", rList);
+    request.setAttribute("rList2", rList2);
 	
 	
 	forward.setPath("../reservation/reservation_apply.jsp");

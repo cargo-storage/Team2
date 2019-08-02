@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="${contextPath }/css/default.css" id="theme-color">
 <!-- font-awesome CSS -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
 <link href="${contextPath }/css/font.css" rel="stylesheet">
 
 <!-- jquery.js -->
