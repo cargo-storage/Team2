@@ -22,7 +22,7 @@ public class NoticeListAction implements Action {
 		
 		BoardnDAO bnDAO = new BoardnDAO();
 		int totalRowCount = bnDAO.getNoticeCount();
-		int pagePerRow = 16;
+		int pagePerRow = 10;
 		
 		ArrayList<BoardnDTO> list = bnDAO.getNoticeList(currentPage, pagePerRow);
 		

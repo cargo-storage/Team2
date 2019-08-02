@@ -57,7 +57,7 @@
             </table>
             
             <div class="col-md-8 float-left mr-auto my-1">
-	            <ul class="ml-auto mb-auto p-0">
+	            <ul class="pagination">
 	       <c:if test="${currentPage > 1}">
 	              <li class="page-item">
 	              	<a class="page-link" href="${contextPath}/bo/NoticeListAction.bo?currentPage=${currentPage-1}">&lt;</a>
