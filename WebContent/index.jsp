@@ -599,11 +599,7 @@
   		</c:if>
   		<!-- login.js -->
   		<script src="js/member/login.js"></script>
-  		
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
         <script src="${contextPath }/js/scripts.js"></script>
+        
     </body>
 </html>
