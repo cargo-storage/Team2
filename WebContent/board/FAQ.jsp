@@ -29,10 +29,8 @@
 					for (var i = 1; i < 10; i++) {
 						$(".card:eq(" + (index - i) + ")").attr("style", "display:flex");
 					}
-					
 				}
 			});
-						
 		});
 	</script>
 
@@ -61,7 +59,7 @@
             </div>
                 
                <!--  FAQ시작 -->
-             <div class="col-md-10 mx-auto mt-3 p-5">
+             <div class="col-md-12 bg-light mx-auto mt-5 p-5" style="box-shadow: 1px 1px 40px #e8e8e8;">
              <div id="service" class="view">
 				<div class="card">
 					<div class="card-header">
@@ -123,17 +121,17 @@
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5 class="mb-0"><i class="fas fa-question fa-spin" style="color:black"></i> <a class="card-link" data-toggle="collapse" href="#collapse9">&nbsp; 중도 해약시 위약금이 있나요? </a></h5>
+						<h5 class="mb-0"><i class="fas fa-question fa-spin" style="color:black"></i> <a class="card-link" data-toggle="collapse" href="#collapse8">&nbsp; 중도 해약시 위약금이 있나요? </a></h5>
 					</div>
-					<div id="collapse9" class="collapse" data-parent="#reserve">
+					<div id="collapse8" class="collapse" data-parent="#reserve">
 						<div class="card-body">별도의 위약금이 발생됩니다. 해지 수수료에 대한 내용은 담당자에 문의 바랍니다.</div>
 					</div>
 				</div>
 				<div class="card">
 					<div class="card-header">
-						<h5 class="mb-0"><i class="fas fa-question fa-spin" style="color: black"></i> <a class="card-link" data-toggle="collapse" href="#collapse8">&nbsp; 택배로 물건을 맡기고 찾을 수 있나요? </a></h5>
+						<h5 class="mb-0"><i class="fas fa-question fa-spin" style="color: black"></i> <a class="card-link" data-toggle="collapse" href="#collapse9">&nbsp; 택배로 물건을 맡기고 찾을 수 있나요? </a></h5>
 					</div>
-					<div id="collapse8" class="collapse" data-parent="#reserve">
+					<div id="collapse9" class="collapse" data-parent="#reserve">
 						<div class="card-body"> 택배를 이용한 박스의 입고/출고가 가능합니다. (택배비/운반비 별도)<br>직접 물품 입출고 또한 가능하며, 해당 지점 영업시간내 가능합니다.<Br>방문 수거/배송 서비스도 제공 예정입니다.</div>
 					</div>
 				</div>
@@ -157,11 +155,5 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 </body>
 </html>
