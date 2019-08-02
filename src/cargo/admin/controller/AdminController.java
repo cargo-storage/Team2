@@ -19,6 +19,7 @@ import cargo.admin.action.AdminEnterOverdueLocationAction;
 import cargo.admin.action.AdminOverdueAction;
 import cargo.admin.action.AdminReleaseItemAction;
 import cargo.admin.action.AdminReservToItemsAction;
+import cargo.admin.action.AdminShowChartsAction;
 import cargo.admin.action.AdminwarehousingCheckAction;
 import cargo.common.DTO.MemberDTO;
 import cargo.common.action.Action;
@@ -131,6 +132,11 @@ public class AdminController extends HttpServlet {
 			}else if("/move_to_overdue".equals(command)){
 				action = new AdminMoveToOverdueAction();
 				forward =action.execute(request, response);
+				
+			//chart에 필요한 정보 가져오기
+			}else if("/show_charts".equals(command)){
+				action =new AdminShowChartsAction();
+				forward = action.execute(request, response);
 			}
 			
 			
