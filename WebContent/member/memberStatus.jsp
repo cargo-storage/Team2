@@ -80,7 +80,7 @@
 									<td><fmt:formatNumber value="${adto.item_price}" type="currency" currencySymbol="￦"/></td>
 									<td>
 									<c:if test="${adto.state eq '보관' }">
-										<a href="${contextPath }/me/extendReserv?category=status" class="btn-success btn-sm">연장하기</a>
+										<a href="${contextPath }/me/extend?category=status" class="btn-success btn-sm">연장하기</a>
 									</c:if>							
 									</td>
 								</tr>
@@ -112,7 +112,7 @@
 									<td><fmt:formatNumber value="${adto.payment}" type="currency" currencySymbol="￦"/></td>
 									<td>
 									<c:if test="${adto.state eq '예약' }">
-										<a href="${contextPath }/me/extendReserv?category=reservation" class="btn-success btn-sm">연장하기</a>
+										<a href="${contextPath }/me/extend?category=reservation" class="btn-success btn-sm">연장하기</a>
 									</c:if>							
 									</td>
 								</tr>

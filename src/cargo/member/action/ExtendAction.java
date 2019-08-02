@@ -13,7 +13,7 @@ import cargo.common.action.ActionForward;
 import cargo.member.DAO.MemberDAO;
 import cargo.reservation.DAO.ReservationDAO;
 
-public class ExtendReservationAction implements Action {
+public class ExtendAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {		

@@ -13,7 +13,7 @@ import cargo.common.action.ActionForward;
 import cargo.member.action.EmailAuthAction;
 import cargo.member.action.EmailCheckAction;
 import cargo.member.action.EmailSearchAction;
-import cargo.member.action.ExtendReservationAction;
+import cargo.member.action.ExtendAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.LogoutAction;
@@ -120,7 +120,7 @@ public class MemberController extends HttpServlet {
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
 			} else if (command.equals("/extendReserv")) { // 보관 연장
-				action = new ExtendReservationAction();
+				action = new ExtendAction();
 				forward = action.execute(request, response);
 				
 			}
