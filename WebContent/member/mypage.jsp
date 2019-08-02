@@ -24,14 +24,12 @@
 <c:if test="${content eq 'leave' }">
 	<c:set var="content" value="leaveMember.jsp"/>
 </c:if> 
-<c:choose>   
-	<c:when test="${sessionScope.mdto.email==null }">
-		<script type="text/javascript">
-			alert("로그인 후 이용 가능합니다.");
-			location.href="${contextPath}/co/login.go"
-		</script>
-	</c:when>
-</c:choose>
+<c:if test="${sessionScope.mdto.email==null }">
+	<script type="text/javascript">
+		alert("로그인 후 이용 가능합니다.");
+		location.href="${contextPath}/co/login.go"
+	</script>
+</c:if>
 <section>
 	<div class="container-fuild">
 		<div class="row">
