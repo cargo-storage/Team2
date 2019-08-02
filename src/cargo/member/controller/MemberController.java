@@ -119,7 +119,7 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/memberStatus")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/extendReserv")) { // 보관 연장
+			} else if (command.equals("/extend")) { // 보관 연장
 				action = new ExtendAction();
 				forward = action.execute(request, response);
 				
