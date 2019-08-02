@@ -149,14 +149,21 @@
 			$(this).val($(this).val().replace(/[^0-9]/g,''));
 		});
 		
-		$(document).on( 'click', '.del',function () {
+		$(document).on( 'click', '.del', function () {
 			var tr = $(this).closest('tr');
 			var name = tr.find(".name").text();
-			if(tr.find(".name").text() =='') name=tr.find(".name input").val();
+			if(name =='') name=tr.find(".name input").val();
 			var check = confirm(name+"을 삭제하시겠습니까?");
 			
 			if(check){
-				tr.find('.item').appendTo('#go');
+				var item = tr.find(".item").text();
+				if(item =='') item=tr.find(".item input").val();
+				
+				$('<input>').attr({
+				    type: 'hidden',
+				    name: 'item',
+				    value: item
+				}).appendTo('#go');
 				$('#go').attr("action", "../mk/del_item.do");
 				$('#go').submit();
 			}
@@ -204,10 +211,6 @@
 					$('#go').submit();
 				}
 			}
-		});
-		
-		$('#dataTable .del').on( 'click', function () {
-			
 		});
 		
 		$('#dataTable tbody').on( 'click', 'tr', function () {

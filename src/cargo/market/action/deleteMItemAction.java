@@ -13,7 +13,7 @@ public class deleteMItemAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String item = request.getParameter("item");
 		MarketDAO dao = new MarketDAO();
-		
+		System.out.println(item);
 		dao.deleteMItem(item);
 		
 		ActionForward forward = new ActionForward();
