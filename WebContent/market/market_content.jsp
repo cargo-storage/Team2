@@ -38,6 +38,7 @@
    		function buy(){
    			var check = confirm("이 상품을 주문하시겠습니까?");
    			var frm = document.getElementById("orderForm");
+   			alert(frm);
    			if(check==true)	frm.submit();
    		}
    		

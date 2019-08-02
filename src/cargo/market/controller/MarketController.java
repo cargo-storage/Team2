@@ -17,6 +17,7 @@ import cargo.market.action.AddCommentAction;
 import cargo.market.action.MarketMainAction;
 import cargo.market.action.OrderCartAction;
 import cargo.market.action.OrderConfirmAction;
+import cargo.market.action.OrderInfoAction;
 import cargo.market.action.OrderItemAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
@@ -120,6 +121,9 @@ public class MarketController extends HttpServlet{
 	        	forward = action.execute(request, response);
 	        }else if(command.equals("/confirmOrder.do")){
 	        	action = new OrderConfirmAction();
+	        	forward = action.execute(request, response);
+	        }else if(command.equals("/orderInfo.do")){
+	        	action = new OrderInfoAction();
 	        	forward = action.execute(request, response);
 	        }
       
