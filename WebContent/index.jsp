@@ -594,10 +594,10 @@
 		
 		<!-- 세션 타임아웃 -->
   		<c:if test="${sessionScope.mdto ne null }">
-   			<script src="js/member/sessionTime.js"></script> 
+   			<script src="${contextPath }/js/member/sessionTime.js"></script> 
   		</c:if>
   		<!-- login.js -->
-  		<script src="js/member/login.js"></script>
+  		<script src="${contextPath }/js/member/login.js"></script>
   		
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

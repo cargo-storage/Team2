@@ -41,7 +41,6 @@ function emailSearch(){
 		alert("오류 사항을 확인 후 다시 입력해주세요.");
 		return false;
 	}
-	return false;
 }
 
 function pwdSearch(){
