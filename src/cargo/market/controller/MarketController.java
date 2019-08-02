@@ -21,6 +21,8 @@ import cargo.market.action.OrderItemAction;
 import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
 import cargo.market.action.ShowItemsAction;
+import cargo.market.action.UpdateMItemAction;
+import cargo.market.action.deleteMItemAction;
 
 public class MarketController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -84,6 +86,15 @@ public class MarketController extends HttpServlet{
 			}else if("/add_item.do".equals(command)){// add item into M_item
 				action = new AddItemAction();
 				forward = action.execute(request, response);
+				
+			}else if("/modi_item.do".equals(command)){// update M_item
+				action = new UpdateMItemAction();
+				forward = action.execute(request, response);
+				
+			}else if("/del_item.do".equals(command)){// delete M_item
+				action = new deleteMItemAction();
+				forward = action.execute(request, response);
+				
 			}else if(command.equals("/addCart.do")){
 	        	action = new AddCartAction();
 	        	forward = action.execute(request, response);
