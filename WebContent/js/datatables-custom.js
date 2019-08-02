@@ -54,13 +54,6 @@ function reservationModal(modal, result) {
 }//end of reservationModal
 
 function itemsModal(modal,result) {
-//	$('.calendar').pignoseCalendar({
-//    	lang: 'ko',
-//    	multiple: true,
-//		init: function(context){
-//	          $(this).pignoseCalendar('set', result.start_day+'~'+result.end_day);
-//	    }
-//    });//end of pignoseCalendar
 	$('.calendar').pignoseCalendar({
 		lang: 'ko',
 		multiple: true,

@@ -11,12 +11,12 @@ public class M_orderDTO { // 아이템 단위로 들어감.
 	public M_orderDTO() {
 	}
 	
-	public M_orderDTO(int no, int price, int quantity, String item, String name, String category, String email,
+	public M_orderDTO(int price, int quantity, String order_id, String item, String name, String category, String email,
 			Date date) {
 		super();
-		this.no = no;
 		this.price = price;
 		this.quantity = quantity;
+		this.order_id = order_id;
 		this.item = item;
 		this.name = name;
 		this.category = category;

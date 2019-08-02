@@ -19,8 +19,6 @@
 <script src="${contextPath}/vendor/jquery/jquery.animateNumber.min.js"></script>
 <script src="${contextPath}/vendor/bootstrap/js/bootstrap-datepicker.js"></script>
 <script src="${contextPath}/vendor/etc/scrollax.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="${contextPath}/vendor/google/google-map.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="${contextPath}/js/market_main.js"></script>
