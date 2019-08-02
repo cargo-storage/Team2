@@ -20,25 +20,9 @@
     <title>RESERVATION - TEAM2 WAREHOUSE</title>
     <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
-
 	<!-- Page level plugin CSS-->
 	<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
-	
-    
-    
-    <style type="text/css">
-   	#inputArea{
-	   	background-color: rgba(108, 117, 125, 0.2);
-   	}
-   	
-   	section{
-		background-image: url(../img/reservation3.jpg);
-		background-size: cover;
-	}
-	.background{
-		background-color: rgba( 255, 255, 255, 0.9);
-	}
-    </style>
+	<link href="${contextPath}/css/reservation.css" rel="stylesheet">
     
 </head>
 
@@ -46,7 +30,7 @@
 	
 	<!--navigation in page-->
 	<jsp:include page="../inc/header.jsp"></jsp:include>
-	<section class="py-7">
+	<section class="py-7"  id="section">
     	<div class="container">
            	<div class="row">
 	            <div class="col-md-7 col-sm-9 mx-auto text-center">
@@ -98,11 +82,6 @@
 		<!-- Page level plugin JavaScript-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 		<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
-		
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 <script type="text/javascript">
     

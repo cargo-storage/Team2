@@ -42,9 +42,9 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse" style="">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#company">회사소개</a>
-                </li>
+<!--                 <li class="nav-item"> -->
+<!--                     <a class="nav-link page-scroll" href="#company">회사소개</a> -->
+<!--                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="${contextPath }/co/information.go">이용안내</a>
                 </li>
@@ -71,9 +71,9 @@
 	               	<li class="nav-item dropdown">
 				      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">마이페이지</a>
 				      <div class="dropdown-menu" id="dropdown-menu">
-				        <a class="dropdown-item" href="${contextPath }/me/mypage.me?category=info">내 정보</a>
-				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=status">사용 내역</a>
-				        <a class="dropdown-item" href="${contextPath }/me/memberStatus.me?category=reservation">예약 현황</a>
+				        <a class="dropdown-item" href="${contextPath }/me/mypage?category=info">내 정보</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus?category=status">사용 내역</a>
+				        <a class="dropdown-item" href="${contextPath }/me/memberStatus?category=reservation">예약 현황</a>
 				      </div>
 				    </li>               
               		<a href="${contextPath }/me/logout" class="btn btn-navbar btn-primary trigger-btn">${name }님 환영합니다. 로그아웃 <i class="fas fa-sign-out-alt"></i></a>

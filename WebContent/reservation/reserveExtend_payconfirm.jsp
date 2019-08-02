@@ -11,29 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>예약 연장 완료 - TEAM2 WAREHOUSE</title>
 
-        <!--Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-        <!--vendors styles-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-        <!-- Bootstrap CSS / Color Scheme -->
-        <link rel="stylesheet" href="../css/default.css" id="theme-color">
-        <!-- font-awesome CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-		
-		<style type="text/css">
-			.table tr>td:not(.confirm){
-				text-align: center;
-			}
-			.red{
-				color: #ff3333;
-			}
-			.confirm{
-				text-align: right;
-			}
-	
-		</style>
+		<link href="${contextPath}/css/reservation.css" rel="stylesheet">	
  
 </head>
 
@@ -41,17 +19,18 @@
  	
 <!--navigation in page-->
 <jsp:include page="../inc/header.jsp"></jsp:include>
-	<section class="py-7 bg-light">
+	<section class="py-7" id="section_ex">
     	<div class="container">
            	<div class="row">
 	            <div class="col-md-7 col-sm-9 mx-auto text-center">
 	                <span class="text-muted text-uppercase">EXTENSION</span>
 	                <h2 class="display-4">예약 연장 확인</h2>
 	                <p class="lead">성공적으로 예약되셨습니다!</p>
+	                
 	            </div>
 			</div>
 		  
-		  <div class="my-3 p-3 bg-white rounded shadow-sm">
+		  <div class="my-3 pt-5 pb-2 bg-white rounded shadow-sm">
 			    <table class="table">
 			    	<tr>
 			    		<td><p class="font-weight-bold pt-2 m-0">예약자명</p></td>
@@ -111,7 +90,5 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
         
-		<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </body>
 </html>
