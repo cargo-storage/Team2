@@ -37,15 +37,14 @@
    		
    		function buy(){
    			var check = confirm("이 상품을 주문하시겠습니까?");
-   			var frm = document.getElementById("orderForm");
-   			alert(frm);
-   			if(check==true)	frm.submit();
+   			var ofrm = document.getElementById("orderForm");
+   			if(check==true)	ofrm.submit();
    		}
    		
    		function deleteitem(){
    			var check = confirm("이 아이템을 삭제하시겠습니까?");
    			var no ="${mjdto.no}";
-   			if(check==true)	location.href="${contextPath}/mk/deleteItem.do?no="+no;
+   			if(check==true)	{location.href="${contextPath}/mk/deleteItem.do?no="+no;}
    		}
     
     </script>
@@ -144,8 +143,8 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-		                	<a class="btn m-auto hover col-md-4" onclick="cart()" href=""><b>장바구니</b></a>
-		                	<a class="btn m-auto hover col-md-4" onclick="buy()" href=""><b>바로구매</b></a>
+		                	<a class="btn m-auto hover col-md-4" href="javascript:cart()"><b>장바구니</b></a>
+		                	<a class="btn m-auto hover col-md-4" href="javascript:buy()"><b>바로구매</b></a>
 		                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	</div>
 	          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
@@ -157,24 +156,6 @@
 	            	</c:if>
 	                </li>
 	              </ul>
-	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 카트폼 -->
-	              		<!-- 넘길값세팅 -->
-	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
-	                	<input type="hidden" name="quantity" id="quantity1" value="1">
-	                	<input type="hidden" name="item" value="${mjdto.item }">
-	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
-	                	<input type="hidden" name="category" value="${mjdto.category }">
-	                	<input type="hidden" name="img" value="${mjdto.image }">
-	              </form>
-	              <form id="orderForm" method="post" action="${contextPath }/mk/payItem.do?no=${mjdto.no}"> <!-- 바로주문 폼 -->
-	              		<!-- 넘길값세팅 -->
-	              		<input type="hidden" name="price" value="${mjdto.price }">
-	                	<input type="hidden" name="quantity" id="quantity2" value="1">
-	                	<input type="hidden" name="item" value="${mjdto.item }">
-	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
-	                	<input type="hidden" name="category" value="${mjdto.category }">
-	                	<input type="hidden" name="total" id="total" value="${mjdto.price }">
-	              </form>
 	            </div>
 
 
@@ -203,6 +184,26 @@
 	          
 	    		</div>
 	    	</div>
+	    	
+	    		 <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 카트폼 -->
+	              		<!-- 넘길값세팅 -->
+	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
+	                	<input type="hidden" name="quantity" id="quantity1" value="1">
+	                	<input type="hidden" name="item" value="${mjdto.item }">
+	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	                	<input type="hidden" name="category" value="${mjdto.category }">
+	                	<input type="hidden" name="img" value="${mjdto.image }">
+	              </form>
+	              <form id="orderForm" method="post" action="${contextPath }/mk/payItem.do?no=${mjdto.no}"> <!-- 바로주문 폼 -->
+	              		<!-- 넘길값세팅 -->
+	              		<input type="hidden" name="price" value="${mjdto.price }">
+	                	<input type="hidden" name="quantity" id="quantity2" value="1">
+	                	<input type="hidden" name="item" value="${mjdto.item }">
+	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	                	<input type="hidden" name="category" value="${mjdto.category }">
+	                	<input type="hidden" name="total" id="total" value="${mjdto.price }">
+	              </form>
+	    	
 	    </section>
 	    
 	    <!-- navbar -->
