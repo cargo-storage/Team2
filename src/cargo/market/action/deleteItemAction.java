@@ -1,7 +1,6 @@
 package cargo.market.action;
 
-import java.io.PrintWriter;
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,9 +13,7 @@ public class deleteItemAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		
 		MarketDAO mdao = new MarketDAO();
-		
 		boolean result = false;
 		
 		int no = Integer.parseInt(request.getParameter("no"));
@@ -29,8 +26,10 @@ public class deleteItemAction implements Action{
 			return null;
 		}
 		
-		ActionForward forward = new ActionForward();
+		// 쿠키 삭제
+		Cookie c = new Cookie("iN"+no, null);
 		
+		ActionForward forward = new ActionForward();
 		forward.setPath("../mk/market.do");
 		
 		return forward;

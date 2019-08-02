@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>POST - TEAM2 WAREHOUSE MARKET</title>
+    <title>Capture - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -41,24 +41,27 @@
 					<h3 class="mb-5 font-weight-bold"><i class="fas fa-clone"></i> POST</h3>
 	                
 	                <div class="p-3 p-md-5 bg-light rounded" style="box-shadow: 3px 3px 20px #e9e9e9;">
-	                <form action="${contextPath }/mk/postItem.do" enctype="multipart/form-data" method="post">
-	                
-	                  <c:forEach items="${requestScope.itemList }" var="idto">
+	                <form action="${contextPath }/mk/modifyItem.do?no=${mjdto.no }" class="p-3 p-md-5 bg-light" enctype="multipart/form-data" method="post">
+	                	
+	                	<c:forEach items="${requestScope.itemList }" var="idto">
 		                  	<input type="hidden" id="${idto.item}" value="${idto.name }">
-		              </c:forEach>
-		              
+		              	</c:forEach>
+	                  		              
 	                  <div class="row">
 		                  <div class="form-group col-md-5">
 		                    <label for="name">Item *</label>
 		                    <select class="form-control" name="item" onchange="getTitle(this)">
 			             <c:forEach items="${requestScope.itemList }" var="idto">
-			                	<option value="${idto.item }">${idto.item } : ${idto.name }</option>
+			             <c:choose>
+			             	<c:when test="${idto.item eq mjdto.item }"><option value="${idto.item }" selected>${idto.item } : ${idto.name }</option></c:when>
+			             	<c:otherwise><option value="${idto.item }">${idto.item } : ${idto.name }</option></c:otherwise>
+			             </c:choose>
 						 </c:forEach> 			            
 		                    </select>
 		                  </div>
 		                  <div class="form-group col-md-7">
 		                    <label for="name">Title *</label>
-		                    <input type="text" class="form-control" name="title" id="title" readOnly>
+		                    <input type="text" class="form-control" name="title" id="title" value="${mjdto.title }" readOnly>
 		                  </div>
 	                  </div>
 	                  
@@ -68,10 +71,10 @@
 	                  </div>
 	                  <div class="form-group">
 		                  <label for="message">Content *</label>
-		                  <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+		                  <textarea name="content" cols="30" rows="10" class="form-control">${mjdto.content }</textarea>
 	                  </div>
 	                  <div class="form-group">
-	                  	  <input type="submit" value="POST ITEM" class="btn py-3 px-4 btn-primary mx-auto">
+	                  	  <input type="submit" value="MODIFY" class="btn py-3 px-4 btn-primary mx-auto">
 	                  </div>
 	                  
 	                </form>

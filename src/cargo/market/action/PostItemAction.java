@@ -1,22 +1,21 @@
 package cargo.market.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
-import java.util.Locale;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.websocket.Transformation;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import cargo.common.DTO.BoardDTO;
+import cargo.common.DTO.M_boardDTO;
+import cargo.common.DTO.M_itemDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.DAO.MarketDAO;
@@ -28,17 +27,17 @@ public class PostItemAction implements Action{
 	
 		request.setCharacterEncoding("UTF-8");
 		
-		//리턴 시킬 객체를 준비
-		ActionForward Forwardaction = new ActionForward();
+		ActionForward forward=new ActionForward();
 		
 		String uploadPath = request.getRealPath("market/uploaded");
+		System.out.println(uploadPath);
 		
 		int size = 10*1024*1024;
 		String item="";
 		String title="";
 		String content="";
 		Timestamp date= new Timestamp(System.currentTimeMillis());
-		String filename="";
+		String imagefile="";
 		String originfilename="";
 		
 		try {
@@ -46,50 +45,40 @@ public class PostItemAction implements Action{
 			
 			item = multi.getParameter("item");
 			title = multi.getParameter("title");
-			content = multi.getParameter("content");	
-			
-						
-			System.out.println("item");
-			System.out.println("title");
-			System.out.println("content");
-			System.out.println("date");
+			content = multi.getParameter("content");
 			
 			Enumeration files = multi.getFileNames();
+			String file1 = (String) files.nextElement();
 			
-			String file1 = (String)files.nextElement();
-			filename = multi.getFilesystemName(file1);
+			imagefile = multi.getFilesystemName(file1);
 			originfilename = multi.getOriginalFileName(file1);
 			
+			System.out.println("imagefile "+imagefile);
+			System.out.println("originfilename "+originfilename);
+			
 		}catch (Exception e) {
+			
 			e.printStackTrace();
+			
 		}
 		
-		BoardDTO bb = new BoardDTO(item, title, content, date, filename);		
-	
-		System.out.println(uploadPath+"/"+filename);
-		
+		M_boardDTO mdto = new M_boardDTO(date, item, title, content, imagefile);
 		MarketDAO mdao = new MarketDAO();
-		boolean b = mdao.postItem(bb);
 		
-		if(b) //디비에 게시물 넣었는지 확인
-		{
-			HttpSession session = request.getSession();
-			session.setAttribute("listSuccess", bb);
+		boolean b = mdao.postItem(mdto);
+		
+		if(b){//디비에 게시물 넣었는지 확인
 			
-			ActionForward forward=new ActionForward();
 			forward.setRedirect(true);
 			forward.setPath(request.getContextPath()+"/mk/market.do");
-			return forward;	
 			
 		}else {
 			String msg = "게시물 등록에 실패했습니다.";
-			request.setAttribute("errMsg", msg);
-			ActionForward forward=new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Error.jsp");
-			return forward;	
-		
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert("+msg+")</script>");
 		}
+		
+		return forward;	
 		
 	}
 	

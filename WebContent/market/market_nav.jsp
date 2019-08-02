@@ -33,7 +33,7 @@
           	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
           		<c:if test="${admin == 1 }">
 	        		<li class="nav-item">
-	                	<a class="nav-link" href="${contextPath }/mk/uploaditem.do">게시글등록<small>(관리자)</small></a>
+	                	<a class="nav-link" href="${contextPath }/mk/uploadpage.do">게시글등록<small>(관리자)</small></a>
 	            	</li> 
 	            	<li class="nav-item">
 	                	<a class="nav-link" href="${contextPath}/mk/show_items.do">물건등록<small>(관리자)</small></a>

@@ -57,23 +57,22 @@ public class MarketDAO {
 	}
 	
 	
-	public boolean postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
+	public boolean postItem(M_boardDTO mdto){ // m_board insert 글쓰기 - 파일업로드 해야함
 		
 		boolean result = false;
-		
-		StringBuffer sql = new StringBuffer();
-		sql.append("Insert into m_board(item,title,content,image,date)");
-		sql.append("values (?,?,?,?,?)");
 	
 		try {
+			
 			getConnection();
+			
+			String sql = "INSERT INTO m_board(item, title, content, image, date) VALUES(?,?,?,?,?)";
 
-			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setString(1, bb.getItem());
-			pstmt.setString(2, bb.getTitle());
-			pstmt.setString(3, bb.getContent());
-			pstmt.setString(4, bb.getPath());
-			pstmt.setTimestamp(5, bb.getDate());
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mdto.getItem());
+			pstmt.setString(2, mdto.getTitle());
+			pstmt.setString(3, mdto.getContent());
+			pstmt.setString(4, mdto.getImage());
+			pstmt.setTimestamp(5, mdto.getDate());
 			
 			int n = pstmt.executeUpdate();
 			if(n>0) {
@@ -91,37 +90,42 @@ public class MarketDAO {
 		
 	
 	
-	public boolean modifyItem(BoardDTO bb){ // m_board 글수정
+	public boolean modifyItem(M_boardDTO bdto){ // m_board 글수정
 		
 		try {
 			
 			getConnection();
-			
-			String sql ="UPDATE m_board SET title=?, image=?,content=? WHERE no=?";
-			
-			if(bb.getPath()==null) sql ="UPDATE m_board SET title=?,content=? WHERE no=?";
-			pstmt = conn.prepareStatement(sql);
-			
-			if(bb.getPath()==null) {
-				pstmt.setString(1, bb.getTitle());
-				pstmt.setString(2, bb.getContent());
-				pstmt.setInt(3, bb.getNo());
+			String sql;
+				
+			if(bdto.getImage()==null) {
+				
+				sql ="UPDATE m_board SET title=?, content=?, item=? WHERE no=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdto.getTitle());
+				pstmt.setString(2, bdto.getContent());
+				pstmt.setString(3, bdto.getItem());
+				pstmt.setInt(4, bdto.getNo());
 			}else {
-				pstmt.setString(1, bb.getTitle());
-				pstmt.setString(2, bb.getPath());
-				pstmt.setString(3, bb.getContent());
-				pstmt.setInt(4, bb.getNo());
+				
+				sql ="UPDATE m_board SET title=?, image=?, content=?, item=? WHERE no=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdto.getTitle());
+				pstmt.setString(2, bdto.getImage());
+				pstmt.setString(3, bdto.getContent());
+				pstmt.setString(4, bdto.getItem());
+				pstmt.setInt(5, bdto.getNo());
 			}
 
 			pstmt.executeUpdate();
-			
 			return true;
 			
 		} catch (Exception e) {
-			System.out.println("modifyboard 오류:"+e.getMessage());
+			System.out.println("modifyboard 오류 : "+e.getMessage());
+			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
+		
 		return false;
 	}
 	
@@ -139,7 +143,6 @@ public class MarketDAO {
 			getConnection();
 			
 			pstmt = conn.prepareStatement(sql);
-			System.out.println("11");
 			pstmt.setInt(1, no);
 			result = pstmt.executeUpdate();
 			
@@ -150,7 +153,7 @@ public class MarketDAO {
 			}
 			
 		}catch(Exception e) {
-			System.out.println("deleteItem오류:"+e.getMessage());
+			System.out.println("deleteItem 오류 : "+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();

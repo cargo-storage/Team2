@@ -40,6 +40,12 @@
    			var frm = document.getElementById("orderForm");
    			if(check==true)	frm.submit();
    		}
+   		
+   		function deleteitem(){
+   			var check = confirm("이 아이템을 삭제하시겠습니까?");
+   			var no ="${mjdto.no}";
+   			if(check==true)	location.href="${contextPath}/mk/deleteItem.do?no="+no;
+   		}
     
     </script>
     
@@ -137,14 +143,17 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover col-md-4" onclick="cart()"><b>장바구니</b></a>
-	                	<a class="btn m-auto hover col-md-4" onclick="buy()"><b>바로구매</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="./modifyView.do?no=${mjdto.no }"><b>수정</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="./deleteItem.do?no=${mjdto.no }"><b>삭제</b></a>
-	                	
-	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
+		                	<a class="btn m-auto hover col-md-4" onclick="cart()" href=""><b>장바구니</b></a>
+		                	<a class="btn m-auto hover col-md-4" onclick="buy()" href=""><b>바로구매</b></a>
+		                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	</div>
+	          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
+	          		<c:if test="${admin == 1 }">
+	          			<div class="row px-3 mt-3">
+			        		<a class="btn m-auto hover col-md-4" href="./modifyView.do?no=${mjdto.no }"><b>아이템수정</b></a> 
+			                <a class="btn m-auto hover col-md-4" href="#" onclick="deleteitem()"><b>아이템삭제</b></a>
+		                </div>
+	            	</c:if>
 	                </li>
 	              </ul>
 	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 카트폼 -->

@@ -22,6 +22,7 @@ import cargo.market.action.PostItemAction;
 import cargo.market.action.ShowContentAction;
 import cargo.market.action.ShowItemsAction;
 import cargo.market.action.UpdateMItemAction;
+import cargo.market.action.UploadPageAction;
 import cargo.market.action.deleteItemAction;
 import cargo.market.action.deleteMItemAction;
 import cargo.market.action.modifyItemAction;
@@ -63,9 +64,9 @@ public class MarketController extends HttpServlet{
 			if(command.equals("/market.do")){	// 메인페이지로 이동 - DB작업수정해야함
 				action = new MarketMainAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/uploaditem.do")){	// 글쓰기 페이지로 이동
-				forward = new ActionForward();
-				forward.setPath("../market/market_post.jsp");
+			}else if(command.equals("/uploadpage.do")){	// 글쓰기 페이지로 이동
+				action = new UploadPageAction();
+				forward = action.execute(request, response);
 			}else if(command.equals("/cart.do")){	// 장바구니 페이지로 이동
 				forward = new ActionForward();
 				forward.setPath("../market/market_cart.jsp");
@@ -75,16 +76,16 @@ public class MarketController extends HttpServlet{
 			}else if(command.equals("/postItem.do")){ // ${contextPath }/mk/postItem.do 글쓰기 + 파일업로드 액션
 				action = new PostItemAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/modifyView.do")){ // 글 수정 액션
+			}else if(command.equals("/modifyView.do")){ // 글 수정 화면으로 이동
 				action = new modifyViewAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/modifyItem.do")){ // 글 수정 액션
+			}else if(command.equals("/modifyItem.do")){ // 글 수정
 				action = new modifyItemAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/deleteItem.do")){ // 글 삭제 액션
+			}else if(command.equals("/deleteItem.do")){ // 글 삭제
 				action = new deleteItemAction();
 				forward = action.execute(request, response);
-			}else if(command.equals("/addComment.do")){ // 댓글 등록 액션
+			}else if(command.equals("/addComment.do")){ // 댓글 등록
 				action = new AddCommentAction();
 				forward=action.execute(request, response);
 			}else if("/show_items.do".equals(command)){// M_item select
