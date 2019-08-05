@@ -23,13 +23,28 @@
    			var total = quantity * price;
    			
    			document.getElementById("totalprice").innerHTML = total;
+   			document.getElementById("total").value = total;
    			document.getElementById("quantity").value = quantity;
-   			document.getElementById("quantity_").value = quantity;
+   			document.getElementById("quantity1").value = quantity;
+   			document.getElementById("quantity2").value = quantity;
    		}
    		
    		function cart(){
+   			var check = confirm("이 상품을 장바구니에 담으시겠습니까?");
    			var cfrm = document.getElementById("cartForm");
-   			cfrm.submit();
+   			if(check==true)	cfrm.submit();
+   		}
+   		
+   		function buy(){
+   			var check = confirm("이 상품을 주문하시겠습니까?");
+   			var frm = document.getElementById("orderForm");
+   			if(check==true)	frm.submit();
+   		}
+   		
+   		function deleteitem(){
+   			var check = confirm("이 아이템을 삭제하시겠습니까?");
+   			var no ="${mjdto.no}";
+   			if(check==true)	location.href="${contextPath}/mk/deleteItem.do?no="+no;
    		}
     
     </script>
@@ -111,10 +126,8 @@
 	          
 	          <!-- 우측메뉴 -->
 	    	<div class="col-lg-4 sidebar ftco-animate bg-light">
-	            <div class="sidebar-box ftco-animate">
+	            <div class="sidebar-box ftco-animate mt-3">
 	            	<h3 class="sidebar-heading fontcolor">SHOPPING</h3>
-	              
-	              
 	              <ul class="categories mt-3">
 	                <li><a>가격 <span style="color: black;">${mjdto.price }</span></a></li>
 	                <li><a>구매가능수량 <span style="color: black;">${mjdto.stock }</span></a></li>
@@ -130,61 +143,59 @@
 	                	</a></li>
 	                <li>
 	                	<div class="row px-3 mt-3">
-	                	<a class="btn m-auto hover col-md-4" onclick="cart()"><b>장바구니</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="#"><b>바로구매</b></a>
-	                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
-	                	<!-- 검색결과 유지하도록 바꾸기ㅇㅅㅇ -->
+		                	<a class="btn m-auto hover col-md-4" onclick="cart()" href=""><b>장바구니</b></a>
+		                	<a class="btn m-auto hover col-md-4" onclick="buy()" href=""><b>바로구매</b></a>
+		                	<a class="btn m-auto hover col-md-4" href="./market.do"><b>목록으로</b></a>
 	                	</div>
+	          	<c:set var="admin" value="${sessionScope.mdto.admin }"/>
+	          		<c:if test="${admin == 1 }">
+	          			<div class="row px-3 mt-3">
+			        		<a class="btn m-auto hover col-md-4" href="./modifyView.do?no=${mjdto.no }"><b>아이템수정</b></a> 
+			                <a class="btn m-auto hover col-md-4" href="#" onclick="deleteitem()"><b>아이템삭제</b></a>
+		                </div>
+	            	</c:if>
 	                </li>
 	              </ul>
-	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 주문 or 카트로 넘길때 사용할 폼? -->
+	              <form id="cartForm" method="post" action="${contextPath }/mk/addCart.do"> <!-- 카트폼 -->
 	              		<!-- 넘길값세팅 -->
 	              		<input type="hidden" name="price" id="price" value="${mjdto.price }">
-	                	<input type="hidden" name="quantity" id="quantity_" value="1">
+	                	<input type="hidden" name="quantity" id="quantity1" value="1">
 	                	<input type="hidden" name="item" value="${mjdto.item }">
 	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
 	                	<input type="hidden" name="category" value="${mjdto.category }">
 	                	<input type="hidden" name="img" value="${mjdto.image }">
+	              </form>
+	              <form id="orderForm" method="post" action="${contextPath }/mk/payItem.do?no=${mjdto.no}"> <!-- 바로주문 폼 -->
+	              		<!-- 넘길값세팅 -->
+	              		<input type="hidden" name="price" value="${mjdto.price }">
+	                	<input type="hidden" name="quantity" id="quantity2" value="1">
+	                	<input type="hidden" name="item" value="${mjdto.item }">
+	                	<input type="hidden" name="name" id="itemname" value="${mjdto.name }">
+	                	<input type="hidden" name="category" value="${mjdto.category }">
+	                	<input type="hidden" name="total" id="total" value="${mjdto.price }">
 	              </form>
 	            </div>
 
 
 				<!-- 최근 본 아이템 for문 돌릴거임 -->
 	            <div class="mt-5 sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading fontcolor">OTHER ITEMS</h3>
+	              <h3 class="sidebar-heading fontcolor">RECENTLY</h3>
+	              
+	              <c:forEach var="cookieDTO" items="${requestScope.cookies }">
 	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_1.jpg);"></a>
+	                <a class="blog-img mr-4"
+	                style="background-image: url(${contextPath }/market/uploaded/${cookieDTO.image });"></a>
 	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
+	                  <h3 class="heading"><a href="${contextPath}/mk/showcontent.do?no=${cookieDTO.no}"><b>${cookieDTO.name }</b></a></h3>
 	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+	                    <div class="d-block"><span class="icon-calendar"></span>${cookieDTO.date }</div>
+	                    <div><i class="fas fa-won-sign"></i> ${cookieDTO.price }</div>
+<!-- 	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
 	                  </div>
 	                </div>
 	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_2.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(../images/image_3.jpg);"></a>
-	                <div class="text">
-	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
-	                  <div class="meta">
-	                    <div><a href="#"><span class="icon-calendar"></span> Oct. 04, 2018</a></div>
-	                    <div><a href="#"><span class="icon-person"></span> Dave Lewis</a></div>
-	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-	                  </div>
-	                </div>
-	              </div>
+	              </c:forEach>
+	             
 	            </div>
 
 	          </div><!-- END COL -->

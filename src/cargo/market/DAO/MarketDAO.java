@@ -15,14 +15,13 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cargo.common.DTO.BoardDTO;
+import cargo.common.DTO.BoardqDTO;
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
 import cargo.common.DTO.M_board_replyDTO;
 import cargo.common.DTO.M_itemDTO;
 import cargo.common.DTO.M_orderDTO;
-import cargo.common.DTO.ReservationDTO;
-import cargo.common.DTO.WarehouseDTO;
 import cargo.market.DTO.CartDTO;
 
 public class MarketDAO {
@@ -58,37 +57,109 @@ public class MarketDAO {
 	}
 	
 	
-	public void postItem(BoardDTO bb){ // m_board insert 글쓰기 - 파일업로드 해야함
-		int num = 0;
-		String sql="";
+	public boolean postItem(M_boardDTO mdto){ // m_board insert 글쓰기 - 파일업로드 해야함
+		
+		boolean result = false;
+	
 		try {
-			getConnection();
-
-			sql="insert into m_board(item,title,content,image,date) values(?,?,?,?,?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bb.getItem());
-			pstmt.setString(2, bb.getTitle());
-			pstmt.setString(3, bb.getContent());
-			pstmt.setString(4, bb.getImage());
-			pstmt.setTimestamp(5, bb.getDate());
 			
-			pstmt.executeUpdate();
+			getConnection();
+			
+			String sql = "INSERT INTO m_board(item, title, content, image, date) VALUES(?,?,?,?,?)";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mdto.getItem());
+			pstmt.setString(2, mdto.getTitle());
+			pstmt.setString(3, mdto.getContent());
+			pstmt.setString(4, mdto.getImage());
+			pstmt.setTimestamp(5, mdto.getDate());
+			
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				result = true;
+			}
+		
 			
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+			freeResource();
+			System.out.println("db결과:"+ result);
+			return result;		
+		}
+		
+	
+	
+	public boolean modifyItem(M_boardDTO bdto){ // m_board 글수정
+		
+		try {
+			
+			getConnection();
+			String sql;
+				
+			if(bdto.getImage()==null) {
+				
+				sql ="UPDATE m_board SET title=?, content=?, item=? WHERE no=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdto.getTitle());
+				pstmt.setString(2, bdto.getContent());
+				pstmt.setString(3, bdto.getItem());
+				pstmt.setInt(4, bdto.getNo());
+			}else {
+				
+				sql ="UPDATE m_board SET title=?, image=?, content=?, item=? WHERE no=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, bdto.getTitle());
+				pstmt.setString(2, bdto.getImage());
+				pstmt.setString(3, bdto.getContent());
+				pstmt.setString(4, bdto.getItem());
+				pstmt.setInt(5, bdto.getNo());
+			}
+
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("modifyboard 오류 : "+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 		
-		
-		
+		return false;
 	}
 	
-	public void modifyItem(){ // m_board 글수정
-		
-	}
 	
-	public void deleteItem(){ // m_board 글삭제
+	
+	
+	public boolean deleteItem(int no){ // m_board 글삭제
+		
+		int result = 0;
+		
+		String sql="DELETE FROM m_board WHERE no=?";
+		
+		try {
+			
+			getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			result = pstmt.executeUpdate();
+			
+			if(result == 0) {
+				return false;
+			}else {
+				return true;
+			}
+			
+		}catch(Exception e) {
+			System.out.println("deleteItem 오류 : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return false;
+		
 		
 	}
 	
@@ -241,6 +312,45 @@ public class MarketDAO {
 		}
 		return list;
 	}//end of selelctAllItmes
+	
+
+	public void updateMItem(M_itemDTO idto) {
+		try {
+			getConnection();
+			String sql = "update M_item set name=?, category=?, price=?, stock=? where item=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idto.getName());
+			pstmt.setString(2, idto.getCategory());
+			pstmt.setInt(3, idto.getPrice());
+			pstmt.setInt(4, idto.getStock());
+			pstmt.setString(5, idto.getItem());
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("error in updateMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of updateMItem
+	
+	public void deleteMItem(String item) {
+		try {
+			getConnection();
+			String sql = "delete from m_item where item=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error in deleteMItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of deleteMItem
 	
 	public M_boardJoinDTO selectJoinItem(int board_no){ // board, item JOIN 객체 반환
 		
@@ -447,7 +557,7 @@ public class MarketDAO {
 	
 	
 	/* 주문번호 생성 메서드 */
-	private String createOrderId() {
+	public String createOrderId() {
 		
 		StringBuffer orderId_ = new StringBuffer();
 		
@@ -463,7 +573,7 @@ public class MarketDAO {
 		return orderId;
 	}
 	
-	private void insertOrderId(String orderid, String email){
+	public void insertOrderId(String orderid, String email){
 		try {
 			getConnection();
 			String sql ="INSERT INTO m_order_id VALUES(?,?)";
@@ -505,7 +615,7 @@ public class MarketDAO {
 	}
 	
 	// 전체주문 - 오버로딩
-	public void insertMOrder(String email, List<CartDTO> clist){
+	public String insertMOrder(String email, List<CartDTO> clist){
 		String orderId = createOrderId();
 		insertOrderId(orderId, email);
 		System.out.println(orderId);
@@ -528,10 +638,12 @@ public class MarketDAO {
 			MItemStockUpdate(dto.getQuantity(), dto.getItem());
 		}
 		
+		return orderId;
+		
 	}
 	
 	// 부분주문 - 오버로딩
-	public void insertMOrder(String email, List<CartDTO> clist, String[] idArray){
+	public String insertMOrder(String email, List<CartDTO> clist, String[] idArray){
 		String orderId = createOrderId();
 		insertOrderId(orderId, email);
 		System.out.println(orderId);
@@ -557,9 +669,50 @@ public class MarketDAO {
 				}
 			}	
 		}
+		return orderId;
 	}
 	
-	
+	public ArrayList<M_orderDTO> getOrders(String order_id){
+		
+		ArrayList<M_orderDTO> oList = new ArrayList<>();
+		
+		try {
+			
+			getConnection();
+			String sql ="SELECT * FROM m_order_id i NATURAL JOIN m_order o WHERE order_id=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, order_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				M_orderDTO oDTO = new M_orderDTO();
+				
+				oDTO.setDate(rs.getDate("date"));
+				oDTO.setCategory(rs.getString("category"));
+				oDTO.setEmail(rs.getString("email"));
+				oDTO.setItem(rs.getString("item"));
+				oDTO.setName(rs.getString("name"));
+				oDTO.setNo(rs.getInt("no"));
+				oDTO.setOrder_id(order_id);
+				oDTO.setPrice(rs.getInt("price"));
+				oDTO.setQuantity(rs.getInt("quantity"));
+				
+				oList.add(oDTO);
+			
+			}
+			
+		} catch (Exception e) {
+			System.out.println("error in MItemStockUpdate :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return oList;
+	}
 }
 
 

@@ -9,7 +9,6 @@ public class M_itemDTO {
 	}
 	
 	public M_itemDTO(int price, int stock, String item, String name, String category) {
-		super();
 		this.price = price;
 		this.stock = stock;
 		this.item = item;
