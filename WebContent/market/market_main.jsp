@@ -122,7 +122,7 @@
 	            	</div>
 	            </form>
 			    	
-<!-- 페이징 : 검색어 있을 시 ! -->
+		<!-- 페이징 : 검색어 있을 시 ! -->
 		    	<div class="d-block row mt-3 mb-5">
 		          <div class="col text-center">
 		            <div class="block-27">

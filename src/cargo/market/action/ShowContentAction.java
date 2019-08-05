@@ -1,7 +1,6 @@
 package cargo.market.action;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;

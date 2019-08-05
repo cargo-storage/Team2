@@ -14,9 +14,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import cargo.common.DTO.BoardDTO;
-import cargo.common.DTO.BoardqDTO;
-import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.M_boardDTO;
 import cargo.common.DTO.M_boardJoinDTO;
 import cargo.common.DTO.M_board_replyDTO;
