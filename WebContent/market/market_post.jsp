@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -51,9 +52,11 @@
 		                  <div class="form-group col-md-5">
 		                    <label for="name">Item *</label>
 		                    <select class="form-control" name="item" onchange="getTitle(this)">
-			             <c:forEach items="${requestScope.itemList }" var="idto">
-			                	<option value="${idto.item }">${idto.item } : ${idto.name }</option>
-						 </c:forEach> 			            
+		                    
+			             	<c:forEach items="${requestScope.itemList }" var="idto">
+			             		<option value="${idto.item }">${idto.item } : ${idto.name }</option>
+		                	</c:forEach>
+		                
 		                    </select>
 		                  </div>
 		                  <div class="form-group col-md-7">

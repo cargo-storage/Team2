@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -86,7 +87,7 @@
 					    	</h3>
 					    	<div class="meta-wrap">
 								<p class="meta">
-					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
+					         		<small><span class="icon-calendar"></span><fmt:formatDate value="${bdto.date}" pattern="YYYY-MM-dd"/></small>
 					         	</p>
 					        </div>
 					    	<p class="mb-4">${bdto.content }</p>
@@ -99,7 +100,7 @@
 					    	<h3 class="mb-2 d-inline"><a href="${contextPath }/mk/showcontent.do?no=${bdto.no}">${bdto.title }</a></h3>
 					    	<div class="meta-wrap">
 								<p class="meta">
-					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
+					         		<small><span class="icon-calendar"></span><fmt:formatDate value="${bdto.date}" pattern="YYYY-MM-dd"/></small>
 					         	</p>
 					        </div>
 					    	<p class="mb-4">${bdto.content }</p>
@@ -112,13 +113,12 @@
 				</div>
 			    
 			    
-			    		        
         		<!-- 검색 -->
 				<form action="./market.do" class="search-form bg-white col-md-3 ml-auto" id="searchFrm">
 	                <div class="form-group">
 	                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
                   		<input type="hidden" name="cate" value="${category }">
-	                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
+	                  <input type="text" id="keyword" name="keyword" class="rounded form-control" value="${requestScope.keyWord }" placeholder="SEARCH">
 	            	</div>
 	            </form>
 			    	

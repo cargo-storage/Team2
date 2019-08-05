@@ -206,6 +206,40 @@ public class MarketDAO {
 		
 	}
 	
+	public ArrayList<M_boardDTO> selectBList(){
+		ArrayList<M_boardDTO> boardList = new ArrayList<>();
+		M_boardDTO bDTO;
+		
+		try {
+			
+			getConnection();
+			String sql ="SELECT * FROM m_board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				bDTO = new M_boardDTO();
+				bDTO.setContent(rs.getString("content"));
+				bDTO.setDate(rs.getTimestamp("date"));
+				bDTO.setImage(rs.getString("image"));
+				bDTO.setItem(rs.getString("item"));
+				bDTO.setNo(rs.getInt("no"));
+				bDTO.setOnStock(rs.getInt("onStock"));
+				bDTO.setTitle(rs.getString("title"));
+				
+				boardList.add(bDTO);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("error in selectAllItem()");
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return boardList;
+	}
+	
 	public ArrayList<M_boardDTO> selectBList(String category, String keyWord, int startRecNum, int recPerPage){ // m_board 목록 불러오기 - 카테고리, 검색 등 !
 
 		ArrayList<M_boardDTO> boardList = new ArrayList<>();

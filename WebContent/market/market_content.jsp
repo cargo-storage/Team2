@@ -69,7 +69,7 @@
 	    		
 	    		<!-- 게시글 영역 -->
 	            <h2 class="mb-5 font-weight-bold d-inline">${requestScope.mjdto.title }</h2>
-	            <p class="float-right"><small><span class="icon-calendar"></span> ${mjdto.date }</small></p>
+	            <p class="float-right"><small><span class="icon-calendar"></span> <fmt:formatDate value="${mjdto.date}" pattern="YYYY-MM-dd hh:mm:ss"/></small></p>
 	            <p class="mt-5">
 	              <img src="${contextPath }/market/uploaded/${mjdto.image }" alt="${mjdto.image }" class="img-fluid">
 	            </p>
@@ -87,7 +87,7 @@
 	                	 <div class="comment-body">
 		                    <h5 class="d-inline mr-5">${mrdto.name }</h5>
 		                    <small>(${mrdto.email })</small>
-		                    <small class='float-right'>${mrdto.date }</small>
+		                    <small class='float-right'><fmt:formatDate value="${mrdto.date}" pattern="YYYY-MM-dd hh:mm:ss"/></small>
 		                    <p class="mt-2">${mrdto.content } </p>
 	                  	</div>
 	                  	<hr>
@@ -170,7 +170,7 @@
 	                <div class="text">
 	                  <h3 class="heading"><a href="${contextPath}/mk/showcontent.do?no=${cookieDTO.no}"><b>${cookieDTO.name }</b></a></h3>
 	                  <div class="meta">
-	                    <div class="d-block"><span class="icon-calendar"></span>${cookieDTO.date }</div>
+	                    <div class="d-block"><span class="icon-calendar"></span> <fmt:formatDate value="${cookieDTO.date}" pattern="YYYY-MM-dd"/></div>
 	                    <div><i class="fas fa-won-sign"></i> ${cookieDTO.price }</div>
 <!-- 	                    <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
 	                  </div>

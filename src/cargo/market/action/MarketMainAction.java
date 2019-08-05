@@ -43,6 +43,7 @@ public class MarketMainAction implements Action{
 		ArrayList<M_boardDTO> boardList = mdao.selectBList(category, keyWord, startNum, recPerPage);
 		
 		
+		request.setAttribute("keyWord", keyWord);
 		request.setAttribute("category", category);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("paging", paging);
