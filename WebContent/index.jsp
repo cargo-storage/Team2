@@ -594,6 +594,7 @@
 		
 		<!-- 세션 타임아웃 -->
   		<c:if test="${sessionScope.mdto ne null }">
+  			<script>var contextPath = "${contextPath}"</script>
    			<script src="${contextPath }/js/member/sessionTime.js"></script> 
   		</c:if>
   		<!-- login.js -->
