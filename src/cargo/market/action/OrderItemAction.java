@@ -34,6 +34,7 @@ public class OrderItemAction implements Action {
 		mdao.insertOrderId(order_id, email);
 		mdao.orderItem(odto);
 		mdao.MItemStockUpdate(quantity, item);
+		mdao.MBoardonStockUpdate(item);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("../mk/confirmOrder.do");

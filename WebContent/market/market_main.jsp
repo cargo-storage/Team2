@@ -72,19 +72,36 @@
 		<c:forEach var="bdto" items="${requestScope.boardList }">
 					<div class="col-md-4">
 					<div class="blog-entry ftco-animate">
-						<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}" class="img"
-							style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
+					
+				<c:choose>
+					<c:when test="${bdto.onStock == 0 }">
+						<a class="img" style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain; opacity:0.2! important;"></a>
 						<div class="text text-2 pt-2 mt-3">
-					    	<h3 class="mb-2 d-inline"><a href="single.html">${bdto.title }</a></h3>
+					    	<h3 class="mb-2 d-inline">
+					    		<a class="text-muted">${bdto.title } <small class="ml-2 font-weight-bold" style="color: red;">SOLD OUT</small></a>
+					    	</h3>
 					    	<div class="meta-wrap">
 								<p class="meta">
 					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
-			<%-- 	         		<span><a href="single.html">${bdto.price }</a></span> --%>
-			<!-- 	         		<span>5 Comment</span> -->
 					         	</p>
 					        </div>
 					    	<p class="mb-4">${bdto.content }</p>
 					    </div>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}" class="img"
+							style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
+						<div class="text text-2 pt-2 mt-3">
+					    	<h3 class="mb-2 d-inline"><a href="${contextPath }/mk/showcontent.do?no=${bdto.no}">${bdto.title }</a></h3>
+					    	<div class="meta-wrap">
+								<p class="meta">
+					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
+					         	</p>
+					        </div>
+					    	<p class="mb-4">${bdto.content }</p>
+					    </div>
+				    </c:otherwise>
+				</c:choose>
 					</div>
 					</div>
 		</c:forEach>

@@ -37,7 +37,6 @@
 	            
 
 	              <h3 class="font-weight-bold"><i class="far fa-check-circle fontcolor"></i> YOUR ORDER</h3>
-<%-- 	              <h5 class="font-weight-bold float-right mr-2">go MAIN <a href="${contextPath }/mk/market.do"><i class="fas fa-store "></i></a></h5> --%>
 	              <table class="table text-center">
 	              <thead>
 	              	<tr class="text-center font-weight-bold bg-light" style="font-family: 'Jeju Gothic' !important;">
@@ -49,18 +48,32 @@
 	              	</tr>
 	              </thead>
 	              <tbody style="color: rgba(0, 0, 0, 0.8);">
-	            
+	            <c:forEach var="odto" items="${requestScope.oList }">
+	            	<tr>
+	           		<c:choose>
+	           			<c:when test="${odto.order_id eq order_id_p }">
+	           				<td></td>
+	           			</c:when>
+	           			<c:otherwise>
+	           				<td style="vertical-align: middle;">${odto.order_id }</td>
+	           			</c:otherwise>
+	           		</c:choose>
+	              		<td width="55%">${odto.name }</td>
+	              		<td width='15%'>${odto.price }</td>
+	              		<td width='10%'>${odto.quantity }</td>
+	              		<td width='15%'><h5>${odto.price * odto.quantity }</h5></td>
+	            	</tr>
+	            	<c:set var="order_id_p" value="${odto.order_id }"/>
+	            </c:forEach> 		
+	            		
+	            		
+	            		
 	              </tbody>
 	              </table>
 	          </div>
 	    		</div>
 	    	</div>
 	    </section>	
-			
-			
-			
-			
-			
 			
 			
 			

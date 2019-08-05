@@ -251,11 +251,39 @@ public class MarketDAO {
 		
 	}
 	
-	public M_boardDTO selectBoardItem(){ // board 테이블 1개
-		return null;
+	public M_boardDTO selectBoardItem(String item){ // board 테이블 1개
+		
+		M_boardDTO bDTO = new M_boardDTO();
+		
+		try {
+			getConnection();
+			String sql = "SELECT * FROM m_board WHERE item=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, item);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				bDTO.setContent(rs.getString("content"));
+				bDTO.setImage(rs.getString("image"));
+				bDTO.setItem(rs.getString("item"));
+				bDTO.setTitle(rs.getString("title"));
+				bDTO.setNo(rs.getInt("no"));
+				bDTO.setOnStock(rs.getInt("onStock"));
+				bDTO.setDate(rs.getTimestamp("date"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error in selectBoardItem :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		return bDTO;
+		
 	}
 	
 	public M_itemDTO selectItem(String item){ // item 테이블 1개
+		
 		M_itemDTO iDTO = new M_itemDTO();
 		
 		try {
@@ -593,7 +621,7 @@ public class MarketDAO {
 		
 	}
 	
-	public void MItemStockUpdate(int stock, String item){
+	public void MItemStockUpdate(int stock, String item){ // 주문 후 재고수량 조절
 		
 		try {
 			getConnection();
@@ -607,6 +635,36 @@ public class MarketDAO {
 			
 		} catch (Exception e) {
 			System.out.println("error in MItemStockUpdate :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+	}
+	
+	public void MBoardonStockUpdate(String item){ // onStock 0
+		
+		try {
+			
+			M_itemDTO iDTO = selectItem(item);
+			int stock = iDTO.getStock();
+			System.out.println("stock :"+stock);
+			
+			if(stock==0){
+				getConnection();
+				
+				String sql ="UPDATE m_board SET onStock=0 WHERE item=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, item);
+				
+				pstmt.executeUpdate();
+			}else{
+				System.out.println("stock!=0");
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("error in onStockUpdate");
 			e.printStackTrace();
 		}finally {
 			freeResource();
@@ -636,6 +694,8 @@ public class MarketDAO {
 			
 			orderItem(odto);
 			MItemStockUpdate(dto.getQuantity(), dto.getItem());
+			MBoardonStockUpdate(dto.getItem());
+			
 		}
 		
 		return orderId;
@@ -666,6 +726,7 @@ public class MarketDAO {
 					
 					orderItem(odto);
 					MItemStockUpdate(dto.getQuantity(), dto.getItem());
+					MBoardonStockUpdate(dto.getItem());
 				}
 			}	
 		}
@@ -706,6 +767,44 @@ public class MarketDAO {
 			
 		} catch (Exception e) {
 			System.out.println("error in MItemStockUpdate :"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return oList;
+	}
+	
+	public ArrayList<M_orderDTO> selectOrderInfo(String email){
+		
+		ArrayList<M_orderDTO> oList = new ArrayList<>();
+		
+		try {
+			getConnection();
+			String sql ="SELECT * FROM m_order_id i NATURAL JOIN m_order o WHERE email=?;";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				M_orderDTO oDTO = new M_orderDTO();
+				
+				oDTO.setDate(rs.getDate("date"));
+				oDTO.setCategory(rs.getString("category"));
+				oDTO.setEmail(rs.getString("email"));
+				oDTO.setItem(rs.getString("item"));
+				oDTO.setName(rs.getString("name"));
+				oDTO.setNo(rs.getInt("no"));
+				oDTO.setOrder_id(rs.getString("order_id"));
+				oDTO.setPrice(rs.getInt("price"));
+				oDTO.setQuantity(rs.getInt("quantity"));
+				
+				oList.add(oDTO);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("error in selectOrderInfo");
 			e.printStackTrace();
 		}finally {
 			freeResource();
