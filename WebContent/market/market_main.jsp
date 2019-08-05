@@ -43,7 +43,7 @@
 	    			
 		    		
    				<!-- 아이템분류 -->
-				<div class="ftco-bread my-3">
+				<div class="ftco-bread mt-3 mb-5">
 				<div class="row">
 					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6"><i class="fas fa-store"></i> ITEMS</h3>
 					
@@ -69,10 +69,14 @@
 	    			
 			    <!-- 아이템 리스트 영역 -->
 			    <div class="row">
+		<c:if test="${empty requestScope.boardList }">
+			<div class="mx-auto my-5">
+				<h4>아이템이 존재하지 않습니다 :-)</h4>
+			</div>
+		</c:if>
 		<c:forEach var="bdto" items="${requestScope.boardList }">
 					<div class="col-md-4">
 					<div class="blog-entry ftco-animate">
-					
 				<c:choose>
 					<c:when test="${bdto.onStock == 0 }">
 						<a class="img" style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain; opacity:0.2! important;"></a>
@@ -140,8 +144,6 @@
 		            </div>
 		          </div>
 		        </div> 
-		        
-		        
 	    	</div>
 	    	</div>
 	    	</div>

@@ -163,14 +163,33 @@ public class MarketDAO {
 		
 	}
 	
-	public int getTotal(){// m_board 게시글 총 갯수 불러오기
+	public int getTotal(String keyWord, String category){// m_board 게시글 총 갯수 불러오기
 		
 		int count=0;
 		
 		try {
 			
 			getConnection();
-			String sql = "SELECT count(*) FROM m_board";
+			String sql="SELECT count(*)";
+			
+			switch (category) {
+			
+			case "all": sql += " FROM m_board";
+				break;
+			case "fur": sql += " FROM m_board WHERE item LIKE 'F%'";
+				break;
+			case "elec": sql += " FROM m_board WHERE item LIKE 'E%'";
+				break;
+			case "mat": sql += " FROM m_board WHERE item LIKE 'M%'";
+				break;
+			case "oth": sql += " FROM m_board WHERE item LIKE 'O%'";
+				break;
+			}
+			
+			if(keyWord != ""){
+				if(category.equals("all")) sql += " WHERE title LIKE '%"+keyWord+"%'";
+				else sql += " AND title LIKE '%"+keyWord+"%'";
+			}
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -178,6 +197,7 @@ public class MarketDAO {
 			rs.next();
 			
 			count = rs.getInt("count(*)");
+				
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -218,13 +238,13 @@ public class MarketDAO {
 			}
 				
 			sql += " ORDER BY no DESC LIMIT ?, ?";
+			System.out.println(sql);
+			System.out.println(startRecNum-1);
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRecNum-1);
+			pstmt.setInt(1, startRecNum-1<0 ? 0: startRecNum-1);
 			pstmt.setInt(2, recPerPage);
 			rs = pstmt.executeQuery();
-			
-			System.out.println(sql);
 			
 			while(rs.next()){
 				bDTO = new M_boardDTO();

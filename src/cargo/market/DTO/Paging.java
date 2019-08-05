@@ -30,14 +30,6 @@ public class Paging {
 	boolean nextGroup;
 	
 	
-/*
-	// 이전,다음 그룹 시작 페이지
-	private int prev_startPage;
-	private int next_startPage;
-	
-	private int prev_lastPage; // 이전그룹 마지막페이지
- */  
-	
 	public void setRecPerPage(int recPerPage) {
 		this.recPerPage = recPerPage;
 	}
@@ -57,10 +49,10 @@ public class Paging {
 		this.startPageNum = lastPageNum - (pagePerGroup - 1);
 	}
 	
-public void setTotalRecord(int nowPage) {
-	this.totalRecord = mdao.getTotal();
-	makePaging(nowPage);
-}
+	public void setTotalRecord(int nowPage, String keyWord, String category) {
+		this.totalRecord = mdao.getTotal(keyWord, category);
+		makePaging(nowPage);
+	}
 
 	public void setTotalPage() {
 		this.totalPage = totalRecord / recPerPage + (totalRecord%recPerPage >0 ? 1 : 0);
@@ -85,7 +77,11 @@ public void setTotalRecord(int nowPage) {
 	
 	private void makePaging(int nowPage){
 		
-		if(this.totalRecord==0) return;
+		if(this.totalRecord==0) {
+			prevGroup = true;
+			nextGroup = true;
+			return;
+		}
 		
 		setNowPage(nowPage);
 		setTotalPage();
@@ -114,11 +110,10 @@ public void setTotalRecord(int nowPage) {
 		System.out.println("startRecNum" + startRecNum);
 		System.out.println("lastRecNum" + lastRecNum);
 		System.out.println("recperpage" + recPerPage);
+		
 		System.out.println(nowGroup);
 		System.out.println(totalGroup);
 		System.out.println(totalPage%pagePerGroup);
-		
-
 		
 	}
 	

@@ -34,7 +34,7 @@ public class MarketMainAction implements Action{
 		
 		paging.setRecPerPage(9);
 		paging.setPagePerGroup(5);
-		paging.setTotalRecord(curPage);
+		paging.setTotalRecord(curPage, keyWord, category);
 		
 		int startNum = paging.getStartRecNum();
 		int recPerPage = paging.getRecPerPage();
