@@ -27,7 +27,7 @@ function setcount() {
 		timer = setInterval(msg_time,1000);
 	}
 }
-
+	
 function msg_time() {	// 1초씩 카운트
 	msg = (setTime % 60) + "초";	// 남은 시간 계산
 	$("#timeMsg").html(msg);						
@@ -35,6 +35,6 @@ function msg_time() {	// 1초씩 카운트
 	
 	if (setTime < 0) {			// 시간이 종료 되었으면..	
 		clearInterval(timer);		// 타이머 해제
-		location.href="${contextPath}/me/logout";
+		location.href=contextPath +"/me/logout";
 	}
 }		
