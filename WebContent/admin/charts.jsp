@@ -63,7 +63,7 @@
 			</div>
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fas fa-chart-area"></i> Area Chart Example
+					<i class="fas fa-chart-area"></i> 매출 현황 (6개월)
 				</div>
 				<div class="card-body py-0 px-0">
 					<div id="combochart" style="width: 100%; height: 400px"></div>
@@ -171,12 +171,12 @@
 	    
 	    function drawComboChart() {
 	        var data = google.visualization.arrayToDataTable([
-	          ['Month', 'A 창고', 'B 창고', 'C 창고', 'D 창고', '평균'],
-	          ['2004/05',  165,  938,         522,             998,          614.6],
+	          ['Month', 'A 창고', 'B 창고', 'C 창고', 'D 창고', 'total'],
+	          ['2004/05',  165,  938,  522,             998,          614.6],
 	          ['2005/06',  135,  1120,        599,             1268,          682],
 	          ['2006/07',  157,	 1167,        587,             807,              623],
-	          ['2007/08',  139,      1110,        615,             968,          609.4],
-	          ['2008/09',  136,      691,         629,             1026,           569.6]
+	          ['2007/08',  139,  1110,        615,             968,          609.4],
+	          ['2008/09',  136,  691,    629,             1026,           569.6]
 	        ]);
 
 	        var options = {

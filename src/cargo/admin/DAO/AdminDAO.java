@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cargo.admin.DTO.AdminDTO;
+import cargo.admin.DTO.ChartDTO;
 import cargo.admin.DTO.OverdueDTO;
 import cargo.common.DTO.MemberDTO;
 
@@ -524,6 +526,53 @@ public class AdminDAO {
 		}finally {
 			freeResource();
 		}
+	}
+
+	public Map<String, String> getChartInfos() {
+		Map<String, String> chartInfo = null;
+		
+		try {
+			sql = "select date_format(start_day,'%Y-%m') as months, left(house, 1) as h, sum(payment) as sumpay"
+					+ " from (SELECT start_day, house, payment FROM closed"
+					+ " where start_day > DATE_ADD((select last_day(start_day) from items order by start_day desc limit 1), INTERVAL -6 MONTH)"
+					+ " union all"
+					+ " SELECT start_day, house, payment FROM items"
+					+ " where start_day > DATE_ADD((select last_day(start_day) from items order by start_day desc limit 1), INTERVAL -6 MONTH)) as temp"
+					+ " group by months, h"
+					+ " order by months desc";
+		
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				ChartDTO cdto = new ChartDTO();
+				cdto.setMonth(rs.getString("months"));
+				char h = rs.getString("h").charAt(0);
+				switch (h) {
+				case 'A':
+					cdto.setAPayment(rs.getInt("sumpay"));
+					break;
+				case 'B':
+					cdto.setBPayment(rs.getInt("sumpay"));
+					break;
+				case 'C':
+					cdto.setCPayment(rs.getInt("sumpay"));
+					break;
+				case 'D':
+					cdto.setDPayment(rs.getInt("sumpay"));
+					break;
+				}
+				
+			}
+		} catch (Exception e) {
+			System.out.println("getChartInfos err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return chartInfo;
 	}
 	
 }

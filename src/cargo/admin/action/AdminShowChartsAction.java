@@ -1,6 +1,7 @@
 package cargo.admin.action;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +15,8 @@ public class AdminShowChartsAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdminDAO dao = new AdminDAO();
-		
-		request.setAttribute("updateTime", new Date());
+		Map<String, String> chartInfo = dao.getChartInfos();
+		request.setAttribute("updateTime", new java.util.Date());
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
