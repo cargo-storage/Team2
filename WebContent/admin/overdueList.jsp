@@ -164,7 +164,7 @@
 								<td class="duration"></td>
 							</tr>
 							<tr class="table-secondary">
-								<th>연채일</th>
+								<th>연체일</th>
 								<td class="overdue_day"></td>
 							</tr>
 							<tr class="table-secondary">
