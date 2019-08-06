@@ -21,19 +21,28 @@ public class UploadPageAction implements Action {
 		List<M_itemDTO> idto = mdao.selectAllItems();
 		List<M_boardDTO> bdto = mdao.selectBList();
 		
-//		List<M_itemDTO> itemList = new ArrayList<M_itemDTO>();
+		List<M_itemDTO> itemList = new ArrayList<M_itemDTO>();
+		List<M_itemDTO> resultList = new ArrayList<M_itemDTO>();
 		
-	/*	for(M_itemDTO idtoi: idto){
+		for(M_itemDTO idtoi: idto){
 			for(M_boardDTO bdtoi: bdto){
 				if(idtoi.getItem().equals(bdtoi.getItem())){
-					continue;
-				}else{
 					itemList.add(idtoi);
+					continue;
 				}
 			}
-		}*/
+		}
 		
-		request.setAttribute("itemList", idto);
+		 for (int i = 0; i < idto.size(); i++) {
+                if (!itemList.contains(idto.get(i))) {
+                    resultList.add(idto.get(i));
+                    continue;
+                }
+         }
+		
+		
+		
+		request.setAttribute("itemList", resultList);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("../market/market_post.jsp");
