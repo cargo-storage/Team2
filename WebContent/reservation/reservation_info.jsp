@@ -91,9 +91,9 @@
 	            </div>
 			</div>
 			
-			<div class="row p-5 mt-5 background raised-box rounded">
+			<div class="row py-5 mt-5 mx-auto background raised-box rounded col-sm-12">
 				
-				<div class="mx-auto">
+				<div class="col-md-6 col-sm-12 mx-auto">
 	            <select class="form-control col-md-6" onchange="showHouse(this.value)">
 					<option value="A" <c:if test="${param.warehouse == 'A'}">selected="selected"</c:if>>House A</option>
 					<option value="B" <c:if test="${param.warehouse == 'B'}">selected="selected"</c:if>>House B</option>
@@ -101,7 +101,8 @@
 					<option value="D" <c:if test="${param.warehouse == 'D'}">selected="selected"</c:if>>House D</option>
 				</select>
 				<!-- 창고 사용 현황 테이블 -->
-				<table class="my-3 col-lg-5">
+				
+				<table class="my-3 col-lg-10 col-md-10 col-sm-12 ">
 				<c:choose>
 					<c:when test="${requestScope.hList == null }"><tr><td colspan="5">nothing</td></tr></c:when>
 					<c:when test="${hList !=null }">
@@ -113,11 +114,11 @@
 							<c:choose>
 								<c:when test="${hDTO.isEmpty==1 }">
 									<td>
-										<input type="button" value="${hDTO.house }" class="button notEmpty" onclick="showInfo(this)">
+										<input type="button" value="${hDTO.house }" class="button col-12 notEmpty" onclick="showInfo(this)">
 									</td>
 								</c:when>
 								<c:when test="${hDTO.isEmpty==0 }">
-									<td><input type="button" value="${hDTO.house }" class="button" onclick="showInfo(this)"></td>
+									<td><input type="button" value="${hDTO.house }" class="button col-12" onclick="showInfo(this)"></td>
 								</c:when>
 							</c:choose>
 							<c:set var="i" value="${i+1 }"/>
@@ -128,7 +129,7 @@
 				</div>
 				
 				<!-- 예약정보 표시 영역 -->
-				<div id="info" class="col-lg-5 text-center mx-auto mt-5">
+				<div id="info" class="col-md-5 text-center mx-auto mt-5">
 					<ul class="list-group mb-3">
 						<li class="list-group-item">
 						  <div>

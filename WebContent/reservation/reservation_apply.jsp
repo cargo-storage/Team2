@@ -107,6 +107,7 @@
    		</c:forEach>
 		
 		console.log(dateRange);
+		
 	
 		$('input.calendar').pignoseCalendar({
 			format: 'YYYY-MM-DD', // date format string. (2017-02-02)
@@ -115,20 +116,23 @@
 			minDate: moment().add(1, 'd').format("YYYY-MM-DD"),
 			disabledRanges: dateRange,
 			buttons: true,
-			select: function(date, context){
+			/* select: function(date, context){
+				console.log(date);
 				
-				var start = date[0]._i;
-				var end = date[1]._i;
+			 	end = date[1]._i; 
+		 		start = date[0]._i;
 				
-				if(moment.duration(moment(end).diff(moment(start))).asDays()<15){
-					alert("최소 보관기간은 15일 입니다.");
-					return false;
-				}
-			},
+				if(!start==""){
+					if(moment.duration(moment(end).diff(moment(start))).asDays()<15){
+						alert("최소 보관기간은 15일 입니다.");
+						return false;
+					}
+				} 
+			}, */
 			apply: function(date, context) {
 				
-				var start = date[0]._i;
-				var end = date[1]._i;
+				var end = date[1]._i; 
+			 	var start = date[0]._i;
 				
 				if(moment.duration(moment(end).diff(moment(start))).asDays()<15){
 					alert("최소 보관기간은 15일 입니다.");

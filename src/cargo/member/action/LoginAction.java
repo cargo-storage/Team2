@@ -58,7 +58,7 @@ public class LoginAction implements Action {
 
 			String path = request.getContextPath();
 			forward.setRedirect(true);
-			forward.setPath(path + "/index.jsp");
+			forward.setPath(path + "/start.jsp");
 		}
 		return forward;
 	}
