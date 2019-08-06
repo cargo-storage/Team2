@@ -17,11 +17,11 @@
         var success = 0;
         
         IMP.request_pay({
-            // pg : 'html5_inicis',
-           	pg : 'kakaopay',
+            pg : 'html5_inicis',
+           	// pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : 'TEAM2 WAREHOUSE - test',
+            name : '${param.house} : ${param.start_day} ~ ${param.end_day}',
             amount : ${param.res_payment},
             buyer_email : '${param.email}',
             buyer_name : '${param.name}',

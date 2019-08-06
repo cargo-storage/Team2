@@ -23,8 +23,8 @@
         var no = "${param.no}";
         
         IMP.request_pay({
-            // pg : 'html5_inicis',
-           	pg : 'kakaopay',
+            pg : 'html5_inicis',
+           	//pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'TEAM2 WAREHOUSE MARKET - test',
