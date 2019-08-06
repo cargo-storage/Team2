@@ -467,29 +467,19 @@
                 			</div>
                 		</div>
                 	</div>
-                	<div class="col-8">
+                	<div class="col-lg-8 col-sm-12">
 	                    <div class="col-md-12 mx-auto review-wrapper slick-reviews">
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-1.jpg" class="img-review rounded d-block mx-auto" alt="Client 1"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다.</span></div>
-	                            </div>
-	                        </div>
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-2.jpg" class="img-review rounded d-block mx-auto" alt="Client 2"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span></div>
-	                            </div>
-	                        </div>
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-3.jpg" class="img-review rounded d-block mx-auto" alt="Client 3"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span> </div>   
-	                            </div>
-	                        </div>
+	                      <c:forEach var="bdto" items="${requestScope.boardList }">
+	                           <div class="card border-0 review p-5 raised-box">
+	                               <div class="card-body col-sm-12">
+	                               		<img src="${contextPath}/market/uploaded/${bdto.image }" class="img mx-auto col-md-10" style="max-height: 350px;"/>
+	                               </div>
+	                               <div>
+										<h5>${bdto.title }</h5>
+		                                <span>가격 : 미정입니다.</span>
+	                               </div>
+	                           </div>
+                          </c:forEach>
 	                    </div>
                     </div>
                 </div>

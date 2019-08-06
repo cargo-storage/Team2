@@ -213,7 +213,7 @@ public class MarketDAO {
 		try {
 			
 			getConnection();
-			String sql ="SELECT * FROM m_board";
+			String sql ="SELECT * FROM m_board ORDER BY no DESC";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
