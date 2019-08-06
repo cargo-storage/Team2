@@ -2,7 +2,6 @@ package cargo.board.action;
 
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +20,6 @@ public class BoardListAction implements Action {
 		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-        
        
         
 		BoardqDAO bdDAO = new BoardqDAO();

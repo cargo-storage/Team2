@@ -41,7 +41,7 @@ public class BoardAddAction implements Action {
 		
 		
 		BoardqDAO bqDAO = new BoardqDAO();
-		int no1 = bqDAO.AddBoardq(bqDTO);
+		bqDAO.AddBoardq(bqDTO);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);

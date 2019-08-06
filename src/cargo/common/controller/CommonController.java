@@ -35,7 +35,7 @@ public class CommonController extends HttpServlet{
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
 		
 		ActionForward forward = null;
-		Action action= null;
+		Action action = null;
 		
 		System.out.println(command);
 		
