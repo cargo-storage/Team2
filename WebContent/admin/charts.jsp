@@ -46,7 +46,7 @@
 						<div class="card-body py-0 px-0">
 							<div id="piechart" style="width: 100%; height:350px;"></div>
 						</div>
-						<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+						<div class="card-footer small text-muted">Updated <fmt:formatDate value="${updateTime}" type="both" dateStyle="short" timeStyle="short"/></div>
 					</div>
 				</div>
 				<div class="col-lg-8">
@@ -57,7 +57,7 @@
 						<div class="card-body py-0 px-0">
 							<div id="barchart" style="width: 100%; height: 350px;"></div>
 						</div>
-						<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+						<div class="card-footer small text-muted">Updated <fmt:formatDate value="${updateTime}" type="both" dateStyle="short" timeStyle="short"/></div>
 					</div>
 				</div>
 			</div>
@@ -68,7 +68,7 @@
 				<div class="card-body py-0 px-0">
 					<div id="combochart" style="width: 100%; height: 400px"></div>
 				</div>
-				<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+				<div class="card-footer small text-muted">Updated <fmt:formatDate value="${updateTime}" type="both" dateStyle="short" timeStyle="short"/></div>
 			</div>
 
 			<p class="small text-center text-muted my-5">
@@ -118,19 +118,13 @@
 	
 	    function drawPieChart() {
 	
-	      var data = google.visualization.arrayToDataTable([
-	        ['창고 종류', '주문 갯수'],
-	        ['A', 11],
-	        ['B', 2],
-	        ['C', 2],
-	        ['D', 2]
-	      ]);
+	      var data = google.visualization.arrayToDataTable(${chartInfo.pie});
 	
 	      var options = {
-	        'width': '100%',
-            'height': '100%',
-            'chartArea': {'width': '90%', 'height': '80%'},
-            'legend': {'position': 'top', 'alignment':'center'}
+	        width: '100%',
+            height: '100%',
+            chartArea: {'width': '90%', 'height': '80%'},
+            legend: {'position': 'top', 'alignment':'center'},
 	      };
 	
 	      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -140,13 +134,7 @@
 	    }
 	    
 	    function drawBarChart() {
-			var data = google.visualization.arrayToDataTable([
-				['창고', '사용 중', { role: 'style' } ],
-				['A 창고', 8.94, 'color: #3366CC'],
-				['B 창고', 10.49, 'color: #DC3912'],
-				['C 창고', 19.30, 'color: #FF9900'],
-				['D 창고', 21.45, 'color: #109618']
-			]);
+			var data = google.visualization.arrayToDataTable(${chartInfo.bar});
 			
 			var options = {
 			        width: '100%',
@@ -160,7 +148,7 @@
 		                viewWindow: {
 		                    max: 25
 		                }
-		              },
+		              }
 			      };
 			
 	      	var chart = new google.visualization.BarChart(document.getElementById('barchart'));
@@ -170,14 +158,7 @@
 		}
 	    
 	    function drawComboChart() {
-	        var data = google.visualization.arrayToDataTable([
-	          ['Month', 'A 창고', 'B 창고', 'C 창고', 'D 창고', 'total'],
-	          ['2004/05',  165,  938,  522,             998,          614.6],
-	          ['2005/06',  135,  1120,        599,             1268,          682],
-	          ['2006/07',  157,	 1167,        587,             807,              623],
-	          ['2007/08',  139,  1110,        615,             968,          609.4],
-	          ['2008/09',  136,  691,    629,             1026,           569.6]
-	        ]);
+	        var data = google.visualization.arrayToDataTable(${chartInfo.combo});
 
 	        var options = {
 	        		width: '100%',

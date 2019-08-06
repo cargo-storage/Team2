@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.Context;
@@ -529,25 +530,32 @@ public class AdminDAO {
 	}
 
 	public Map<String, String> getChartInfos() {
-		Map<String, String> chartInfo = null;
+		Map<String, String> chartInfo = new HashMap<>();
 		
 		try {
+			/*combochart 정보 가져오는 부분*/
 			sql = "select date_format(start_day,'%Y-%m') as months, left(house, 1) as h, sum(payment) as sumpay"
 					+ " from (SELECT start_day, house, payment FROM closed"
 					+ " where start_day > DATE_ADD((select last_day(start_day) from items order by start_day desc limit 1), INTERVAL -6 MONTH)"
 					+ " union all"
 					+ " SELECT start_day, house, payment FROM items"
 					+ " where start_day > DATE_ADD((select last_day(start_day) from items order by start_day desc limit 1), INTERVAL -6 MONTH)) as temp"
-					+ " group by months, h"
-					+ " order by months desc";
+					+ " group by months, h";
 		
 			con = connect();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
+			List<String> list = new ArrayList<>();
+			ChartDTO cdto = new ChartDTO();
+			list.add("['Month', 'A 창고', 'B 창고', 'C 창고', 'D 창고', 'total']");
+			
 			while (rs.next()) {
-				ChartDTO cdto = new ChartDTO();
-				cdto.setMonth(rs.getString("months"));
+				if(!rs.getString("months").equals(cdto.getMonth())){
+					list.add(cdto.toComboArray());
+					cdto = new ChartDTO(rs.getString("months"));
+				}
+				
 				char h = rs.getString("h").charAt(0);
 				switch (h) {
 				case 'A':
@@ -563,16 +571,86 @@ public class AdminDAO {
 					cdto.setDPayment(rs.getInt("sumpay"));
 					break;
 				}
-				
 			}
+			
+			list.add(cdto.toComboArray());
+			list.remove(1);
+			
+			chartInfo.put("combo", list.toString());
+			
+			/*piechart 정보 가져오는 부분*/
+			sql="select left(house,1) as h, count(*) as count from ("
+					+ " select house from reservation"
+					+ " union all"
+					+ " select house from items"
+					+ " union all"
+					+ " select house from closed) as temp"
+					+ " group by h";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			list.clear();
+			list.add("['창고 종류', '주문 갯수']");
+			
+			while (rs.next()) {
+				char h = rs.getString("h").charAt(0);
+				switch (h) {
+				case 'A':
+					list.add("['A창고',"+rs.getString("count")+"]");
+					break;
+				case 'B':
+					list.add("['B창고',"+rs.getString("count")+"]");
+					break;
+				case 'C':
+					list.add("['C창고',"+rs.getString("count")+"]");
+					break;
+				case 'D':
+					list.add("['D창고',"+rs.getString("count")+"]");
+					break;
+				}
+			}
+			chartInfo.put("pie", list.toString());
+			
+			/*barchart 정보 가져오는 부분*/
+			sql="select left(house,1) as h, count(*) as count"
+					+ " from warehouse"
+					+ " where isEmpty=1"
+					+ " group by h";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			list.clear();
+			list.add("['창고', '사용 중', { role: 'style' } ]");
+			
+			while (rs.next()) {
+				char h = rs.getString("h").charAt(0);
+				switch (h) {
+				case 'A':
+					list.add("['A창고',"+rs.getString("count")+",'color: #3366CC']");
+					break;
+				case 'B':
+					list.add("['B창고',"+rs.getString("count")+",'color: #DC3912']");
+					break;
+				case 'C':
+					list.add("['C창고',"+rs.getString("count")+",'color: #FF9900']");
+					break;
+				case 'D':
+					list.add("['D창고',"+rs.getString("count")+",'color: #109618']");
+					break;
+				}
+			}
+			chartInfo.put("bar", list.toString());
+			
+			System.out.println("bar: "+chartInfo.get("bar"));
+			System.out.println("pie: "+chartInfo.get("pie"));
+			System.out.println("combo: "+chartInfo.get("combo"));
 		} catch (Exception e) {
 			System.out.println("getChartInfos err:"+e.getMessage());
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
-		
 		return chartInfo;
 	}
-	
+
 }

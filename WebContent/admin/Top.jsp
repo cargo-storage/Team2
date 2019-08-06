@@ -107,7 +107,7 @@
 <!-- 				</div> -->
 <!-- 			</li> -->
 			<li class="nav-item">
-				<a class="nav-link" href="charts.html">
+				<a class="nav-link" href="${contextPath}/ad/show_charts">
 					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
 				</a>
 			</li>

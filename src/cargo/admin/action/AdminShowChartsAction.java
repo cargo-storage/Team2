@@ -16,7 +16,9 @@ public class AdminShowChartsAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdminDAO dao = new AdminDAO();
 		Map<String, String> chartInfo = dao.getChartInfos();
+		
 		request.setAttribute("updateTime", new java.util.Date());
+		request.setAttribute("chartInfo", chartInfo);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

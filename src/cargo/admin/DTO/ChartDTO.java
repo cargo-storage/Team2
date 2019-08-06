@@ -1,13 +1,17 @@
 package cargo.admin.DTO;
 
-import java.sql.Date;
-
 public class ChartDTO {
 	private String month;
 	private int APayment=0;
 	private int BPayment=0;
 	private int CPayment=0;
 	private int DPayment=0;
+	
+	public ChartDTO(String month) {
+		this.month = month;
+	}
+	
+	public ChartDTO(){}
 
 	public String getMonth() {
 		return month;
@@ -53,6 +57,4 @@ public class ChartDTO {
 		int total = APayment+BPayment+CPayment+DPayment;
 		return "['"+month + "' ," + APayment + "," + BPayment + "," + CPayment + "," + DPayment + ","+total+"]";
 	}
-	
-	
 }
