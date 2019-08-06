@@ -1,10 +1,8 @@
 package cargo.reservation.action;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +11,6 @@ import org.json.simple.JSONObject;
 
 import cargo.common.DTO.ItemsDTO;
 import cargo.common.DTO.ReservationDTO;
-import cargo.common.DTO.WarehouseDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;

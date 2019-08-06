@@ -10,7 +10,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import cargo.common.DTO.BoardnDTO;
-import cargo.common.DTO.BoardqDTO;
 
 public class BoardnDAO {
 

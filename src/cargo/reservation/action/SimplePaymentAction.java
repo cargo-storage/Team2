@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import cargo.common.DTO.ReservationDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;

@@ -1,7 +1,6 @@
 package cargo.member.action;
 
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
-import cargo.reservation.action.ResInfoAction;
 
 public class CommonController extends HttpServlet{
 

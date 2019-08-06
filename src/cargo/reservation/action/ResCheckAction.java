@@ -1,12 +1,10 @@
 package cargo.reservation.action;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cargo.common.DTO.ReservationDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.reservation.DAO.ReservationDAO;
