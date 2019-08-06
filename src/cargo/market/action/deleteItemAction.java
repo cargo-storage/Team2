@@ -26,8 +26,21 @@ public class deleteItemAction implements Action{
 			return null;
 		}
 		
+		
 		// 쿠키 삭제
-		Cookie c = new Cookie("iN"+no, null);
+		Cookie[] ckList = request.getCookies();
+		
+		if(ckList.length != 0){
+			for(int i=0;i<ckList.length;i++){
+				Cookie ck = ckList[i];
+				if(ck.getName().equals("iN"+no)){
+					ck.setMaxAge(0);
+					response.addCookie(ck);
+					System.out.println("clear cookie");
+					break;
+				}
+			}
+		}
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath("../mk/market.do");

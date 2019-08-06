@@ -46,7 +46,6 @@ public class AddCartAction implements Action {
 		forward.setAjax(true); // Ajax는 아니지만.... 전송 X
 		
 		PrintWriter out = response.getWriter();
-		
 		out.print("<script>alert('장바구니에 추가되었습니다.'); history.back(); </script>");
 		
 		return forward;

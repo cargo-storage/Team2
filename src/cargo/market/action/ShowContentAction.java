@@ -33,41 +33,53 @@ public class ShowContentAction implements Action{
 		
 		/* 최근 본 아이템 쿠키 설정 */
 		M_boardJoinDTO cookieDTO;
-		
 		ArrayList<M_boardJoinDTO> cookies = new ArrayList<>();
+		
 		Cookie[] ckList = request.getCookies();
-		System.out.println(ckList.length);
+		
+		for(Cookie c : ckList){
+			System.out.println("ckList "+c.getName()+", "+c.getValue());
+		}
 		
 		if(ckList.length != 0){
-			for(int i=ckList.length-1;i>=0;i--){
+			for(int i = ckList.length-1; i>=0; i--){
 				Cookie ck = ckList[i];
-				String name = URLDecoder.decode(ck.getName(), "utf-8");
-				System.out.println("cookieName"+name);
+				String name = URLDecoder.decode(ck.getName(), "UTF-8");
+				
 				if(name.substring(0, 2).equals("iN")){
-					int bno = Integer.parseInt(URLDecoder.decode(ck.getValue(), "utf-8"));
-					System.out.println("bno"+bno);
+					int bno = Integer.parseInt(URLDecoder.decode(ck.getValue(), "UTF-8"));
 					cookieDTO = mdao.selectJoinItem(bno);
 					cookies.add(cookieDTO);
+					System.out.println("latest cookie "+bno);
 				}
 				if(cookies.size()>4) break;
 			}
 		}
 		
-		System.out.println(cookies.size());
-		
 		request.setAttribute("cookies", cookies);
+		
+		
+		/* 확인한 아이템 쿠키 등록 */
+		Cookie ck;
+		
+		if(ckList.length != 0){
+			for(int i=0;i<ckList.length;i++){
+				ck = ckList[i];
+				if(ck.getName().equals("iN"+board_no)){	// 쿠키가 이미 존재한다면 삭제
+					ck.setMaxAge(0);
+					response.addCookie(ck);
+					System.out.println("clear cookie");
+					break;
+				}
+			}
+		}
 		
 		Cookie c = new Cookie("iN"+board_no, request.getParameter("no"));
 		c.setMaxAge(60*60*24);
 		response.addCookie(c);
 		
-		
-		
-		
 		ActionForward forward = new ActionForward();
-		
 		forward.setPath("../market/market_content.jsp");
-		
 		return forward;
 	}
 
