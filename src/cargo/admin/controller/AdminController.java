@@ -71,7 +71,7 @@ public class AdminController extends HttpServlet {
 				
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath(contextPath+"/index.jsp");
+				forward.setPath(contextPath+"/start.jsp");
 			
 			//관리자 메인 페이지
 			}else  if("/admin_main".equals(command)){

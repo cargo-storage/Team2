@@ -84,7 +84,8 @@
 							</tr>
 							<tr bgcolor="#f2f2f2">
 								<th>물건 가격</th>
-								<td><input class="form-control" type="text" name="item_price" id="item_price"></td>
+								<td><input class="form-control" type="text" name="item_price" id="item_price" maxlength="9
+								"></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text-right">
