@@ -206,14 +206,51 @@ public class MarketDAO {
 		
 	}
 	
-	public ArrayList<M_boardDTO> selectBList(){
-		ArrayList<M_boardDTO> boardList = new ArrayList<>();
-		M_boardDTO bDTO;
+	public ArrayList<M_boardJoinDTO> selectBJList(){
+		ArrayList<M_boardJoinDTO> boardList = new ArrayList<>();
+		M_boardJoinDTO bDTO;
 		
 		try {
 			
 			getConnection();
-			String sql ="SELECT * FROM m_board ORDER BY no DESC";
+			String sql ="SELECT * FROM m_board b NATURAL JOIN m_item i WHERE b.onStock!=0 ORDER BY b.no DESC";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				bDTO = new M_boardJoinDTO();
+				bDTO.setContent(rs.getString("content"));
+				bDTO.setDate(rs.getTimestamp("date"));
+				bDTO.setImage(rs.getString("image"));
+				bDTO.setItem(rs.getString("item"));
+				bDTO.setNo(rs.getInt("no"));
+				bDTO.setOnStock(rs.getInt("onStock"));
+				bDTO.setTitle(rs.getString("title"));
+				bDTO.setPrice(rs.getInt("price"));
+				bDTO.setStock(rs.getInt("stock"));
+				
+				boardList.add(bDTO);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("error in selectBJList()");
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+		
+		return boardList;
+	}
+	
+	public ArrayList<M_boardDTO> selectBList(){ // m_board 목록 불러오기
+
+		ArrayList<M_boardDTO> boardList = new ArrayList<>();
+		M_boardDTO bDTO;
+		
+		try {
+			String sql ="SELECT * FROM m_board";
+			getConnection();
+			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -231,13 +268,14 @@ public class MarketDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("error in selectAllItem()");
+			System.out.println("error in selectBList()");
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 		
 		return boardList;
+		
 	}
 	
 	public ArrayList<M_boardDTO> selectBList(String category, String keyWord, int startRecNum, int recPerPage){ // m_board 목록 불러오기 - 카테고리, 검색 등 !

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.DTO.M_boardDTO;
+import cargo.common.DTO.M_boardJoinDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.market.DAO.MarketDAO;
@@ -18,11 +19,11 @@ public class MainpageAction implements Action {
       MarketDAO mdao = new MarketDAO();
       
       
-      ArrayList<M_boardDTO> boardList1 = mdao.selectBList();
-      ArrayList<M_boardDTO> boardList = new ArrayList<>();
+      ArrayList<M_boardJoinDTO> boardList1 = mdao.selectBJList();
+      ArrayList<M_boardJoinDTO> boardList = new ArrayList<>();
       
       for (int i = 0; i < 3; i++) {
-         M_boardDTO mt = new M_boardDTO();
+    	 M_boardJoinDTO mt = new M_boardJoinDTO();
          mt= boardList1.get(i);
          boardList.add(mt);
       }

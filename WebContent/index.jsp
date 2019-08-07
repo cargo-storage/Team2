@@ -472,11 +472,12 @@
 	                      <c:forEach var="bdto" items="${requestScope.boardList }">
 	                           <div class="card border-0 review p-5 raised-box">
 	                               <div class="card-body col-sm-12">
-	                               		<img src="${contextPath}/market/uploaded/${bdto.image }" class="img mx-auto col-md-10" style="max-height: 350px;"/>
+	                               		<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}"><img src="${contextPath}/market/uploaded/${bdto.image }" 
+	                               		class="img mx-auto col-md-10" style="max-height: 350px;"/></a>
 	                               </div>
 	                               <div>
 										<h5>${bdto.title }</h5>
-		                                <span>가격 : 미정입니다.</span>
+		                                <h5 style="color: #00c853">￦ ${bdto.price }</h5>
 	                               </div>
 	                           </div>
                           </c:forEach>

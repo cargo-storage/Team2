@@ -61,7 +61,7 @@
 		                  </div>
 		                  <div class="form-group col-md-7">
 		                    <label for="name">Title *</label>
-		                    <input type="text" class="form-control" name="title" id="title" readOnly>
+		                    <input type="text" class="form-control" name="title" id="title" value="${itemList[0].name }" readOnly>
 		                  </div>
 	                  </div>
 	                  
