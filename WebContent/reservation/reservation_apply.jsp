@@ -20,14 +20,13 @@
     <title>RESERVATION - TEAM2 WAREHOUSE</title>
     <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
-	<!-- Page level plugin CSS-->
-	<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
-	<link href="${contextPath}/css/reservation.css" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
+    <link href="${contextPath}/css/reservation.css" rel="stylesheet">
     
 </head>
 
-    <body class="bg-light">
-	
+<body class="bg-light">
 	<!--navigation in page-->
 	<jsp:include page="../inc/header.jsp"></jsp:include>
 	<section class="py-7"  id="section">

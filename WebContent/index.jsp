@@ -588,10 +588,12 @@
 		
 		<!-- 세션 타임아웃 -->
   		<c:if test="${sessionScope.mdto ne null }">
-   			<script src="js/member/sessionTime.js"></script> 
+  			<script>var contextPath = "${contextPath}"</script>
+   			<script src="${contextPath }/js/member/sessionTime.js"></script> 
   		</c:if>
   		<!-- login.js -->
-  		<script src="js/member/login.js"></script>
+  		<script src="${contextPath }/js/member/login.js"></script>
+
         <script src="${contextPath }/js/scripts.js"></script>
         
     </body>

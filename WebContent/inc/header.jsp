@@ -11,6 +11,7 @@
 </head>
 <body onmousemove="count=0">
 	<!-- 세션 타임아웃 -->
+	<span data-toggle="modal" data-target="#timerModal" data-backdrop="static" id="openTimer"></span>  
 	<!-- The Modal -->
 	<div class="modal" id="timerModal" data-backdrop="static">
 		<div class="modal-dialog modal-sm">
@@ -127,6 +128,7 @@
 
 	<!-- 세션 타임아웃 -->
 	<c:if test="${sessionScope.mdto ne null }">
+		<script>var contextPath = "${contextPath}"</script>
 		<script src="${contextPath }/js/member/sessionTime.js"></script> 
 	</c:if>
 	<!-- login.js -->
