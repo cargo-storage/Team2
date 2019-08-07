@@ -19,7 +19,6 @@
 		<!-- CSS/CDN links 밑에 자바 스크립트 때문에 위로 올려둠-->
 		<jsp:include page="inc/head_js.jsp"/>
 		
-		
         <style>
         	/* 중고 장터 */
         	.market-go{
@@ -155,7 +154,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="${contextPath }/index.jsp">
+       <a class="navbar-brand" href="${contextPath }/start.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -588,10 +587,12 @@
 		
 		<!-- 세션 타임아웃 -->
   		<c:if test="${sessionScope.mdto ne null }">
-   			<script src="js/member/sessionTime.js"></script> 
+  			<script>var contextPath = "${contextPath}"</script>
+   			<script src="${contextPath }/js/member/sessionTime.js"></script> 
   		</c:if>
   		<!-- login.js -->
-  		<script src="js/member/login.js"></script>
+  		<script src="${contextPath }/js/member/login.js"></script>
+
         <script src="${contextPath }/js/scripts.js"></script>
         
     </body>
