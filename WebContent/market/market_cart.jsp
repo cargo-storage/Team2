@@ -34,12 +34,16 @@
 			
 			// 장바구니 선택삭제
 			$('#delCart').on("click", function(){
-				var id= new Array();
-				$(".cb:checked").each(function(){
-					 var test = $(this).closest("tr").find('input#itemId').val(); // string
-					 id.push(test);
-				});
-				location.href="${contextPath}/mk/delCart.do?id="+id;
+				
+				var chk = confirm("선택하신 상품을 삭제하시겠습니까?");
+				if(chk==true){
+					var id= new Array();
+					$(".cb:checked").each(function(){
+						 var test = $(this).closest("tr").find('input#itemId').val(); // string
+						 id.push(test);
+					});
+					location.href="${contextPath}/mk/delCart.do?id="+id;
+				}
 			});
 			
 		});
@@ -62,26 +66,42 @@
 		
 		// 주문
 	    function order(btn){
-			var orderType = btn.value;
-			var totalPrice = $("#totalPrice").text();
-			
-			if(orderType=="선택주문"){
+			var chk=confirm("선택하신 상품을 주문하시겠습니까?");
+			if(chk==true){
+				var orderType = btn.value;
+				var totalPrice = $("#totalPrice").text();
 				
-				var id= new Array();
-				$(".cb:checked").each(function(){
-					 var test = $(this).closest("tr").find('input#itemId').val(); // string
-					 id.push(test);
-				});
-				
-				location.href="${contextPath}/mk/payCart.do?total="+totalPrice+"&id="+id;
-				
-			}else{
-				location.href="${contextPath}/mk/payCart.do?total="+totalPrice;
+				if(orderType=="선택주문"){
+					
+					var id= new Array();
+					$(".cb:checked").each(function(){
+						 var test = $(this).closest("tr").find('input#itemId').val(); // string
+						 id.push(test);
+					});
+					
+					location.href="${contextPath}/mk/payCart.do?total="+totalPrice+"&id="+id;
+					
+				}else{
+					location.href="${contextPath}/mk/payCart.do?total="+totalPrice;
+				}
 			}
 			
 		}
 
     </script>
+    <style type="text/css">
+    	@media screen and (max-width: 480px) {
+    		.dis-non{
+    			display: none;
+    		}
+    		.dis-on{
+    			display: ;
+ 			}	
+ 		}
+ 		.dis-on{
+ 			display: none;
+ 		}
+    </style>
     
   </head>
   <body>
@@ -118,12 +138,16 @@
 	            <c:forEach var="item" items="${sessionScope.cart.itemList }">
 	            	<tr height="60px" id="itemTable">
 	            		<td width='5%'><input type="checkbox" onclick="changeTotal(this)" class="cb" value="${item.price * item.quantity }" checked></td>
-	            		<td width='10%'>
+	            		
+	            		<td width='10%' class="dis-non">
 	            			<img alt="${item.img }" src="${contextPath }/market/uploaded/${item.img}">
 	            		</td>
-	              		<td width='45%'>&nbsp;&nbsp; ${item.name }
+	              		<td width='45%' class="dis-non">&nbsp;&nbsp; ${item.name }
 	              			<input type="hidden" value="${item.item }" id="itemId">
 	              		</td>
+<!-- 요기확인해라아아아	              		 -->
+	              		<td colspan="2" class="dis-on">${item.name }</td>
+	              		
 	              		<td width='15%'>${item.price }</td>
 	              		<td width='10%'>${item.quantity }</td>
 	              		<td width='15%'>${item.price * item.quantity }</td>
