@@ -11,9 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.mysql.fabric.Response;
-
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -31,7 +28,7 @@ public class MemberDAO {
 	// 연결 메서드 따로있습니다..
 	private Connection connect() throws Exception {
 		Context ctx = new InitialContext();
-		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jspbeginner");
+		ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jspbeginner");
 		return ds.getConnection();
 	}
 
@@ -257,7 +254,7 @@ public class MemberDAO {
 		return state;
 	}
 
-	public ArrayList memberStatus(String email, String category) { // 사용/예약 현황
+	public ArrayList<AdminDTO> memberStatus(String email, String category) { // 사용/예약 현황
 		ArrayList<AdminDTO> list = new ArrayList<>();
 		String item =
 				"SELECT '보관' as state, m.name, m.phone, m.email,"

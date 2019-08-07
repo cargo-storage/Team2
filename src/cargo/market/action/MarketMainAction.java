@@ -34,7 +34,7 @@ public class MarketMainAction implements Action{
 		
 		paging.setRecPerPage(9);
 		paging.setPagePerGroup(5);
-		paging.setTotalRecord(curPage);
+		paging.setTotalRecord(curPage, keyWord, category);
 		
 		int startNum = paging.getStartRecNum();
 		int recPerPage = paging.getRecPerPage();
@@ -43,6 +43,7 @@ public class MarketMainAction implements Action{
 		ArrayList<M_boardDTO> boardList = mdao.selectBList(category, keyWord, startNum, recPerPage);
 		
 		
+		request.setAttribute("keyWord", keyWord);
 		request.setAttribute("category", category);
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("paging", paging);

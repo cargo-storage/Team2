@@ -1,18 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Capture - Free Bootstrap 4 Template by Colorlib</title>
+    <title>POST - TEAM2 WAREHOUSE MARKET</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
     
+    <script type="text/javascript">
+    	function getTitle(select){
+    		var itemid = select.value;
+    		var itemname = document.getElementById(itemid).value;
+    		document.getElementById("title").value = itemname;
+    	}
+    
+    </script>
   </head>
   <body>
 
@@ -26,58 +35,55 @@
 			<jsp:include page="market_header.jsp"></jsp:include>
 			
 			<section class="ftco-section mb-5">
-	    	<div class="container">
+	    		<div class="container">
 	    		<div class="row">
-	    			<div class="col-lg-12 ftco-animate">
-	            <div class="comment-form-wrap pt-5">
-	            <h2 class="mb-3 font-weight-bold">POST ITEMS</h2>
+	    		<div class="col-lg-12 ftco-animate pt-2">
+	            
+					<h3 class="mb-5 font-weight-bold"><i class="fas fa-clone"></i> POST</h3>
 	                
+	                <div class="p-3 p-md-5 bg-light rounded" style="box-shadow: 3px 3px 20px #e9e9e9;">
+	                <form action="${contextPath }/mk/postItem.do" enctype="multipart/form-data" method="post">
 	                
-	                
-	                <!-- ********************* 글쓰기 폼***************  -->
-	                <form action="${contextPath }/mk/postItem.do" class="p-3 p-md-5 bg-light">
+	                  <c:forEach items="${requestScope.itemList }" var="idto">
+		                  	<input type="hidden" id="${idto.item}" value="${idto.name }">
+		              </c:forEach>
+		              
+	                  <div class="row">
+		                  <div class="form-group col-md-5">
+		                    <label for="name">Item *</label>
+		                    <select class="form-control" name="item" onchange="getTitle(this)">
+		                    
+			             	<c:forEach items="${requestScope.itemList }" var="idto">
+			             		<option value="${idto.item }">${idto.item } : ${idto.name }</option>
+		                	</c:forEach>
+		                
+		                    </select>
+		                  </div>
+		                  <div class="form-group col-md-7">
+		                    <label for="name">Title *</label>
+		                    <input type="text" class="form-control" name="title" id="title" value="${itemList[0].name }" readOnly>
+		                  </div>
+	                  </div>
+	                  
 	                  <div class="form-group">
-	                    <label for="name">Item *</label>
-	                    <input type="text" class="form-control" name="item">
+		                  <label for="name">Image *</label>
+		                  <input type="file" class="form-control" name="image">
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="name">Title *</label>
-	                    <input type="text" class="form-control" name="title">
+		                  <label for="message">Content *</label>
+		                  <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="name">Image *</label>
-	                    <input type="text" class="form-control" name="image">
+	                  	  <input type="submit" value="POST ITEM" class="btn py-3 px-4 btn-primary mx-auto">
 	                  </div>
-<!-- 	                  <div class="form-group"> -->
-<!-- 	                    <label for="email">Title *</label> -->
-<!-- 	                    <input type="email" class="form-control" id="title"> -->
-<!-- 	                  </div> -->
-<!-- 	                  <div class="form-group"> -->
-<!-- 	                    <label for="website">Image</label> -->
-<!-- 	                    <input type="url" class="form-control" id="image"> -->
-<!-- 	                  </div> -->
-
-	                  <div class="form-group">
-	                    <label for="message">Content</label>
-	                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
-	                  </div>
-	                  <div class="form-group">
-	                    <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
-	                  </div>
-
+	                  
 	                </form>
+	                </div>
 	                
-	                
-	                
-	                
-	              </div>
-	          </div>
-	          
-	          
-	          
+	            </div>
 	    		</div>
-	    	</div>
-	    </section>
+	    		</div>
+	   		</section>
 	    
 	   <!-- footer -->
 		<jsp:include page="market_footer.jsp"></jsp:include>

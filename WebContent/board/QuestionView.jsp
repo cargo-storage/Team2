@@ -59,7 +59,7 @@
 		<hr>
 	
 		<div align="right">
-	<c:if test="${bqDTO.email == sessionScope.mdto.email || sessionScope.mdto.admin==1}" >
+	<c:if test="${bqDTO.name == sessionScope.mdto.name || sessionScope.mdto.admin==1}" >
 			<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/bo/QuestionModifyFormAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">수정</a>
 			<a class="btn btn-primary btn-sm" id="del" href="${pageContext.request.contextPath}/bo/QuestionDelAction.bo?no=${bqDTO.no}&email=${bqDTO.email}">삭제</a>
 	</c:if>

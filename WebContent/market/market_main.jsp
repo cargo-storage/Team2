@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@
 	    			
 		    		
    				<!-- 아이템분류 -->
-				<div class="ftco-bread my-3">
+				<div class="ftco-bread mt-3 mb-5">
 				<div class="row">
 					<h3 class="mb-0 font-weight-bold d-inline-block col-md-6"><i class="fas fa-store"></i> ITEMS</h3>
 					
@@ -69,39 +70,59 @@
 	    			
 			    <!-- 아이템 리스트 영역 -->
 			    <div class="row">
+		<c:if test="${empty requestScope.boardList }">
+			<div class="mx-auto my-5">
+				<h4>아이템이 존재하지 않습니다 :-)</h4>
+			</div>
+		</c:if>
 		<c:forEach var="bdto" items="${requestScope.boardList }">
 					<div class="col-md-4">
 					<div class="blog-entry ftco-animate">
-						<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}" class="img"
-							style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
+				<c:choose>
+					<c:when test="${bdto.onStock == 0 }">
+						<a class="img" style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain; opacity:0.2! important;"></a>
 						<div class="text text-2 pt-2 mt-3">
-					    	<h3 class="mb-2 d-inline"><a href="single.html">${bdto.title }</a></h3>
+					    	<h3 class="mb-2 d-inline">
+					    		<a class="text-muted">${bdto.title } <small class="ml-2 font-weight-bold" style="color: red;">SOLD OUT</small></a>
+					    	</h3>
 					    	<div class="meta-wrap">
 								<p class="meta">
-					         		<small><span class="icon-calendar"></span> ${bdto.date}</small>
-			<%-- 	         		<span><a href="single.html">${bdto.price }</a></span> --%>
-			<!-- 	         		<span>5 Comment</span> -->
+					         		<small><span class="icon-calendar"></span><fmt:formatDate value="${bdto.date}" pattern="YYYY-MM-dd"/></small>
 					         	</p>
 					        </div>
 					    	<p class="mb-4">${bdto.content }</p>
 					    </div>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}" class="img"
+							style="background-image: url(${contextPath}/market/uploaded/${bdto.image }); background-size: contain;"></a>
+						<div class="text text-2 pt-2 mt-3">
+					    	<h3 class="mb-2 d-inline"><a href="${contextPath }/mk/showcontent.do?no=${bdto.no}">${bdto.title }</a></h3>
+					    	<div class="meta-wrap">
+								<p class="meta">
+					         		<small><span class="icon-calendar"></span><fmt:formatDate value="${bdto.date}" pattern="YYYY-MM-dd"/></small>
+					         	</p>
+					        </div>
+					    	<p class="mb-4">${bdto.content }</p>
+					    </div>
+				    </c:otherwise>
+				</c:choose>
 					</div>
 					</div>
 		</c:forEach>
 				</div>
 			    
 			    
-			    		        
         		<!-- 검색 -->
 				<form action="./market.do" class="search-form bg-white col-md-3 ml-auto" id="searchFrm">
 	                <div class="form-group">
 	                  <a href="#" onclick="document.getElementById('searchFrm').submit();"><span class="icon icon-search"></span></a>
                   		<input type="hidden" name="cate" value="${category }">
-	                  <input type="text" id="keyword" name="keyword" class="rounded form-control" placeholder="SEARCH">
+	                  <input type="text" id="keyword" name="keyword" class="rounded form-control" value="${requestScope.keyWord }" placeholder="SEARCH">
 	            	</div>
 	            </form>
 			    	
-<!-- 페이징 : 검색어 있을 시 ! -->
+		<!-- 페이징 : 검색어 있을 시 ! -->
 		    	<div class="d-block row mt-3 mb-5">
 		          <div class="col text-center">
 		            <div class="block-27">
@@ -123,8 +144,6 @@
 		            </div>
 		          </div>
 		        </div> 
-		        
-		        
 	    	</div>
 	    	</div>
 	    	</div>

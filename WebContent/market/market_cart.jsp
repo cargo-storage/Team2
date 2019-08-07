@@ -113,7 +113,7 @@
 	              		<td width='15%'>총 가격</td>
 	              	</tr>
 	              </thead>
-	              <tbody>
+	              <tbody class="tbody">
 	            <c:set var="total" value="${0 }"/>
 	            <c:forEach var="item" items="${sessionScope.cart.itemList }">
 	            	<tr height="60px" id="itemTable">

@@ -13,6 +13,7 @@
          <!-- CSS/CDN links-->
 		<jsp:include page="inc/head_css.jsp"></jsp:include>
 		<!-- login.css -->
+		
 		<link href="${contextPath }/css/member/login.css" rel="stylesheet"/>
 		
 		<!-- CSS/CDN links 밑에 자바 스크립트 때문에 위로 올려둠-->
@@ -29,6 +30,7 @@
         	.quote{
 	        	display:block;
 			 	overflow: hidden; 
+			 	
 			  	text-overflow: ellipsis;
 			  	white-space: nowrap; 
 			  	
@@ -465,29 +467,20 @@
                 			</div>
                 		</div>
                 	</div>
-                	<div class="col-8">
+                	<div class="col-lg-8 col-sm-12">
 	                    <div class="col-md-12 mx-auto review-wrapper slick-reviews">
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-1.jpg" class="img-review rounded d-block mx-auto" alt="Client 1"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다.</span></div>
-	                            </div>
-	                        </div>
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-2.jpg" class="img-review rounded d-block mx-auto" alt="Client 2"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span></div>
-	                            </div>
-	                        </div>
-	                        <div class="card border-0 review p-5 raised-box">
-	                            <div class="card-body">
-	                                <img src="${contextPath }/img/client-3.jpg" class="img-review rounded d-block mx-auto" alt="Client 3"/>
-	                                <p class="quote">물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳물품에 대한 정보를 알려주는 곳</p>
-	                                <div class="mt-4">가격 &nbsp;&nbsp; <span class="text-muted">미정입니다</span> </div>   
-	                            </div>
-	                        </div>
+	                      <c:forEach var="bdto" items="${requestScope.boardList }">
+	                           <div class="card border-0 review p-5 raised-box">
+	                               <div class="card-body col-sm-12">
+	                               		<a href="${contextPath }/mk/showcontent.do?no=${bdto.no}"><img src="${contextPath}/market/uploaded/${bdto.image }" 
+	                               		class="img mx-auto col-md-10" style="max-height: 350px;"/></a>
+	                               </div>
+	                               <div>
+										<h5>${bdto.title }</h5>
+		                                <h5 style="color: #00c853">￦ ${bdto.price }</h5>
+	                               </div>
+	                           </div>
+                          </c:forEach>
 	                    </div>
                     </div>
                 </div>
@@ -499,7 +492,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto text-center">
-                        <span class="text-muted text-uppercase">Frequently Asked Questions</span>
+                        <span class="text-muted text-uppercase">Customer Support</span>
                         <h2 class="display-4">FAQ</h2>
                     </div>
                 </div>
@@ -507,40 +500,41 @@
                     <div class="col-md-9 mx-auto">
                         <div class="row mt-4">
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem ipsum dolor sit amet?</h5>
+                                <h5>보관 불가능한 물품은 어떤것이 있나요? </h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                               	변질우려가 있는 물품, 동식물, 현금(통장)및 유가증권<br>
+								화재의 위험이 있는 위험물, 도난물품, 도검류, 권총 등 <Br>
+								 불법 무기류와 미풍양속을 해치는 물품 등이 있습니다.
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem sit andigen daepeditem amet?</h5>
+                                <h5>견적은 어떻게 계산되나요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                    	보관기간과 용량에 따라 달라지니 <br>
+                                    	자세한 사항은 문의게시판에 질문해주시면 상세하게 답변 드리겠습니다.
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem ipsum dolor sit andigen daepeditem amet?</h5>
+                                <h5>창고의 보안은 어떤가요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                   	이용고객의 소중한 물품과 개인정보 보호를 위하여 <br>
+                                   24시간 365일 유인.무인 보안체계를 갖추어 이용고객이 편리하고 안심하게 사용할 수 있습니다
                                 </p>
                             </div>
                             <div class="col-md-6 mb-4">
-                                <h5>Lorem sit andigen daepeditem amet dem tumquam explabo?</h5>
+                                <h5>온도, 습도는 어떻게 관리하나요?</h5>
                                 <p class="text-muted">
-                                    Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore. Laceaque quiae sitiorem 
-                                    rest non restibusaes maio es dem tumquam explabo.
+                                   	고객님의 물품을 최상의 상태로 유지하기 위해,<br>
+                                   	온,습도 감지 센서를 이용해 실시간으로 관리하고 있습니다.
                                 </p>
                             </div>
                         </div>
                         <div class="row text-center my-5">
                             <div class="col-lg-6 col-md-8 mx-auto">
-                                <div class="font-weight-bold lead">Still have more questions?</div>
-                                <p class="text-muted">Magnis modipsae que voloratati andigen daepeditem quiate conecus aut labore.</p>
-                                <a href="${contextPath}/bo/NoticeListAction.bo"" class="btn btn-primary btn-sm">
-                                    	문의게시판가기
+                                <div class="font-weight-bold lead">더 자세하게 알아보려면?</div>
+                                <p class="text-muted"></p>
+                                <a href="${contextPath}/bo/NoticeListAction.bo" class="btn btn-primary btn-sm">
+                                    	고객지원 페이지로 이동
                                 </a>
                             </div>
                         </div>
@@ -599,11 +593,8 @@
   		</c:if>
   		<!-- login.js -->
   		<script src="${contextPath }/js/member/login.js"></script>
-  		
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
         <script src="${contextPath }/js/scripts.js"></script>
+        
     </body>
 </html>

@@ -22,6 +22,15 @@ public class M_boardDTO {
 		this.content = content;
 		this.image = image;
 	}
+	
+	public M_boardDTO(Timestamp date, String item, String title, String content, String image) {
+		super();
+		this.date = date;
+		this.item = item;
+		this.title = title;
+		this.content = content;
+		this.image = image;
+	}
 
 	public int getNo() {
 		return no;

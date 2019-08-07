@@ -7,7 +7,6 @@
 <c:choose>   
 	<c:when test="${sessionScope.mdto.name !=null }"><c:set var="mem_name" value="${sessionScope.mdto.name }"/></c:when>
 </c:choose>
- 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,29 +16,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>RESERVATION - TEAM2 WAREHOUSE</title>
         <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
-
 		
-		
-		<style type="text/css">
-			.table tr>td:not(.confirm){
-				text-align: center;
-			}
-			.red{
-				color: #ff3333;
-			}
-			.confirm{
-				text-align: right;
-			}
-			
-			section{
-				background-image: url(../img/reservation.jpg);
-				background-size: cover;
-			}
-			.background{
-				background-color: rgba( 255, 255, 255, 0.9);
-			}
-			
-		</style>
+		<link href="${contextPath}/css/reservation.css" rel="stylesheet">
  
 </head>
 
@@ -47,7 +25,7 @@
  	
 <!--navigation in page-->
 <jsp:include page="../inc/header.jsp"></jsp:include>
-	<section class="py-7">
+	<section class="py-7" id="section">
     	<div class="container">
            	<div class="row">
 	            <div class="col-md-7 col-sm-9 mx-auto text-center">
@@ -129,13 +107,8 @@
 	</section>
 
 
-
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     </body>
 </html>

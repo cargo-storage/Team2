@@ -11,29 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>예약 연장(관리자 확인)  - TEAM2 WAREHOUSE</title>
 
-        <!--Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-        <!--vendors styles-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="${contextPath}/css/reservation.css" rel="stylesheet">
 		
-        <!-- Bootstrap CSS / Color Scheme -->
-        <link rel="stylesheet" href="../css/default.css" id="theme-color">
-        <!-- font-awesome CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-		
-		<style type="text/css">
-			.table tr>td:not(.confirm){
-				text-align: center;
-			}
-			.red{
-				color: #ff3333;
-			}
-			.confirm{
-				text-align: right;
-			}
-	
-		</style>
  
 </head>
 
@@ -121,8 +100,6 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-		<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script type="text/javascript">
         function check() {
 			var check = confirm("고객님이 결제를 완료하셨습니까?");

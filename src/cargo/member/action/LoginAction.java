@@ -1,7 +1,6 @@
 package cargo.member.action;
 
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +58,7 @@ public class LoginAction implements Action {
 
 			String path = request.getContextPath();
 			forward.setRedirect(true);
-			forward.setPath(path + "/index.jsp");
+			forward.setPath(path + "/start.jsp");
 		}
 		return forward;
 	}

@@ -16,7 +16,6 @@ import cargo.member.action.EmailSearchAction;
 import cargo.member.action.ExtendAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
-import cargo.member.action.LogoutAction;
 import cargo.member.action.ModifyCheckAction;
 import cargo.member.action.ModifyMemberAction;
 import cargo.member.action.PwdCheckAction;
@@ -46,7 +45,6 @@ public class MemberController extends HttpServlet {
 		// 가상요청 주소 가져오기
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI: " + RequestURI);
-		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
 		System.out.println("command: " + command);
 

@@ -8289,6 +8289,7 @@ textarea.form-control {
   font-size: 15px; }
 
 .block-21 .blog-img {
+  background-size: contain;
   display: block;
   height: 80px;
   width: 80px; }

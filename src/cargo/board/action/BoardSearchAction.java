@@ -2,7 +2,6 @@ package cargo.board.action;
 
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,8 +19,6 @@ public class BoardSearchAction implements Action {
 		if(request.getParameter("currentPage") != null) {
 		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
-		
-        
        
 
 		String search = request.getParameter("search");

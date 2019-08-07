@@ -35,7 +35,7 @@ request.setCharacterEncoding("utf-8");
 		System.out.println(content);
 		
 		BoardnDAO bnDAO = new BoardnDAO();
-		int no = bnDAO.AddBoardn(bnDTO);
+		bnDAO.AddBoardn(bnDTO);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(true);

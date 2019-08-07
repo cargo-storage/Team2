@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -83,9 +82,7 @@ public class ReservationDAO {
 	
 	public ArrayList<ItemsDTO> getCurReservation(String house){
 		ItemsDTO idto;
-		ReservationDTO rdto;
 		ArrayList<ItemsDTO> rList = new ArrayList<>();
-		ArrayList<ReservationDTO> rList2 = new ArrayList<>();
 		
 		try {
 			

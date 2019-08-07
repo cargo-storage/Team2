@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
-import cargo.reservation.action.ResInfoAction;
+import cargo.market.action.MainpageAction;
 
 public class CommonController extends HttpServlet{
 
@@ -35,15 +35,15 @@ public class CommonController extends HttpServlet{
 		String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
 		
 		ActionForward forward = null;
-		Action action= null;
+		Action action = null;
 		
 		System.out.println(command);
 		
 		try {
 			
 			if("/index.go".equals(command)){ // Team2/co/index.go --> 인덱스이동
-				forward = new ActionForward();
-				forward.setPath("../index.jsp");
+				action = new MainpageAction();
+				forward = action.execute(request, response);
 			}else if("/login.go".equals(command)){ // 인덱스(모달창바로띄우는)
 				forward = new ActionForward();
 				forward.setPath("../index.jsp?login=true");
@@ -52,8 +52,6 @@ public class CommonController extends HttpServlet{
 				forward.setPath("../company/information.jsp");
 			}
 				
-			
-			
 			
 			
 			// 모든 과정 후 페이지 이동부분

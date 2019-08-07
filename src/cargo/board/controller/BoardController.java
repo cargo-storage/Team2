@@ -49,7 +49,6 @@ public class BoardController extends HttpServlet{
 		
 		//가상요청 주소 가져오기
 				String RequestURI=request.getRequestURI();				
-				String contextPath=request.getContextPath();
 				
 				System.out.println(RequestURI.lastIndexOf("/"));
 				String command=RequestURI.substring(RequestURI.lastIndexOf("/"));

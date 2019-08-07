@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cargo.common.DTO.MemberDTO;
 import cargo.common.action.Action;
 import cargo.common.action.ActionForward;
 import cargo.member.DAO.MemberDAO;

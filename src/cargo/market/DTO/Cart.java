@@ -32,8 +32,11 @@ public class Cart {
 		boolean check = false;
 		
 		for(CartDTO dto: itemList){
+			
 			if(cdto.getItem().equals(dto.getItem())){
-				cdto.setQuantity(cdto.getQuantity()+dto.getQuantity());
+				System.out.println("기존수량 "+cdto.getQuantity());
+				System.out.println("더할수량 "+dto.getQuantity());
+				dto.setQuantity(cdto.getQuantity()+dto.getQuantity());
 				check = true;
 				break;
 			}

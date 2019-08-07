@@ -43,9 +43,9 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse" style="">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link page-scroll" href="#company">회사소개</a>
-                </li>
+<!--                 <li class="nav-item"> -->
+<!--                     <a class="nav-link page-scroll" href="#company">회사소개</a> -->
+<!--                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="${contextPath }/co/information.go">이용안내</a>
                 </li>

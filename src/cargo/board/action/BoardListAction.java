@@ -2,7 +2,6 @@ package cargo.board.action;
 
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,12 +20,11 @@ public class BoardListAction implements Action {
 		    currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-        
        
         
 		BoardqDAO bdDAO = new BoardqDAO();
 		int totalRowCount = bdDAO.getQuestionCount();
-		int pagePerRow = 16;
+		int pagePerRow = 10;
 		
 		ArrayList<BoardqDTO> list = bdDAO.getQuestionList(currentPage, pagePerRow);
 		// 현재페이지currentPage  총 열 개수totalRowCount  페이지당행 pagePerRow 마지막페이지lastPage

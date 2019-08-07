@@ -15,38 +15,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>예약 연장</title>
 
-        <!--Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-        <!-- Bootstrap CSS / Color Scheme -->
-        <link rel="stylesheet" href="../css/default.css" id="theme-color">
-        
-        <!-- font-awesome CSS -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-		
 		<!-- Page level plugin CSS-->
 		<link href="${contextPath}/css/pignose.calendar.css" rel="stylesheet">
-		
-		<style type="text/css">
-			.table tr>td:not(.confirm){
-				text-align: center;
-			}
-			.red{
-				color: #ff3333;
-			}
-			.confirm{
-				text-align: right;
-			}
-			
-			section{
-				background-image: url(../img/reservation.jpg);
-				background-size: cover;
-			}
-			.background{
-				background-color: rgba( 255, 255, 255, 0.9);
-			}
-			
-		</style>
+		<link href="${contextPath}/css/reservation.css" rel="stylesheet">		
+
  
 </head>
 
@@ -54,7 +26,7 @@
  	
 <!--navigation in page-->
 <jsp:include page="../inc/header.jsp"></jsp:include>
-	<section class="py-7">
+	<section class="py-7" id="section_ex">
     	<div class="container">
            	<div class="row">
 	            <div class="col-md-7 col-sm-9 mx-auto text-center">
@@ -166,13 +138,10 @@
 <!--footer -->
 <jsp:include page="../inc/footer.jsp"></jsp:include>
 
-        <!-- Bootstrap core JavaScript-->
-		<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
-		<script src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 		<!-- Page level plugin JavaScript-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 		<script src="${contextPath}/vendor/pignose_calendar/pignose.calendar.full.min.js"></script>
+	
 	
 		<!-- scripts for this page-->
         <script type="text/javascript">
