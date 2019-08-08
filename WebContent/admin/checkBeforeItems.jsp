@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>보관 시작하기</title>
+<title>보관 완료</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- Custom fonts for this template-->
 <link href="${contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

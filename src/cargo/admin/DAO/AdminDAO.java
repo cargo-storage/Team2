@@ -651,6 +651,22 @@ public class AdminDAO {
 			freeResource();
 		}
 		return chartInfo;
-	}
+	}//end of getChartInfos
+
+	public void deleteResevation(int num) {
+		try {
+			sql="delete from reservation where num=?";
+			con = connect();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("deleteResevation err:"+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			freeResource();
+		}
+	}//end of deleteResevation
 
 }
