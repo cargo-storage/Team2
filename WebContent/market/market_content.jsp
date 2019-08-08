@@ -79,7 +79,7 @@
 
 
 				<!-- 댓글 영역 -->
-	            <div class="pt-5 mt-5">
+	            <div class="pt-5 my-5">
 	              <h4 class="mb-5 font-weight-bold"><span class="icon-chat"></span> ${totalComment } Comments</h4>
 	              <div class="comment-list">
 	                <div class="comment">
