@@ -13,6 +13,12 @@
 	<c:otherwise><c:set var="pay" value="${param.res_payment + param.payment}"/></c:otherwise>
 </c:choose>
 	<script type="text/javascript">
+	
+	history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+	};
+	
     $(function(){
     	
         var IMP = window.IMP; // 생략가능

@@ -19,7 +19,6 @@
 		<!-- CSS/CDN links 밑에 자바 스크립트 때문에 위로 올려둠-->
 		<jsp:include page="inc/head_js.jsp"/>
 		
-		
         <style>
         	/* 중고 장터 */
         	.market-go{
@@ -50,6 +49,8 @@
 			$(function(){
 			 	/* 마이 페이지 hover */
 			 	$("#navbardrop").mouseenter(function(){
+			 		
+			 		
 			 		$(".dropdown-menu").addClass("show");
 			 	});
 			 	$("#dropdown-menu").mouseleave(function(){
@@ -59,6 +60,11 @@
 				if(${param.login!=null}){
 					$("#loginModal").modal('toggle');
 				}
+				
+				
+				/* 간편견적 */
+				var go;
+				var day;
 				
 				//창 열기 버튼을 클릭했을경우
 	            $("#ajaxbtn").on("click",function(){
@@ -89,9 +95,10 @@
 	            	}
 	            });
 				
+	          //$("#dialog").dialog();
 	            $("#dialog").dialog({
 	                autoOpen:false, //자동으로 열리지않게
-	                position:[100,300], //x,y  값을 지정
+	                position:[100,200], //x,y  값을 지정
 	                //"center", "left", "right", "top", "bottom"
 	                modal:true, //모달대화상자
 	                resizable:false, //크기 조절 못하게
@@ -105,12 +112,8 @@
 	                    }
 	                }
 	            });
+	            
        		});
-
-							
-			/* 간편견적 */
-			var go;
-			var day;
 			
 			function inNumber(){
 		        if(event.keyCode<48 || event.keyCode>57){
@@ -149,7 +152,7 @@
 
    <!--navigation-->
    <nav class="navbar navbar-expand-md navbar-dark navbar-transparent fixed-top sticky-navigation" id="lambda-navbar">
-       <a class="navbar-brand" href="${contextPath }/index.jsp">
+       <a class="navbar-brand" href="${contextPath }/start.jsp">
            TEAM2 WAREHOUSE
        </a>
        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
@@ -536,7 +539,7 @@
                 </div>
             </div>
         </section>
-        
+        <div id="plusfriend-chat-button" style="position: fixed; bottom: 15px; right: 65px;"></div>
         <!--footer / contact-->
 		<jsp:include page="inc/footer.jsp"></jsp:include>
 
@@ -582,11 +585,27 @@
 		
 		<!-- 세션 타임아웃 -->
   		<c:if test="${sessionScope.mdto ne null }">
-   			<script src="js/member/sessionTime.js"></script> 
+  			<script>var contextPath = "${contextPath}"</script>
+   			<script src="${contextPath }/js/member/sessionTime.js"></script> 
   		</c:if>
   		<!-- login.js -->
-  		<script src="js/member/login.js"></script>
+  		<script src="${contextPath }/js/member/login.js"></script>
+
         <script src="${contextPath }/js/scripts.js"></script>
+        
+        <!-- 1:1채팅 -->
+        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <script type='text/javascript'>
+		  //<![CDATA[
+		    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		    Kakao.init('421ef65f051ad3badd2314b50a343d37');
+		    // 플러스친구 1:1채팅 버튼을 생성합니다.
+		    Kakao.PlusFriend.createChatButton({
+		      container: '#plusfriend-chat-button',
+		      plusFriendId: '_xhxdZxnT' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+		    });
+		  //]]>
+		</script>
         
     </body>
 </html>

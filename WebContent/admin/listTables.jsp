@@ -310,6 +310,7 @@
 						<input type="hidden" name="state" value="reservation">
 					</div>
 					<div class="modal-footer">
+						<button type="button" class="btn btn-danger sub sr-only" value="deldel">예약 삭제하기</button>
 						<button type="button" class="btn btn-primary sub" value="extend">기간 연장하기</button>
 						<button type="button" class="btn btn-primary sub" value="toitems">창고에 넣기</button>
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

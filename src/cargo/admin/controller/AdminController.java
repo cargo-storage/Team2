@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cargo.admin.action.AdminAllInfoAction;
+import cargo.admin.action.AdminDelReservAction;
 import cargo.admin.action.AdminEachInfoAction;
 import cargo.admin.action.AdminExtendReservAction;
 import cargo.admin.action.AdminItemsToClosedAction;
@@ -71,7 +72,7 @@ public class AdminController extends HttpServlet {
 				
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath(contextPath+"/index.jsp");
+				forward.setPath(contextPath+"/start.jsp");
 			
 			//관리자 메인 페이지
 			}else  if("/admin_main".equals(command)){
@@ -112,7 +113,12 @@ public class AdminController extends HttpServlet {
 			}else if("/reserve_to_items".equals(command)){
 				action = new AdminReservToItemsAction();
 				forward = action.execute(request, response);
-			
+				
+			//예약 start날짜에 안들어 왔을 경우 삭제하기
+			}else if("/delete_reservation".equals(command)){
+				action = new AdminDelReservAction();
+				forward = action.execute(request, response);
+				
 			//창고에서 빼기 전에 언제 반환 하는지 체크
 			}else if("/release_check".equals(command)){
 				action = new AdminReleaseItemAction();

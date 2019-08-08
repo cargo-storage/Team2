@@ -16,6 +16,7 @@
 	<meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
 	
 	<link href="${contextPath}/css/reservation.css" rel="stylesheet">
+
 	
 	<c:choose>   
 		<c:when test="${sessionScope.mdto.email==null }">
@@ -77,9 +78,9 @@
 
 <body>
 
-<!--navigation in page-->
-<jsp:include page="../inc/header.jsp"></jsp:include>
-        
+ 	<!--navigation in page-->
+	<jsp:include page="../inc/header.jsp"></jsp:include>
+  
 	<section class="py-7" id="section">
 		<div class="container">
 		

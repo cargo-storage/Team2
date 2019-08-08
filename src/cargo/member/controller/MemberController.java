@@ -13,7 +13,7 @@ import cargo.common.action.ActionForward;
 import cargo.member.action.EmailAuthAction;
 import cargo.member.action.EmailCheckAction;
 import cargo.member.action.EmailSearchAction;
-import cargo.member.action.ExtendReservationAction;
+import cargo.member.action.ExtendAction;
 import cargo.member.action.JoinAction;
 import cargo.member.action.LoginAction;
 import cargo.member.action.ModifyCheckAction;
@@ -41,6 +41,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 
+		System.out.println("=============== Member ==============");
 		// 가상요청 주소 가져오기
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI: " + RequestURI);
@@ -116,8 +117,8 @@ public class MemberController extends HttpServlet {
 			} else if (command.equals("/memberStatus")) { // 마이페이지 현황
 				action = new MemberStatusAction();
 				forward = action.execute(request, response);
-			} else if (command.equals("/extendReserv")) { // 보관 연장
-				action = new ExtendReservationAction();
+			} else if (command.equals("/extend")) { // 보관 연장
+				action = new ExtendAction();
 				forward = action.execute(request, response);
 				
 			}
@@ -141,5 +142,6 @@ public class MemberController extends HttpServlet {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+		System.out.println("=====================================");
 	}
 }

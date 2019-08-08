@@ -9,6 +9,12 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 	<script type="text/javascript">
+	
+	history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+	};
+	
     $(function(){
     	
         var IMP = window.IMP; // 생략가능

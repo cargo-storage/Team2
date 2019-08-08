@@ -126,7 +126,7 @@ function modify(){
 		return false;
 	}
 	
-	if($("#currentPwdErr").text()!=''||$("#pwdErr").text()!=''||$("#pwd2Err").text()!=''
+	if($("#currentPwdErr").text()!=''||$("#newPwdErr").text()!=''||$("#pwd2Err").text()!=''
 			||$("#nameErr").text()!=''||$("#phoneErr").text()!=''
 			||$("#addrErr").text()!=''||$("#emailErr").text()!=''){
 		alert("오류 사항을 확인 후 다시 입력해주세요.");
