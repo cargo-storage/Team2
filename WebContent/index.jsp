@@ -61,6 +61,11 @@
 					$("#loginModal").modal('toggle');
 				}
 				
+				
+				/* 간편견적 */
+				var go;
+				var day;
+				
 				//창 열기 버튼을 클릭했을경우
 	            $("#ajaxbtn").on("click",function(){
 	            	if($("#size").val()==""){
@@ -70,6 +75,22 @@
 	            	}else if(parseInt($("#minday").val())<15){
 	            		alert("최소 15일 이상 사용가능합니다.");
 	            	}else{
+	            		go = $("#size").val(); //A,B,C,D
+						day = $("#minday").val();
+						//var AllData = {'minday': day,'house': go};
+						$.ajax({
+							type : 'POST',
+							url : "${contextPath}/re/simplepayment.me",
+							data : {house : go},
+							dataType: 'text',
+							success : function(r) {
+								var re = JSON.parse(r);
+								$("#ajaxresult").val(re.price * day);
+								$("#rsname").val($("#name").val());
+								$("#rssize").val($("#size").val());
+								$("#rsminday").val($("#minday").val());
+							}
+						});//end of ajax
 	            		$("#dialog").dialog("open"); //다이얼로그창 오픈                
 	            	}
 	            });
@@ -92,30 +113,7 @@
 	                }
 	            });
 	            
-	            $("#ajaxbtn").on("click", function() {
-					go = $("#size").val(); //A,B,C,D
-					day = $("#minday").val();
-					//var AllData = {'minday': day,'house': go};
-					$.ajax({
-						type : 'POST',
-						url : "${contextPath}/re/simplepayment.me",
-						data : {house : go},
-						dataType: 'text',
-						success : function(r) {
-							var re = JSON.parse(r);
-							$("#ajaxresult").val(re.price * day);
-							$("#rsname").val($("#name").val());
-							$("#rssize").val($("#size").val());
-							$("#rsminday").val($("#minday").val());
-						}
-					});//end of ajax
-				});//end of onclick
        		});
-
-							
-			/* 간편견적 */
-			var go;
-			var day;
 			
 			function inNumber(){
 		        if(event.keyCode<48 || event.keyCode>57){
@@ -541,7 +539,7 @@
                 </div>
             </div>
         </section>
-        
+        <div id="plusfriend-chat-button" style="position: fixed; bottom: 15px; right: 65px;"></div>
         <!--footer / contact-->
 		<jsp:include page="inc/footer.jsp"></jsp:include>
 
@@ -594,6 +592,20 @@
   		<script src="${contextPath }/js/member/login.js"></script>
 
         <script src="${contextPath }/js/scripts.js"></script>
+        
+        <!-- 1:1채팅 -->
+        <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+        <script type='text/javascript'>
+		  //<![CDATA[
+		    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		    Kakao.init('421ef65f051ad3badd2314b50a343d37');
+		    // 플러스친구 1:1채팅 버튼을 생성합니다.
+		    Kakao.PlusFriend.createChatButton({
+		      container: '#plusfriend-chat-button',
+		      plusFriendId: '_xhxdZxnT' // 플러스친구 홈 URL에 명시된 id로 설정합니다.
+		    });
+		  //]]>
+		</script>
         
     </body>
 </html>

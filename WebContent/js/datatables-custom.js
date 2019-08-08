@@ -42,6 +42,12 @@ function reservationModal(modal, result) {
 	//날짜는 클릭 못하게 여기서는 보여주는것만 하는거
 	$('.pignose-calendar-body').addClass('clickX');
 	
+	var today = moment();
+	var start_day = moment(result.start_day,'YYYY-MM-DD');
+	if(moment.duration(today.diff(start_day)).asDays()>=1){
+		$('.modal-footer button[value="deldel"]').removeClass("sr-only");
+	}
+	
 	modal.find('.num').text(result.num);
 	modal.find('.res_day').text(result.res_day);
 	modal.find('.start_day').text(result.start_day);
@@ -177,6 +183,7 @@ $(document).ready(function() {
   $('.modal').on('hide.bs.modal', function (event) {
 	  $('#dataTable tbody tr.selected').removeClass('selected');
 	  $('.modal-footer button[value="overdue"]').addClass("sr-only");
+	  $('.modal-footer button[value="deldel"]').addClass("sr-only");
 	});//모달 없어졌을 때..
 
   $(".sub").on('click', function() {
@@ -190,6 +197,14 @@ $(document).ready(function() {
 	else if(button.val() == 'toclosed') nearForm.attr("action", "../ad/release_check");
 	//연체 창고 옮기기
 	else if(button.val() == 'overdue') nearForm.attr("action", "../ad/enter_overdue_location");
+	//예약 오래된거 삭제
+	else if(button.val() == 'deldel'){ 
+		var check = confirm("정말 삭제하시겠습니까?");
+		
+		if(check){
+			nearForm.attr("action", "../ad/delete_reservation");
+		}else return false;
+	}
 	
 	nearForm.submit();
   });//예약연장, 창고넣기, 창고 빼기 버튼 눌렀을 때
