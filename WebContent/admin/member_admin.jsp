@@ -189,7 +189,7 @@
 								  <label class="form-check-label" for="admin">
 								    	관리자
 								  </label>
-								</div>
+								</div>&nbsp;&nbsp;&nbsp;&nbsp;
 								<div class="form-check">
 								  <input class="form-check-input dont" type="radio" name="admin" id="market" value="2">
 								  <label class="form-check-label" for="market">

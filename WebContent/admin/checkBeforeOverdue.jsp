@@ -20,7 +20,12 @@
 <!-- Custom styles for this template-->
 <link href="${contextPath}/css/sb-admin.css" rel="stylesheet">
 <style type="text/css">
-
+/*연체 표시...*/
+.pignose-calendar .pignose-calendar-unit.pignose-calendar-unit-disabled a {
+	opacity: 0.9;
+  	background-color: #f44336;
+  	color: white;
+}
 </style>
 </head>
 	<jsp:useBean id="now" class="java.util.Date" />
