@@ -23,7 +23,7 @@ $(function(){
 		var reg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if(!reg.test(email)){
 			$("#emailErr").text("이메일 형식이 맞지 않습니다.");
-		}
+		}else{ $("#emailErr").text(''); }
 	});
 });
 
