@@ -94,6 +94,7 @@
 	</div>
 </section>
 <!-- findMember.js -->
+<script>var contextPath = "${contextPath}"</script>
 <script src="${contextPath }/js/member/findMember.js"></script>
 </body>
 </html>

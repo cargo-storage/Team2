@@ -23,6 +23,7 @@ $(function(){
 
 function setcount() {
 	if (count++ == 600){ // 10분 뒤 모달 띄우기
+		setTime = 59;
 		$("#openTimer").trigger("click");
 		timer = setInterval(msg_time,1000);
 	}
