@@ -50,8 +50,6 @@
 			$(function(){
 			 	/* 마이 페이지 hover */
 			 	$("#navbardrop").mouseenter(function(){
-			 		
-			 		
 			 		$(".dropdown-menu").addClass("show");
 			 	});
 			 	$("#dropdown-menu").mouseleave(function(){
@@ -71,14 +69,29 @@
 	            	}else if(parseInt($("#minday").val())<15){
 	            		alert("최소 15일 이상 사용가능합니다.");
 	            	}else{
+	            		go = $("#size").val(); //A,B,C,D
+						day = $("#minday").val();
+						//var AllData = {'minday': day,'house': go};
+						$.ajax({
+							type : 'POST',
+							url : "${contextPath}/re/simplepayment.me",
+							data : {house : go},
+							dataType: 'text',
+							success : function(r) {
+								var re = JSON.parse(r);
+								$("#ajaxresult").val(re.price * day);
+								$("#rsname").val($("#name").val());
+								$("#rssize").val($("#size").val());
+								$("#rsminday").val($("#minday").val());
+							}
+						});//end of ajax
 	            		$("#dialog").dialog("open"); //다이얼로그창 오픈                
 	            	}
 	            });
 				
-	          //$("#dialog").dialog();
 	            $("#dialog").dialog({
 	                autoOpen:false, //자동으로 열리지않게
-	                position:[100,200], //x,y  값을 지정
+	                position:[100,300], //x,y  값을 지정
 	                //"center", "left", "right", "top", "bottom"
 	                modal:true, //모달대화상자
 	                resizable:false, //크기 조절 못하게
@@ -92,25 +105,6 @@
 	                    }
 	                }
 	            });
-	            
-	            $("#ajaxbtn").on("click", function() {
-					go = $("#size").val(); //A,B,C,D
-					day = $("#minday").val();
-					//var AllData = {'minday': day,'house': go};
-					$.ajax({
-						type : 'POST',
-						url : "${contextPath}/re/simplepayment.me",
-						data : {house : go},
-						dataType: 'text',
-						success : function(r) {
-							var re = JSON.parse(r);
-							$("#ajaxresult").val(re.price * day);
-							$("#rsname").val($("#name").val());
-							$("#rssize").val($("#size").val());
-							$("#rsminday").val($("#minday").val());
-						}
-					});//end of ajax
-				});//end of onclick
        		});
 
 							
