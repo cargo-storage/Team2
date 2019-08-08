@@ -24,11 +24,11 @@ ul li {
 }
 
 #sidebar ul li a {
-	color: darkslategrey;
+	color: #00953e;
 }
 
 #sidebar ul li a:HOVER {
-	color: #00953e;
+	color: darkslategrey;
 }
 
 .post {
@@ -45,7 +45,7 @@ ul li {
 }
 
 .post_btn {
-	height: calc(1.5em + .75rem + 2px);
+	height: calc(1.5em + 1rem + 2px);
 	padding: .375rem .75rem;
 }
 

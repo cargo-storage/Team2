@@ -58,18 +58,17 @@
 						</div>
 						<div class="form-group">
 							<label for="detailAddr">집 주소</label>
-							<div style="width:100%; margin-bottom: 5px;">
-								<input type="text" id="postCode" name="postCode" class="post" placeholder="우편번호" readonly>
-								<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
+							<div class="row">
+								<input type="text" id="postCode" name="postCode" class="form-control ml-3 mb-2 col-4 col-sm-3" placeholder="우편번호" readonly> &nbsp;&nbsp;
+								<input type="button" onclick="execPostcode()" class="post_btn col-6 col-sm-3" value="우편번호 찾기">
 							</div>
 							<div style="width:100%; margin-bottom: 5px;">
-								<input type="text" id="roadAddr" name="roadAddr" class="post post1" placeholder="도로명주소" readonly>
+								<input type="text" id="roadAddr" name="roadAddr" class="form-control mb-2" placeholder="도로명주소" readonly>
 							</div>
 							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="detailAddr" name="detailAddr" class="post post1" placeholder="상세주소">
+							<input type="text" id="detailAddr" name="detailAddr" class="form-control" placeholder="상세주소">
 							<span id="addrErr" class="help-block clear"></span>	
 						</div>
-						<br>
 						<br>
 						<div class="form-group text-center">
 							<button class="btn btn_submit btn-success">

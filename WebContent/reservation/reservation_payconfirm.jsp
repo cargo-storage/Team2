@@ -13,7 +13,7 @@
         <title>RESERVATION - TEAM2 WAREHOUSE</title>
         <meta name="description" content="Lambda is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
         
-		<link href="${contextPath}/css/reservation.css" rel="stylesheet">
+		    <link href="${contextPath}/css/reservation.css" rel="stylesheet">
  
 </head>
 

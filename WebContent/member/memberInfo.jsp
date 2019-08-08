@@ -23,25 +23,23 @@
 					</div>
 					<div class="form-group">
 						<label for="name">성명</label>
-						<input type="text" class="form-control" id="name" name="name" value="${sessionScope.mdto.name }">
+						<input type="text" class="form-control" id="name" name="name" value="${sessionScope.mdto.name }" readonly>
 						<span id="nameErr" class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label for="phone">휴대폰 번호</label>
-						<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.mdto.phone }">
+						<input type="tel" class="form-control" id="phone" name="phone" value="${sessionScope.mdto.phone }" readonly>
 						<span id="phoneErr" class="help-block"></span>
 					</div>
 					<div class="form-group">
 						<label for="detailAddr">집 주소</label>
-						<div style="width:100%; margin-bottom: 5px;">
-							<input type="text" id="postCode" name="postCode" class="post" value="${sessionScope.mdto.postCode }" readonly>
-							<input type="button" onclick="execPostcode()" class="post_btn" value="우편번호 찾기">
+						<div class="row">
+							<input type="text" id="postCode" name="postCode" class="form-control ml-3 mb-2 col-4 col-sm-3" value="${sessionScope.mdto.postCode }" readonly> &nbsp;&nbsp;
+							<input type="button" onclick="execPostcode()" class="post_btn col-6 col-sm-3" value="우편번호 찾기">
 						</div>
-						<div style="width:100%; margin-bottom: 5px;">
-							<input type="text" id="roadAddr" name="roadAddr" class="post post1" value="${sessionScope.mdto.roadAddr }" readonly>
-						</div>
+						<input type="text" id="roadAddr" name="roadAddr" class="form-control mb-2" value="${sessionScope.mdto.roadAddr }" readonly>
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="detailAddr" name="detailAddr" class="post post1" value="${sessionScope.mdto.detailAddr }">
+						<input type="text" id="detailAddr" name="detailAddr" class="form-control" value="${sessionScope.mdto.detailAddr }" readonly>
 						<span id="addrErr" class="help-block clear"></span>	
 					</div>
 				</div>						

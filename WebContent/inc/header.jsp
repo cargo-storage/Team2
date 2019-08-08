@@ -11,6 +11,7 @@
 </head>
 <body onmousemove="count=0">
 	<!-- 세션 타임아웃 -->
+	<span data-toggle="modal" data-target="#timerModal" data-backdrop="static" id="openTimer"></span>  
 	<!-- The Modal -->
 	<div class="modal" id="timerModal" data-backdrop="static">
 		<div class="modal-dialog modal-sm">
@@ -33,7 +34,7 @@
 		</div>
 	</div>
     <nav class="navbar navbar-expand-md navbar-transparent fixed-top sticky-navigation navbar-light bg-white shadow-bottom" id="lambda-navbar">
-        <a class="navbar-brand" href="${contextPath }/index.jsp">
+        <a class="navbar-brand" href="${contextPath }/start.jsp">
             TEAM2 WAREHOUSE
         </a>
         <button class="navbar-toggler navbar-toggler-right border-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,9 +43,9 @@
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse" style="">
             <ul class="navbar-nav ml-auto">
-<!--                 <li class="nav-item"> -->
-<!--                     <a class="nav-link page-scroll" href="#company">회사소개</a> -->
-<!--                 </li> -->
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#company">회사소개</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="${contextPath }/co/information.go">이용안내</a>
                 </li>
@@ -127,6 +128,7 @@
 
 	<!-- 세션 타임아웃 -->
 	<c:if test="${sessionScope.mdto ne null }">
+		<script>var contextPath = "${contextPath}"</script>
 		<script src="${contextPath }/js/member/sessionTime.js"></script> 
 	</c:if>
 	<!-- login.js -->
