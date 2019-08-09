@@ -26,16 +26,7 @@
                     <div class="col-md-2 col-sm-6 mx-auto text-center">
                         <h5 class="text-white">WAREHOUSE</h5>
                         <ul class="list-unstyled mt-4">
-                        	<li><a href="${contextPath }/me/join.me">회원가입</a></li>
-                            <li><a href="${contextPath }/co/information.go">이용안내</a></li>
-                            <li><a href="${contextPath }/re/info.me?warehouse=A">예약안내</a></li>
-                            <li><a href="${contextPath }/mk/market.do">중고장터</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-sm-6 mx-auto text-center">
-                        <h5 class="text-white">WAREHOUSE</h5>
-                        <ul class="list-unstyled mt-4">
-                        	<li><a href="${contextPath }/me/join.me">회원가입</a></li>
+                        	<li><a href="${contextPath }/me/join">회원가입</a></li>
                             <li><a href="${contextPath }/co/information.go">이용안내</a></li>
                             <li><a href="${contextPath }/re/info.me?warehouse=A">예약안내</a></li>
                             <li><a href="${contextPath }/mk/market.do">중고장터</a></li>
