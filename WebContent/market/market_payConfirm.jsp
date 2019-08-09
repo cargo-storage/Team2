@@ -14,7 +14,13 @@
     
    <!-- css/cdn links -->
 	<jsp:include page="market_link.jsp"></jsp:include>
-
+	
+	<script type="text/javascript">
+		history.pushState(null, null, location.href);
+	    window.onpopstate = function () {
+	        history.go(1);
+		};
+	</script>
     
   </head>
   <body>

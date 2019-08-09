@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>보관 시작하기</title>
+<title>보관 완료</title>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- Custom fonts for this template-->
 <link href="${contextPath}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -84,7 +84,8 @@
 							</tr>
 							<tr bgcolor="#f2f2f2">
 								<th>물건 가격</th>
-								<td><input class="form-control" type="text" name="item_price" id="item_price"></td>
+								<td><input class="form-control" type="text" name="item_price" id="item_price" maxlength="9
+								"></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="text-right">
