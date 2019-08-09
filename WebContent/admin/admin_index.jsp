@@ -59,7 +59,7 @@
 							</div>
 							<div class="mr-5">문의사항</div>
 						</div>
-						<a class="card-footer text-white clearfix small z-1" href="#">
+						<a class="card-footer text-white clearfix small z-1" href="${contextPath}/bo/NoticeListAction.bo">
 							<span class="float-left">View Details</span>
 							<span class="float-right"> <i class="fas fa-angle-right"></i></span>
 						</a>
