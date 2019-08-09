@@ -64,7 +64,7 @@ function pwdSearch(){
 					alert("임시 비밀번호 발급에 실패했습니다. \n다시 시도해주시기 바랍니다.");
 				}else{
 					alert(email+"로 임시 비밀번호를 발급했습니다. \n다시 로그인 해주시기 바랍니다.");
-					location.href="${contextPath}/co/index.go";
+					location.href=contextPath+"/co/index.go";
 				}
 			},
 			error: function(){

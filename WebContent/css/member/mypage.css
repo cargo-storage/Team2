@@ -24,11 +24,11 @@ ul li {
 }
 
 #sidebar ul li a {
-	color: darkslategrey;
+	color: #00953e;
 }
 
 #sidebar ul li a:HOVER {
-	color: #00953e;
+	color: darkslategrey;
 }
 
 .post {

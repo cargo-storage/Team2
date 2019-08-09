@@ -34,7 +34,7 @@
 		</div>
 	</div>
     <nav class="navbar navbar-expand-md navbar-transparent fixed-top sticky-navigation navbar-light bg-white shadow-bottom" id="lambda-navbar">
-        <a class="navbar-brand" href="${contextPath }/index.jsp">
+        <a class="navbar-brand" href="${contextPath }/co/index.go">
             TEAM2 WAREHOUSE
         </a>
         <button class="navbar-toggler navbar-toggler-right border-0 collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

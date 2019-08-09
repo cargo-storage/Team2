@@ -37,10 +37,10 @@
 				<ul class="p-0">
 					<span class="text-muted text-uppercase">MY PAGE</span>
 					<h1 class="mb-4">마이페이지</h1>
-					<li class="m-2"><a href="${contextPath }/me/mypage?category=info"><h4><i class="fas fa-user-circle"></i> 내 정보</a></h4></li>
-					<li class="m-2"><a href="${contextPath }/me/memberStatus?category=status"><h4><i class="fas fa-warehouse"></i> 사용 현황</a></h4></li>
-					<li class="m-2"><a href="${contextPath }/me/memberStatus?category=reservation"><h4><i class="far fa-calendar-alt"></i> 예약 현황</a></h4></li>
-					<li class="m-2"><a href="${contextPath }/me/mypage?category=leave"><h4><i class="fas fa-cut"></i> 회원 탈퇴</a></h4></li>
+					<li class="m-2"><a href="${contextPath }/me/mypage?category=info"><h4>내 정보</a></h4></li>
+					<li class="m-2"><a href="${contextPath }/me/memberStatus?category=status"><h4>사용 현황</a></h4></li>
+					<li class="m-2"><a href="${contextPath }/me/memberStatus?category=reservation"><h4>예약 현황</a></h4></li>
+					<li class="m-2"><a href="${contextPath }/me/mypage?category=leave"><h4>회원 탈퇴</a></h4></li>
 				</ul>
 			</div>
 			<div class="col-sm-10 mr-auto ml-auto" id="content">
