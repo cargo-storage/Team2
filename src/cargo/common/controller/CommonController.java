@@ -45,8 +45,8 @@ public class CommonController extends HttpServlet{
 				action = new MainpageAction();
 				forward = action.execute(request, response);
 			}else if("/login.go".equals(command)){ // 인덱스(모달창바로띄우는)
-				forward = new ActionForward();
-				forward.setPath("../index.jsp?login=true");
+				action = new MainpageAction();
+				forward = action.execute(request, response);
 			}else if("/information.go".equals(command)){
 				forward = new ActionForward();
 				forward.setPath("../company/information.jsp");

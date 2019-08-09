@@ -15,6 +15,7 @@ public class MainpageAction implements Action {
 
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	   
       request.setCharacterEncoding("UTF-8");
       MarketDAO mdao = new MarketDAO();
       
@@ -32,9 +33,12 @@ public class MainpageAction implements Action {
       
       ActionForward forward = new ActionForward();
       
-      String login = request.getParameter("login");
       
-      if(login=="true")	forward.setPath("../index.jsp?login=true");
+      String RequestURI = request.getRequestURI();
+	  String command = RequestURI.substring(RequestURI.lastIndexOf("/"));
+      
+      
+      if("/login.go".equals(command))	forward.setPath("../index.jsp?login=true");
   	  else	forward.setPath("../index.jsp");
       
       forward.setRedirect(false);
