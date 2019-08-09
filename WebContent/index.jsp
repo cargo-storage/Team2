@@ -134,7 +134,6 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h2 class="modal-title text-danger text-center">* 알림 *</h2>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
         <div class="modal-body p-0">
