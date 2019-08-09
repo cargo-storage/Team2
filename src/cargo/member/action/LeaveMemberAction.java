@@ -32,7 +32,18 @@ public class LeaveMemberAction implements Action {
 			out.println("history.back();");
 			out.print("</script>");
 
-			System.out.println("회원 탈퇴 오류");
+			out.close();
+			
+			return null;
+		} else if (state == -1) { // 비밀번호가 다를 때
+			PrintWriter out = response.getWriter();
+			
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀려 탈퇴 처리가 되지 않습니다. \\n비밀번호를 다시 한 번 확인해 주시기 바랍니다.');");
+			out.println("history.back();");
+			out.print("</script>");
+
+			System.out.println("aaa");
 			out.close();
 			
 			return null;
@@ -44,7 +55,7 @@ public class LeaveMemberAction implements Action {
 			session.removeAttribute("mdto");
 			
 			String path = request.getContextPath();
-			forward.setPath(path+"/index.jsp");
+			forward.setPath(path+"/co/index.go");
 		}
 		return forward;
 	}

@@ -334,11 +334,11 @@ public class MemberDAO {
 	}
 
 	public int deleteMember(String email, String pwd) { //회원 탈퇴
-		int state = 0; // 0: 실패, 1: 성공
+		int state = 0; // 0: 실패, -1: 비밀번호 틀림, 1: 성공
 		
 		try {
 			con = connect();
-			query = "(SELECT email FROM items WHERE email=?) UNION ALL (SELECT email FROM reservation WHERE email=?)";
+			query = "(SELECT email FROM items WHERE email=?) UNION ALL (SELECT email FROM reservation WHERE email=?)"; //보관이나 예약 내역 검색
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, email);
 			pstmt.setString(2, email);
@@ -348,15 +348,22 @@ public class MemberDAO {
 			if(rs.next()){
 				return 0; // 보관이나 예약 존재하기 때문에 탈퇴 안됨
 			}
-			else{
-				con = connect();
-				query = "DELETE FROM member WHERE email=? and pwd=?";
-				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, email);
-				pstmt.setString(2, pwd);
-				
-				state = pstmt.executeUpdate();
+
+			query = "SELECT * FROM member WHERE email=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()&&!pwd.equals(rs.getString("pwd"))) { //기존 비밀번호 체크
+				return -1;
 			}
+
+			query = "DELETE FROM member WHERE email=? and pwd=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, email);
+			pstmt.setString(2, pwd);
+				
+			state = pstmt.executeUpdate();
 			
 		}catch (Exception e) {
 			System.out.println("deleteMember()에서 오류: " + e);
